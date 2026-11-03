@@ -1,144 +1,147 @@
-# Produktový a designový brief
+# Product and design brief
 
-Stav k 3. 11. 2026 · fáze: discovery / obsah / koncept · bez implementace webu.
+As of 3 November 2026 · stage: discovery / content / concept · no website implementation.
 
-## Zdroje a význam stavů
+## Sources and status definitions
 
-Podkladem je celá konverzace [Brainstorming portfolia](chatgpt-conversation://6aea36d8-8d94-83eb-9d4d-592906f3df09) a navazující zadání k jejímu zdokumentování. Jde o syntézu brainstormingu, nikoli audit projektů nebo schválený finální design.
+Based on the full [Portfolio brainstorming conversation](chatgpt-conversation://6aea36d8-8d94-83eb-9d4d-592906f3df09) and the follow-up request to document it. This is a synthesis of the brainstorming, rather than a project audit or an approved final design.
 
-- **Potvrzeno:** výslovně zvolené uživatelem nebo vyžadované navazujícím zadáním.
-- **Návrh:** doporučení z brainstormingu či jeho rozpracování pro brief; čeká na výběr.
-- **Otevřeno:** chybějící rozhodnutí nebo fakt, který je potřeba ověřit.
+- **Confirmed:** explicitly selected by the user or required by the follow-up brief.
+- **Proposal:** a recommendation from the brainstorming or its development for this brief; awaiting selection.
+- **Open:** a missing decision or a fact that needs verification.
 
-Asistentovy dřívější popisy rolí, technologií a výsledků nejsou samy o sobě doloženými profesními fakty. Ilustrační obrázky z chatu nejsou materiály k publikaci.
+Earlier assistant descriptions of roles, technologies and outcomes are not, by themselves, verified professional facts. Illustrative images from the conversation are not publication assets.
 
-## 1. Cíl a positioning
+## 1. Purpose and positioning
 
-**Potvrzeno:** osobní portfolio Davida Křapky s positioningem **Product-minded Engineer**, cílené současně na zaměstnavatele a vlastní zakázky. Má stavět osobní značku, zůstat profesionální a dovolit si výrazné experimentování.
+**Confirmed:** David Křapka's personal portfolio, positioned as a **Product-minded Engineer**, addressing potential employers and independent client work. It should build a personal brand, remain professional and allow substantial experimentation.
 
-Základní příslib — **návrh formulace**: schopnost rozumět problému, přemýšlet o něm produktově, navrhnout řešení a dovést je k fungujícímu digitálnímu produktu. Technologie mají podpořit důkazy o práci, nikoli tvořit hlavní sdělení.
+Core promise — **proposed wording**: the ability to understand a problem, approach it with a product mindset, design a solution and turn it into a working digital product. Technologies should support evidence of the work rather than become the main message.
 
-Návštěvník by měl rychle pochopit:
-1. Kdo David je a jaké problémy umí řešit.
-2. Co konkrétně vytvořil a za co odpovídal.
-3. Proč a jak s ním navázat spolupráci.
+Visitors should quickly understand:
 
-**Návrh tónu:** kreativní, přístupný, sebevědomý a věcný. Osobní hlas, konkrétní rozhodnutí, minimum superlativů. Profesionální důvěryhodnost má vycházet z reálné práce.
+1. Who David is and what kinds of problems he can solve.
+2. What he has actually created and what he was responsible for.
+3. Why and how to work with him.
 
-**Otevřeno:** finální veřejný název role. „Product-minded Engineer“ je zvolený positioning; „Product-minded Frontend Engineer“ a „Product Engineer“ byly alternativy. Šíře názvu musí odpovídat skutečně nabízené odpovědnosti.
+**Proposed voice:** creative, approachable, confident and factual. A personal voice, concrete decisions and few superlatives. Professional credibility should come from real work.
 
-## 2. Publikum a cesty návštěvníka
+**Open:** the final public role title. “Product-minded Engineer” is the chosen positioning; “Product-minded Frontend Engineer” and “Product Engineer” were alternatives. The breadth of the title must match the responsibility actually offered.
 
-| Publikum | Co potřebuje zjistit | Navržená cesta |
+## 2. Audiences and visitor journeys
+
+| Audience | What they need to learn | Proposed journey |
 | --- | --- | --- |
-| Hiring manager / recruiter | Zaměření, zkušenosti, přínos do týmu | Hero → vybraný projekt → Emplifi / CV → kontakt |
-| Technický nebo produktový lead | Rozhodování, technická hloubka, spolupráce, ownership | Case study → kompromisy / validace → profesní zkušenost → kontakt |
-| Potenciální klient | Schopnost pochopit zadání, dodat řešení a komunikovat | Relevantní realizace → způsob práce → kontakt |
+| Hiring manager / recruiter | Focus, experience and contribution to a team | Hero → selected project → Emplifi / CV → contact |
+| Technical or product lead | Decision-making, technical depth, collaboration and ownership | Case study → trade-offs / validation → professional experience → contact |
+| Potential client | Ability to understand a brief, deliver a solution and communicate | Relevant project → working approach → contact |
 
-**Návrh:** jedna společná prezentace s přirozenými cestami pro obě skupiny. Kontakt může rozlišovat pracovní příležitost a projektovou spolupráci. Nevytvářet dvě identity ani agenturní personu.
+**Proposal:** one shared presentation with natural paths for both groups. The contact section can distinguish employment opportunities from project collaboration. Avoid creating two identities or an agency persona.
 
-**Otevřeno:** priorita zaměstnání vůči zakázkám, typ hledané role, rozsah přijímaných zakázek a aktuální dostupnost. Text „Open to opportunities“ nelze převzít bez potvrzení.
+**Open:** the relative priority of employment and client work, desired roles, scope of accepted projects and current availability. “Open to opportunities” needs confirmation before use.
 
-## 3. Návrh obsahové architektury
+## 3. Proposed content architecture
 
-Jedna homepage a samostatné URL case studies. Jednoduchá navigace: Work / About / Contact.
+One homepage with separate case study URLs. Simple navigation: Work / About / Contact.
 
-| Sekce | Účel a navržený obsah |
+| Section | Purpose and proposed content |
 | --- | --- |
-| Hero | Jméno, positioning, stručný příslib, výrazný vizuální motiv, odkaz na práci |
-| Selected Work | Kultomat jako hlavní důkaz, Systerna po připravení, tři klientské realizace |
-| How I Think & Build | Produktové otázky, UX, prioritizace, engineering, spolupráce a AI |
-| Experience | Emplifi jako samostatná profesní zkušenost |
-| About / Always evolving | Stručný osobní kontext a proměna způsobu práce |
-| Let's Work Together | Srozumitelný kontakt pro zaměstnavatele i klienty; dostupné profesní odkazy |
+| Hero | Name, positioning, short promise, distinctive visual motif and a link to the work |
+| Selected Work | Kultomat as the main proof point, Systerna when ready, three client projects |
+| How I Think & Build | Product questions, UX, prioritization, engineering, collaboration and AI |
+| Experience | Emplifi as a separate professional experience |
+| About / Always evolving | Brief personal context and an evolving way of working |
+| Let's Work Together | Clear contact options for employers and clients; accessible professional links |
 
-Pořadí, názvy i oddělení sekcí jsou **návrh**. Pět projektů je obsahový záměr, nikoli závazek vydat pět plných case studies v první verzi. Detaily viz [obsah a case studies](content-and-case-studies.md).
+The order, names and separation of sections are **proposals**. Five projects are a content intention, not a commitment to publish five complete case studies in the first release. See [content and case studies](content-and-case-studies.md).
 
-**Návrh pro první vydání:** dokončená hlavní case study Kultomatu, přiměřeně stručné klientské realizace, ověřená zkušenost z Emplifi a kontakt. Systerna pouze s poctivě označeným stavem, nebo až bude připravená. Blog, rozsáhlý katalog služeb a Playground mohou přijít později.
+**Proposed first release:** a completed main Kultomat case study, appropriately concise client projects, verified Emplifi experience and contact information. Include Systerna only with an honest status label, or wait until it is ready. A blog, extensive services catalogue and Playground can come later.
 
-## 4. Designový směr
+## 4. Design direction
 
-**Potvrzeno:** **Playful Modernism × osobní značka × Product-minded Engineering**. Uživatel preferuje výrazně experimentální přístup, který souvisí s proměnou jeho způsobu práce, při zachování profesionality.
+**Confirmed:** **Playful Modernism × personal brand × Product-minded Engineering**. The user prefers a highly experimental approach that reflects a changed way of working while retaining professionalism.
 
-**Zadaný princip:** vysoce experimentální hero a klidné, profesionální case studies. Konkrétní podoba tohoto přechodu zůstává návrhem.
+**Required principle:** a highly experimental hero paired with calm, professional case studies. The specific transition between them remains a proposal.
 
-### Hierarchie experimentu — návrh
+### Experimental hierarchy — proposal
 
-- **Hero:** největší prostor pro výraznou typografii, pohyb a překvapení. Jméno, role a cesta k projektům musí zůstat srozumitelné.
-- **Homepage / projekty:** řízená asymetrie, různé velikosti bloků, geometrie; jasné pořadí čtení a ovládání.
-- **Case studies:** klidný editorial layout, čitelné dlouhé texty, autentické screenshoty, rozhodnutí a důkazy.
+- **Hero:** the greatest freedom for expressive typography, motion and surprise. Name, role and the path to projects must remain clear.
+- **Homepage / projects:** controlled asymmetry, varied block sizes and geometry, with clear reading and interaction order.
+- **Case studies:** calm editorial layouts, readable long-form text, authentic screenshots, decisions and evidence.
 
-Pracovní princip z brainstormingu: „Homepage ukazuje osobnost. Case studies ukazují způsob přemýšlení.“ Přechod od experimentu k systému může být součástí identity, bez přepínače mezi režimy.
+Working principle from the brainstorming: “The homepage shows personality. Case studies show how I think.” The transition from experiment to system can become part of the identity without a mode switch.
 
-### Think / Make / Rethink — koncept k rozpracování
+### Think / Make / Rethink — concept to develop
 
-Zahrnout jako hlavní kandidátní motiv, **nikoli jako schválený slogan či hotovou navigaci**.
+Include as the leading candidate motif, **not as an approved slogan or finalized navigation**.
 
-| Motiv | Význam pro příběh | Možný důkaz v case study |
+| Motif | Narrative meaning | Potential case study evidence |
 | --- | --- | --- |
-| Think | Pochopit problém, klást otázky, volit priority | Kontext, alternativy, produktové rozhodnutí |
-| Make | Převést záměr do funkčního řešení | UX, implementace, spolupráce, provoz |
-| Rethink | Ověřovat, učit se a měnit směr | Zpětná vazba, iterace, poučení |
+| Think | Understand the problem, ask questions and choose priorities | Context, alternatives and a product decision |
+| Make | Turn intention into a working solution | UX, implementation, collaboration and operations |
+| Rethink | Validate, learn and change direction | Feedback, iteration and lessons |
 
-Motiv může nést typografické hero a interakci: proměnlivá kompozice nebo přeuspořádání slov. Doslovné rozdělení celého webu do tří sekcí není rozhodnuto.
+The motif could drive a typographic hero and its interactions: a changing composition or rearranged words. A literal division of the entire website into three sections has not been decided.
 
-### Vizuální kandidáti — vše návrh
+### Visual candidates — all proposals
 
-- Velká expresivní typografie, kontrast, geometrické prvky a nečekaná kompozice.
-- Teplé světlé pozadí, tmavý text a výrazný oranžový akcent: pracovní směr **Electric Editorial**.
-- **Acid Modernism** jako alternativní barevný směr; paleta není vybraná.
-- Space Grotesk nebo Syne pro titulky, Inter pro text, IBM Plex Mono pro detaily jako kandidáti k ověření. Žádný font není závazný.
-- Grid může držet disciplínu za zdánlivě volnou kompozicí; 12 sloupců je možnost, ne požadavek.
-- Reference z chatu: Studio Feixen — hravost; Claudia Mussett — typografie; Astroshock — kontrasty; Romain Vincens — disciplína. Jde o zaznamenané inspirační odkazy z brainstormingu, nikoli ověřený rozbor jejich současných webů nebo předlohy ke kopírování.
+- Large expressive typography, contrast, geometric elements and unexpected compositions.
+- A warm light background, dark text and a strong orange accent: the working direction **Electric Editorial**.
+- **Acid Modernism** as an alternative colour direction; no palette has been selected.
+- Space Grotesk or Syne for headings, Inter for body text and IBM Plex Mono for details as candidates to test. No typeface is mandatory.
+- A grid could provide discipline behind a seemingly free composition; twelve columns are an option, not a requirement.
+- References mentioned in the conversation: Studio Feixen — playfulness; Claudia Mussett — typography; Astroshock — contrast; Romain Vincens — discipline. These record brainstorming references, rather than a verified analysis of their current websites or designs to copy.
 
-Používat celé jméno. Monogram DK je možnost; symbol ® byl součástí skic a nepřebírá se jako finální identita ani tvrzení o registraci.
+Use David's full name. A DK monogram is an option; the ® symbol appeared in sketches and is not adopted as a final identity or a claim of trademark registration.
 
-### Interakce a hranice kvality — návrh požadavků
+### Interactions and quality boundaries — proposed requirements
 
-Pohyb má vyjadřovat experimentování a iteraci, ne sloužit jako povinná překážka ke čtení.
+Motion should express experimentation and iteration without becoming a mandatory obstacle to reading.
 
-- Obsah a navigace fungují bez animací; respektovat omezený pohyb.
-- Ovládání klávesnicí, viditelný focus, čitelný kontrast a smysluplné pořadí obsahu.
-- Mobilní varianta není závislá na kurzoru ani přesných gestech.
-- Kontakt, CV a projekty snadno dostupné; žádná povinná vstupní hra.
-- Ověřit rychlost, stabilitu layoutu a čitelnost na skutečných zařízeních.
-- Autentické screenshoty a skutečné výsledky mají přednost před efektními maketami.
+- Content and navigation work without animation; respect reduced-motion preferences.
+- Support keyboard navigation, visible focus, readable contrast and a meaningful content order.
+- The mobile experience does not depend on a cursor or precise gestures.
+- Contact, CV and projects are easy to reach; no mandatory introductory game.
+- Check speed, layout stability and readability on real devices.
+- Prioritize authentic screenshots and actual outcomes over impressive mockups.
 
-Číselné limity výkonu a konkrétní akceptační kritéria ještě stanovit.
+Numerical performance budgets and specific acceptance criteria remain to be defined.
 
-## 5. Příběh proměny práce a AI
+## 5. The evolving work narrative and AI
 
-**Potvrzeno uživatelem:** výrazně proměnil způsob práce. **Požadováno zadáním:** zahrnout AI-assisted development s transparentním vlastnictvím.
+**Confirmed by the user:** his way of working has changed substantially. **Required by the brief:** include AI-assisted development with transparent ownership.
 
-**Návrh narativu:** posun od práce na částech produktu k širší odpovědnosti za celek, propojení produktového myšlení, UX a engineeringu. Tento výklad vznikl v brainstormingu a musí být podložen konkrétními příklady; nepředstavuje potvrzení výlučného autorství ani full-stack role u všech projektů.
+**Proposed narrative:** a move from working on parts of a product towards broader responsibility for the whole, combining product thinking, UX and engineering. This interpretation emerged during brainstorming and needs concrete examples; it does not confirm exclusive authorship or a full-stack role on every project.
 
-Sekce „Always evolving“ může změnu stručně vysvětlit. Přínos pro uživatele a kvalita výsledku mají být důležitější než samotný příběh transformace.
+An “Always evolving” section could explain the change briefly. User value and the quality of the result should matter more than the transformation story itself.
 
-U každého projektu rozlišit:
-- Co David zadal, navrhl, rozhodl a skutečně vlastnil.
-- S čím pomohla AI a co dělali další lidé.
-- Jak David výstupy kontroloval, testoval a přijal do výsledného řešení.
-- Jaká omezení nebo neověřené části zůstávají.
+For each project, distinguish:
 
-Nevydávat asistovanou implementaci za výlučně ručně vytvořenou práci. Současně nesnižovat skutečnou odpovědnost za požadavky, rozhodnutí a validaci. Nástroje, rozsah použití a konkrétní kontrolní kroky doplnit podle reality každého projektu.
+- What David specified, designed, decided and actually owned.
+- What AI helped with and what other people contributed.
+- How David reviewed, tested and accepted outputs into the final solution.
+- What limitations or unverified areas remain.
 
-## 6. Copy a jazyk — návrhy, nikoli finální texty
+Do not present assisted implementation as exclusively handwritten work. Equally, recognize real responsibility for requirements, decisions and validation. Document tools, scope of use and specific review steps according to what happened on each project.
 
-Kandidáti z brainstormingu:
-- „I build products. And question what we're building.“
-- „Engineering with a product mindset.“
-- „Good products start with good questions.“
-- „Ideas, interfaces and products. Always evolving.“
-- „Playful by design. Serious about the work.“
+## 6. Copy and language — proposals, not final copy
 
-Výraz „THINK. MAKE. RETHINK.“ je samostatný vizuální koncept; případný podpůrný text má vysvětlit profesní nabídku.
+Candidates from the brainstorming:
 
-**Návrh:** angličtina jako primární jazyk, čeština později pro lokální klienty. **Otevřeno:** finální jazyk a rozsah lokalizace. Zatím není potvrzena lokalita v copy, délka praxe ani dostupnost; příklady z chatu nejsou publikovatelná fakta.
+- “I build products. And question what we're building.”
+- “Engineering with a product mindset.”
+- “Good products start with good questions.”
+- “Ideas, interfaces and products. Always evolving.”
+- “Playful by design. Serious about the work.”
 
-## 7. Úspěch a hranice rozsahu
+“THINK. MAKE. RETHINK.” is a distinct visual concept; supporting copy should explain the professional offering.
 
-**Návrh kvalitativního ověření:** návštěvník vlastními slovy popíše Davidovo zaměření, najde relevantní projekt, rozliší osobní přínos od týmové či AI práce a bez vysvětlování se dostane ke kontaktu.
+**Proposal:** English as the primary website language, with Czech added later for local clients. **Open:** the final website language and localization scope. This documentation is written in English as requested; that does not by itself settle the website's localization strategy. Location claims in copy, years of experience and availability have not been confirmed; examples from the conversation are not publication-ready facts.
 
-Možné budoucí signály: otevření case studies, přechody na CV / kontakt a relevantní poptávky. Měřicí nástroj, cílové hodnoty ani analytika nejsou vybrané.
+## 7. Success and scope boundaries
 
-Tento brief nevolí stack, hosting, CMS, finální design ani harmonogram implementace. Dalším výstupem má být ověřený obsah a 2–3 odlišné koncepty hero. Rozhodnutí a návaznost viz [rozhodnutí a další kroky](decisions-and-next-steps.md).
+**Proposed qualitative validation:** visitors can describe David's focus in their own words, find a relevant project, distinguish his contribution from team or AI work and reach contact information without explanation.
+
+Possible future signals: case study opens, visits to the CV / contact and relevant enquiries. No measurement tool, target values or analytics setup has been chosen.
+
+This brief does not select a stack, hosting, CMS, final design or implementation schedule. The next outputs should be verified content and two or three distinct hero concepts. See [decisions and next steps](decisions-and-next-steps.md).
