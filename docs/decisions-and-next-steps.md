@@ -1,80 +1,81 @@
-# Rozhodnutí, otevřené otázky a další kroky
+# Decisions, open questions and next steps
 
-Stav k 3. 11. 2026. Podrobnosti viz [brief](portfolio-brief.md) a [obsah a case studies](content-and-case-studies.md).
+As of 3 November 2026. See the [brief](portfolio-brief.md) and [content and case studies](content-and-case-studies.md) for details.
 
-## Potvrzený základ
+## Confirmed foundation
 
-| Rozhodnutí / požadavek | Opora |
+| Decision / requirement | Basis |
 | --- | --- |
-| Positioning Product-minded Engineer | Výslovná volba uživatele v původním chatu |
-| Cílit na zaměstnavatele i vlastní zakázky | Úvodní zadání brainstormingu a současné zadání |
-| Stavět osobní značku a zachovat profesionalitu | Výslovná preference uživatele |
-| Playful Modernism | Výběr směru B uživatelem |
-| Výrazně experimentovat | Uživatel: „Klidně hodně experimentální“ |
-| Proměna způsobu práce je relevantní osobní kontext | Uživatelské vyjádření v původním chatu |
-| Dokumentovat experimentální hero vs profesionální case studies a koncept Think / Make / Rethink | Současné zadání; konkrétní provedení není schválené |
-| Zahrnout Kultomat, Systernu, Eucal, Vladana Vaňka a UpVideo | Uživatelský seznam projektů |
-| Systerna je připravovaná | Uživatel ji uvedl s podmínkou „až to bude hotový“ |
-| Zahrnout zkušenost Emplifi a transparentní AI-assisted development | Současné zadání; konkrétní role a procesy ještě doložit |
-| Zapsat brainstorming, zachovat obsah, neimplementovat web | Současné zadání |
+| Product-minded Engineer positioning | Explicit user choice in the original conversation |
+| Address employers and independent client work | Initial brainstorming request and documentation brief |
+| Build a personal brand while remaining professional | Explicit user preference |
+| Playful Modernism | User selected direction B |
+| Substantial experimentation | User: “It can be very experimental” (translated) |
+| A changed way of working is relevant personal context | User statement in the original conversation |
+| Document an experimental hero, professional case studies and Think / Make / Rethink | Documentation brief; specific execution is not approved |
+| Include Kultomat, Systerna, Eucal, Vladan Vaněk and UpVideo | User's project list |
+| Systerna is in preparation | User listed it with the condition “once it is finished” (translated) |
+| Include Emplifi experience and transparent AI-assisted development | Documentation brief; specific roles and processes still need evidence |
+| Document the brainstorming, preserve existing content and do not implement the website | Documentation brief |
+| Write the repository documentation in English | User's follow-up request; website localization remains open |
 
-## Návrhy k výběru, nikoli hotová rozhodnutí
+## Proposals to select from, not final decisions
 
-- Typografický motiv **THINK. MAKE. RETHINK.** jako hlavní kandidát hero.
-- Přirozený přechod z hravé homepage do klidného editorial layoutu case studies.
-- Jedna homepage, vlastní URL case studies, navigace Work / About / Contact.
-- Kultomat jako hlavní case study, Systerna později jako technická, klientské projekty stručněji.
-- How I Think & Build, Experience, About / Always evolving a společný kontakt.
-- Angličtina jako primární jazyk, případná česká verze později.
-- Electric Editorial: teplé světlé pozadí, tmavý text, oranžový akcent; Acid Modernism jako alternativa.
-- Kandidátní fonty a interakce podle briefu; žádná paleta, font ani animace nejsou vybrané.
-- Playground jako pozdější prostor pro malé experimenty; není podmínkou prvního vydání.
-- Ověření s návštěvníky a případné sledování přechodů k práci, CV a kontaktu.
+- **THINK. MAKE. RETHINK.** typography as the leading hero candidate.
+- A natural transition from a playful homepage to calm editorial case studies.
+- One homepage, separate case study URLs and Work / About / Contact navigation.
+- Kultomat as the main case study, Systerna as a later technical case study and shorter client projects.
+- How I Think & Build, Experience, About / Always evolving and a shared contact section.
+- English as the primary website language, with a possible Czech version later.
+- Electric Editorial: a warm light background, dark text and an orange accent; Acid Modernism as an alternative.
+- Candidate typefaces and interactions described in the brief; no palette, typeface or animation has been selected.
+- A Playground for small experiments later; not a first-release requirement.
+- Visitor validation and possible tracking of journeys to work, CV and contact.
 
-Dřívější doporučení „70 % Editorial Minimalism + 30 % Playful Modernism“ předcházelo explicitní volbě Playful Modernism a požadavku na výraznější experiment. Není cílovým poměrem ani závazným zadáním. „MAKE IT WORK.“ a další headline varianty zůstávají alternativami.
+The earlier recommendation of “70% Editorial Minimalism + 30% Playful Modernism” preceded the explicit selection of Playful Modernism and the request for stronger experimentation. It is not a target ratio or binding requirement. “MAKE IT WORK.” and other headline options remain alternatives.
 
-## Otevřené otázky
+## Open questions
 
-| Priorita | Otázka | Proč ji vyřešit |
+| Priority | Question | Why resolve it |
 | --- | --- | --- |
-| Před finálním copy | Jaká role a jaké zakázky jsou prioritní? Jaká je dostupnost? | Určí slib, CTA a rozsah nabídky |
-| Před finálním copy | Veřejný název role a hranice frontend / širší produktové odpovědnosti? | Předejde přehnaným očekáváním |
-| Před obsahovým návrhem | Angličtina, čeština, nebo obojí? | Ovlivní texty, rozsah i layout |
-| Před case studies | Přesné role, období, spoluautoři a AI podíl u každého projektu? | Umožní transparentní ownership |
-| Před case studies | Jaké výsledky lze doložit a jaké materiály zveřejnit? | Zajistí věrohodné důkazy |
-| Před case studies | Co přesně David dělal v Emplifi? | Potvrdí týmovou a produktovou zkušenost |
-| Před výběrem obsahu první verze | Jak připravená je Systerna a jak ji představit? | Zabrání dojmu hotového produktu |
-| Před finálním designem | Je Think / Make / Rethink finální motiv? Který hero koncept funguje nejlépe? | Umožní sjednotit vizuální jazyk |
-| Před finálním designem | Paleta, fonty, míra pohybu a mobilní chování? | Propojí osobnost s použitelností |
-| Před implementací | Stack, hosting, správa obsahu, doména, výkonové cíle a měření? | Naváže technické volby na skutečné potřeby |
+| Before final copy | Which roles and client projects take priority? What is the current availability? | Defines the promise, CTA and offering scope |
+| Before final copy | What is the public role title and the boundary between frontend and broader product responsibility? | Sets accurate expectations |
+| Before content design | Will the website use English, Czech or both? | Affects copy, scope and layout |
+| Before case studies | What are the exact roles, dates, collaborators and AI contributions on each project? | Enables transparent ownership |
+| Before case studies | Which outcomes can be substantiated and which materials can be published? | Provides credible evidence |
+| Before case studies | What exactly did David do at Emplifi? | Substantiates team and product experience |
+| Before selecting first-release content | How ready is Systerna and how should it be presented? | Avoids implying a finished product |
+| Before final design | Is Think / Make / Rethink the final motif? Which hero concept works best? | Establishes a coherent visual language |
+| Before final design | Which palette, typefaces, motion level and mobile behaviour? | Connects personality with usability |
+| Before implementation | Which stack, hosting, content management, domain, performance targets and measurement approach? | Connects technical choices to actual needs |
 
-## Doporučený postup
+## Recommended sequence
 
-1. **Potvrdit nabídku a obsahové hranice.** Vybrat hlavní publikum, název role, jazyk a dostupnost. Výstup: krátké zadání sdělení a CTA.
-2. **Vyplnit faktické karty projektů.** Začít Kultomatem, doplnit klientské realizace a Emplifi; u Systerny určit stav. Výstup: podložené role, rozhodnutí, výsledky, screenshoty a AI disclosure.
-3. **Napsat první hlavní case study.** Ověřit, že příběh stojí na skutečných volbách a ukazuje konkrétní přínos. Výstup: redakční návrh Kultomatu a kratší osnovy ostatních projektů.
-4. **Připravit 2–3 odlišné hero koncepty.** Typografický Think / Make / Rethink, kinetická geometrická kompozice a hravá interaktivní varianta. Každý ukázat na desktopu i mobilu, s popisem chování bez pohybu.
-5. **Vybrat směr podle obsahu a použitelnosti.** Posoudit zapamatovatelnost, jasnost role, čitelnost, přístup k projektům a profesionální dojem. Výstup: jeden vizuální směr a pravidla přechodu do case study.
-6. **Dopracovat strukturu a design.** Provázat homepage, projekt a kontakt; doplnit profesní odkazy a případné CV. Ověřit s lidmi z obou cílových skupin.
-7. **Teprve poté naplánovat implementaci.** Vybrat technologie, provoz, rozsah první verze a kontrolní kritéria. Vlastní implementace není součástí tohoto úkolu.
+1. **Confirm the offering and content boundaries.** Choose the main audience, role title, website language and availability. Output: a short messaging and CTA brief.
+2. **Complete factual project cards.** Start with Kultomat, add client projects and Emplifi, and establish Systerna's status. Output: substantiated roles, decisions, outcomes, screenshots and AI disclosure.
+3. **Write the first main case study.** Check that the story rests on real choices and demonstrates a specific contribution. Output: a Kultomat editorial draft and shorter outlines for other projects.
+4. **Prepare two or three distinct hero concepts.** Typographic Think / Make / Rethink, a kinetic geometric composition and a playful interactive option. Show desktop and mobile versions of each, including behaviour without motion.
+5. **Select a direction based on content and usability.** Assess memorability, role clarity, readability, access to projects and professional credibility. Output: one visual direction and rules for the transition into case studies.
+6. **Refine the structure and design.** Connect homepage, project and contact journeys; add professional links and a CV if appropriate. Validate with people from both audiences.
+7. **Only then plan implementation.** Choose technologies, operations, first-release scope and acceptance criteria. Implementation itself is outside this task.
 
-Kroky jsou návrh pořadí práce; termíny, kapacity a odpovědnosti nebyly dohodnuté.
+These steps propose an order of work; dates, capacity and responsibilities have not been agreed.
 
-## Kontrola připravenosti před implementací — návrh
+## Proposed readiness check before implementation
 
-- [ ] Positioning, jazyk a CTA jsou vybrané.
-- [ ] Hlavní case study má ověřené role, rozhodnutí a výsledky.
-- [ ] Klientské realizace rozlišují osobní práci a příspěvky dalších lidí.
-- [ ] Emplifi má potvrzené profesní údaje.
-- [ ] Systerna má jasnou a pravdivou publikační podobu.
-- [ ] AI disclosure odpovídá skutečnosti každého projektu.
-- [ ] Screenshoty a materiály jsou autentické a použitelné pro zveřejnění.
-- [ ] Je vybraný hero koncept a klidná podoba case studies.
-- [ ] Je popsána mobilní varianta, omezený pohyb a přístup k obsahu bez animací.
-- [ ] Je stanoven rozsah první verze a způsob ověření jejího účelu.
+- [ ] Positioning, website language and CTA are selected.
+- [ ] The main case study has verified roles, decisions and outcomes.
+- [ ] Client projects distinguish personal work from other people's contributions.
+- [ ] Emplifi professional details are confirmed.
+- [ ] Systerna has a clear, accurate publication approach.
+- [ ] AI disclosure reflects what happened on each project.
+- [ ] Screenshots and materials are authentic and suitable for publication.
+- [ ] A hero concept and calm case study design are selected.
+- [ ] Mobile behaviour, reduced motion and access without animation are described.
+- [ ] First-release scope and a way to validate its purpose are defined.
 
-## Stav repozitáře při zahájení zápisu
+## Repository state when documentation began
 
-Kontrola 3. 11. 2026: lokální cesta byla prázdná složka bez Git repozitáře; GitHub repozitář Phunkhouse/david-krapka neměl žádné větve. Nebyl nalezen existující obsah k úpravě.
+Checked on 3 November 2026: the local path was an empty directory without a Git repository; the Phunkhouse/david-krapka GitHub repository had no branches. There was no existing content to modify.
 
-Pro umožnění branch/PR workflow byl založen pouze úvodní README na main. Brief a odkazy na něj patří do samostatné dokumentační větve. Nebyl implementován web ani vybrán technologický stack.
+Only an introductory README was created on main to enable a branch and PR workflow. The brief and its documentation links belong to a separate documentation branch. No website was implemented and no technology stack was selected.
