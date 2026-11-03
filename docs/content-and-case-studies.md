@@ -1,92 +1,93 @@
-# Obsah a case studies
+# Content and case studies
 
-Navazuje na [produktový a designový brief](portfolio-brief.md). Stav k 3. 11. 2026.
+Companion to the [product and design brief](portfolio-brief.md). As of 3 November 2026.
 
-## Co víme a co teprve zjistit
+## What is known and what needs evidence
 
-Uživatel vybral projekty **Kultomat, Systerna, Eucal, Vladan Vaněk a UpVideo**. Systerna je **připravovaná** a původně byla uvedena s podmínkou „až to bude hotový“. Zadání dále požaduje zkušenost **Emplifi** a transparentní AI-assisted development.
+The user selected **Kultomat, Systerna, Eucal, Vladan Vaněk and UpVideo**. Systerna is **in preparation** and was originally listed with the condition “once it is finished.” The brief also requires **Emplifi** experience and transparent AI-assisted development.
 
-Odkazy níže pocházejí od uživatele; weby nebyly v rámci tohoto zápisu auditovány. Popisy kompetencí jsou **návrhy příběhů k doložení**, nikoli potvrzení implementovaných funkcí, autorství nebo obchodních výsledků.
+The links below were supplied by the user; the websites were not audited for this documentation. Competency descriptions are **proposed stories to substantiate**, rather than confirmation of implemented features, authorship or business outcomes.
 
-## Navržený výběr a hloubka
+## Proposed selection and depth
 
-| Položka | Navržená role v portfoliu | Kandidátní příběh / kompetence | Co doplnit před publikací |
+| Item | Proposed portfolio role | Candidate story / competency | What to add before publication |
 | --- | --- | --- | --- |
-| [Kultomat](https://kultomat.cz) | Hlavní hlubší case study vlastního produktu | Od filmového discovery přes UX a data k realizaci a provozu | Skutečný problém, cílovka, rozsah role, aktuální funkce, rozhodnutí a důkazy výsledku |
-| [Systerna](https://systerna.cz) | Připravovaná technická case study; případně označený teaser | System design, integrace, monitoring, bezpečnost a provoz | Skutečný účel, připravenost, co je realizované a co jen plán; bezpečně zveřejnitelné podklady |
-| [Eucal](https://eucal.cz) | Stručnější klientská realizace | Převod obchodních potřeb do srozumitelného webu | Zadání, uživatelské cesty, Davidův podíl, spoluautoři, změny a výsledek |
-| [Vladan Vaněk](https://vladanvanek.cz) | Stručnější klientská realizace | Obsahová struktura, osobní identita, UX a prezentace | Kdo tvořil obsah a design, Davidova rozhodnutí a doložitelné výsledky |
-| [UpVideo](https://upvideo.cz) | Stručnější klientská realizace | Vizuální komunikace, multimédia a dodání klientského zadání | Autorství médií a designu, implementační podíl, požadavky a výsledek |
-| Emplifi | Profesní zkušenost, ne automaticky další klientská case study | Větší produkt, design systém, týmová spolupráce; případně vedení týmu | Přesná role, období, rozsah odpovědnosti, osobní příspěvky a povolené materiály |
+| [Kultomat](https://kultomat.cz) | Main in-depth independent product case study | From film discovery through UX and data to delivery and operations | Actual problem, audience, role scope, current features, decisions and evidence of outcomes |
+| [Systerna](https://systerna.cz) | Upcoming technical case study; possibly a labelled teaser | System design, integrations, monitoring, security and operations | Actual purpose, readiness, implemented versus planned work; material safe to publish |
+| [Eucal](https://eucal.cz) | Shorter client project | Translating business needs into a clear website | Brief, user journeys, David's contribution, collaborators, changes and outcome |
+| [Vladan Vaněk](https://vladanvanek.cz) | Shorter client project | Content structure, personal identity, UX and presentation | Content and design authorship, David's decisions and verifiable outcomes |
+| [UpVideo](https://upvideo.cz) | Shorter client project | Visual communication, multimedia and delivery against a client brief | Media and design authorship, implementation contribution, requirements and outcome |
+| Emplifi | Professional experience, not automatically another client case study | A larger product, design system and teamwork; potentially team leadership | Exact role, dates, responsibilities, individual contributions and approved materials |
 
-Pořadí je návrh. Kultomat a Systerna byly v brainstormingu označované jako vlastní produkty; konkrétní vlastnictví a podíl dalších lidí je stále potřeba rozepsat.
+The order is a proposal. Kultomat and Systerna were described as independent products in the brainstorming; specific ownership and other people's contributions still need to be documented.
 
-### Kultomat: otázky pro hlavní příběh
+### Kultomat: questions for the main story
 
-Brainstorming navrhl objevování filmových projekcí napříč pražskými kiny. Ověřit, zda je to přesná současná definice problému a cílové skupiny.
+The brainstorming proposed discovering film screenings across Prague cinemas as the problem. Verify whether this accurately describes the current problem and target audience.
 
-Jako náměty byly zmíněny týdenní přehled, klasiky, watchlist, notifikace, sběr dat z kin a provozní kompromisy. **Nejde o potvrzený seznam funkcí.** Ke každému tématu nejprve zjistit, zda existuje, proč bylo zvoleno a co přineslo. Totéž platí pro dříve navržené technologie typu Next.js nebo scheduled workers.
+Suggested topics included a weekly overview, classics, a watchlist, notifications, cinema data collection and operational trade-offs. **This is not a confirmed feature list.** For each topic, establish whether it exists, why it was chosen and what it achieved. The same applies to previously suggested technologies such as Next.js or scheduled workers.
 
-Pro nejsilnější příběh vybrat 2–3 reálná rozhodnutí: řešený problém, alternativy, omezení, zvolená cesta a způsob ověření. Zahrnout i něco, co se záměrně nepostavilo nebo následně změnilo.
+For the strongest story, select two or three real decisions: the problem, alternatives, constraints, chosen approach and validation. Include something deliberately left unbuilt or subsequently changed.
 
-### Systerna: stav viditelně a poctivě
+### Systerna: make its status clear and honest
 
-Systernu neprezentovat jako dokončený produkt s výsledky. Před zveřejněním rozhodnout mezi:
-1. Vynecháním do doby připravenosti.
-2. Stručným teaserem s označením „Připravuje se / In progress“ a pouze potvrzenými informacemi.
-3. Pozdější plnou case study opřenou o skutečnou realizaci.
+Do not present Systerna as a finished product with established outcomes. Before publication, choose between:
 
-Témata architektury, integrací, bezpečnosti a škálování pocházejí z návrhů asistenta. Vybrat pouze relevantní témata doložená projektem.
+1. Leaving it out until it is ready.
+2. A short “In progress” teaser containing only confirmed information.
+3. A later full case study supported by actual implementation.
 
-### Klientské realizace: každá má ukázat jinou hodnotu
+Architecture, integrations, security and scaling were assistant suggestions. Select only relevant topics supported by the project.
 
-Neopakovat třikrát stejný seznam technologií. U Eucalu ověřit obchodní potřeby a orientaci návštěvníka; u Vladana Vaňka strukturu obsahu a osobní prezentaci; u UpVideo práci s vizuálním a multimediálním obsahem.
+### Client projects: each should demonstrate a distinct value
 
-Tyto úhly jsou redakční návrhy. Pokud skutečná role ukáže silnější jiný příběh, upravit je. U každého uvést, zda David zajišťoval design, vývoj, obsah, koordinaci, nebo jen část z nich.
+Avoid repeating the same technology list three times. For Eucal, investigate business needs and visitor orientation; for Vladan Vaněk, content structure and personal presentation; for UpVideo, visual and multimedia content.
 
-### Emplifi: zkušenost v týmu
+These angles are editorial proposals. Adjust them if the actual role supports a stronger story. For each project, state whether David provided design, development, content, coordination or a subset of these.
 
-Samostatná sekce má doplnit vlastní produkty o práci v existujícím produktu a organizaci. Tvrzení o design systému, vedení týmu a délce praxe vzešla z asistentských odpovědí a je potřeba je potvrdit.
+### Emplifi: experience within a team
 
-Doplnit přesnou roli a období, složení spolupráce, osobní příspěvky a 1–2 konkrétní příklady rozhodnutí či dopadu. Nepřipisovat Davidovi celý výsledek týmu. Pokud nelze zveřejnit interní materiály, použít schválený popis; bez vymyšlených metrik.
+A separate section should complement independent products with work inside an established product and organization. Claims about a design system, team leadership and years of experience came from assistant responses and need confirmation.
 
-## Návrh společné struktury case study
+Add the exact role and dates, collaboration context, individual contributions and one or two concrete examples of decisions or impact. Do not attribute the entire team's outcome to David. If internal materials cannot be shared, use an approved description without invented metrics.
 
-Struktura má umožnit rychlý přehled i hlubší čtení bez povinného přepínání režimů.
+## Proposed shared case study structure
 
-1. **Shrnutí:** co projekt řeší, pro koho a v jakém je stavu.
-2. **What I owned:** Davidova role, období, rozsah, spoluautoři a hranice odpovědnosti.
-3. **Problém a omezení:** uživatelské i obchodní potřeby, čas, rozpočet, provoz.
-4. **Klíčová rozhodnutí:** 2–3 konkrétní volby včetně alternativ a kompromisů.
-5. **Realizace:** relevantní UX a engineering; technologie jen s vysvětlením jejich významu.
-6. **AI a spolupráce:** konkrétní rozdělení práce a způsob kontroly.
-7. **Výsledek a ověření:** co je dokončeno, jak to víme, zdroje případných metrik.
-8. **Rethink / poučení:** co se změnilo, co nefungovalo a co by David udělal jinak.
+The structure should support both a quick overview and deeper reading without requiring a mode switch.
 
-U klientských realizací může jít o výrazně kratší text se stejnou poctivostí. U hlubších case studies je možné přidat architektonické schéma nebo technickou přílohu. Rozsah přizpůsobit důkazům, ne vyplňování šablony.
+1. **Summary:** what the project solves, for whom and its current status.
+2. **What I owned:** David's role, dates, scope, collaborators and boundaries of responsibility.
+3. **Problem and constraints:** user and business needs, time, budget and operations.
+4. **Key decisions:** two or three specific choices, including alternatives and trade-offs.
+5. **The build:** relevant UX and engineering; technologies explained through their significance.
+6. **AI and collaboration:** the actual division of work and review process.
+7. **Outcomes and validation:** what is complete, how it was verified and sources for any metrics.
+8. **Rethink / lessons:** what changed, what did not work and what David would do differently.
 
-## Podklady k získání pro každý projekt
+Client projects can be much shorter while maintaining the same honesty. Deeper case studies may include an architecture diagram or technical appendix. Let evidence determine the length rather than filling a template.
 
-- Jednovětý popis, cílová skupina, původní zadání a aktuální stav.
-- Období, role a spolupracovníci včetně autorství designu, obsahu a médií.
-- Reálné screenshoty a případně ukázka před / po s datem a popiskem.
-- Rozhodnutí, alternativy a kompromisy; co bylo ověřeno a jak.
-- Výsledky: zdroj, období a způsob měření. Pokud nejsou metriky, popsat doložitelný kvalitativní výsledek a limit důkazu.
-- Skutečné použití AI a lidská kontrola; ne domnělá automatizace celého projektu.
-- Veřejné odkazy a ověření, zda materiály a reference lze zveřejnit.
+## Evidence to gather for each project
 
-Do pracovních podkladů označovat chybějící údaje „K doplnění“. Na veřejném webu je nahradit potvrzeným obsahem nebo vynechat. Nepoužívat ilustrační fotografie z brainstormingu jako doklad práce.
+- A one-sentence description, target audience, original brief and current status.
+- Dates, role and collaborators, including design, content and media authorship.
+- Actual screenshots and, where useful, before / after examples with dates and captions.
+- Decisions, alternatives and trade-offs; what was validated and how.
+- Outcomes: source, timeframe and measurement method. Without metrics, describe a verifiable qualitative outcome and the limits of the evidence.
+- Actual AI use and human review, rather than assumed automation of the whole project.
+- Public links and confirmation that materials and testimonials can be published.
 
-## Pracovní karta k vyplnění
+Mark missing information “To be completed” in working materials. Replace it with confirmed content or omit it from the public website. Do not use illustrative brainstorming photographs as evidence of the work.
 
-Tato karta je pouze obsahová osnova; žádný projekt jí zatím nebyl fakticky doplněn.
+## Working project card
 
-- **Projekt / URL / stav:** K doplnění.
-- **Pro koho a jaký problém:** K doplnění.
-- **Období a kontext spolupráce:** K doplnění.
-- **Co jsem vlastnil:** K doplnění.
-- **Co dodali další lidé / AI:** K doplnění.
-- **Rozhodnutí → alternativa → důvod → ověření:** K doplnění.
-- **Výsledek a zdroj důkazu:** K doplnění.
-- **Co bych přehodnotil:** K doplnění.
-- **Screenshoty, odkazy a možnost zveřejnění:** K doplnění.
+This card is a content outline only; no project's facts have been filled in yet.
+
+- **Project / URL / status:** To be completed.
+- **Audience and problem:** To be completed.
+- **Dates and collaboration context:** To be completed.
+- **What I owned:** To be completed.
+- **What other people / AI contributed:** To be completed.
+- **Decision → alternative → reason → validation:** To be completed.
+- **Outcome and evidence source:** To be completed.
+- **What I would rethink:** To be completed.
+- **Screenshots, links and publication permissions:** To be completed.
