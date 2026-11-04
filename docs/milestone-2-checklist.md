@@ -171,7 +171,7 @@ Record evidence here and in the PR that completes each check.
 - [ ] Keyboard alone reaches every link and the menu, with a visible focus ring on paper and on ink; verify manually and with an axe check in Playwright. (PR C)
 - [ ] No horizontal scroll at 320 px; verify in Playwright at 320 × 640. (PR A, re-checked in PR C)
 - [x] Draft PR defers both `check` and `playwright`; ready PR runs both; verify in the Actions tab. (PR A) Evidence: PR #8 runs on `b4b8b06` and the draft push of `801d719` were skipped; marking ready ran `check` and `E2E` on `801d719`, both successful.
-- [ ] David signs off on the specimen page (PR B) and the shell on the preview URL (PR C).
+- [ ] David signs off on the specimen page (PR B) and the shell on the preview URL (PR C). Specimen: approved by David on 4 November 2026 (“Looks good”), on the PR B preview URL. Shell: pending PR C.
 
 ## Wrap-up
 
