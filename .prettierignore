@@ -8,3 +8,5 @@ pnpm-lock.yaml
 
 # Planning docs and design mockups are not reformatted
 docs/
+blob-report/
+.wrangler/

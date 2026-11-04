@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { en } from '../i18n/en'
+import { cs } from '../i18n/cs'
+import { pathFor } from '../i18n/routes'
+---
+
+<BaseLayout
+  title={`${en.notFound.title} · ${cs.notFound.title}`}
+  description={en.notFound.body}
+  locale="en"
+>
+  <h1>
+    {en.notFound.title} <span lang="cs">· {cs.notFound.title}</span>
+  </h1>
+  <p>{en.notFound.body}</p>
+  <p>
+    <a href={pathFor('en', 'home')}>{en.notFound.home}</a>
+  </p>
+  <div lang="cs">
+    <p>{cs.notFound.body}</p>
+    <p>
+      <a href={pathFor('cs', 'home')}>{cs.notFound.home}</a>
+    </p>
+  </div>
+</BaseLayout>

@@ -7,5 +7,13 @@ export default defineConfig([
   js.configs.recommended,
   ...tseslint.configs.recommended,
   ...astro.configs.recommended,
-  globalIgnores(['dist/**', '.astro/**', 'docs/**']),
+  globalIgnores([
+    'dist/**',
+    '.astro/**',
+    '.wrangler/**',
+    'docs/**',
+    'playwright-report/**',
+    'test-results/**',
+    'blob-report/**',
+  ]),
 ])
