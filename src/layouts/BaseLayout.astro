@@ -1,6 +1,8 @@
 ---
+import { Font } from 'astro:assets'
 import { isLocale, t, type Locale } from '../i18n'
 import { alternatesFor, urlFor, type RouteKey } from '../i18n/routes'
+import '../styles/global.css'
 
 interface Props {
   title: string
@@ -24,6 +26,9 @@ const alternates = route ? alternatesFor(route) : []
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" preload={[{ weight: 400 }]} />
+    <Font cssVariable="--font-mono" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {route && <link rel="canonical" href={urlFor(locale, route)} />}
@@ -33,6 +38,7 @@ const alternates = route ? alternatesFor(route) : []
     {route && (
       <link rel="alternate" hreflang="x-default" href={urlFor('en', route)} />
     )}
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">
@@ -43,25 +49,3 @@ const alternates = route ? alternatesFor(route) : []
     </main>
   </body>
 </html>
-
-<style is:global>
-  /* Temporary base styles; the design system replaces them in PR B. */
-  body {
-    margin: 0;
-    font-family: system-ui, sans-serif;
-  }
-
-  main {
-    padding: 2rem 1rem;
-  }
-
-  .skip-link {
-    position: absolute;
-    left: 1rem;
-    top: -3rem;
-  }
-
-  .skip-link:focus {
-    top: 1rem;
-  }
-</style>

@@ -1,0 +1,370 @@
+---
+// Temporary design-system specimen for visual review on the preview URL.
+// Not linked, noindex, English only (internal page). Remove before launch
+// (milestone 6).
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Button from '../components/Button.astro'
+import SectionHeading from '../components/SectionHeading.astro'
+
+const inks = [
+  { name: '--ink', value: '#1B2F7A', note: 'Text, borders, rollers' },
+  { name: '--paper', value: '#FAFAF7', note: 'Page background' },
+  { name: '--yellow', value: '#FFE800', note: 'Yellow paper, accents' },
+  { name: '--pink', value: '#FF48B0', note: 'Decoration only' },
+  { name: '--tint', value: '#E9ECF7', note: 'Pale panels' },
+  { name: '--ink-soft', value: '#D6DCF2', note: 'Secondary text on ink' },
+  { name: '--ink-line', value: '#8C9BD6', note: 'Dashed border on ink' },
+]
+
+const scale = [
+  { token: '--text-hero', label: 'Hero H1', sample: 'Think.' },
+  { token: '--text-contact', label: 'Contact', sample: 'Hiring?' },
+  { token: '--text-h2', label: 'Section H2', sample: 'Selected work' },
+  { token: '--text-feature', label: 'Feature card', sample: 'Kultomat' },
+  { token: '--text-about', label: 'About', sample: 'Playful by design' },
+  { token: '--text-experience', label: 'Experience', sample: 'Big team' },
+  { token: '--text-approach', label: 'Approach', sample: 'Rethink' },
+  { token: '--text-card', label: 'Small card', sample: 'Eucal' },
+]
+
+const czech = 'Příliš žluťoučký kůň úpěl ďábelské ódy · ŘĚŮČ ěščřžýáíéůú'
+---
+
+<BaseLayout
+  title="Design system specimen"
+  description="Internal specimen of tokens, type and print utilities."
+>
+  <meta name="robots" content="noindex" slot="head" />
+  <div class="specimen">
+    <h1 class="label">Design system specimen · temporary, not linked</h1>
+    <section aria-labelledby="inks">
+      <SectionHeading eyebrow="Tokens" id="inks">
+        Three inks
+      </SectionHeading>
+      <ul class="swatches" role="list">
+        {inks.map(({ name, value, note }) => (
+          <li>
+            <span class={`swatch swatch-${name.slice(2)}`} />
+            <code>{name}</code>
+            <span class="label">{value}</span>
+            <span>{note}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="type">
+      <SectionHeading eyebrow="Type scale · fluid 390 → 1440 px" id="type">
+        Type
+      </SectionHeading>
+      <div class="scale">
+        {scale.map(({ token, label, sample }) => (
+          <div class="scale-row">
+            <span class="label">
+              {label} · {token}
+            </span>
+            <p class={`display scale-${token.slice(7)}`}>{sample}</p>
+          </div>
+        ))}
+      </div>
+      <div class="faces">
+        <p class="display face">Rubik 900 · {czech}</p>
+        <p class="body-lg">Sora 400 body large · {czech}</p>
+        <p>
+          <strong>Sora 700</strong> · <span class="sora-600">Sora 600</span> ·
+          Sora 400 body · {czech}
+        </p>
+        <p class="label">Space Mono 700 label · {czech}</p>
+        <p class="mono">Space Mono 400 · {czech}</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="print">
+      <SectionHeading eyebrow="Print motifs" id="print">
+        Printing artefacts
+      </SectionHeading>
+      <div class="grid">
+        <figure class="paper-yellow rollers tile">
+          <span
+            class="halftone halftone--lg misregister glyph-lg"
+            data-text="T"
+            aria-hidden="true"
+          >
+            T
+          </span>
+          <figcaption class="label">
+            Halftone large + misregistration + yellow paper + rollers
+          </figcaption>
+        </figure>
+        <figure class="tile">
+          <span
+            class="halftone misregister glyph-md"
+            data-text="+"
+            aria-hidden="true"
+          >
+            +
+          </span>
+          <figcaption class="label">Halftone medium</figcaption>
+        </figure>
+        <figure class="paper-yellow rollers rollers--thin tile">
+          <span class="halftone halftone--sm glyph-sm" aria-hidden="true">
+            2
+          </span>
+          <figcaption class="label">Halftone small + thin rollers</figcaption>
+        </figure>
+        <figure class="dots-pink tile">
+          <figcaption class="label caption-box">Pink dot screen</figcaption>
+        </figure>
+      </div>
+      <p class="demo-heading">
+        <span class="shadow-heading">Offset shadow</span>·{' '}
+        <span class="highlight">Re</span>think ·
+        <span class="highlight">Serious</span> about the work
+      </p>
+      <div class="cards">
+        <div class="card shadow-card">Card · pink shadow</div>
+        <div class="card shadow-card-ink">Card · ink shadow</div>
+      </div>
+    </section>
+
+    <section aria-labelledby="buttons">
+      <SectionHeading
+        eyebrow="Components · Tab through to check focus"
+        id="buttons"
+      >
+        Buttons and focus
+      </SectionHeading>
+      <div class="surfaces">
+        <div class="surface">
+          <span class="label">On paper</span>
+          <Button href="#buttons">See selected work</Button>
+          <Button href="#buttons" variant="secondary">
+            Get in touch
+          </Button>
+          <a href="#buttons">A text link</a>
+        </div>
+        <div class="surface paper-yellow">
+          <span class="label">On yellow</span>
+          <Button href="#buttons">See selected work</Button>
+          <Button>Button element</Button>
+          <a href="#buttons">A text link</a>
+        </div>
+        <div class="surface surface-ink">
+          <span class="label">On ink</span>
+          <Button href="#buttons">Start a project →</Button>
+          <a href="#buttons">A text link</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .specimen {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad-section);
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: var(--pad-section) var(--pad-inline);
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-l);
+  }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--gap-s);
+    padding: 0;
+    list-style: none;
+  }
+
+  .swatches li {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .swatch {
+    height: 72px;
+    border: var(--border);
+  }
+
+  .swatch-ink {
+    background: var(--ink);
+  }
+  .swatch-paper {
+    background: var(--paper);
+  }
+  .swatch-yellow {
+    background: var(--yellow);
+  }
+  .swatch-pink {
+    background: var(--pink);
+  }
+  .swatch-tint {
+    background: var(--tint);
+  }
+  .swatch-ink-soft {
+    background: var(--ink-soft);
+  }
+  .swatch-ink-line {
+    background: var(--ink-line);
+  }
+  .scale-hero {
+    font-size: var(--text-hero);
+  }
+  .scale-contact {
+    font-size: var(--text-contact);
+  }
+  .scale-h2 {
+    font-size: var(--text-h2);
+  }
+  .scale-feature {
+    font-size: var(--text-feature);
+  }
+  .scale-about {
+    font-size: var(--text-about);
+  }
+  .scale-experience {
+    font-size: var(--text-experience);
+  }
+  .scale-approach {
+    font-size: var(--text-approach);
+  }
+  .scale-card {
+    font-size: var(--text-card);
+  }
+  .body-lg {
+    font-size: var(--text-body-lg);
+  }
+
+  .scale {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
+  }
+
+  .scale-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: var(--gap-s);
+    border-bottom: 1px dashed var(--ink-line);
+  }
+
+  .display {
+    font-family: var(--family-display);
+    font-weight: 900;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+  }
+
+  .faces {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+  }
+
+  .face {
+    font-size: var(--text-card);
+  }
+
+  .sora-600 {
+    font-weight: 600;
+  }
+
+  .mono {
+    font-family: var(--family-mono);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--gap-m);
+  }
+
+  .tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-xs);
+    min-height: 280px;
+    padding: var(--gap-m);
+    border: var(--border);
+    text-align: center;
+  }
+
+  /* Keep the rollers: the tile border would otherwise override them. */
+  .tile.rollers {
+    border-inline-width: var(--roller-width);
+  }
+
+  .glyph-lg,
+  .glyph-md,
+  .glyph-sm {
+    font-family: var(--family-display);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .glyph-lg {
+    font-size: 180px;
+  }
+
+  .glyph-md {
+    font-size: 140px;
+  }
+
+  .glyph-sm {
+    font-size: 150px;
+  }
+
+  .caption-box {
+    margin-top: auto;
+    padding: 6px 10px;
+    background: var(--paper);
+  }
+
+  .demo-heading {
+    font-family: var(--family-display);
+    font-size: var(--text-about);
+    font-weight: 900;
+    line-height: var(--leading-heading);
+    text-transform: uppercase;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-xl);
+  }
+
+  .card {
+    padding: var(--gap-m);
+    border: var(--border);
+    background: var(--paper);
+    font-weight: 700;
+  }
+
+  .surfaces {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--gap-m);
+  }
+
+  .surface {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-s);
+    padding: var(--gap-m);
+    border: var(--border);
+  }
+</style>

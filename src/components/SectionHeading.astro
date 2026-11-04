@@ -1,0 +1,36 @@
+---
+interface Props {
+  /** Mono eyebrow above the heading. */
+  eyebrow?: string
+  /** Heading level; sections use 2, nested blocks 3. */
+  level?: 2 | 3
+  id?: string
+}
+
+const { eyebrow, level = 2, id } = Astro.props
+const Tag = `h${level}` as 'h2' | 'h3'
+---
+
+<header class="section-heading">
+  {eyebrow && <p class="label">{eyebrow}</p>}
+  <Tag id={id} class="shadow-heading">
+    <slot />
+  </Tag>
+</header>
+
+<style>
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+  }
+
+  h2 {
+    font-size: var(--text-h2);
+    line-height: var(--leading-tight);
+  }
+
+  h3 {
+    font-size: var(--text-approach);
+  }
+</style>

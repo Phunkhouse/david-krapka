@@ -1,0 +1,74 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = {
+  /** primary: ink with yellow text. secondary: yellow with an ink border. */
+  variant?: 'primary' | 'secondary'
+} & (
+  | ({ href: string } & HTMLAttributes<'a'>)
+  | ({ href?: undefined } & HTMLAttributes<'button'>)
+)
+
+const { variant = 'primary', href, class: className, ...rest } = Astro.props
+const classes = ['button', `button--${variant}`, className]
+---
+
+{href ? (
+  <a href={href} class:list={classes} {...(rest as HTMLAttributes<'a'>)}>
+    <slot />
+  </a>
+) : (
+  <button
+    type="button"
+    class:list={classes}
+    {...(rest as HTMLAttributes<'button'>)}
+  >
+    <slot />
+  </button>
+)}
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 0 26px;
+    border: var(--border);
+    border-radius: var(--radius-pill);
+    font-family: var(--family-body);
+    font-size: var(--text-body);
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .button--primary {
+    background: var(--ink);
+    color: var(--yellow);
+  }
+
+  .button--secondary {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+
+  /* On ink, a primary button would vanish: swap to yellow with ink text. */
+  :global(.surface-ink) .button--primary {
+    border-color: var(--yellow);
+    background: var(--yellow);
+    color: var(--ink);
+  }
+
+  @media (hover: hover) {
+    .button {
+      transition: translate 0.15s ease;
+    }
+
+    .button:hover {
+      translate: -2px -2px;
+    }
+  }
+</style>

@@ -87,7 +87,7 @@ Slugs: `kultomat`, `eucal`, `vladan-vanek`, `upvideo`. Canonical host is `https:
 - It sets no cookies, stores nothing on visitors' devices and loads no third-party scripts, fonts or embeds in the first release ([LEG-005](#legal-requirements)). **Proposal:** no analytics at launch; if wanted later, choose a cookieless, EU-hosted option and run legal planning again.
 - The only personal data processed on the site itself is what Cloudflare handles for each request (IP address, user agent), plus emails people send and collaborators named in case studies. The privacy notice covers it ([LEG-003](#legal-requirements)); Cloudflare is the processor ([LEG-004](#legal-requirements)).
 - Email links expose a public address; spam is an accepted risk. The address must be one David is happy to publish.
-- Security headers are set by the host through `public/_headers`: HSTS, Content-Security-Policy, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and frame protection.
+- Security headers are set by the host through `public/_headers`: HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and frame protection. The Content-Security-Policy is split: Astro's `security.csp` emits a `<meta>` policy with hashes for every inline style and script (`default-src 'self'`, no third parties), and the header adds `frame-ancestors 'none'`, which a `<meta>` policy cannot carry.
 
 ## Legal requirements
 

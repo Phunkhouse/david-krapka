@@ -1,0 +1,88 @@
+/*
+ * Design tokens: the reference for exact values (docs/design/visual-system.md
+ * explains what they are for). Fluid sizes interpolate linearly between the
+ * 390 px mobile and 1440 px desktop mockups with clamp().
+ *
+ * Breakpoints (custom media is not native CSS, so they are written out):
+ *   < 720 px   mobile layout
+ *   720–1099   stacked hero, two-column cards
+ *   >= 1100    desktop layout
+ */
+:root {
+  /* Three inks on paper */
+  --ink: #1b2f7a;
+  --paper: #fafaf7;
+  --yellow: #ffe800;
+  --pink: #ff48b0;
+  --tint: #e9ecf7;
+  --ink-soft: #d6dcf2;
+  --ink-line: #8c9bd6;
+  /* Pink overprint: decoration only, never text */
+  --pink-overprint: rgb(255 72 176 / 0.55);
+
+  /* Families: CSS variables come from <Font> in BaseLayout */
+  --family-display: var(--font-display), sans-serif;
+  --family-body: var(--font-body), sans-serif;
+  --family-mono: var(--font-mono), monospace;
+
+  /* Type scale */
+  /* Hero headline (H1): 56px at 390 → 104px at 1440 */
+  --text-hero: clamp(3.5rem, 2.3857rem + 4.5714vw, 6.5rem);
+  /* Hero subline: 17px at 390 → 24px at 1440 */
+  --text-hero-sub: clamp(1.0625rem, 0.9rem + 0.6667vw, 1.5rem);
+  /* Section heading (H2): 48px at 390 → 92px at 1440 */
+  --text-h2: clamp(3rem, 1.9786rem + 4.1905vw, 5.75rem);
+  /* Contact heading: 52px at 390 → 112px at 1440 */
+  --text-contact: clamp(3.25rem, 1.8571rem + 5.7143vw, 7rem);
+  /* About heading: 36px at 390 → 56px at 1440 */
+  --text-about: clamp(2.25rem, 1.7857rem + 1.9048vw, 3.5rem);
+  /* Feature card title (Kultomat): 40px at 390 → 64px at 1440 */
+  --text-feature: clamp(2.5rem, 1.9429rem + 2.2857vw, 4rem);
+  /* Experience card title: 38px at 390 → 56px at 1440 */
+  --text-experience: clamp(2.375rem, 1.9571rem + 1.7143vw, 3.5rem);
+  /* Approach column title: 32px at 390 → 48px at 1440 */
+  --text-approach: clamp(2rem, 1.6286rem + 1.5238vw, 3rem);
+  /* Small card title: 24px at 390 → 30px at 1440 */
+  --text-card: clamp(1.5rem, 1.3607rem + 0.5714vw, 1.875rem);
+  /* Body large: 16px at 390 → 18.5px at 1440 */
+  --text-body-lg: clamp(1rem, 0.942rem + 0.2381vw, 1.1562rem);
+  /* Body: 15px at 390 → 16.5px at 1440 */
+  --text-body: clamp(0.9375rem, 0.9027rem + 0.1429vw, 1.0312rem);
+  /* Mono label: 11.5px at 390 → 13px at 1440 */
+  --text-label: clamp(0.7188rem, 0.6839rem + 0.1429vw, 0.8125rem);
+
+  --leading-tight: 0.95;
+  --leading-heading: 1.1;
+  --leading-body: 1.55;
+  --tracking-display: -0.03em;
+  --tracking-label: 0.08em;
+
+  /* Spacing: fixed gaps from the mockups */
+  --gap-xs: 14px;
+  --gap-s: 18px;
+  --gap-m: 24px;
+  --gap-l: 28px;
+  --gap-xl: 48px;
+  --gap-2xl: 56px;
+  /* Page side padding (mobile 20, desktop 56) */
+  --pad-inline: clamp(1.25rem, 0.4143rem + 3.4286vw, 3.5rem);
+  /* Section vertical padding */
+  --pad-section: clamp(3.5rem, 2.2rem + 5.3333vw, 7rem);
+  /* Roller width on section panels */
+  --roller: clamp(1.375rem, 1.05rem + 1.3333vw, 2.25rem);
+  --content-max: 1440px;
+
+  /* Borders and hard offset shadows (no blur, ever) */
+  --border: 3px solid var(--ink);
+  --radius-pill: 999px;
+  --shadow-heading: 6px 5px 0 var(--pink-overprint);
+  --shadow-card: 10px 9px 0 var(--pink);
+  --shadow-card-ink: 10px 9px 0 var(--ink);
+
+  /* Focus (agreed rule): ink on light backgrounds, yellow on ink.
+     Surfaces override --focus-color; use it directly in outline rules
+     (a shorthand token defined here would freeze it to ink). */
+  --focus-color: var(--ink);
+  --focus-width: 3px;
+  --focus-offset: 3px;
+}

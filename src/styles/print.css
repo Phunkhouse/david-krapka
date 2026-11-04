@@ -1,0 +1,110 @@
+/*
+ * Print motifs from docs/design/visual-system.md#print-motifs.
+ * Everything here is decoration: mark the elements aria-hidden="true" and
+ * put their meaning in real text.
+ */
+
+/* Halftone text: letters filled with an ink dot screen. Three densities. */
+.halftone {
+  --dot: 3.4px;
+  --grid: 11px;
+
+  color: transparent;
+  background-image: radial-gradient(
+    var(--ink) var(--dot),
+    transparent calc(var(--dot) + 0.4px)
+  );
+  background-size: var(--grid) var(--grid);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Hero drum, contact "?": 6 px dots on an 18 px grid */
+.halftone--lg {
+  --dot: 6px;
+  --grid: 18px;
+}
+
+/* Approach columns: 2.2 px dots on an 8 px grid */
+.halftone--sm {
+  --dot: 2.2px;
+  --grid: 8px;
+}
+
+/* Misregistered copy: a pink copy of the same glyph, slipped right and down.
+   Usage: <span class="misregister" data-text="T" aria-hidden="true">T</span>
+   The copy sits behind the glyph (z-index: -1), so the nearest ancestor with
+   a background must be a stacking context (.paper-yellow and .surface-ink
+   are; add isolation: isolate to any other panel), or the copy disappears
+   behind that background. Isolating .misregister itself would break the
+   multiply blend with the panel colour. */
+.misregister {
+  --slip-x: 0.06em;
+  --slip-y: 0.05em;
+
+  position: relative;
+  display: inline-block;
+}
+
+.misregister::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: var(--pink);
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  transform: translate(var(--slip-x), var(--slip-y));
+}
+
+/* Yellow paper: yellow stock with a faint ink dot screen */
+.paper-yellow {
+  background-color: var(--yellow);
+  background-image: radial-gradient(
+    rgb(27 47 122 / 0.1) 2px,
+    transparent 2.4px
+  );
+  background-size: 12px 12px;
+  color: var(--ink);
+  isolation: isolate;
+}
+
+/* Pink dot screen: behind the portrait and in the "In progress" card */
+.dots-pink {
+  background-image: radial-gradient(var(--pink) 2.2px, transparent 2.5px);
+  background-size: 9px 9px;
+}
+
+/* Rollers: solid ink bars on the left and right edges of yellow panels.
+   Fluid 22 → 36 px by default; --thin is the 18 px approach-grid variant. */
+.rollers {
+  --roller-width: var(--roller);
+
+  border-inline: var(--roller-width) solid var(--ink);
+}
+
+.rollers--thin {
+  --roller-width: 18px;
+}
+
+/* Hard offset shadows */
+.shadow-heading {
+  text-shadow: var(--shadow-heading);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-card-ink {
+  box-shadow: var(--shadow-card-ink);
+}
+
+/* Highlight: yellow behind a word fragment ("Re"think) */
+.highlight {
+  padding-inline: 0.12em;
+  background: var(--yellow);
+  color: var(--ink);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
