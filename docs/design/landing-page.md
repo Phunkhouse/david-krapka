@@ -135,4 +135,4 @@ Ink background, small text.
 | © 2026 David Křapka | © 2026 David Křapka |
 | Printed in three inks: blue, yellow and a little pink. | Tištěno třemi barvami: modrou, žlutou a trochou růžové. |
 
-The year should come from the build date. The language switcher and any legal links will probably live here or in the header (not designed yet). The footer needs a link to the privacy notice (LEG-003) and a reserved slot for business identification (name, place of business, IČO and registration note) that appears once the IČO is active (LEG-002).
+The year should come from the build date. Proposed sizing for the business identification block is in the [milestone 2 checklist](../milestone-2-checklist.md). The language switcher and any legal links will probably live here or in the header (not designed yet). The footer needs a link to the privacy notice (LEG-003) and a reserved slot for business identification (name, place of business, IČO and registration note) that appears once the IČO is active (LEG-002).

@@ -71,7 +71,7 @@ Status as of 4 November 2026: milestones 0 and 1 done, milestone 2 planned in de
 - Self-hosted fonts through the Astro Fonts API with Latin Extended.
 - Print utilities: halftone text (three densities), misregistered copy, yellow paper, pink dot screen, rollers, offset shadows, highlight.
 - Components: header with wordmark and navigation, mobile menu, language switcher, footer (with a privacy-notice link and a reserved, initially empty slot for business identification), buttons, section heading, focus styles, pause-motion toggle (static for now).
-- Privacy notice routes (`/privacy/`, `/cs/soukromi/`) with a placeholder page, so the footer link exists ([LEG-003](SPEC.md#legal-requirements)).
+- Privacy notice routes (`/privacy/`, `/cs/privacy/`) with a placeholder page, so the footer link exists ([LEG-003](SPEC.md#legal-requirements)).
 - Ship the `OFL.txt` of Rubik, Sora and Space Mono with the site, or verify that the served font files keep copyright and licence metadata ([LEG-008](SPEC.md#legal-requirements)).
 - Routing for `/` (English) and `/cs/` (Czech) with the correct `lang`, typed dictionaries, Astro i18n routing (`prefixDefaultLocale: false`), `site` `https://david-krapka.eu`, `hreflang` alternates, bilingual 404.
 - Playwright installed with a first smoke test, plus the adapted `budget-e2e.yml` (required result `playwright`) added to the ruleset.

@@ -11,7 +11,7 @@ The milestone is split so work can start before the missing canvas designs exist
 | PR | Branch (proposed) | Contents | Blocked by |
 | --- | --- | --- | --- |
 | A | `feat/i18n-routing-e2e` | Bilingual routing, typed dictionaries, base layout, unstyled placeholder pages, bilingual 404, Playwright and the `playwright` CI job | Nothing |
-| B | `feat/design-system` | Design tokens, fonts and their licences, base typography, print utilities, buttons, section heading, focus styles, baseline CSP | Font delivery choice (section 0) |
+| B | `feat/design-system` | Design tokens, fonts and their licences, base typography, print utilities, buttons, section heading, focus styles, baseline CSP | Nothing |
 | C | `feat/site-shell` | Header, mobile menu, language switcher, footer, pause toggle (static), privacy notice placeholder pages | Canvas designs for menu, switcher and pause toggle (section 0) |
 
 ## 0. Before starting (David)
@@ -20,10 +20,13 @@ The milestone is split so work can start before the missing canvas designs exist
 - [ ] Approve this plan, or name changes.
 - [ ] **Canvas designs** (block PR C): mobile menu panel, language switcher position and style, pause-motion toggle wording and placement. Optional on the same pass: 404 page and tablet header. Update `docs/design/` from the canvas in PR C.
 - [x] **Focus ring**: agreed 4 November 2026: 3 px ink outline with 3 px offset on light backgrounds, 3 px yellow outline on ink ([Visual system](design/visual-system.md#focus)).
-- [ ] **Privacy notice Czech slug**: `/cs/soukromi/` (as in MILESTONES and LEG-003) or `/cs/privacy/` (same slug as English, matching the rule in [0005](decisions/0005-bilingual-routing.md)). Recommendation: `/cs/privacy/`, so the switcher maps every page by the same path; record the choice in 0005 either way.
-- [ ] **Font delivery**: Astro Fonts API with the Fontsource provider (fonts downloaded at build time; CI and Cloudflare builds need network) or the local provider with committed `woff2` files subset to Latin + Latin Extended (offline builds, licence files committed next to the fonts). Recommendation: local provider; record the choice in `docs/decisions/`.
-- [ ] **Footer slot for business identification** ([LEG-002](SPEC.md#legal-requirements)): accept a slot sized for four short lines (name, place of business, IČO, registration note) without knowing the address yet. The slot stays empty and renders nothing until filled.
-- [ ] Confirm that adding the required status `playwright` to the `protect-main` ruleset is approved (end of PR A).
+- [x] **Privacy notice Czech slug**: `/cs/privacy/` (decided 4 November 2026; same slug as English, recorded in [0005](decisions/0005-bilingual-routing.md)).
+- [x] **Font delivery**: local provider with committed `woff2` files subset to Latin + Latin Extended and the `OFL.txt` files next to them (decided 4 November 2026, [0009](decisions/0009-self-hosted-font-files.md)).
+- [ ] **Footer slot for business identification** ([LEG-002](SPEC.md#legal-requirements)): accept a slot for four short lines (name, place of business, IČO, registration note) without knowing the address yet. The slot renders nothing until filled. **Proposed sizing, to confirm:**
+  - Sora 400, 14 px / 1.5 on desktop and 13 px / 1.5 on mobile (the footer is small text, below body size), `--ink-soft` on `--ink` (8.9:1).
+  - Block above the © line, separated by a 1 px `--ink-line` rule; one line per item on desktop, wrapping on mobile, at most about 60 characters per line.
+  - Footer navigation and the privacy link stay Space Mono 12 px uppercase labels (the mono label size), so the legal block reads as plain text and the links as navigation.
+- [x] Adding the required status `playwright` to the `protect-main` ruleset is approved (4 November 2026). It can only be done at the end of PR A, after the job has run once.
 - [x] Decide on the optional Claude PR review workflow from the starter pack (carried over from milestone 1): yes, 4 November 2026, as its own small PR right after the planning PR and before PR A. Not required for milestone 2.
   - [ ] David installs the [Claude GitHub App](https://github.com/apps/claude) on the repository and saves a `claude setup-token` token as the Actions secret `CLAUDE_CODE_OAUTH_TOKEN` (never in chat or files).
   - [ ] Copy `recipes/claude-pr-review/files/.github/workflows/claude.yml` from the starter pack; `actionlint` clean; mention the workflow in `AGENTS.md`.

@@ -9,7 +9,7 @@ The mockups include complete English and Czech landing pages; the hero claim sta
 
 ## Decision
 
-- English at `/`, Czech at `/cs/`, with the same slugs for case studies (`/work/kultomat/`, `/cs/work/kultomat/`).
+- English at `/`, Czech at `/cs/`, with the same slugs for every page: case studies (`/work/kultomat/`, `/cs/work/kultomat/`) and the privacy notice (`/privacy/`, `/cs/privacy/`; decided 4 November 2026).
 - Interface copy lives in typed dictionaries per language, so a missing translation fails type checking. Case studies are MDX files per language.
 - Each page sets its own `lang` and lists the other language as an `hreflang` alternate.
 - A visible switcher links to the equivalent page; no automatic redirects.

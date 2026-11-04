@@ -16,3 +16,4 @@ Copy `template.md` to `0001-short-title.md` and increment numbers without renumb
 | [0006](0006-astro-static-site.md) | Build the site with Astro instead of Next.js | accepted |
 | [0007](0007-cloudflare-workers-hosting.md) | Host on Cloudflare Workers static assets | accepted |
 | [0008](0008-keep-project-invitation-while-trade-suspended.md) | Keep the project invitation while the trade is suspended | accepted |
+| [0009](0009-self-hosted-font-files.md) | Commit the font files and load them with the local font provider | accepted |
