@@ -86,7 +86,7 @@ Slugs: `kultomat`, `eucal`, `vladan-vanek`, `upvideo`. Canonical host is `https:
 - It sets no cookies and loads no third-party scripts, fonts or embeds in the first release. **Proposal:** no analytics at launch; if wanted later, choose a cookieless, EU-hosted option and run legal planning again.
 - The only personal data processed is what the hosting provider logs for each request (IP address, user agent). This must be covered by the legal review.
 - Email links expose a public address; spam is an accepted risk. The address must be one David is happy to publish.
-- Security headers are set by the host: HSTS, Content-Security-Policy, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and frame protection.
+- Security headers are set by the host through `public/_headers`: HSTS, Content-Security-Policy, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and frame protection.
 
 ## Technical approach
 
@@ -95,7 +95,7 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 | Area | Choice | Status |
 | --- | --- | --- |
 | Framework | Astro 7, strict TypeScript, generated with `create astro`. No client JavaScript by default; scripts or islands only where behaviour needs them. | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
-| Rendering | Fully static (`output: 'static'`, build to `dist/`), no server runtime | Proposal ([0003](decisions/0003-vercel-static-hosting.md)) |
+| Rendering | Fully static (`output: 'static'`, build to `dist/`), no server runtime | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
 | Package manager and runtime | pnpm (pinned with `packageManager`), Node from `.nvmrc` (recipe default 26 LTS) | From recipe |
 | Styling | Astro component-scoped styles plus global design tokens as CSS custom properties; no Tailwind; Sass only if a real need appears | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
 | Fonts | Rubik 900, Sora 400/600/700, Space Mono 400/700, self-hosted through the Astro Fonts API (to verify in milestone 2), Latin + Latin Extended | Confirmed design |
@@ -105,8 +105,8 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 | Formatting and linting | Prettier (`semi: false`, `singleQuote: true`), ESLint flat config with `@eslint/js`, `typescript-eslint` and `eslint-plugin-astro` | From recipe |
 | Tests | Playwright for smoke, navigation, reduced-motion and accessibility checks (with axe). Vitest only when there is logic worth unit testing. | Proposal |
 | CI | GitHub Actions, **Budget-conscious**: draft PRs defer cloud jobs; ready PRs run the full suite | Confirmed ([0002](decisions/0002-budget-conscious-ci.md)) |
-| Hosting | Vercel, production from `main`, preview deployments for branches; domain `david-krapka.eu` | Proposal ([0003](decisions/0003-vercel-static-hosting.md)) |
-| Domain and DNS | `david-krapka.eu`, DNS at Websupport. Apex and `www` still point to Vercel from a previous project that has since been deleted, so the domain is free to attach to the new Vercel project. Mail (MX) is at Active24 and must not be changed. | Confirmed |
+| Hosting | Cloudflare Workers static assets (no Worker script), deployed by Workers Builds: production from `main`, preview URLs for branches; `wrangler.jsonc` and `public/_headers` | Confirmed ([0007](decisions/0007-cloudflare-workers-hosting.md)) |
+| Domain and DNS | `david-krapka.eu`, registered at Websupport, which also hosts its DNS today. Apex and `www` still point to Vercel from a deleted project. At launch DNS moves to Cloudflare (needed for the apex), with the Active24 mail records (MX, SPF, DKIM, DMARC) copied exactly. Mail must keep working. | Confirmed ([0007](decisions/0007-cloudflare-workers-hosting.md)) |
 | Repository | `git@github.com:Phunkhouse/david-krapka.git`, public, default branch `main` | Confirmed |
 
 ### Commands
@@ -121,7 +121,7 @@ macOS locally versus Ubuntu in CI; Playwright browser version tied to the instal
 
 - **Content is the critical path.** Most project facts, Emplifi details, the portrait photo, the CV and the public email address are still missing. Design and code can progress, but launch cannot.
 - **Case study pages are not designed.** Milestone 5 cannot start building until the canvas has a case study template.
-- **Vercel Hobby plan terms** allow non-commercial personal use only. A portfolio that also invites client work may count as commercial; confirm before launch or use the Pro plan.
+- **DNS move at launch.** Moving the zone to Cloudflare can break email if a mail record is missed; compare records one by one before switching nameservers and send a test email afterwards.
 - **Looping motion** carries accessibility risk; the pause control and flash check are launch requirements.
 - **Static output** rules out middleware-based language detection; visitors choose the language themselves.
 - **Branch protection** is technically enforceable because the repository is public. If it becomes private, rulesets need a paid GitHub plan.
@@ -132,7 +132,6 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 
 | Blocks | Question |
 | --- | --- |
-| Milestone 1 | Confirm Vercel (record 0003), or name an alternative. Framework settled as Astro (0006). |
 | Milestone 1 | Enable legal planning with the `audit-legal-readiness` skill? (Recommended: EU audience, freelance offer, possible identification duties for a sole trader.) |
 | Milestone 2 | Design the mobile menu panel, language switcher and pause control. |
 | Milestone 3 | Should the mobile hero show the intro sentence? What does the reduced-motion hero show? Should Experience be in the navigation? |
@@ -142,7 +141,6 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 | Milestone 6 | Public email address, LinkedIn and GitHub URLs, CV content and languages. |
 | Milestone 6 | Final role title, availability statement and which audience comes first. |
 | Milestone 6 | Analytics at launch: none (proposal) or a cookieless tool. |
-| Milestone 6 | Vercel Hobby or Pro. |
 
 ## Design
 

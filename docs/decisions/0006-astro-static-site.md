@@ -26,4 +26,4 @@ Supersedes: [0001](0001-starter-pack-and-nextjs.md) (framework choice only; the 
 - Interactive pieces are written as plain scripts or as an explicitly added framework island; adding a UI framework needs its own decision record.
 - TypeScript is pinned to 6.0.x because `@astrojs/check` and `typescript-eslint` did not support 7 at setup. Revisit when they do.
 - The repository shows less React/Next.js work to readers of the code; visitors to the site see no difference.
-- Hosting is unchanged ([0003](0003-vercel-static-hosting.md)): the build is plain files in `dist/`.
+- The build is plain files in `dist/`, so hosting is independent of the framework (originally [0003](0003-vercel-static-hosting.md), now [0007](0007-cloudflare-workers-hosting.md)).

@@ -9,7 +9,7 @@ Status as of 4 November 2026: milestone 0 done (PR #2), milestone 1 in progress,
 - Work on a branch, open the PR as a **draft**. Run `pnpm verify` (and `pnpm test:e2e` once it exists) locally and record results in the PR.
 - Draft PRs do not run cloud validation (Budget-conscious CI): the `check` job is skipped. When the work is ready, the agent asks David for permission to mark the PR **ready for review**; that triggers the full suite.
 - Every new commit to a ready PR re-runs the full suite. Merge only with green required checks for the current revision. Merging is David's call.
-- Vercel builds a preview for every branch, so each PR has a link for visual review.
+- Cloudflare Workers Builds deploys a preview for every branch, so each PR has a link for visual review.
 - Visual and product judgements (does it match the mockups, does the motion feel right) need David's sign-off; green CI is not enough.
 
 ## Milestone 0: Plan and design handoff
@@ -32,7 +32,7 @@ Status as of 4 November 2026: milestone 0 done (PR #2), milestone 1 in progress,
 
 **Status:** in progress
 
-**Goal:** An empty but real Astro site that builds, is checked in CI under the Budget-conscious policy, and deploys to Vercel.
+**Goal:** An empty but real Astro site that builds, is checked in CI under the Budget-conscious policy, and deploys to Cloudflare.
 
 **Scope:**
 
@@ -43,7 +43,7 @@ Status as of 4 November 2026: milestone 0 done (PR #2), milestone 1 in progress,
 - Adapt `recipes/ci-strategy/examples/budget-ci.yml` to `.github/workflows/ci.yml` (job name `check`). Validate with `actionlint`.
 - Write `AGENTS.md` with real commands, `CI strategy: Budget-conscious`, pointers to SPEC, design and milestones.
 - GitHub ruleset on `main`: pull request required, required status check `check` from GitHub Actions, branch must be up to date, no force pushes or deletion.
-- Vercel project linked to the repository: production branch `main`, preview deployments for other branches, Node version matching `.nvmrc`. The existing DNS records come from a deleted project and can be reused; if Vercel still reports the domain as in use, verify ownership with the TXT record it asks for. `david-krapka.eu` is **not** attached to production until launch (milestone 6). Until then production lives on the `*.vercel.app` URL with an `X-Robots-Tag: noindex` header.
+- Cloudflare Worker `david-krapka` connected to the repository with Workers Builds ([0007](decisions/0007-cloudflare-workers-hosting.md)): build command `pnpm build`, deploy command `npx wrangler deploy`, production branch `main`, preview builds for other branches, Node version matching `.nvmrc`. Configuration in `wrangler.jsonc` and `public/_headers`. DNS stays at Websupport and `david-krapka.eu` is **not** attached until launch (milestone 6). Until then production lives on the `*.workers.dev` URL with an `X-Robots-Tag: noindex` header.
 - Optional, if David agrees: legal planning with `audit-legal-readiness` (Planning mode, top-tier model, high effort) against SPEC; report in `docs/audits/`. Optional: Claude PR review workflow from the starter pack.
 
 **Acceptance checks:**
@@ -52,10 +52,10 @@ Status as of 4 November 2026: milestone 0 done (PR #2), milestone 1 in progress,
 - [ ] A draft PR skips `check` without installing dependencies; marking it ready runs the full suite and passes; verify on the milestone PR itself.
 - [ ] A new commit to the ready PR triggers a new full run; verify in the Actions tab.
 - [ ] Merging into `main` is blocked while `check` is failing or missing; verify with a throwaway PR that fails formatting.
-- [ ] The Vercel preview for the PR and the production `*.vercel.app` URL both serve the built page, with `noindex`; verify with `curl -I`.
+- [ ] The preview URL for the PR and the production `*.workers.dev` URL both serve the built page, with `noindex`; verify with `curl -I`.
 - [ ] `david-krapka.eu` still has working email (MX untouched); verify with `dig MX`.
 
-**Dependencies and risks:** David's confirmation of decision 0003; access to Vercel, GitHub settings and Websupport DNS. Vercel Hobby terms (see SPEC risks).
+**Dependencies and risks:** access to Cloudflare and GitHub settings.
 
 ## Milestone 2: Design system and site shell
 
@@ -150,10 +150,10 @@ Status as of 4 November 2026: milestone 0 done (PR #2), milestone 1 in progress,
 
 - Contact links with the real address and prefilled subjects; LinkedIn and GitHub links; CV PDF.
 - Favicon / monogram, Open Graph images, `sitemap.xml`, `robots.txt`, canonical URLs, JSON-LD `Person`.
-- Security headers in Vercel configuration; HSTS.
+- Final security headers in `public/_headers`, including a Content-Security-Policy; HSTS.
 - Placeholder check that fails the production build if any `[…]` placeholder remains.
 - Pre-launch reviews: `audit-legal-readiness` (Pre-launch mode, if legal planning was enabled), `audit-web-quality` (accessibility, SEO, performance), and a light `audit-security` of headers and dependencies.
-- Remove `noindex`; attach `david-krapka.eu` to production and redirect `www` to the apex.
+- Remove `noindex`. Move DNS to Cloudflare: add the zone, compare every record with Websupport (especially Active24 MX, SPF, DKIM and DMARC), switch nameservers at Websupport, then attach `david-krapka.eu` as a Custom Domain and redirect `www` to the apex.
 
 **Acceptance checks:**
 
@@ -165,7 +165,7 @@ Status as of 4 November 2026: milestone 0 done (PR #2), milestone 1 in progress,
 - [ ] Audit reports are saved in `docs/audits/` and every launch-blocking finding is fixed or accepted by David.
 - [ ] Email to the domain still arrives after the DNS change; verify by sending a test message.
 
-**Dependencies and risks:** Content inputs below; Vercel plan decision; legal findings.
+**Dependencies and risks:** Content inputs below; legal findings; access to Websupport to change nameservers; DNS change risk for email ([0007](decisions/0007-cloudflare-workers-hosting.md)).
 
 ## Content inputs (owner: David)
 

@@ -12,8 +12,9 @@ Before changing code, inspect the relevant files and the documentation for the i
 
 - Package manager: pnpm (pinned in `packageManager`). Node version: `.nvmrc`.
 - `pnpm dev`: start the dev server (http://localhost:4321). Agents run it in the background with `pnpm astro dev --background`, managed with `pnpm astro dev stop|status|logs`.
-- `pnpm build`: static build to `dist/` (`output: 'static'`). `pnpm preview` serves it locally.
+- `pnpm build`: static build to `dist/` (`output: 'static'`). `pnpm preview` serves it locally; `pnpm preview:cloudflare` serves it through `wrangler dev` with `public/_headers` and the 404/trailing-slash behaviour of production.
 - `pnpm format` / `pnpm format:check`: write / check Prettier formatting (`docs/` is excluded).
+- Hosting: Cloudflare Workers static assets (decision 0007), configured in `wrangler.jsonc` and `public/_headers`. Deploys run in Cloudflare Workers Builds, not from this repository's scripts.
 - `pnpm lint`: ESLint (`@eslint/js`, `typescript-eslint`, `eslint-plugin-astro`).
 - `pnpm typecheck`: `astro check` (runs `astro sync`, then type-checks `.astro` and `.ts` files). TypeScript is pinned to 6.0.x because `@astrojs/check` and `typescript-eslint` do not support 7 yet.
 - `pnpm verify`: format check, lint, typecheck and build in sequence. Run it before asking for review.

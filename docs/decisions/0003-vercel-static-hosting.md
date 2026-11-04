@@ -1,7 +1,7 @@
 # 0003. Static export hosted on Vercel
 
 Date: 2026-11-04  
-Status: proposed
+Status: superseded by [0007](0007-cloudflare-workers-hosting.md)
 
 ## Context
 

@@ -22,5 +22,5 @@ The starter pack offers two CI strategies ([CI strategy recipe](https://github.c
 
 - Draft PRs show a skipped `check` (job-level `if` on draft state, amended 2026-11-04; the pack example fails instead). A draft cannot be merged and marking it ready triggers the job. The skip is never replaced with a step that passes without validating.
 - Feedback from Linux CI arrives later, so local `pnpm verify` must be run before asking for review.
-- Vercel preview builds still run on every push (on Vercel, not GitHub Actions). If they become a cost or noise problem, add an ignore rule for draft branches.
+- Hosting preview builds still run on every push (Cloudflare Workers Builds since [0007](0007-cloudflare-workers-hosting.md), not GitHub Actions). If they become a cost or noise problem, limit preview builds by branch.
 - The repository is public, so Actions minutes on standard runners and rulesets are available without a paid plan; the strategy mainly reduces noise and queue time. Revisit if the repository becomes private.

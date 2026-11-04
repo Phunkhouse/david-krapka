@@ -6,7 +6,7 @@ The repository has a planned scope, design and delivery plan, and a placeholder 
 
 ## How it will work
 
-A static Astro site hosted on Vercel. One bilingual landing page (hero, selected work, approach, experience, about, contact) printed in a three-ink style, plus case study pages. No server, forms or cookies in the first release. Development follows the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack) with Budget-conscious CI: draft PRs are checked locally, and cloud CI runs when a PR is marked ready for review.
+A static Astro site hosted on Cloudflare Workers. One bilingual landing page (hero, selected work, approach, experience, about, contact) printed in a three-ink style, plus case study pages. No server, forms or cookies in the first release. Development follows the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack) with Budget-conscious CI: draft PRs are checked locally, and cloud CI runs when a PR is marked ready for review.
 
 ## Documentation
 
@@ -30,4 +30,4 @@ pnpm dev      # http://localhost:4321
 pnpm verify   # format check, lint, typecheck, build
 ```
 
-Other scripts: `pnpm build` (to `dist/`), `pnpm preview`, `pnpm format`, `pnpm lint`, `pnpm typecheck`. Commands and conventions for agents are in [AGENTS.md](AGENTS.md).
+Other scripts: `pnpm build` (to `dist/`), `pnpm preview`, `pnpm preview:cloudflare` (serves `dist/` with the production headers), `pnpm format`, `pnpm lint`, `pnpm typecheck`. Commands and conventions for agents are in [AGENTS.md](AGENTS.md).
