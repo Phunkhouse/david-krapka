@@ -104,7 +104,7 @@ Nothing may scroll horizontally at 320 px.
 
 ## Focus
 
-The mockups define a yellow outline only for project cards on blue. Proposed rule for the implementation: a 3 px ink outline with 3 px offset on light backgrounds, and a 3 px yellow outline on ink backgrounds. Never use yellow on paper. Focus must be visible on every link, button and card.
+The mockups define a yellow outline only for project cards on blue. Agreed rule (David, 4 November 2026): a 3 px ink outline with 3 px offset on light backgrounds, and a 3 px yellow outline on ink backgrounds. Never use yellow on paper. Focus must be visible on every link, button and card.
 
 ## Imagery
 
