@@ -58,7 +58,8 @@ const letters = ['T', 'M', 'R']
             {letters[index]}
           </span>
           <p class="label counter">{step.counter}</p>
-          <h3>
+          <h3 lang={locale === 'en' ? undefined : 'en'}>
+            {/* The highlight follows the hero claim on purpose ("Re" in Rethink). */}
             {step.title.startsWith(copy.hero.highlight) ? (
               <>
                 <span class="highlight">{copy.hero.highlight}</span>
@@ -295,10 +296,6 @@ const letters = ['T', 'M', 'R']
 
     .col:last-child {
       padding-right: 52px;
-    }
-
-    .col h3 {
-      font-size: var(--text-approach);
     }
 
     .text {

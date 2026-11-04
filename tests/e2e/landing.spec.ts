@@ -99,6 +99,25 @@ for (const {
       await expect(page.locator('#approach')).toBeInViewport()
     })
 
+    test('the English claim is marked as English on the Czech page', async ({
+      page,
+    }) => {
+      await page.goto(path)
+      const claims = page.locator('h1, #approach h3')
+      expect(await claims.count()).toBe(4)
+      for (const claim of await claims.all()) {
+        if (lang === 'cs') await expect(claim).toHaveAttribute('lang', 'en')
+        else await expect(claim).not.toHaveAttribute('lang')
+      }
+    })
+
+    test('opening a section by its address focuses it', async ({ page }) => {
+      for (const id of ['approach', 'experience']) {
+        await page.goto(`${path}#${id}`)
+        await expect(page.locator(`#${id}`)).toBeFocused()
+      }
+    })
+
     test('approach has three ordered steps and the AI disclosure', async ({
       page,
     }) => {

@@ -91,6 +91,8 @@ export const en = {
         textShort: "Being built now. Case study when it's ready.",
       },
     },
+    // Each `*Short` text is the mobile version of the one above it: keep them
+    // saying the same thing (the mockups use a shorter wording on mobile).
     approach: {
       title: 'How I think & build',
       intro:

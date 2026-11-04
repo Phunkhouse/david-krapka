@@ -20,7 +20,8 @@ const home = pathFor(locale, 'home')
 <section id="top" class="hero" tabindex="-1">
   <div class="text">
     <p class="label eyebrow">{hero.eyebrow}</p>
-    <h1>
+    <!-- The claim stays in English on the Czech page: mark its language. -->
+    <h1 lang={locale === 'en' ? undefined : 'en'}>
       {hero.heading.map((word) => (
         <>
           <span class="line">

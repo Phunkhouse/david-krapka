@@ -15,7 +15,8 @@ const home = pathFor(locale, 'home')
 
 <!--
   E3 "Big team. Small team." The CV line stays plain text until the CV exists
-  (milestone 6). Placeholders in square brackets are listed in the PR.
+  (milestone 6): then keep only one of `cv--card` and `cv--after` focusable
+  at any width. Placeholders in square brackets are listed in the PR.
 -->
 <section
   id="experience"
@@ -81,7 +82,7 @@ const home = pathFor(locale, 'home')
     gap: var(--gap-m);
     max-width: var(--content-max);
     margin-inline: auto;
-    padding: var(--pad-section) var(--gap-m);
+    padding: var(--pad-section) 20px;
   }
 
   .cards {
@@ -194,7 +195,7 @@ const home = pathFor(locale, 'home')
 
     .inner {
       gap: var(--gap-xl);
-      padding-inline: var(--gap-xl);
+      padding-inline: var(--gap-m);
     }
 
     .card {
@@ -224,7 +225,8 @@ const home = pathFor(locale, 'home')
   /* Side by side: two cards joined by the plus, CV line inside the first. */
   @media (min-width: 1100px) {
     .inner {
-      padding-inline: 80px;
+      /* 36 px roller + 44 px = 80 px from the edge, as in the mockup. */
+      padding-inline: 44px;
     }
 
     .cards {
