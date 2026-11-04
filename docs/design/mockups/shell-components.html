@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shell components: mobile menu, language switcher, pause control</title>
+<!-- Reference mockup, not code to ship. Proposal made without the canvas on 4 November 2026; to iterate. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@900&family=Sora:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1B2F7A;--paper:#FAFAF7;--yellow:#FFE800;--pink:#FF48B0;--tint:#E9ECF7;--ink-soft:#D6DCF2;--ink-line:#8C9BD6}
+*{box-sizing:border-box}
+body{margin:0;background:#cfd3e6;color:var(--ink);font-family:'Sora',system-ui,sans-serif;padding:32px}
+h1{font-family:'Rubik',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;font-size:28px;margin:0 0 6px}
+p.note{margin:0 0 28px;max-width:70ch;font-size:15px;line-height:1.5}
+h2{font-family:'Space Mono',monospace;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin:36px 0 12px}
+.row{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.board{background:var(--paper);border:3px solid var(--ink);overflow:hidden;position:relative}
+.m{width:390px;height:844px}
+.d{width:1100px}
+.cap{font-family:'Space Mono',monospace;font-size:12px;margin-top:8px}
+a{color:inherit}
+
+/* header */
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:14px 20px}
+.word{text-decoration:none;display:flex;flex-direction:column;line-height:1.15}
+.word b{font-family:'Rubik',sans-serif;font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:-.02em}
+.word i{font-style:normal;font-size:12px;font-weight:600}
+.menu-btn{width:48px;height:48px;border-radius:50%;border:3px solid var(--ink);background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;cursor:pointer;color:var(--ink)}
+.menu-btn span{width:18px;height:3px;background:var(--ink)}
+.menu-btn.open{background:var(--yellow);gap:0}
+.menu-btn.open span{position:absolute;width:20px}
+.menu-btn.open span:first-child{transform:rotate(45deg)}
+.menu-btn.open span:last-child{transform:rotate(-45deg)}
+.menu-btn.open{position:relative}
+.focus{outline:3px solid var(--ink);outline-offset:3px}
+
+/* desktop header */
+.dhdr{display:flex;justify-content:space-between;align-items:center;padding:20px 56px}
+.dhdr .word b{font-size:24px}.dhdr .word i{font-size:13px}
+.nav{display:flex;gap:30px;align-items:center;font-weight:600;font-size:15px}
+.nav a{text-decoration:none}
+.nav a:hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-color:var(--pink)}
+
+/* language switcher */
+.lang{display:inline-flex;border:3px solid var(--ink);border-radius:999px;overflow:hidden;font-family:'Space Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.lang a{display:flex;align-items:center;justify-content:center;min-width:44px;height:34px;padding:0 10px;text-decoration:none;color:var(--ink);background:var(--paper)}
+.lang a[aria-current]{background:var(--ink);color:var(--yellow)}
+.lang.big a{min-width:64px;height:48px;font-size:14px}
+.lang.on-ink{border-color:var(--yellow)}
+.lang.on-ink a{background:transparent;color:var(--yellow)}
+.lang.on-ink a[aria-current]{background:var(--yellow);color:var(--ink)}
+
+/* menu panel */
+.panel{position:absolute;left:0;right:0;top:76px;bottom:0;background:var(--ink);color:var(--paper);padding:28px 34px 28px;display:flex;flex-direction:column;border-top:3px solid var(--ink)}
+.panel:before,.panel:after{content:"";position:absolute;top:0;bottom:0;width:14px;background:var(--yellow)}
+.panel:before{left:0}.panel:after{right:0}
+.panel ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.panel li{border-bottom:3px solid var(--ink-line);border-bottom-style:dashed}
+.panel li a{display:flex;align-items:baseline;gap:14px;padding:14px 0;text-decoration:none;font-family:'Rubik',sans-serif;font-weight:900;font-size:44px;line-height:1;text-transform:uppercase;letter-spacing:-.03em;color:var(--yellow);text-shadow:5px 4px 0 rgba(255,72,176,.6)}
+.panel li a small{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);text-shadow:none}
+.panel li a.focus{outline:3px solid var(--yellow);outline-offset:-3px;padding-left:10px}
+.panel .foot{margin-top:auto;display:flex;flex-direction:column;gap:18px}
+.panel .lbl{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.panel .cta{display:flex;align-items:center;justify-content:center;height:52px;border-radius:999px;background:var(--yellow);color:var(--ink);border:3px solid var(--yellow);font-weight:700;text-decoration:none}
+.tail{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-soft)}
+
+/* pause control */
+.pause{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 16px 0 12px;border:3px solid var(--ink);border-radius:999px;background:var(--yellow);color:var(--ink);font-family:'Space Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;box-shadow:4px 4px 0 rgba(255,72,176,.6);cursor:pointer}
+.pause .ic{width:20px;height:20px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;gap:3px}
+.pause .ic i{width:3px;height:9px;background:var(--yellow)}
+.pause .ic i.tri{width:0;height:0;background:none;border-left:7px solid var(--yellow);border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px}
+.pause.paused{background:var(--paper)}
+.pause.small{height:36px;font-size:11px}
+
+/* hero drum band stand-in */
+.band{position:relative;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);background:var(--yellow);background-image:radial-gradient(rgba(27,47,122,.1) 1px,transparent 2px);background-size:12px 12px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.band .ht{font-family:'Rubik',sans-serif;font-weight:900;line-height:1;background:radial-gradient(var(--ink) 2.6px,transparent 3px) 0 0/10px 10px;-webkit-background-clip:text;background-clip:text;color:transparent}
+.band .pause{position:absolute;left:16px;bottom:14px}
+.dh{padding:0 56px 48px}
+.dh .band{height:250px;border:3px solid var(--ink)}
+.dh h3{font-family:'Rubik',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;font-size:56px;margin:22px 0 0}
+
+/* footer */
+.ft{background:var(--ink);color:var(--paper);padding:26px 56px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;font-size:13px}
+.ft .links{display:flex;gap:22px;font-family:'Space Mono',monospace;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.ft .links a{text-decoration:none;color:var(--yellow)}
+.ft .id{width:100%;border-bottom:1px dashed var(--ink-line);padding-bottom:12px;color:var(--ink-soft);font-size:14px}
+</style>
+</head>
+<body>
+<h1>Shell components: first proposal</h1>
+<p class="note">Mobile menu, language switcher and pause control, drawn in the existing three-ink system. Written without access to the canvas on 4 November 2026 so milestone 2 can proceed; expect to iterate. Spec: <a href="../shell-components.md">shell-components.md</a>. This file renders directly in a browser (it loads Google Fonts, which the real site does not).</p>
+
+<h2>Mobile · 390 px · English</h2>
+<div class="row">
+  <div>
+    <div class="board m">
+      <div class="hdr">
+        <a class="word" href="#"><b>David Křapka</b><i>Product-minded engineer</i></a>
+        <button class="menu-btn" aria-label="Open menu"><span></span><span></span></button>
+      </div>
+      <div class="band" style="height:410px"><span class="ht" style="font-size:340px">T</span>
+        <button class="pause small"><span class="ic"><i></i><i></i></span>Stop the press</button>
+      </div>
+      <div style="padding:22px 20px"><div style="font-family:Rubik;font-weight:900;font-size:56px;line-height:1.1;text-transform:uppercase;letter-spacing:-.03em">Think.</div></div>
+    </div>
+    <div class="cap">1 · Closed. Pause control sits on the drum band.</div>
+  </div>
+  <div>
+    <div class="board m">
+      <div class="hdr">
+        <a class="word" href="#"><b>David Křapka</b><i>Product-minded engineer</i></a>
+        <button class="menu-btn open" aria-label="Close menu" aria-expanded="true"><span></span><span></span></button>
+      </div>
+      <nav class="panel" aria-label="Main">
+        <ul>
+          <li><a href="#"><small>01</small>Work</a></li>
+          <li><a href="#"><small>02</small>Approach</a></li>
+          <li><a href="#" class="focus"><small>03</small>About</a></li>
+          <li><a href="#"><small>04</small>Contact</a></li>
+        </ul>
+        <div class="foot">
+          <a class="cta" href="#">Start a project →</a>
+          <div><div class="lbl" style="margin-bottom:8px">Language</div>
+            <div class="lang big on-ink"><a href="#" lang="en" hreflang="en" aria-current="page">EN</a><a href="#" lang="cs" hreflang="cs" aria-label="Česky">CS</a></div>
+          </div>
+          <div class="tail">Printed in three inks.</div>
+        </div>
+      </nav>
+    </div>
+    <div class="cap">2 · Open. Ink panel, yellow rollers, focus ring on ink = yellow.</div>
+  </div>
+  <div>
+    <div class="board m">
+      <div class="hdr">
+        <a class="word" href="#"><b>David Křapka</b><i>Product-minded engineer</i></a>
+        <button class="menu-btn open" aria-label="Zavřít menu" aria-expanded="true"><span></span><span></span></button>
+      </div>
+      <nav class="panel" aria-label="Hlavní">
+        <ul>
+          <li><a href="#"><small>01</small>Práce</a></li>
+          <li><a href="#"><small>02</small>Přístup</a></li>
+          <li><a href="#"><small>03</small>O mně</a></li>
+          <li><a href="#"><small>04</small>Kontakt</a></li>
+        </ul>
+        <div class="foot">
+          <a class="cta" href="#">Začít projekt →</a>
+          <div><div class="lbl" style="margin-bottom:8px">Jazyk</div>
+            <div class="lang big on-ink"><a href="#" lang="en" hreflang="en" aria-label="English">EN</a><a href="#" lang="cs" hreflang="cs" aria-current="page">CS</a></div>
+          </div>
+          <div class="tail">Tištěno třemi barvami.</div>
+        </div>
+      </nav>
+    </div>
+    <div class="cap">3 · Open, Czech. "Přístup" is the longest label; fits at 44 px.</div>
+  </div>
+</div>
+
+<h2>Desktop · header, pause control, footer</h2>
+<div class="board d">
+  <div class="dhdr">
+    <a class="word" href="#"><b>David Křapka</b><i>Product-minded engineer</i></a>
+    <nav class="nav" aria-label="Main"><a href="#">Work</a><a href="#">Approach</a><a href="#">About</a><a href="#">Contact</a>
+      <span class="lang"><a href="#" lang="en" hreflang="en" aria-current="page">EN</a><a href="#" lang="cs" hreflang="cs" aria-label="Česky">CS</a></span>
+    </nav>
+  </div>
+  <div class="dh">
+    <div class="band"><span class="ht" style="font-size:300px">T</span>
+      <button class="pause" style="left:20px;bottom:18px"><span class="ic"><i></i><i></i></span>Stop the press</button>
+    </div>
+    <h3>Think.</h3>
+  </div>
+  <div class="ft">
+    <div class="id">Name · Place of business · IČO · Registration note <span style="color:var(--ink-line)">(slot: renders only when filled)</span></div>
+    <div>© 2026 David Křapka · Printed in three inks: blue, yellow and a little pink.</div>
+    <div class="links"><a href="#">Work</a><a href="#">Approach</a><a href="#">About</a><a href="#">Contact</a><a href="#">Privacy</a>
+      <span class="lang on-ink"><a href="#" lang="en" hreflang="en" aria-current="page">EN</a><a href="#" lang="cs" hreflang="cs" aria-label="Česky">CS</a></span></div>
+  </div>
+</div>
+<div class="cap">The switcher sits in the header on desktop and repeats in the footer and the mobile menu. Pause control sits on the hero drum band.</div>
+
+<h2>Pause control · states</h2>
+<div class="row" style="align-items:center">
+  <div><button class="pause"><span class="ic"><i></i><i></i></span>Stop the press</button><div class="cap">Playing (EN)</div></div>
+  <div><button class="pause paused"><span class="ic"><i class="tri"></i></span>Start the press</button><div class="cap">Paused (EN), also the default under reduced motion</div></div>
+  <div><button class="pause"><span class="ic"><i></i><i></i></span>Zastavit tisk</button><div class="cap">Playing (CS)</div></div>
+  <div><button class="pause paused"><span class="ic"><i class="tri"></i></span>Spustit tisk</button><div class="cap">Paused (CS)</div></div>
+  <div><button class="pause focus"><span class="ic"><i></i><i></i></span>Stop the press</button><div class="cap">Keyboard focus on yellow band: ink ring</div></div>
+</div>
+
+<h2>Language switcher · states</h2>
+<div class="row" style="align-items:center">
+  <div class="lang"><a href="#" aria-current="page">EN</a><a href="#">CS</a></div>
+  <div class="lang"><a href="#">EN</a><a href="#" aria-current="page">CS</a></div>
+  <div class="lang"><a href="#" aria-current="page">EN</a><a href="#" class="focus" style="outline-offset:-6px">CS</a></div>
+  <div style="background:var(--ink);padding:14px;display:inline-flex"><div class="lang on-ink"><a href="#" aria-current="page">EN</a><a href="#">CS</a></div></div>
+</div>
+</body>
+</html>

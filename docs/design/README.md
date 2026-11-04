@@ -11,6 +11,7 @@ Snapshot taken on 4 November 2026 from canvas version `1793790030-28cb`. Source 
 | [Visual system](visual-system.md) | Colours, typefaces, type scale, print motifs (halftone, misregistration, rollers), borders, shadows, spacing and breakpoints. |
 | [Landing page](landing-page.md) | Section-by-section layout for desktop and mobile, with English and Czech copy and every placeholder that still needs content. |
 | [Motion](motion.md) | Hero print drum, approach section, portrait glitch and hover behaviour, with timings, reduced-motion rules and the pause requirement. |
+| [Shell components](shell-components.md) | First proposal for the mobile menu, language switcher and pause control (not yet on the canvas), with a [visual mockup](mockups/shell-components.html). |
 | [Mockup sources](mockups/README.md) | Snapshot of the canvas index and the four landing-page artboards. |
 
 ## Product and interaction principles
@@ -50,9 +51,7 @@ Kept on the canvas for reference; do not implement.
 These are needed before the related milestone can finish (see [milestones](../MILESTONES.md)):
 
 1. **Case study page** template (desktop and mobile), including the Kultomat long form and the shorter client format.
-2. **Mobile menu** panel opened by the round button.
-3. **Language switcher** position and style (the mockups have no switcher).
-4. **Motion pause control** (see [Motion](motion.md#pause-requirement)).
+2. **Mobile menu**, **language switcher** and **motion pause control**: first proposal in [Shell components](shell-components.md), not yet on the canvas; to iterate.
 5. **Tablet range** (roughly 720–1100 px). The mockups cover 390 px and 1440 px only.
 6. **404 page**, CV download treatment, and any legal or privacy page the legal planning requires.
 7. **Social preview image** (Open Graph) and favicon / monogram.
