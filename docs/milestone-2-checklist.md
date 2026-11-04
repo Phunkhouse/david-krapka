@@ -28,8 +28,8 @@ The milestone is split so work can start before the missing canvas designs exist
   - Footer navigation and the privacy link stay Space Mono 12 px uppercase labels (the mono label size), so the legal block reads as plain text and the links as navigation.
 - [x] Adding the required status `playwright` to the `protect-main` ruleset is approved (4 November 2026). It can only be done at the end of PR A, after the job has run once.
 - [x] Decide on the optional Claude PR review workflow from the starter pack (carried over from milestone 1): yes, 4 November 2026, as its own small PR right after the planning PR and before PR A. Not required for milestone 2.
-  - [ ] David installs the [Claude GitHub App](https://github.com/apps/claude) on the repository and saves a `claude setup-token` token as the Actions secret `CLAUDE_CODE_OAUTH_TOKEN` (never in chat or files).
-  - [ ] Copy `recipes/claude-pr-review/files/.github/workflows/claude.yml` from the starter pack; `actionlint` clean; mention the workflow in `AGENTS.md`.
+  - [x] David installs the [Claude GitHub App](https://github.com/apps/claude) on the repository and saves a `claude setup-token` token as the Actions secret `CLAUDE_CODE_OAUTH_TOKEN` (never in chat or files). Done 4 November 2026; `gh secret list` shows the secret (created 19:03 UTC). The app install is confirmed by the first review run.
+  - [x] Copy `recipes/claude-pr-review/files/.github/workflows/claude.yml` from the starter pack (commit `e948314`, unchanged); `actionlint` clean; mentioned in `AGENTS.md`.
   - [ ] After merge (the workflow must be on `main`), comment `@claude review` on the next PR and record the run and response.
 
 ## PR A: Routing, layout and end-to-end tests
