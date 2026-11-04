@@ -35,7 +35,7 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 
 - [x] Scripts: `dev`, `build`, `preview`, `format`, `format:check`, `lint`, `typecheck` (`astro check`), `verify` (format check, lint, typecheck, build in sequence).
 - [x] `astro.config.mjs`: `output: 'static'`, `trailingSlash: 'always'`.
-- [x] `wrangler.jsonc` (static assets from `dist/`, `auto-trailing-slash`, `404-page`, `workers.dev` and preview URLs on) and `public/_headers`: `X-Robots-Tag: noindex` plus basic security headers (HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options`). CSP waits for milestone 2. `noindex` is removed at launch (milestone 6).
+- [x] `wrangler.jsonc` (static assets from `dist/`, `auto-trailing-slash`, `404-page`, `workers.dev` and preview URLs on, empty `previews` block required by `wrangler preview`) and `public/_headers`: `X-Robots-Tag: noindex` plus basic security headers (HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options`). CSP waits for milestone 2. `noindex` is removed at launch (milestone 6).
 - [x] No Playwright, `test:e2e` or `budget-e2e.yml` yet. `AGENTS.md` lists only commands that exist.
 - [x] `pnpm verify` passes locally.
 
@@ -59,7 +59,8 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 
 - [x] `pnpm wrangler deploy --dry-run` reads the config; `pnpm preview:cloudflare` serves `/` with the headers above and returns 404 for unknown paths (checked locally).
 - [x] Create the Worker by importing the GitHub repository (Workers & Pages → Create → Import a repository). The Worker name must match `wrangler.jsonc` (`david-krapka`). The first production build of `main` failed as expected (no `package.json` until this PR merges).
-- [ ] Build settings: build command `pnpm build`, deploy command `npx wrangler deploy`, production branch `main`, preview builds for non-production branches on. Set `NODE_VERSION` to match `.nvmrc` if the build image does not read it.
+- [x] Build settings: build command `pnpm build`, deploy command `npx wrangler deploy`, production branch `main`. Previews Base tab: preview builds on, preview command `npx wrangler preview`, Preview URLs enabled, same API token as production. The build image reads Node 26.13 from `.nvmrc` and pnpm 12.9.1 from `packageManager`.
+- [x] `pnpm-workspace.yaml` allows the `esbuild` and `workerd` build scripts; pnpm 12 otherwise fails frozen installs in CI (`ERR_PNPM_IGNORED_BUILDS`).
 - [ ] Production lives on the `*.workers.dev` URL; **do not add `david-krapka.eu`** or touch DNS until milestone 6.
 
 ## 8. Optional
@@ -74,6 +75,8 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 - [ ] A new commit to the ready PR triggers a new full run. Evidence: Actions tab.
 - [ ] Merging into `main` is blocked while `check` is failing or missing. Evidence: a throwaway PR that fails formatting, closed afterwards.
 - [ ] The PR's preview URL and the production `*.workers.dev` URL both serve the built page with `noindex`. Evidence: `curl -I` output.
+  - [x] Preview (4 Nov 2026, commit `c7ced9e`): `https://feat-foundation-david-krapka.services-d43.workers.dev/` returns 200 with the placeholder page, `x-robots-tag: noindex`, HSTS, `x-frame-options: DENY`, `x-content-type-options: nosniff`, `referrer-policy` and `permissions-policy`; `/missing` returns 404.
+  - [ ] Production `david-krapka.services-d43.workers.dev`, after PR #3 merges.
 - [ ] `david-krapka.eu` still has working email (DNS is untouched in this milestone). Evidence: `dig MX david-krapka.eu` unchanged from before.
 
 ## 10. Wrap-up
