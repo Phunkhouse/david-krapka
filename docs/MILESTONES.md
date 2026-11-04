@@ -95,7 +95,7 @@ Status as of 4 November 2026: milestones 0, 1 and 2 done, the rest planned.
 
 ## Milestone 3: Landing page (static)
 
-**Status:** planned
+**Status:** planning; work plan in the [milestone 3 checklist](milestone-3-checklist.md) (three PRs: hero and work; approach and experience; about, contact and wrap-up).
 
 **Goal:** The full landing page in both languages matching the mockups, with no motion yet.
 
@@ -111,7 +111,7 @@ Status as of 4 November 2026: milestones 0, 1 and 2 done, the rest planned.
 - [ ] A list of remaining placeholders is in the PR description.
 - [ ] Neither language version states prices, rates, terms or availability for paid services; verify by reading the rendered pages ([LEG-001](SPEC.md#legal-requirements)).
 
-**Dependencies and risks:** Answers to the hero and mobile-intro questions in the [design README](design/README.md#open-design-questions); tablet layout approval.
+**Dependencies and risks:** Answers to the hero and mobile-intro questions in the [design README](design/README.md#open-design-questions); tablet layout approval; whether the header is sticky (carried from the milestone 2 review); how project cards and contact links behave before case studies (milestone 5) and the email address (milestone 6) exist. Lighthouse SEO cannot reach 100 while the preview sends `noindex`; that one audit is recorded as expected until milestone 6.
 
 ## Milestone 4: Motion
 
