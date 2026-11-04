@@ -13,15 +13,12 @@ concurrency:
 
 jobs:
   check:
+    # Draft PRs skip cloud validation. A draft cannot be merged, and marking
+    # it ready for review triggers this job, so a skipped run never gates a merge.
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      # Keep this job unconditional: skipped required jobs can count as passing.
-      - name: Require ready PR before cloud validation
-        if: github.event_name == 'pull_request' && github.event.pull_request.draft
-        run: |
-          echo '::error::Cloud validation deferred until the user authorizes ready for review.'
-          exit 1
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7

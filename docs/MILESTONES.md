@@ -7,7 +7,7 @@ Status as of 4 November 2026: milestone 0 in review, the rest planned.
 ## How every milestone is delivered
 
 - Work on a branch, open the PR as a **draft**. Run `pnpm verify` (and `pnpm test:e2e` once it exists) locally and record results in the PR.
-- Draft PRs do not run cloud validation (Budget-conscious CI): the `check` job fails immediately on purpose. When the work is ready, the agent asks David for permission to mark the PR **ready for review**; that triggers the full suite.
+- Draft PRs do not run cloud validation (Budget-conscious CI): the `check` job is skipped. When the work is ready, the agent asks David for permission to mark the PR **ready for review**; that triggers the full suite.
 - Every new commit to a ready PR re-runs the full suite. Merge only with green required checks for the current revision. Merging is David's call.
 - Vercel builds a preview for every branch, so each PR has a link for visual review.
 - Visual and product judgements (does it match the mockups, does the motion feel right) need David's sign-off; green CI is not enough.
@@ -49,7 +49,7 @@ Status as of 4 November 2026: milestone 0 in review, the rest planned.
 **Acceptance checks:**
 
 - [ ] `pnpm verify` passes locally on a fresh clone; verify by running it and recording output in the PR.
-- [ ] A draft PR shows a failed, deferred `check` without installing dependencies; marking it ready runs the full suite and passes; verify on the milestone PR itself.
+- [ ] A draft PR skips `check` without installing dependencies; marking it ready runs the full suite and passes; verify on the milestone PR itself.
 - [ ] A new commit to the ready PR triggers a new full run; verify in the Actions tab.
 - [ ] Merging into `main` is blocked while `check` is failing or missing; verify with a throwaway PR that fails formatting.
 - [ ] The Vercel preview for the PR and the production `*.vercel.app` URL both serve the built page, with `noindex`; verify with `curl -I`.

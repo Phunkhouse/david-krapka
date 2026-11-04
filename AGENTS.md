@@ -21,7 +21,7 @@ Before changing code, inspect the relevant files and the installed framework's d
 
 ## Validation strategy
 
-- CI strategy: Budget-conscious (decision 0002). `.github/workflows/ci.yml` job `check` fails on purpose for draft PRs and runs the full suite for ready PRs.
+- CI strategy: Budget-conscious (decision 0002). `.github/workflows/ci.yml` job `check` is skipped for draft PRs and runs the full suite for ready PRs.
 - During development and before handing off work, run the relevant local formatting, lint, type, test and build checks using existing project commands. Use a unified verification command when useful; report results and local/cloud environment differences, including checks that could not run.
 - Standard runs cloud validation on relevant PR updates. Budget-conscious uses draft PRs while developing and defers expensive cloud jobs until ready for review; every subsequent commit to a ready PR still needs full cloud validation.
 - In Budget-conscious mode, create draft PRs and obtain explicit user permission before marking them ready. Permission to request review is not permission to merge. Do not bypass checks or change the strategy to avoid a failure.

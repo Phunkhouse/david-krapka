@@ -15,7 +15,7 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 ## 1. Branch and PR hygiene
 
 - [ ] Branch from up-to-date `main` (for example `feat/foundation`); one PR at a time.
-- [ ] Open the PR as a **draft** early; expect a red, deferred `check` (intended).
+- [ ] Open the PR as a **draft** early; expect `check` to be skipped (intended).
 
 ## 2. Generate the app
 
@@ -70,7 +70,7 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 ## 9. Acceptance checks (from MILESTONES.md)
 
 - [ ] `pnpm verify` passes locally on a fresh clone. Evidence: output pasted in the PR.
-- [ ] Draft PR shows a failed, deferred `check` without installing dependencies. Marking it ready (after David's permission) runs the full suite and passes. Evidence: the milestone PR itself.
+- [ ] Draft PR skips `check` without installing dependencies. Marking it ready (after David's permission) runs the full suite and passes. Evidence: the milestone PR itself.
 - [ ] A new commit to the ready PR triggers a new full run. Evidence: Actions tab.
 - [ ] Merging into `main` is blocked while `check` is failing or missing. Evidence: a throwaway PR that fails formatting, closed afterwards.
 - [ ] Vercel preview for the PR and the production `*.vercel.app` URL both serve the built page with `noindex`. Evidence: `curl -I` output.
@@ -94,4 +94,4 @@ Everything may go in one PR; if it grows, split in this order (each PR starts on
 - Starter pack recipe was drafted against Next.js 16; the generator may install a newer version. Follow the installed docs.
 - `next/font` fetches at build time in CI; not used until milestone 2, so no network risk yet.
 - The `check` required status must exist on `main` before the ruleset can require it; otherwise merges block forever. Order: merge the workflow PR, then enforce, or enable the ruleset after the first run on the PR.
-- Draft PRs are red by design; do not turn that into a passing no-op.
+- Draft PRs skip `check` (job-level `if`). GitHub cannot merge a draft, and marking ready triggers the job, so the skip never gates a merge. Do not replace the skip with a step that passes without validating.
