@@ -16,16 +16,32 @@ export const cs: Dictionary = {
     about: 'O mně',
     contact: 'Kontakt',
   },
+  menu: {
+    open: 'Otevřít menu',
+    close: 'Zavřít menu',
+    fallback: 'Menu',
+    cta: 'Začít projekt →',
+  },
   skipLink: 'Přejít na obsah',
   language: {
     label: 'Jazyk',
     en: 'English',
     cs: 'Česky',
   },
+  pause: {
+    stop: 'Zastavit tisk',
+    start: 'Spustit tisk',
+  },
   home: {
     // The claim stays in English in the Czech version (design README).
     heading: 'Think. Make. Rethink.',
     placeholder: 'Web se právě staví.',
+  },
+  privacy: {
+    title: 'Ochrana osobních údajů',
+    description: 'Jak tento web zachází s osobními údaji.',
+    placeholder:
+      '[Informace o zpracování osobních údajů se připravují a budou zveřejněny před spuštěním webu.]',
   },
   notFound: {
     title: 'Stránka nenalezena',
@@ -33,6 +49,8 @@ export const cs: Dictionary = {
     home: 'Přejít na českou úvodní stránku',
   },
   footer: {
+    navLabel: 'Patička',
+    privacy: 'Soukromí',
     printed: 'Tištěno třemi barvami: modrou, žlutou a trochou růžové.',
   },
 }

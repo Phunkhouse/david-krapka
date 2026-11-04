@@ -22,7 +22,7 @@ A two-item segmented pill, `EN | CS`, in Space Mono 700, 12 px, uppercase, `0.08
 - Current language: ink fill, yellow text, `aria-current="page"`. The other: paper fill, ink text, a real link to the same page in the other language.
 - 3 px ink border, pill shape, 34 px high (header and footer); 48 px high with 64 px wide items in the mobile menu, so touch targets are large enough.
 - On ink (footer, mobile menu): yellow border and text, current item yellow fill with ink text.
-- Each link has `lang` and `hreflang`, and an accessible name in its own language: “English”, “Česky”. No redirects and nothing stored ([0005](../decisions/0005-bilingual-routing.md), [LEG-005](../SPEC.md#legal-requirements)).
+- A `role="group"` labelled “Language” / “Jazyk” (not a `<nav>`: it appears up to three times per page, and repeated landmarks with one name fail axe). Each link has `lang` and `hreflang`; its accessible name keeps the visible code and adds the language in its own language: “EN English”, “CS Česky”. No redirects and nothing stored ([0005](../decisions/0005-bilingual-routing.md), [LEG-005](../SPEC.md#legal-requirements)).
 - Placement: desktop header, to the right of the navigation; mobile menu panel; both footers. On mobile the header shows only the wordmark and menu button, so the switcher is one tap deeper.
 
 ## Pause control
@@ -32,7 +32,7 @@ Required by [Motion](motion.md#pause-requirement) (WCAG 2.2.2). It pauses all lo
 - Labels: “Stop the press” / “Start the press”; Czech “Zastavit tisk” / “Spustit tisk”. The label states the action; use `aria-pressed` or swap the label, not both.
 - Placement: on the hero drum band, bottom-left (16–20 px from the edges), 40 px high on desktop and 36 px on mobile. It sits early in the tab order, before the animation it controls. Yellow on the yellow band is separated by the ink border and the shadow; focus ring is ink.
 - Default state: playing, except under `prefers-reduced-motion`, where it starts paused. State lives in page memory only: no cookie, `localStorage` or `sessionStorage`.
-- Milestone 2 ships it static: rendered and labelled, no behaviour, because no motion exists yet. Decide in PR C whether to hide it until milestone 4.
+- Milestone 2 builds it as a static component (`src/components/PauseControl.astro`) shown only on the specimen page. It is not placed on real pages until the looping motion exists (milestone 4), so it never offers a control that does nothing.
 
 ## Header and footer additions
 

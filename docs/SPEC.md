@@ -77,7 +77,7 @@ Slugs: `kultomat`, `eucal`, `vladan-vanek`, `upvideo`. Canonical host is `https:
 
 ### Failure cases
 
-- JavaScript disabled or failed: all content, links and navigation still work (static HTML); only motion and the mobile menu's enhanced behaviour are lost. **Proposal:** the mobile menu falls back to an anchor link to a footer navigation.
+- JavaScript disabled or failed: all content, links and navigation still work (static HTML); only motion and the mobile menu's enhanced behaviour are lost. The mobile menu button is a link to the footer navigation until JavaScript replaces it with the real button (milestone 2).
 - Unknown URL: bilingual 404 page with links to both landing pages.
 - Missing translation: the build fails rather than shipping a page with missing strings.
 
@@ -119,7 +119,7 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 | Rendering | Fully static (`output: 'static'`, build to `dist/`), no server runtime | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
 | Package manager and runtime | pnpm (pinned with `packageManager`), Node from `.nvmrc` (recipe default 26 LTS) | From recipe |
 | Styling | Astro component-scoped styles plus global design tokens as CSS custom properties; no Tailwind; Sass only if a real need appears | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
-| Fonts | Rubik 900, Sora 400/600/700, Space Mono 400/700, self-hosted through the Astro Fonts API (to verify in milestone 2), Latin + Latin Extended | Confirmed design |
+| Fonts | Rubik 900, Sora 400/600/700, Space Mono 400/700, committed as Latin and Latin Extended `woff2` subsets and loaded with the Astro Fonts API local provider and `unicode-range`; OFL licences served from `/fonts/licenses/` | Confirmed ([0009](decisions/0009-self-hosted-font-files.md)) |
 | Languages | English (default, `/`) and Czech (`/cs/`) with Astro i18n routing; typed dictionaries in `src/i18n/` so a missing key fails type checking | Confirmed ([0005](decisions/0005-bilingual-routing.md)) |
 | Case study content | MDX files in an Astro content collection, one per project and language; a schema enforces role, collaborators and AI share | Proposal |
 | Images | Optimised at build time (Astro `<Image>`/`<Picture>`, AVIF/WebP with fixed dimensions) | Proposal |

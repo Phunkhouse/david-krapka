@@ -1,0 +1,370 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro'
+import { t, type Locale } from '../i18n'
+import { pathFor, type RouteKey } from '../i18n/routes'
+
+interface Props {
+  locale: Locale
+  route: RouteKey
+}
+
+const { locale, route } = Astro.props
+const copy = t(locale)
+const home = pathFor(locale, 'home')
+const links = [
+  { id: 'work', label: copy.nav.work },
+  { id: 'approach', label: copy.nav.approach },
+  { id: 'about', label: copy.nav.about },
+  { id: 'contact', label: copy.nav.contact },
+].map((link, index) => ({
+  ...link,
+  href: `${home}#${link.id}`,
+  counter: String(index + 1).padStart(2, '0'),
+}))
+---
+
+<header class="site-header">
+  <a class="wordmark" href={home}>
+    <span class="wordmark-name">{copy.site.name}</span>
+    <span class="wordmark-role">{copy.site.role}</span>
+  </a>
+
+  <nav class="desktop-nav" aria-label={copy.nav.label}>
+    <ul role="list">
+      {links.map(({ href, label }) => (
+        <li>
+          <a href={href}>{label}</a>
+        </li>
+      ))}
+    </ul>
+    <LanguageSwitcher locale={locale} route={route} />
+  </nav>
+
+  <!-- Without JavaScript the menu is a link to the footer navigation. -->
+  <a class="menu-toggle menu-fallback" href="#footer-nav" data-menu-fallback>
+    <span class="bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+    </span>
+    <span class="visually-hidden">{copy.menu.fallback}</span>
+  </a>
+  <button
+    class="menu-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+    data-menu-button
+    data-label-open={copy.menu.open}
+    data-label-close={copy.menu.close}
+    hidden
+  >
+    <span class="bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+    </span>
+    <span class="visually-hidden" data-menu-label>
+      {copy.menu.open}
+    </span>
+  </button>
+
+  <nav
+    id="mobile-menu"
+    class="mobile-menu surface-ink"
+    aria-label={copy.nav.label}
+    hidden
+    data-menu-panel
+  >
+    <ul role="list">
+      {links.map(({ href, label, counter }) => (
+        <li>
+          <a href={href} data-menu-link>
+            <span class="counter" aria-hidden="true">
+              {counter}
+            </span>
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="mobile-menu-foot">
+      <a class="menu-cta" href={`${home}#contact`} data-menu-link>
+        {copy.menu.cta}
+      </a>
+      <div class="menu-language">
+        <span class="label">{copy.language.label}</span>
+        <LanguageSwitcher locale={locale} route={route} size="lg" />
+      </div>
+      <p class="menu-tail label">{copy.footer.printed}</p>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Progressive enhancement: swap the fallback link for a real menu button.
+  const fallback = document.querySelector<HTMLElement>('[data-menu-fallback]')
+  const button = document.querySelector<HTMLButtonElement>('[data-menu-button]')
+  const panel = document.querySelector<HTMLElement>('[data-menu-panel]')
+  const label = button?.querySelector<HTMLElement>('[data-menu-label]')
+
+  if (fallback && button && panel && label) {
+    fallback.hidden = true
+    button.hidden = false
+
+    const setOpen = (open: boolean) => {
+      button.setAttribute('aria-expanded', String(open))
+      label.textContent =
+        (open ? button.dataset.labelClose : button.dataset.labelOpen) ?? ''
+      panel.hidden = !open
+      document.documentElement.classList.toggle('menu-open', open)
+    }
+
+    button.addEventListener('click', () => {
+      setOpen(button.getAttribute('aria-expanded') !== 'true')
+    })
+
+    panel.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+        button.focus()
+      }
+    })
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false)
+    })
+
+    panel.querySelectorAll('[data-menu-link]').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false))
+    })
+
+    // The panel only exists below 720 px; close it if the window grows.
+    matchMedia('(min-width: 720px)').addEventListener('change', (event) => {
+      if (event.matches) setOpen(false)
+    })
+  }
+</script>
+
+<style>
+  .site-header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-m);
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: 14px var(--pad-inline);
+  }
+
+  .wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    text-decoration: none;
+  }
+
+  .wordmark-name {
+    font-family: var(--family-display);
+    font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .wordmark-role {
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.8125rem);
+    font-weight: 600;
+  }
+
+  /* Desktop navigation: from 720 px */
+  .desktop-nav {
+    display: none;
+  }
+
+  .desktop-nav ul {
+    display: flex;
+    gap: clamp(18px, 2.2vw, 32px);
+    padding: 0;
+    list-style: none;
+  }
+
+  .desktop-nav ul a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (hover: hover) {
+    .desktop-nav ul a:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--pink);
+      text-decoration-thickness: 3px;
+      text-underline-offset: 6px;
+    }
+  }
+
+  @media (min-width: 720px) {
+    .site-header {
+      padding-block: 24px;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 2.2vw, 32px);
+    }
+
+    .menu-toggle,
+    .mobile-menu {
+      display: none !important;
+    }
+  }
+
+  /* Round menu button (mobile) */
+  .menu-toggle {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: var(--border);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .menu-toggle[hidden] {
+    display: none;
+  }
+
+  .bars {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .bars span {
+    display: block;
+    width: 18px;
+    height: 3px;
+    background: var(--ink);
+  }
+
+  .menu-toggle[aria-expanded='true'] {
+    background: var(--yellow);
+  }
+
+  .menu-toggle[aria-expanded='true'] .bars {
+    gap: 0;
+  }
+
+  .menu-toggle[aria-expanded='true'] .bars span {
+    width: 20px;
+  }
+
+  .menu-toggle[aria-expanded='true'] .bars span:first-child {
+    transform: translateY(1.5px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded='true'] .bars span:last-child {
+    transform: translateY(-1.5px) rotate(-45deg);
+  }
+
+  /* Mobile menu panel: under the header, filling the rest of the screen */
+  .mobile-menu {
+    position: absolute;
+    z-index: 50;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 100%);
+    padding: 24px calc(14px + var(--pad-inline));
+    border-top: var(--border);
+    border-inline: 14px solid var(--yellow);
+    overflow-y: auto;
+  }
+
+  .mobile-menu[hidden] {
+    display: none;
+  }
+
+  .mobile-menu ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .mobile-menu li {
+    border-bottom: 3px dashed var(--ink-line);
+  }
+
+  .mobile-menu li a {
+    display: flex;
+    align-items: baseline;
+    gap: var(--gap-xs);
+    padding: 14px 0;
+    color: var(--yellow);
+    font-family: var(--family-display);
+    font-size: clamp(2.25rem, 11vw, 2.75rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: var(--tracking-display);
+    text-decoration: none;
+    text-transform: uppercase;
+    text-shadow: 5px 4px 0 rgb(255 72 176 / 0.6);
+  }
+
+  .mobile-menu li a:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .counter {
+    font-family: var(--family-mono);
+    font-size: 12px;
+    letter-spacing: var(--tracking-label);
+    color: var(--ink-soft);
+    text-shadow: none;
+  }
+
+  .mobile-menu-foot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
+    margin-top: auto;
+    padding-top: var(--gap-m);
+  }
+
+  .menu-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    border: 3px solid var(--yellow);
+    border-radius: var(--radius-pill);
+    background: var(--yellow);
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .menu-language {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--ink-soft);
+  }
+
+  .menu-tail {
+    color: var(--ink-soft);
+    text-transform: none;
+  }
+
+  :global(html.menu-open) {
+    overflow: hidden;
+  }
+</style>

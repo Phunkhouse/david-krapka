@@ -8,6 +8,7 @@ import { locales, type Locale } from './index'
  */
 export const routes = {
   home: '',
+  privacy: 'privacy',
 } as const
 
 export type RouteKey = keyof typeof routes

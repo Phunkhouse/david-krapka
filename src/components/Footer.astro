@@ -1,0 +1,131 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro'
+import { t, type Locale } from '../i18n'
+import { pathFor, type RouteKey } from '../i18n/routes'
+
+interface Props {
+  locale: Locale
+  route: RouteKey
+}
+
+/**
+ * Business identification (LEG-002, Civil Code § 435). Stays null while the
+ * trade licence is suspended; fill it in when David accepts paid work, and
+ * the block appears in every footer. Lines are shown as written.
+ */
+const businessIdentification = null as readonly string[] | null
+
+const { locale, route } = Astro.props
+const copy = t(locale)
+const home = pathFor(locale, 'home')
+const year = new Date().getFullYear()
+const links = [
+  { href: `${home}#work`, label: copy.nav.work },
+  { href: `${home}#approach`, label: copy.nav.approach },
+  { href: `${home}#about`, label: copy.nav.about },
+  { href: `${home}#contact`, label: copy.nav.contact },
+  { href: pathFor(locale, 'privacy'), label: copy.footer.privacy },
+]
+---
+
+<footer class="site-footer surface-ink">
+  <div class="inner">
+    {businessIdentification && (
+      <p class="business">
+        {businessIdentification.map((line) => (
+          <span>{line}</span>
+        ))}
+      </p>
+    )}
+    <div class="row">
+      <p class="colophon">
+        {`© ${year} ${copy.site.name} · ${copy.footer.printed}`}
+      </p>
+      <div class="links">
+        <nav id="footer-nav" aria-label={copy.footer.navLabel} tabindex="-1">
+          <ul role="list">
+            {links.map(({ href, label }) => (
+              <li>
+                <a href={href}>{label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <LanguageSwitcher locale={locale} route={route} />
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--pad-section);
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: 28px var(--pad-inline);
+  }
+
+  /* Business identification: Sora 14/13 px, ink-soft on ink (8.9:1) */
+  .business {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px var(--gap-m);
+    max-width: 60ch;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--ink-line);
+    color: var(--ink-soft);
+    font-size: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+    line-height: 1.5;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-s) var(--gap-m);
+  }
+
+  .colophon {
+    font-size: 13px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--gap-s) var(--gap-m);
+  }
+
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    padding: 0;
+    list-style: none;
+  }
+
+  nav a {
+    color: var(--yellow);
+    font-family: var(--family-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  #footer-nav:focus {
+    outline: none;
+  }
+</style>
