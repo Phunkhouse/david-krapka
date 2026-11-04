@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mobile menu closed</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@900&amp;family=Sora:wght@400;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0;background:#FAFAF7}
+a{color:#1B2F7A}
+.m-paper{background-color:#FFE800;background-image:radial-gradient(rgba(27,47,122,.10) 1.6px,transparent 1.9px);background-size:9px 9px}
+.m-ht{color:transparent;-webkit-background-clip:text;background-clip:text;background-image:radial-gradient(#1B2F7A 3.4px,transparent 3.8px);background-size:10px 10px}
+.m-btn:focus-visible,.pz:focus-visible{outline:3px solid #1B2F7A;outline-offset:3px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; background: #FAFAF7; color: #1B2F7A; font-family: 'Sora', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 14px 20px">
+    <a href="#top" style="text-decoration: none; display: flex; flex-direction: column; line-height: 1.15"><span style="font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 20px; text-transform: uppercase">David Křapka</span><span style="font-size: 12px; font-weight: 600">Product-minded engineer</span></a>
+    <button type="button" class="m-btn" aria-label="Open menu" aria-expanded="false" style="width: 48px; height: 48px; border-radius: 50%; border: 3px solid #1B2F7A; background: #FAFAF7; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; padding: 0">
+      <span aria-hidden="true" style="width: 18px; height: 3px; background: #1B2F7A"></span>
+      <span aria-hidden="true" style="width: 18px; height: 3px; background: #1B2F7A"></span>
+    </button>
+  </header>
+  <div class="m-paper" style="position: relative; flex: 0 0 410px; overflow: hidden; border-top: 3px solid #1B2F7A; border-bottom: 3px solid #1B2F7A; display: flex; align-items: center; justify-content: center">
+    <span aria-hidden="true" style="position: relative; display: block; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 330px; line-height: 1">
+      <span style="position: absolute; left: 9px; top: 7px; color: #FF48B0; mix-blend-mode: multiply; opacity: 0.55">T</span><span class="m-ht" style="position: relative">T</span>
+    </span>
+    <button type="button" class="pz" style="position: absolute; left: 16px; bottom: 14px; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 16px 0 10px; border: 3px solid #1B2F7A; border-radius: 999px; background: #FFE800; color: #1B2F7A; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 4px 4px 0 rgba(255,72,176,.6); cursor: pointer">
+      <span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; background: #1B2F7A; display: flex; align-items: center; justify-content: center; gap: 3px"><span style="width: 3px; height: 9px; background: #FFE800"></span><span style="width: 3px; height: 9px; background: #FFE800"></span></span>
+      Stop the press
+    </button>
+  </div>
+  <div style="padding: 22px 20px; display: flex; flex-direction: column; gap: 10px">
+    <h1 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 56px; line-height: 62px; text-transform: uppercase; letter-spacing: -0.03em">Think.</h1>
+    <p style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4">Understand the problem and ask the questions.</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

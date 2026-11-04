@@ -1,6 +1,6 @@
 # Shell components: mobile menu, language switcher, pause control
 
-**Status: first proposal, 4 November 2026.** Drawn without access to the canvas so milestone 2 can proceed, in the existing three-ink system. David asked for a first version to iterate on. The canvas still has no board for these; when one exists, it wins (see [design README](README.md)). Visual reference: [mockups/shell-components.html](mockups/shell-components.html) (opens directly in a browser).
+**Status: first proposal, 4 November 2026, to iterate.** Drawn in the existing three-ink system at David's request so milestone 2 can proceed. The boards are on the canvas page **Site shell · menu, switcher, pause** (canvas version `1793818431-5e1b`); as everywhere, the canvas wins if it and this document disagree (see [design README](README.md)). Source copies: [M-Menu-Closed](mockups/M-Menu-Closed.dc.html), [M-Menu-Open](mockups/M-Menu-Open.dc.html), [M-Menu-Open-CS](mockups/M-Menu-Open-CS.dc.html), [D-Shell](mockups/D-Shell.dc.html). The business identification line in D-Shell uses square-bracket placeholders: the real block renders only when filled.
 
 All values use the tokens in [Visual system](visual-system.md). Focus follows the [agreed rule](visual-system.md#focus): ink outline on light backgrounds, yellow outline on ink.
 

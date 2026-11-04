@@ -18,7 +18,7 @@ The milestone is split so work can start before the missing canvas designs exist
 
 - [x] Milestone 1 merged and complete ([PR #3](https://github.com/Phunkhouse/david-krapka/pull/3), evidence in [PR #5](https://github.com/Phunkhouse/david-krapka/pull/5)).
 - [ ] Approve this plan, or name changes.
-- [x] **Shell designs** (were blocking PR C): first proposal for the mobile menu, language switcher and pause toggle in [Shell components](design/shell-components.md) and its [mockup](design/mockups/shell-components.html), made in the existing style (4 November 2026). David will iterate on it later, so PR C builds from this and updates the docs if the design changes. The 404 page and tablet header are still undesigned; PR C uses the proposal's rules for both.
+- [x] **Shell designs** (were blocking PR C): first proposal for the mobile menu, language switcher and pause toggle in [Shell components](design/shell-components.md), on the canvas page “Site shell · menu, switcher, pause”, made in the existing style (4 November 2026). David will iterate on it later, so PR C builds from this and updates the docs if the design changes. The 404 page and tablet header are still undesigned; PR C uses the proposal's rules for both.
 - [x] **Focus ring**: agreed 4 November 2026: 3 px ink outline with 3 px offset on light backgrounds, 3 px yellow outline on ink ([Visual system](design/visual-system.md#focus)).
 - [x] **Privacy notice Czech slug**: `/cs/privacy/` (decided 4 November 2026; same slug as English, recorded in [0005](decisions/0005-bilingual-routing.md)).
 - [x] **Font delivery**: local provider with committed `woff2` files subset to Latin + Latin Extended and the `OFL.txt` files next to them (decided 4 November 2026, [0009](decisions/0009-self-hosted-font-files.md)).
@@ -181,7 +181,7 @@ Record evidence here and in the PR that completes each check.
 
 ## Risks and notes
 
-- PR C builds from a proposal that is not on the canvas yet. Expect design changes after review; keep the components simple to restyle.
+- PR C builds from a first proposal. Expect design changes after review; keep the components simple to restyle.
 - Astro's i18n helpers and the Fonts API change between versions; check the docs for the installed version before using them, and pin what you use.
 - A Fontsource provider makes every build depend on the network (Cloudflare Workers Builds and CI included). The local provider avoids that at the cost of committing font files.
 - `astro preview` and `wrangler dev` can differ on 404 status and trailing slashes. Playwright runs against one of them; note which, and check the other by hand.
