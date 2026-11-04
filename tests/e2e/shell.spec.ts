@@ -111,17 +111,20 @@ test.describe('focus ring', () => {
       page.getByRole('link', { name: 'Skip to content' }),
     ).toBeFocused()
     const reached = new Set<string>()
-    for (let i = 0; i < 30; i++) {
+    // Tab until the privacy link in the footer, with an upper bound so the
+    // test keeps working as pages gain links.
+    for (let i = 0; i < 200; i++) {
       await page.keyboard.press('Tab')
       const label = await page.evaluate(() => {
         const el = document.activeElement as HTMLElement | null
         return el
-          ? `${el.closest('header, footer, main')?.tagName}:${el.innerText.trim()}`
+          ? `${el.closest('header, footer, main')?.tagName}:${(el.textContent ?? '').trim().toUpperCase()}`
           : ''
       })
       reached.add(label)
+      if (label === 'FOOTER:PRIVACY') break
     }
-    for (const label of ['HEADER:Work', 'HEADER:Contact', 'FOOTER:PRIVACY']) {
+    for (const label of ['HEADER:WORK', 'HEADER:CONTACT', 'FOOTER:PRIVACY']) {
       expect([...reached]).toContain(label)
     }
   })
@@ -146,6 +149,22 @@ test.describe('mobile menu', () => {
     await expect(menu).toBeHidden()
     await expect(button).toBeFocused()
     await storageIsEmpty(page)
+  })
+
+  test('keeps focus out of the page behind the open menu', async ({ page }) => {
+    await page.goto('/')
+    await page.getByRole('button', { name: 'Open menu' }).click()
+    for (let i = 0; i < 12; i++) {
+      await page.keyboard.press('Tab')
+      const where = await page.evaluate(
+        () => document.activeElement?.closest('main, footer')?.tagName ?? null,
+      )
+      expect(where).toBeNull()
+    }
+    await expect(page.locator('main')).toHaveAttribute('inert', '')
+    await page.keyboard.press('Escape')
+    await expect(page.locator('#mobile-menu')).toBeHidden()
+    await expect(page.locator('main')).not.toHaveAttribute('inert')
   })
 
   test('closes when a menu link is chosen', async ({ page }) => {
