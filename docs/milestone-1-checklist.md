@@ -58,7 +58,7 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 ## 7. Cloudflare
 
 - [x] `pnpm wrangler deploy --dry-run` reads the config; `pnpm preview:cloudflare` serves `/` with the headers above and returns 404 for unknown paths (checked locally).
-- [ ] Create the Worker by importing the GitHub repository (Workers & Pages → Create → Import a repository). The Worker name must match `wrangler.jsonc` (`david-krapka`).
+- [x] Create the Worker by importing the GitHub repository (Workers & Pages → Create → Import a repository). The Worker name must match `wrangler.jsonc` (`david-krapka`). The first production build of `main` failed as expected (no `package.json` until this PR merges).
 - [ ] Build settings: build command `pnpm build`, deploy command `npx wrangler deploy`, production branch `main`, preview builds for non-production branches on. Set `NODE_VERSION` to match `.nvmrc` if the build image does not read it.
 - [ ] Production lives on the `*.workers.dev` URL; **do not add `david-krapka.eu`** or touch DNS until milestone 6.
 
