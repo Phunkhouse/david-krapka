@@ -22,7 +22,7 @@ The milestone is split so work can start before the missing canvas designs exist
 - [x] **Focus ring**: agreed 4 November 2026: 3 px ink outline with 3 px offset on light backgrounds, 3 px yellow outline on ink ([Visual system](design/visual-system.md#focus)).
 - [x] **Privacy notice Czech slug**: `/cs/privacy/` (decided 4 November 2026; same slug as English, recorded in [0005](decisions/0005-bilingual-routing.md)).
 - [x] **Font delivery**: local provider with committed `woff2` files subset to Latin + Latin Extended and the `OFL.txt` files next to them (decided 4 November 2026, [0009](decisions/0009-self-hosted-font-files.md)).
-- [ ] **Footer slot for business identification** ([LEG-002](SPEC.md#legal-requirements)): accept a slot for four short lines (name, place of business, IČO, registration note) without knowing the address yet. The slot renders nothing until filled. **Proposed sizing, to confirm:**
+- [x] **Footer slot for business identification** ([LEG-002](SPEC.md#legal-requirements)): accept a slot for four short lines (name, place of business, IČO, registration note) without knowing the address yet. The slot renders nothing until filled. **Sizing approved with the shell sign-off (4 November 2026):**
   - Sora 400, 14 px / 1.5 on desktop and 13 px / 1.5 on mobile (the footer is small text, below body size), `--ink-soft` on `--ink` (8.9:1).
   - Block above the © line, separated by a 1 px `--ink-line` rule; one line per item on desktop, wrapping on mobile, at most about 60 characters per line.
   - Footer navigation and the privacy link stay Space Mono 12 px uppercase labels (the mono label size), so the legal block reads as plain text and the links as navigation.
@@ -171,7 +171,7 @@ Record evidence here and in the PR that completes each check.
 - [x] Keyboard alone reaches every link and the menu, with a visible focus ring on paper and on ink; verify manually and with an axe check in Playwright. (PR C) Evidence: Playwright tabbing reaches the skip link, header and footer links; the menu opens, takes focus on Tab, closes with Escape and returns focus; ring colour checked (ink in the header, yellow in the footer); axe clean on all pages at 1280 and 320 px and with the menu open. Manual check in the browser at 390 px.
 - [x] No horizontal scroll at 320 px; verify in Playwright at 320 × 640. (PR A, re-checked in PR C) Evidence: every page, including privacy and 404, in `shell.spec.ts`.
 - [x] Draft PR defers both `check` and `playwright`; ready PR runs both; verify in the Actions tab. (PR A) Evidence: PR #8 runs on `b4b8b06` and the draft push of `801d719` were skipped; marking ready ran `check` and `E2E` on `801d719`, both successful.
-- [ ] David signs off on the specimen page (PR B) and the shell on the preview URL (PR C). Specimen: approved by David on 4 November 2026 (“Looks good”), on the PR B preview URL. Shell: pending PR C.
+- [x] David signs off on the specimen page (PR B) and the shell on the preview URL (PR C). Specimen: approved by David on 4 November 2026 (“Looks good”), on the PR B preview URL. Shell: approved by David on 4 November 2026 (“Looks good”), on the PR C preview URL, including the pause control shown only on the specimen page.
 
 ## Wrap-up
 
