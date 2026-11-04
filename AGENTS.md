@@ -18,11 +18,11 @@ Before changing code, inspect the relevant files and the documentation for the i
 - `pnpm lint`: ESLint (`@eslint/js`, `typescript-eslint`, `eslint-plugin-astro`).
 - `pnpm typecheck`: `astro check` (runs `astro sync`, then type-checks `.astro` and `.ts` files). TypeScript is pinned to 6.0.x because `@astrojs/check` and `typescript-eslint` do not support 7 yet.
 - `pnpm verify`: format check, lint, typecheck and build in sequence. Run it before asking for review.
-- No test suite exists yet; `pnpm test:e2e` arrives with Playwright.
+- `pnpm test:e2e`: Playwright end-to-end tests in `tests/e2e/` (Chromium, with axe). It builds the site and serves it with `wrangler dev` on port 8788, so `public/_headers` and production 404 handling apply. First run: `pnpm exec playwright install chromium`. Not part of `pnpm verify`; CI runs it in its own job.
 
 ## Validation strategy
 
-- CI strategy: Budget-conscious (decision 0002). `.github/workflows/ci.yml` job `check` is skipped for draft PRs and runs the full suite for ready PRs.
+- CI strategy: Budget-conscious (decision 0002). `.github/workflows/ci.yml` job `check` is skipped for draft PRs and runs the full suite for ready PRs. `.github/workflows/e2e.yml` does the same for Playwright: `browser_tests` runs in the Playwright container (its image tag must match `@playwright/test` exactly), and `playwright` is the required status that fails unless `browser_tests` succeeded.
 - Optional Claude feedback: commenting `@claude review` on a PR runs `.github/workflows/claude.yml` (starter pack recipe `claude-pr-review`). It replies in a comment, is not a required check or an approval, and uses the `CLAUDE_CODE_OAUTH_TOKEN` secret and David's Claude plan. Ask before triggering it.
 - During development and before handing off work, run the relevant local formatting, lint, type, test and build checks using existing project commands. Use a unified verification command when useful; report results and local/cloud environment differences, including checks that could not run.
 - Standard runs cloud validation on relevant PR updates. Budget-conscious uses draft PRs while developing and defers expensive cloud jobs until ready for review; every subsequent commit to a ready PR still needs full cloud validation.

@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { t } from '../../i18n'
+
+const copy = t(Astro.currentLocale)
+---
+
+<BaseLayout
+  title={`${copy.site.name} · ${copy.site.role}`}
+  description={copy.site.description}
+  route="home"
+>
+  <h1>{copy.home.heading}</h1>
+  <p>{copy.home.placeholder}</p>
+</BaseLayout>

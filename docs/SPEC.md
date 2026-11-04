@@ -120,11 +120,11 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 | Package manager and runtime | pnpm (pinned with `packageManager`), Node from `.nvmrc` (recipe default 26 LTS) | From recipe |
 | Styling | Astro component-scoped styles plus global design tokens as CSS custom properties; no Tailwind; Sass only if a real need appears | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
 | Fonts | Rubik 900, Sora 400/600/700, Space Mono 400/700, self-hosted through the Astro Fonts API (to verify in milestone 2), Latin + Latin Extended | Confirmed design |
-| Languages | English (default, `/`) and Czech (`/cs/`); typed dictionaries so a missing key fails type checking | Proposal ([0005](decisions/0005-bilingual-routing.md)) |
+| Languages | English (default, `/`) and Czech (`/cs/`) with Astro i18n routing; typed dictionaries in `src/i18n/` so a missing key fails type checking | Confirmed ([0005](decisions/0005-bilingual-routing.md)) |
 | Case study content | MDX files in an Astro content collection, one per project and language; a schema enforces role, collaborators and AI share | Proposal |
 | Images | Optimised at build time (Astro `<Image>`/`<Picture>`, AVIF/WebP with fixed dimensions) | Proposal |
 | Formatting and linting | Prettier (`semi: false`, `singleQuote: true`), ESLint flat config with `@eslint/js`, `typescript-eslint` and `eslint-plugin-astro` | From recipe |
-| Tests | Playwright for smoke, navigation, reduced-motion and accessibility checks (with axe). Vitest only when there is logic worth unit testing. | Proposal |
+| Tests | Playwright for smoke, navigation, reduced-motion and accessibility checks (with axe), against the built site served by `wrangler dev`. Vitest only when there is logic worth unit testing. | Confirmed (milestone 2) |
 | CI | GitHub Actions, **Budget-conscious**: draft PRs defer cloud jobs; ready PRs run the full suite | Confirmed ([0002](decisions/0002-budget-conscious-ci.md)) |
 | Hosting | Cloudflare Workers static assets (no Worker script), deployed by Workers Builds: production from `main`, preview URLs for branches; `wrangler.jsonc` and `public/_headers` | Confirmed ([0007](decisions/0007-cloudflare-workers-hosting.md)) |
 | Domain and DNS | `david-krapka.eu`, registered at Websupport, which also hosts its DNS today. Apex and `www` still point to Vercel from a deleted project. At launch DNS moves to Cloudflare (needed for the apex), with the Active24 mail records (MX, SPF, DKIM, DMARC) copied exactly. Mail must keep working. | Confirmed ([0007](decisions/0007-cloudflare-workers-hosting.md)) |
@@ -132,11 +132,11 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 
 ### Commands
 
-`pnpm dev`, `pnpm build`, `pnpm preview`, `pnpm format`, `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test:e2e`, and `pnpm verify` running format check, lint, typecheck and build in sequence. `AGENTS.md` will list only commands that exist.
+`pnpm dev`, `pnpm build`, `pnpm preview`, `pnpm format`, `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test:e2e` (Playwright against `wrangler dev`), and `pnpm verify` running format check, lint, typecheck and build in sequence. `AGENTS.md` lists every command.
 
 ### Local and cloud differences to document
 
-macOS locally versus Ubuntu in CI; Playwright browser version tied to the installed package; fonts downloaded at build time by the Astro Fonts API (network needed during build).
+macOS locally versus Ubuntu in CI; Playwright browser version tied to the installed package; Playwright runs in the official container in CI and with a locally installed Chromium on macOS; fonts are committed to the repository ([0009](decisions/0009-self-hosted-font-files.md)), so builds need no network.
 
 ## Known limitations and risks
 
