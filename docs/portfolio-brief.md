@@ -1,5 +1,7 @@
 # Product and design brief
 
+> **Status, 4 November 2026:** this brief is background. Current scope and requirements are in [SPEC.md](SPEC.md) and the approved design is in [design/](design/README.md). Where they differ, they win. In particular, the [mockups](design/README.md) have since settled the hero (print drum), palette (three inks: blue, yellow, pink), typefaces (Rubik, Sora, Space Mono) and a bilingual English/Czech site, replacing the candidates listed in section 4.
+
 As of 3 November 2026 · stage: discovery / content / concept · no website implementation.
 
 ## Sources and status definitions
