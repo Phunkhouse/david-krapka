@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "david-krapka",
+  "compatibility_date": "2026-11-04",
+  // Static assets only, no Worker script. Headers live in public/_headers.
+  "assets": {
+    "directory": "./dist/",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+  },
+  "workers_dev": true,
+  "preview_urls": true,
+  // Required by `wrangler preview` (non-production branch builds), even if empty.
+  "previews": {},
+}

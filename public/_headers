@@ -1,0 +1,8 @@
+# Remove X-Robots-Tag at launch (milestone 6).
+/*
+  X-Robots-Tag: noindex
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains

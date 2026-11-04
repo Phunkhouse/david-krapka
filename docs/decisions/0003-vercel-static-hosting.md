@@ -1,7 +1,7 @@
 # 0003. Static export hosted on Vercel
 
 Date: 2026-11-04  
-Status: proposed
+Status: superseded by [0007](0007-cloudflare-workers-hosting.md)
 
 ## Context
 
@@ -9,14 +9,14 @@ The site has no forms, accounts or server logic in the first release. The domain
 
 ## Decision
 
-- Build the site as a fully static export (`output: 'export'`).
+- Build the site as fully static files (Astro `output: 'static'` since [0006](0006-astro-static-site.md); originally Next.js `output: 'export'`).
 - Host on Vercel: production from `main`, preview deployments for branches, security headers in Vercel configuration.
 - Keep production on the `*.vercel.app` address with `noindex` until launch; attach `david-krapka.eu` (apex canonical, `www` redirecting) in milestone 6.
 
 ## Alternatives considered
 
 - **Server rendering on Vercel.** Enables middleware (for example automatic language detection) but adds a server runtime the site does not need.
-- **Another static host (for example Cloudflare or GitHub Pages).** Viable because the output is plain files, but DNS already points to Vercel and Vercel integrates directly with Next.js previews.
+- **Another static host (for example Cloudflare or GitHub Pages).** Viable because the output is plain files, but DNS already points to Vercel and Vercel builds preview deployments for every branch.
 
 ## Consequences
 

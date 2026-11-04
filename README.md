@@ -2,11 +2,11 @@
 
 Source and planning for **[david-krapka.eu](https://david-krapka.eu)**, the personal portfolio of David Křapka, a product-minded engineer. The site presents product thinking, engineering and a personal brand to potential employers and clients, in English and Czech.
 
-The repository is at the planning stage: scope, design and delivery plan are documented; the website has not been built yet.
+The repository has a planned scope, design and delivery plan, and a placeholder Astro site. The real design is built from milestone 2 onward.
 
 ## How it will work
 
-A static Next.js site hosted on Vercel. One bilingual landing page (hero, selected work, approach, experience, about, contact) printed in a three-ink style, plus case study pages. No server, forms or cookies in the first release. Development follows the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack) with Budget-conscious CI: draft PRs are checked locally, and cloud CI runs when a PR is marked ready for review.
+A static Astro site hosted on Cloudflare Workers. One bilingual landing page (hero, selected work, approach, experience, about, contact) printed in a three-ink style, plus case study pages. No server, forms or cookies in the first release. Development follows the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack) with Budget-conscious CI: draft PRs are checked locally, and cloud CI runs when a PR is marked ready for review.
 
 ## Documentation
 
@@ -22,4 +22,12 @@ The documentation distinguishes confirmed decisions from proposals. Project role
 
 ## Getting started
 
-There is nothing to run yet. Setup commands arrive with [milestone 1](docs/MILESTONES.md#milestone-1-foundation-and-delivery-pipeline).
+Requires the Node version in `.nvmrc` and pnpm (version pinned in `package.json`).
+
+```bash
+pnpm install
+pnpm dev      # http://localhost:4321
+pnpm verify   # format check, lint, typecheck, build
+```
+
+Other scripts: `pnpm build` (to `dist/`), `pnpm preview`, `pnpm preview:cloudflare` (serves `dist/` with the production headers), `pnpm format`, `pnpm lint`, `pnpm typecheck`. Commands and conventions for agents are in [AGENTS.md](AGENTS.md).
