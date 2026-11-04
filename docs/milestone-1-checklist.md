@@ -53,7 +53,7 @@ Ruleset `protect-main` (active, default branch, no bypass actors):
 
 - [x] Pull request required before merge (squash merges only, 0 approvals).
 - [x] Required status check `check`, source GitHub Actions.
-- [ ] Branch must be up to date before merging: **off** (`strict_required_status_checks_policy: false`); needs turning on.
+- [x] Branch must be up to date before merging (`strict_required_status_checks_policy` turned on 4 Nov 2026).
 - [x] Block force pushes and deletion.
 
 ## 7. Cloudflare
