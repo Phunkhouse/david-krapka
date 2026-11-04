@@ -67,7 +67,7 @@ Ruleset `protect-main` (active, default branch, no bypass actors):
 ## 8. Optional
 
 - [x] Legal planning with `audit-legal-readiness` (Planning mode, top-tier model, high effort) against SPEC; report in [docs/audits/2026-11-04/](audits/2026-11-04/legal-planning.md).
-- [ ] Claude PR review workflow from the starter pack.
+- [ ] Claude PR review workflow from the starter pack. Moved to the [milestone 2 checklist](milestone-2-checklist.md) (decided yes).
 
 ## 9. Acceptance checks (from MILESTONES.md)
 

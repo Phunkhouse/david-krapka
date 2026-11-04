@@ -24,7 +24,10 @@ The milestone is split so work can start before the missing canvas designs exist
 - [ ] **Font delivery**: Astro Fonts API with the Fontsource provider (fonts downloaded at build time; CI and Cloudflare builds need network) or the local provider with committed `woff2` files subset to Latin + Latin Extended (offline builds, licence files committed next to the fonts). Recommendation: local provider; record the choice in `docs/decisions/`.
 - [ ] **Footer slot for business identification** ([LEG-002](SPEC.md#legal-requirements)): accept a slot sized for four short lines (name, place of business, IČO, registration note) without knowing the address yet. The slot stays empty and renders nothing until filled.
 - [ ] Confirm that adding the required status `playwright` to the `protect-main` ruleset is approved (end of PR A).
-- [ ] Decide on the optional Claude PR review workflow from the starter pack (carried over from milestone 1). Not required for milestone 2.
+- [x] Decide on the optional Claude PR review workflow from the starter pack (carried over from milestone 1): yes, 4 November 2026, as its own small PR right after the planning PR and before PR A. Not required for milestone 2.
+  - [ ] David installs the [Claude GitHub App](https://github.com/apps/claude) on the repository and saves a `claude setup-token` token as the Actions secret `CLAUDE_CODE_OAUTH_TOKEN` (never in chat or files).
+  - [ ] Copy `recipes/claude-pr-review/files/.github/workflows/claude.yml` from the starter pack; `actionlint` clean; mention the workflow in `AGENTS.md`.
+  - [ ] After merge (the workflow must be on `main`), comment `@claude review` on the next PR and record the run and response.
 
 ## PR A: Routing, layout and end-to-end tests
 
