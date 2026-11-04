@@ -1,5 +1,7 @@
 # Decisions, open questions and next steps
 
+> **Status, 4 November 2026:** kept for history. Live open questions are in [SPEC.md](SPEC.md#planning-and-open-questions), the delivery plan is in [MILESTONES.md](MILESTONES.md) and new decisions are recorded in [decisions/](decisions/README.md). Since this log was written, the [Personal Portfolio mockups](design/README.md) resolved the hero concept, palette, typefaces, motion level and website languages (English and Czech), and stack, hosting and CI were planned ([0001](decisions/0001-starter-pack-and-nextjs.md)–[0005](decisions/0005-bilingual-routing.md)).
+
 As of 3 November 2026. See the [brief](portfolio-brief.md) and [content and case studies](content-and-case-studies.md) for details.
 
 ## Confirmed foundation

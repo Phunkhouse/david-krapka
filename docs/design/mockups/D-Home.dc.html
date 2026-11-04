@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Landing page · desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@900&amp;family=Sora:wght@400;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0;background:#FAFAF7}
+a{color:#1B2F7A}a:hover{text-decoration-thickness:3px}
+.d-ht{color:transparent;-webkit-background-clip:text;background-clip:text;background-image:radial-gradient(#1B2F7A 6px,transparent 6.8px);background-size:18px 18px}
+.d-ht-m{color:transparent;-webkit-background-clip:text;background-clip:text;background-image:radial-gradient(#1B2F7A 3.4px,transparent 3.8px);background-size:11px 11px}
+.d-ht-s{color:transparent;-webkit-background-clip:text;background-clip:text;background-image:radial-gradient(#1B2F7A 2.2px,transparent 2.5px);background-size:8px 8px}
+.d-paper{background-color:#FFE800;background-image:radial-gradient(rgba(27,47,122,.10) 2px,transparent 2.4px);background-size:12px 12px}
+.d-dots-p{background-image:radial-gradient(#FF48B0 2.2px,transparent 2.5px);background-size:9px 9px}
+.d-face{position:absolute;left:0;right:0;top:50%;height:620px;margin-top:-310px;display:flex;align-items:center;justify-content:center;font-family:'Rubik',sans-serif;font-weight:900;font-size:680px;line-height:1;text-transform:uppercase;backface-visibility:hidden}
+@keyframes d-turn{0%,26%{transform:rotateX(0)}33%,59%{transform:rotateX(120deg)}66%,92%{transform:rotateX(240deg)}100%{transform:rotateX(360deg)}}
+@keyframes d-sheet{0%,26%{transform:translateY(0)}33%,59%{transform:translateY(-74px)}66%,92%{transform:translateY(-148px)}100%{transform:translateY(-222px)}}
+@keyframes d-w1{0%,24%{opacity:1;transform:translateY(0)}30%,94%{opacity:0;transform:translateY(-36px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes d-w2{0%,28%{opacity:0;transform:translateY(36px)}35%,57%{opacity:1;transform:translateY(0)}63%,100%{opacity:0;transform:translateY(-36px)}}
+@keyframes d-w3{0%,61%{opacity:0;transform:translateY(36px)}68%,90%{opacity:1;transform:translateY(0)}96%,100%{opacity:0;transform:translateY(-36px)}}
+@keyframes d-kick{0%,26%,33%,59%,66%,92%,100%{transform:translateX(0)}29%,62%,95%{transform:translateX(10px)}}
+@keyframes d-reg{0%,100%{transform:translate(0,0)}50%{transform:translate(6px,-4px)}}
+.d-turn{animation:d-turn 9s cubic-bezier(.7,0,.3,1) infinite}
+.d-sheet{animation:d-sheet 9s cubic-bezier(.7,0,.3,1) infinite}
+.d-w1{animation:d-w1 9s ease-in-out infinite}
+.d-w2{animation:d-w2 9s ease-in-out infinite;opacity:0}
+.d-w3{animation:d-w3 9s ease-in-out infinite;opacity:0}
+.d-kick{animation:d-kick 9s ease-in-out infinite}
+.d-reg{animation:d-reg 4s ease-in-out infinite}
+.d-card{transition:transform .2s ease}
+.d-card:hover{transform:translate(-4px,-4px)}
+.d-card:focus-visible{outline:3px solid #FFE800;outline-offset:4px}
+@media (prefers-reduced-motion: reduce){.d-turn,.d-sheet,.d-kick,.d-w1,.d-reg{animation:none}.d-w2,.d-w3{animation:none;opacity:0}.d-card{transition:none}}
+/* approach section: halftone develops once when it appears (on the live site, triggered on scroll), then columns react to hover */
+@property --r{syntax:'<length>';inherits:false;initial-value:2.2px}
+@keyframes ap-dev{from{--r:0px}to{--r:2.2px}}
+@keyframes ap-reg{from{transform:translate(18px,-14px);opacity:0}to{transform:translate(0,0);opacity:.45}}
+@keyframes ap-txt{from{opacity:0;filter:blur(6px)}to{opacity:1;filter:blur(0)}}
+.ap-l.d-ht-s{background-image:radial-gradient(#1B2F7A var(--r),transparent calc(var(--r) + .3px));animation:ap-dev 1.6s ease-out both}
+.ap-pink{animation:ap-reg 1.4s ease-out both}
+.ap-t{animation:ap-txt .9s ease-out both}
+.apd0{animation-delay:.2s}.apd1{animation-delay:.45s}.apd2{animation-delay:.7s}
+@media (hover: hover){
+.ap-col{transition:background-color .35s ease}
+.ap-col .ap-l,.ap-col .ap-pink{transition:translate .45s cubic-bezier(.2,.8,.2,1),rotate .45s cubic-bezier(.2,.8,.2,1)}
+.ap-col h3{transition:translate .35s ease}
+.ap-col h3 span{transition:background-color .35s ease,color .35s ease}
+.ap-col:hover{background-color:#FFE800}
+.ap-col:hover .ap-l{translate:0 -36px;rotate:-4deg}
+.ap-col:hover .ap-pink{translate:14px -26px;rotate:-4deg}
+.ap-col:hover h3{translate:8px 0}
+.ap-col:hover h3 span{background-color:#1B2F7A!important;color:#FFE800}
+.ap-wrap:hover .ap-col:not(:hover){background-color:#FAFAF7}
+}
+@media (prefers-reduced-motion: reduce){.ap-l,.ap-pink,.ap-t{animation:none!important}.ap-col,.ap-col *{transition:none!important}}
+/* about portrait: print glitch, never-ending. Inks slip out of register and the roller jams in short bursts, long calm between (7s loop). Silhouette stands in for the photo. */
+.pg-face{position:absolute;inset:0;-webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%20400%22%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%22165%22%20rx%3D%2272%22%20ry%3D%2288%22/%3E%3Crect%20x%3D%22168%22%20y%3D%22230%22%20width%3D%2264%22%20height%3D%2250%22/%3E%3Cpath%20d%3D%22M50%20400%20C60%20300%20125%20262%20200%20262%20C275%20262%20340%20300%20350%20400%20Z%22/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%20400%22%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%22165%22%20rx%3D%2272%22%20ry%3D%2288%22/%3E%3Crect%20x%3D%22168%22%20y%3D%22230%22%20width%3D%2264%22%20height%3D%2250%22/%3E%3Cpath%20d%3D%22M50%20400%20C60%20300%20125%20262%20200%20262%20C275%20262%20340%20300%20350%20400%20Z%22/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.pg-blue{background-image:radial-gradient(#1B2F7A 2.6px,transparent 3px);background-size:9px 9px}
+.pg-pink{background-image:radial-gradient(#FF48B0 2.6px,transparent 3px);background-size:9px 9px;mix-blend-mode:multiply;opacity:.75}
+@keyframes pg-pink{0%,62%{transform:translate(8px,6px)}63%{transform:translate(-22px,10px)}64%{transform:translate(18px,-8px) skewX(-8deg)}65.5%{transform:translate(-6px,4px)}67%,88%{transform:translate(8px,6px)}88.6%{transform:translate(26px,0)}89.4%,100%{transform:translate(8px,6px)}}
+@keyframes pg-blue{0%,63%{transform:translate(0,0)}63.6%{transform:translate(12px,-6px)}64.8%{transform:translate(-10px,3px)}66%,89%{transform:translate(0,0)}89.6%{transform:translate(-8px,0) scaleY(1.04)}90.4%,100%{transform:translate(0,0)}}
+.pg-p{animation:pg-pink 7s steps(1,end) infinite}
+.pg-b{animation:pg-blue 7s steps(1,end) infinite}
+@keyframes pg-bar{0%,57%{opacity:0;top:-10%}58%{opacity:1;top:10%}62%{top:70%;opacity:1}63%,100%{opacity:0;top:110%}}
+.pg-bar{position:absolute;left:0;right:0;height:14px;background:#FF48B0;mix-blend-mode:multiply;animation:pg-bar 7s linear infinite}
+@keyframes pg-s0{0%,58.0%{transform:translateX(0)}58.6%{transform:translateX(14px)}60.2%{transform:translateX(-26px)}61.4%,84.0%{transform:translateX(0)}84.6%{transform:translateX(-26px)}85.4%,100%{transform:translateX(0)}}
+.pg-s0{position:absolute;inset:0;animation:pg-s0 7s steps(1,end) infinite;clip-path:inset(0% 0 82% 0)}
+@keyframes pg-s1{0%,58.7%{transform:translateX(0)}59.3%{transform:translateX(-18px)}60.9%{transform:translateX(10px)}62.1%,84.5%{transform:translateX(0)}85.1%{transform:translateX(10px)}85.9%,100%{transform:translateX(0)}}
+.pg-s1{position:absolute;inset:0;animation:pg-s1 7s steps(1,end) infinite;clip-path:inset(18% 0 64% 0)}
+@keyframes pg-s2{0%,59.4%{transform:translateX(0)}60.0%{transform:translateX(30px)}61.6%{transform:translateX(-8px)}62.8%,85.0%{transform:translateX(0)}85.6%{transform:translateX(-8px)}86.4%,100%{transform:translateX(0)}}
+.pg-s2{position:absolute;inset:0;animation:pg-s2 7s steps(1,end) infinite;clip-path:inset(36% 0 48% 0)}
+@keyframes pg-s3{0%,60.1%{transform:translateX(0)}60.7%{transform:translateX(-12px)}62.3%{transform:translateX(22px)}63.5%,85.5%{transform:translateX(0)}86.1%{transform:translateX(22px)}86.9%,100%{transform:translateX(0)}}
+.pg-s3{position:absolute;inset:0;animation:pg-s3 7s steps(1,end) infinite;clip-path:inset(52% 0 30% 0)}
+@keyframes pg-s4{0%,60.8%{transform:translateX(0)}61.4%{transform:translateX(22px)}63.0%{transform:translateX(-16px)}64.2%,86.0%{transform:translateX(0)}86.6%{transform:translateX(-16px)}87.4%,100%{transform:translateX(0)}}
+.pg-s4{position:absolute;inset:0;animation:pg-s4 7s steps(1,end) infinite;clip-path:inset(70% 0 14% 0)}
+@keyframes pg-s5{0%,61.5%{transform:translateX(0)}62.1%{transform:translateX(-26px)}63.7%{transform:translateX(6px)}64.9%,86.5%{transform:translateX(0)}87.1%{transform:translateX(6px)}87.9%,100%{transform:translateX(0)}}
+.pg-s5{position:absolute;inset:0;animation:pg-s5 7s steps(1,end) infinite;clip-path:inset(86% 0 0% 0)}
+@media (prefers-reduced-motion: reduce){.pg-p,.pg-b,.pg-bar,[class^="pg-s"]{animation:none!important}.pg-bar{opacity:0}}
+</style>
+</helmet>
+<div style="width: 1440px; background: #FAFAF7; color: #1B2F7A; font-family: 'Sora', system-ui, sans-serif">
+
+  <section id="top" style="height: 900px; display: grid; grid-template-columns: minmax(0, 1fr) 720px; overflow: hidden">
+    <div style="display: flex; flex-direction: column; padding: 28px 56px 56px; min-width: 0">
+      <header style="display: flex; justify-content: space-between; align-items: center; gap: 24px">
+        <a href="#top" style="text-decoration: none; display: flex; flex-direction: column; line-height: 1.15"><span style="font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 24px; text-transform: uppercase">David Křapka</span><span style="font-size: 13px; font-weight: 600">Product-minded engineer</span></a>
+        <nav style="display: flex; gap: 26px; font-weight: 600; font-size: 16px; align-items: center">
+          <a href="#work" style="text-decoration: none">Work</a>
+          <a href="#approach" style="text-decoration: none">Approach</a>
+          <a href="#about" style="text-decoration: none">About</a>
+          <a href="#contact" style="text-decoration: none">Contact</a>
+        </nav>
+      </header>
+      <main style="margin-top: auto; display: flex; flex-direction: column; gap: 26px">
+        <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 14px">HOW EVERY PROJECT GOES</span>
+        <h1 style="margin: 0; position: relative; height: 116px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 104px; line-height: 116px; text-transform: uppercase; letter-spacing: -0.035em">
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Think. Make. Rethink.</span>
+          <span aria-hidden="true" class="d-w1" style="position: absolute; left: 0; top: 0">Think.</span>
+          <span aria-hidden="true" class="d-w2" style="position: absolute; left: 0; top: 0">Make.</span>
+          <span aria-hidden="true" class="d-w3" style="position: absolute; left: 0; top: 0; white-space: nowrap"><span style="background: #FFE800; padding: 0 8px">Re</span>think.</span>
+        </h1>
+        <div aria-hidden="true" style="position: relative; height: 70px; max-width: 560px; font-size: 24px; line-height: 1.4; font-weight: 600">
+          <span class="d-w1" style="position: absolute; inset: 0">Understand the problem and ask the questions.</span>
+          <span class="d-w2" style="position: absolute; inset: 0">Turn it into a working product.</span>
+          <span class="d-w3" style="position: absolute; inset: 0">Learn from it and change direction when it helps.</span>
+        </div>
+        <p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 1.55">I'm David Křapka, a product-minded engineer. I find the real problem, build the product and keep improving it after it ships.</p>
+        <div style="display: flex; align-items: center; gap: 14px; margin-top: 8px">
+          <a href="#work" style="text-decoration: none; background: #1B2F7A; color: #FFE800; font-weight: 700; font-size: 18px; padding: 20px 32px; border-radius: 999px">See selected work</a>
+          <a href="#contact" style="text-decoration: none; border: 3px solid #1B2F7A; background: #FFE800; font-weight: 700; font-size: 18px; padding: 17px 28px; border-radius: 999px">Get in touch</a>
+        </div>
+      </main>
+    </div>
+    <div aria-hidden="true" class="d-paper" style="position: relative; overflow: hidden; perspective: 1300px; border-left: 3px solid #1B2F7A">
+      <div class="d-turn" style="position: absolute; inset: 0; transform-style: preserve-3d">
+        <div class="d-face" style="transform: rotateX(0deg) translateZ(180px)"><span class="d-kick" style="position: relative; display: block"><span style="position: absolute; left: 18px; top: 14px; color: #FF48B0; mix-blend-mode: multiply; opacity: 0.55">T</span><span class="d-ht" style="position: relative">T</span></span></div>
+        <div class="d-face" style="transform: rotateX(-120deg) translateZ(180px)"><span class="d-kick" style="position: relative; display: block"><span style="position: absolute; left: 18px; top: 14px; color: #FF48B0; mix-blend-mode: multiply; opacity: 0.55">M</span><span class="d-ht" style="position: relative">M</span></span></div>
+        <div class="d-face" style="transform: rotateX(-240deg) translateZ(180px)"><span class="d-kick" style="position: relative; display: block"><span style="position: absolute; left: 18px; top: 14px; color: #FF48B0; mix-blend-mode: multiply; opacity: 0.55">R</span><span class="d-ht" style="position: relative">R</span></span></div>
+      </div>
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(150,120,0,.5) 0%, rgba(255,232,0,0) 24%, rgba(255,232,0,0) 76%, rgba(150,120,0,.5) 100%)"></div>
+      <div style="position: absolute; left: 0; width: 36px; top: 0; bottom: 0; background: #1B2F7A"></div>
+      <div style="position: absolute; right: 0; width: 36px; top: 0; bottom: 0; background: #1B2F7A"></div>
+      <div style="position: absolute; right: 64px; top: 28px; width: 80px; height: 80px; overflow: hidden; border-radius: 50%; border: 3px solid #1B2F7A; box-sizing: border-box; background: #FAFAF7">
+        <div class="d-sheet" style="display: flex; flex-direction: column">
+          <span style="flex: 0 0 74px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 15px">1/3</span>
+          <span style="flex: 0 0 74px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 15px">2/3</span>
+          <span style="flex: 0 0 74px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 15px">3/3</span>
+          <span style="flex: 0 0 74px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 15px">1/3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" style="background: #1B2F7A; color: #FAFAF7; border-top: 3px solid #1B2F7A">
+    <div style="padding: 104px 56px; display: flex; flex-direction: column; gap: 48px">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px">
+        <h2 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 88px; line-height: 1; text-transform: uppercase; letter-spacing: -0.03em; color: #FFE800; text-shadow: 6px 5px 0 #FF48B0">Selected work</h2>
+        <p style="margin: 0; max-width: 440px; font-size: 18px; line-height: 1.55; color: #D6DCF2">One product I own end to end, a few client projects, and one that is still being built.</p>
+      </div>
+
+      <a href="#kultomat" class="d-card" style="text-decoration: none; color: #1B2F7A; background: #FAFAF7; display: grid; grid-template-columns: 560px minmax(0, 1fr); box-shadow: 12px 12px 0 #FF48B0">
+        <div aria-hidden="true" class="d-paper" style="position: relative; overflow: hidden; height: 420px; border-right: 3px solid #1B2F7A">
+          <span style="position: absolute; left: 50px; top: -70px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 520px; line-height: 1; color: #FF48B0; mix-blend-mode: multiply; opacity: 0.5">K</span>
+          <span class="d-ht-m" style="position: absolute; left: 36px; top: -80px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 520px; line-height: 1">K</span>
+          <span style="position: absolute; left: 24px; bottom: 20px; font-family: 'Space Mono', monospace; font-size: 13px; background: #FAFAF7; padding: 6px 10px">[Screenshot of Kultomat goes here]</span>
+        </div>
+        <div style="padding: 56px; display: flex; flex-direction: column; gap: 20px; justify-content: center; min-width: 0">
+          <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">Main case study · Own product</span>
+          <h3 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 64px; line-height: 1; text-transform: uppercase; letter-spacing: -0.02em">Kultomat</h3>
+          <p style="margin: 0; font-size: 19px; line-height: 1.55; max-width: 520px">From the first question to a product that runs every day: the problem, the decisions, the build and what changed afterwards. <span style="background: #FFE800">[One-line summary to be confirmed]</span></p>
+          <span style="font-weight: 700; font-size: 17px; text-decoration: underline; text-underline-offset: 4px">Read the case study →</span>
+        </div>
+      </a>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px">
+        <a href="#eucal" class="d-card" style="text-decoration: none; color: #1B2F7A; background: #FAFAF7; display: flex; flex-direction: column">
+          <div aria-hidden="true" style="height: 190px; position: relative; overflow: hidden; background: #E9ECF7; border-bottom: 3px solid #1B2F7A"><span class="d-ht-m" style="position: absolute; left: 18px; top: -46px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 260px; line-height: 1">E</span><span style="position: absolute; right: 22px; top: 22px; width: 84px; height: 84px; border-radius: 50%; background: #FFE800; mix-blend-mode: multiply"></span></div>
+          <div style="padding: 26px; display: flex; flex-direction: column; gap: 10px">
+            <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Client · Business needs</span>
+            <h3 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 30px; text-transform: uppercase">Eucal</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.55">Turning business needs into a website visitors can find their way through.</p>
+          </div>
+        </a>
+        <a href="#vladanvanek" class="d-card" style="text-decoration: none; color: #1B2F7A; background: #FAFAF7; display: flex; flex-direction: column">
+          <div aria-hidden="true" class="d-paper" style="height: 190px; position: relative; overflow: hidden; border-bottom: 3px solid #1B2F7A"><span class="d-ht-m" style="position: absolute; left: 18px; top: -46px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 260px; line-height: 1">V</span></div>
+          <div style="padding: 26px; display: flex; flex-direction: column; gap: 10px">
+            <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Client · Personal identity</span>
+            <h3 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 30px; text-transform: uppercase">Vladan Vaněk</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.55">Content structure and personal presentation for an individual's website.</p>
+          </div>
+        </a>
+        <a href="#upvideo" class="d-card" style="text-decoration: none; color: #1B2F7A; background: #FAFAF7; display: flex; flex-direction: column">
+          <div aria-hidden="true" style="height: 190px; position: relative; overflow: hidden; background: #E9ECF7; border-bottom: 3px solid #1B2F7A"><span class="d-ht-m" style="position: absolute; left: 18px; top: -46px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 260px; line-height: 1">U</span><span style="position: absolute; right: 22px; bottom: 22px; width: 0; height: 0; border-left: 70px solid #FF48B0; border-top: 42px solid transparent; border-bottom: 42px solid transparent; mix-blend-mode: multiply; opacity: 0.8"></span></div>
+          <div style="padding: 26px; display: flex; flex-direction: column; gap: 10px">
+            <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">Client · Visual &amp; multimedia</span>
+            <h3 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 30px; text-transform: uppercase">UpVideo</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.55">Visual communication and video content delivered against a client brief.</p>
+          </div>
+        </a>
+        <div style="border: 3px dashed #8C9BD6; display: flex; flex-direction: column">
+          <div aria-hidden="true" style="height: 190px; position: relative; overflow: hidden"><span class="d-dots-p" style="position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 50%; opacity: 0.8"></span><span style="position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 80px; color: #FFE800">S</span></div>
+          <div style="padding: 26px; display: flex; flex-direction: column; gap: 10px">
+            <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #FFE800">In progress</span>
+            <h3 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 30px; text-transform: uppercase">Systerna</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #D6DCF2">Being built now. The case study comes when it's ready.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach" style="padding: 112px 56px; display: flex; flex-direction: column; gap: 56px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px">
+      <h2 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 88px; line-height: 1; text-transform: uppercase; letter-spacing: -0.03em; text-shadow: 6px 5px 0 rgba(255,72,176,.55)">How I think<br>&amp; build</h2>
+      <p style="margin: 0; max-width: 440px; font-size: 18px; line-height: 1.55">The same three turns of the drum on every project, big or small. Good products start with good questions.</p>
+    </div>
+    <div class="ap-wrap" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 3px solid #1B2F7A; position: relative">
+      <div aria-hidden="true" style="position: absolute; left: -3px; top: -3px; bottom: -3px; width: 18px; background: #1B2F7A"></div>
+      <div aria-hidden="true" style="position: absolute; right: -3px; top: -3px; bottom: -3px; width: 18px; background: #1B2F7A"></div>
+      <div class="ap-col" style="padding: 40px 40px 40px 52px; border-right: 3px solid #1B2F7A; display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden; min-height: 380px">
+        <span aria-hidden="true" class="d-ht-s ap-l apd0" style="position: absolute; right: -10px; bottom: -80px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 320px; line-height: 1">T</span>
+        <span class="ap-t apd0" style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700">1/3</span>
+        <h3 class="ap-t apd0" style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 48px; text-transform: uppercase">Think</h3>
+        <p class="ap-t apd0" style="position: relative; margin: 0; font-size: 17px; line-height: 1.6; max-width: 300px">Understand the problem, ask the questions and choose priorities. Who is this for, and what happens if we don't build it?</p>
+      </div>
+      <div class="d-paper ap-col" style="padding: 40px; border-right: 3px solid #1B2F7A; display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden; min-height: 380px">
+        <span aria-hidden="true" class="ap-pink apd1" style="position: absolute; right: -4px; bottom: -74px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 320px; line-height: 1; color: #FF48B0; opacity: 0.45; mix-blend-mode: multiply">M</span>
+        <span aria-hidden="true" class="d-ht-s ap-l apd1" style="position: absolute; right: -14px; bottom: -80px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 320px; line-height: 1">M</span>
+        <span class="ap-t apd1" style="position: relative; font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700">2/3</span>
+        <h3 class="ap-t apd1" style="position: relative; margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 48px; text-transform: uppercase">Make</h3>
+        <p class="ap-t apd1" style="position: relative; margin: 0; font-size: 17px; line-height: 1.6; max-width: 300px">Turn the intention into a working product: UX, implementation, collaboration and running it in production.</p>
+      </div>
+      <div class="ap-col" style="padding: 40px 52px 40px 40px; display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden; min-height: 380px">
+        <span aria-hidden="true" class="d-ht-s ap-l apd2" style="position: absolute; right: 6px; bottom: -80px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 320px; line-height: 1">R</span>
+        <span class="ap-t apd2" style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700">3/3</span>
+        <h3 class="ap-t apd2" style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 48px; text-transform: uppercase"><span style="background: #FFE800; padding: 0 6px">Re</span>think</h3>
+        <p class="ap-t apd2" style="position: relative; margin: 0; font-size: 17px; line-height: 1.6; max-width: 300px">Validate, learn and change direction. Feedback, iteration, and the things I chose not to build.</p>
+      </div>
+    </div>
+    <div style="display: flex; gap: 32px; align-items: flex-start; background: #E9ECF7; padding: 36px">
+      <span style="flex: 0 0 auto; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 14px; background: #1B2F7A; color: #FFE800; padding: 8px 12px">AI + me</span>
+      <p style="margin: 0; flex: 1; min-width: 0; font-size: 18px; line-height: 1.6; max-width: 820px">I use AI tools in my work, openly. Each case study says what I specified, designed and decided, what AI helped with, and how I reviewed and tested the result.</p>
+    </div>
+  </section>
+
+  <section id="experience" class="d-paper" style="position: relative; padding: 96px 56px 104px; overflow: hidden; border-top: 3px solid #1B2F7A; border-bottom: 3px solid #1B2F7A">
+    <div aria-hidden="true" style="position: absolute; left: 0; width: 36px; top: 0; bottom: 0; background: #1B2F7A"></div>
+    <div aria-hidden="true" style="position: absolute; right: 0; width: 36px; top: 0; bottom: 0; background: #1B2F7A"></div>
+    <div style="position: relative; display: flex; flex-direction: column; gap: 14px; margin-bottom: 44px; padding: 0 24px">
+      <span style="font-family: 'Space Mono', monospace; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13px">Experience · What each one taught me</span>
+      <h2 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; font-size: 96px; line-height: 0.95; text-shadow: 6px 5px 0 rgba(255,72,176,.6)">Big team. Small team.</h2>
+    </div>
+    <div style="position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr); align-items: stretch; padding: 0 24px">
+      <article style="background: #FAFAF7; border: 3px solid #1B2F7A; box-shadow: 10px 9px 0 #1B2F7A; padding: 36px; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px"><h3 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; font-size: 56px; line-height: 1">Emplifi</h3><span style="font-family: 'Space Mono', monospace; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px">[20XX – 20XX]</span></div>
+        <span style="font-weight: 700; font-size: 17px">[Role] · employed</span>
+        <span style="font-family: 'Space Mono', monospace; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-top: 8px">What it taught me</span>
+        <p style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; font-size: 30px; line-height: 1.1; letter-spacing: -0.01em">[How to ship inside a big product without breaking it.]</p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.55">[Responsibilities and one concrete decision, to confirm.]</p>
+        <a href="#cv" style="margin-top: auto; font-weight: 700; font-size: 16px">[Download CV] →</a>
+      </article>
+      <div aria-hidden="true" style="display: flex; align-items: center; justify-content: center"><span class="d-ht-m" style="font-family: 'Rubik', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; font-size: 120px; line-height: 1; letter-spacing: 0">+</span></div>
+      <article style="background: #1B2F7A; color: #FAFAF7; border: 3px solid #1B2F7A; box-shadow: 10px 9px 0 #FF48B0; padding: 36px; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px"><h3 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; font-size: 56px; line-height: 1; color: #FFE800">Freelance</h3><span style="font-family: 'Space Mono', monospace; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px">[20XX – now]</span></div>
+        <span style="font-weight: 700; font-size: 17px">Independent · for clients</span>
+        <span style="font-family: 'Space Mono', monospace; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; margin-top: 8px">What it taught me</span>
+        <p style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; font-size: 30px; line-height: 1.1; letter-spacing: -0.01em">Owning the whole thing, from the first question to launch.</p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.55">Eucal, Vladan Vaněk, UpVideo. <a href="#work" style="color: #FFE800; font-weight: 700">See the projects ↑</a></p>
+      </article>
+    </div>
+  </section>
+
+  <section id="about" style="padding: 112px 56px; display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 72px; align-items: center">
+    <div aria-hidden="true" style="width: 400px; height: 400px; position: relative">
+      <div class="d-dots-p d-reg" style="position: absolute; inset: 40px -16px -16px 40px; border-radius: 50%; mix-blend-mode: multiply; opacity: 0.7"></div>
+      <div class="d-paper" style="position: absolute; inset: 0; border-radius: 50%; border: 3px solid #1B2F7A; overflow: hidden">
+        <div class="pg-s0"><div class="pg-face pg-pink pg-p"></div><div class="pg-face pg-blue pg-b"></div></div>
+        <div class="pg-s1"><div class="pg-face pg-pink pg-p"></div><div class="pg-face pg-blue pg-b"></div></div>
+        <div class="pg-s2"><div class="pg-face pg-pink pg-p"></div><div class="pg-face pg-blue pg-b"></div></div>
+        <div class="pg-s3"><div class="pg-face pg-pink pg-p"></div><div class="pg-face pg-blue pg-b"></div></div>
+        <div class="pg-s4"><div class="pg-face pg-pink pg-p"></div><div class="pg-face pg-blue pg-b"></div></div>
+        <div class="pg-s5"><div class="pg-face pg-pink pg-p"></div><div class="pg-face pg-blue pg-b"></div></div>
+        <div class="pg-bar"></div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 640px">
+      <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase">About · Always evolving</span>
+      <h2 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 56px; line-height: 1.02; text-transform: uppercase; letter-spacing: -0.02em">Playful by design. <span style="background: #FFE800; padding: 0 6px">Serious</span> about the work.</h2>
+      <p style="margin: 0; font-size: 19px; line-height: 1.65">The way I work has changed a lot. I used to work on parts of a product. Now I take on more of the whole thing, combining product thinking, UX and engineering. [A short personal note goes here.]</p>
+    </div>
+  </section>
+
+  <section id="contact" class="d-paper" style="position: relative; overflow: hidden; border-top: 3px solid #1B2F7A">
+    <div aria-hidden="true" style="position: absolute; left: 0; width: 36px; top: 0; bottom: 0; background: #1B2F7A"></div>
+    <div aria-hidden="true" style="position: absolute; right: 0; width: 36px; top: 0; bottom: 0; background: #1B2F7A"></div>
+    <span aria-hidden="true" style="position: absolute; right: 70px; bottom: -150px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 620px; line-height: 1; color: #FF48B0; opacity: 0.5; mix-blend-mode: multiply">?</span>
+    <span aria-hidden="true" class="d-ht" style="position: absolute; right: 90px; bottom: -165px; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 620px; line-height: 1">?</span>
+    <div style="position: relative; padding: 112px 96px; display: flex; flex-direction: column; gap: 40px">
+      <h2 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 112px; line-height: 0.98; text-transform: uppercase; letter-spacing: -0.03em; max-width: 900px">Let's work together.</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 880px">
+        <div style="background: #FAFAF7; border: 3px solid #1B2F7A; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+          <h3 style="margin: 0; font-weight: 700; font-size: 22px">Hiring?</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.55">Tell me about the team and the role. My CV and LinkedIn are one click away.</p>
+          <a href="#contact-hire" style="font-weight: 700; font-size: 17px">Talk about a role →</a>
+        </div>
+        <div style="background: #1B2F7A; color: #FAFAF7; border: 3px solid #1B2F7A; padding: 30px; display: flex; flex-direction: column; gap: 14px; box-shadow: 8px 8px 0 #FF48B0">
+          <h3 style="margin: 0; font-weight: 700; font-size: 22px">Have a project?</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.55">Share the problem, not just the spec. I'll come back with questions first.</p>
+          <a href="#contact-project" style="font-weight: 700; font-size: 17px; color: #FFE800">Start a project →</a>
+        </div>
+      </div>
+      <p style="margin: 0; font-family: 'Space Mono', monospace; font-size: 15px">[email address] · [LinkedIn] · [GitHub]</p>
+    </div>
+  </section>
+
+  <footer style="padding: 32px 56px; display: flex; justify-content: space-between; font-size: 14px; background: #1B2F7A; color: #FAFAF7">
+    <span>© 2026 David Křapka</span>
+    <span style="font-family: 'Space Mono', monospace">Printed in three inks: blue, yellow and a little pink.</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5444}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
