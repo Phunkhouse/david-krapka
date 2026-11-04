@@ -116,20 +116,22 @@ const links = [
         (open ? button.dataset.labelClose : button.dataset.labelOpen) ?? ''
       panel.hidden = !open
       document.documentElement.classList.toggle('menu-open', open)
+      // Keep keyboard and screen reader users inside the open menu.
+      document.querySelectorAll('main, footer').forEach((el) => {
+        ;(el as HTMLElement).inert = open
+      })
     }
 
     button.addEventListener('click', () => {
       setOpen(button.getAttribute('aria-expanded') !== 'true')
     })
 
-    panel.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
+    // On the document so Escape works wherever focus is while the menu is open.
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !panel.hidden) {
         setOpen(false)
         button.focus()
       }
-    })
-    button.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') setOpen(false)
     })
 
     panel.querySelectorAll('[data-menu-link]').forEach((link) => {
@@ -137,6 +139,7 @@ const links = [
     })
 
     // The panel only exists below 720 px; close it if the window grows.
+    // Keep this in step with the `min-width: 720px` media query below.
     matchMedia('(min-width: 720px)').addEventListener('change', (event) => {
       if (event.matches) setOpen(false)
     })
@@ -202,6 +205,7 @@ const links = [
     }
   }
 
+  /* Keep in step with the matchMedia query in the script above. */
   @media (min-width: 720px) {
     .site-header {
       padding-block: 24px;
