@@ -89,7 +89,7 @@ Status as of 4 November 2026: milestones 0 and 1 done, milestone 2 planned in de
 - [ ] Draft PR defers both `check` and `playwright`; ready PR runs both; verify in the Actions tab.
 - [ ] David signs off on the design system and the shell on the preview URL.
 
-**Dependencies and risks:** Mobile menu, language switcher and pause toggle need a design on the canvas first (small additions).
+**Dependencies and risks:** Mobile menu, language switcher and pause toggle use a first proposal ([Shell components](design/shell-components.md)) that is not on the canvas yet; expect to iterate.
 
 ## Milestone 3: Landing page (static)
 

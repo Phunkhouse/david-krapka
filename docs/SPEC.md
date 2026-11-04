@@ -37,7 +37,7 @@ Blog, Playground, services catalogue, prices, rates, terms or availability claim
 
 ### Navigation and structure
 
-- One landing page with anchor navigation: Work · Approach · About · Contact (desktop) and a menu button (mobile). The mobile menu panel still needs design.
+- One landing page with anchor navigation: Work · Approach · About · Contact (desktop) and a menu button (mobile). The mobile menu panel has a first proposal in [Shell components](design/shell-components.md).
 - Every project card is a real link (except Systerna). Every section offers a path to work, CV or contact.
 - A language switcher on every page links to the same page in the other language. Its position still needs design.
 
@@ -155,7 +155,7 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 | Blocks | Question |
 | --- | --- |
 | Milestone 2 | Business identification in the footer ([LEG-002](#legal-requirements)): which place of business will be published when the IČO is active? Needed to size the footer slot. |
-| Milestone 2 | Design the mobile menu panel, language switcher and pause control. |
+| Milestone 2 | Mobile menu, language switcher and pause control: first proposal in [Shell components](design/shell-components.md); David to iterate. |
 | Milestone 3 | Should the mobile hero show the intro sentence? What does the reduced-motion hero show? Should Experience be in the navigation? |
 | Milestone 3 | Tablet layout (720–1100 px): accept the proposal in [Visual system](design/visual-system.md#breakpoints-proposal) or design it. |
 | Milestone 5 | Case study page design; whether short client projects get their own pages; Czech translations of case studies at launch or later. |

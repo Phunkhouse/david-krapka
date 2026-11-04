@@ -8,6 +8,7 @@ Copies of the approved landing-page artboards from the [Personal Portfolio mocku
 | [M-Home.dc.html](M-Home.dc.html) | Landing page · mobile · English | 390 × 6047 |
 | [D-Home-CS.dc.html](D-Home-CS.dc.html) | Úvodní stránka · desktop · Czech | 1440 × 5301 |
 | [M-Home-CS.dc.html](M-Home-CS.dc.html) | Úvodní stránka · mobil · Czech | 390 × 6050 |
+| [shell-components.html](shell-components.html) | Not from the canvas: first proposal for the mobile menu, language switcher and pause control. Renders directly in a browser. | — |
 | [canvas.json](canvas.json) | Canvas index: all boards, pages and titles, including the explorations | — |
 
 The landing boards already contain the chosen section variants (E3 experience, A5 approach motion, G4 portrait glitch). The explored alternatives stay on the canvas only; they are listed in the [design README](../README.md#explored-and-not-chosen).
