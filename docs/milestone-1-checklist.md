@@ -9,8 +9,8 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 - [x] Milestone 0 PR merged, so `main` holds SPEC, MILESTONES and decision records ([PR #2](https://github.com/Phunkhouse/david-krapka/pull/2)).
 - [x] Framework decided: Astro ([0006](decisions/0006-astro-static-site.md), supersedes the Next.js choice in [0001](decisions/0001-starter-pack-and-nextjs.md)).
 - [x] Hosting decided: Cloudflare Workers static assets ([0007](decisions/0007-cloudflare-workers-hosting.md), supersedes Vercel in [0003](decisions/0003-vercel-static-hosting.md)).
-- [ ] Decide on legal planning with `audit-legal-readiness` (recommended) and the optional Claude PR review workflow.
-- [ ] Confirm access: Cloudflare account, GitHub repository settings (admin). Websupport access is needed only at launch.
+- [ ] Decide on legal planning with `audit-legal-readiness` (recommended) and the optional Claude PR review workflow. Still open; not required to close milestone 1.
+- [x] Confirm access: Cloudflare account, GitHub repository settings (admin). Websupport access is needed only at launch.
 - [x] Starter pack available (cloned to a scratch directory for copying).
 
 ## 1. Branch and PR hygiene
@@ -62,7 +62,7 @@ Ruleset `protect-main` (active, default branch, no bypass actors):
 - [x] Create the Worker by importing the GitHub repository (Workers & Pages → Create → Import a repository). The Worker name must match `wrangler.jsonc` (`david-krapka`). The first production build of `main` failed as expected (no `package.json` until this PR merges).
 - [x] Build settings: build command `pnpm build`, deploy command `npx wrangler deploy`, production branch `main`. Previews Base tab: preview builds on, preview command `npx wrangler preview`, Preview URLs enabled, same API token as production. The build image reads Node 26.13 from `.nvmrc` and pnpm 12.9.1 from `packageManager`.
 - [x] `pnpm-workspace.yaml` allows the `esbuild` and `workerd` build scripts; pnpm 12 otherwise fails frozen installs in CI (`ERR_PNPM_IGNORED_BUILDS`).
-- [ ] Production lives on the `*.workers.dev` URL; **do not add `david-krapka.eu`** or touch DNS until milestone 6.
+- [x] Production lives on the `*.workers.dev` URL; `david-krapka.eu` is not added and DNS is untouched until milestone 6.
 
 ## 8. Optional
 
@@ -71,20 +71,20 @@ Ruleset `protect-main` (active, default branch, no bypass actors):
 
 ## 9. Acceptance checks (from MILESTONES.md)
 
-- [ ] `pnpm verify` passes locally on a fresh clone. Evidence: output pasted in the PR.
+- [x] `pnpm verify` passes locally on a fresh clone. Evidence: fresh clone with `CI=true pnpm install --frozen-lockfile` and `CI=true pnpm verify` (format check, lint, `astro check` with 0 errors, build) on `f91b8e3`; recorded in PR #3.
 - [x] Draft PR skips `check` without installing dependencies. Marking it ready runs the full suite and passes. Evidence: skipped runs on `f91b8e3` and `c7ced9e`; [run 41879722163](https://github.com/Phunkhouse/david-krapka/actions/runs/41879722163) on `74f7daa` passed install, format check, lint, typecheck and build in 28 s. The first ready runs stayed queued during a GitHub Actions partial outage on 4 Nov 2026.
-- [ ] A new commit to the ready PR triggers a new full run. Evidence: Actions tab.
-- [ ] Merging into `main` is blocked while `check` is failing or missing. Evidence: a throwaway PR that fails formatting, closed afterwards.
-- [ ] The PR's preview URL and the production `*.workers.dev` URL both serve the built page with `noindex`. Evidence: `curl -I` output.
+- [x] A new commit to the ready PR triggers a new full run. Evidence: after marking ready, `3ddbb41` ran in full ([run 41877404628](https://github.com/Phunkhouse/david-krapka/actions/runs/41877404628), success), then the next commit `74f7daa` ran again ([run 41879722163](https://github.com/Phunkhouse/david-krapka/actions/runs/41879722163), success). Two later pushes (`e0ff416`, `6aa20f5`) never reached the PR during the GitHub outage; their changes land in a follow-up PR.
+- [x] Merging into `main` is blocked while `check` is failing or missing. Evidence: [PR #4](https://github.com/Phunkhouse/david-krapka/pull/4) (unformatted file) was `BLOCKED` while `check` was pending, and still `BLOCKED` after `check` failed at `pnpm format:check` ([run 41883380910](https://github.com/Phunkhouse/david-krapka/actions/runs/41883380910)). Closed without merging, branch deleted.
+- [x] The PR's preview URL and the production `*.workers.dev` URL both serve the built page with `noindex`. Evidence: `curl -I` output.
   - [x] Preview (4 Nov 2026, commit `c7ced9e`): `https://feat-foundation-david-krapka.services-d43.workers.dev/` returns 200 with the placeholder page, `x-robots-tag: noindex`, HSTS, `x-frame-options: DENY`, `x-content-type-options: nosniff`, `referrer-policy` and `permissions-policy`; `/missing` returns 404.
-  - [ ] Production `david-krapka.services-d43.workers.dev`, after PR #3 merges.
-- [ ] `david-krapka.eu` still has working email (DNS is untouched in this milestone). Evidence: `dig MX david-krapka.eu` unchanged from before.
+  - [x] Production (4 Nov 2026, after merge `4710592`; Cloudflare build on `main` succeeded): `https://david-krapka.services-d43.workers.dev/` returns 200 with the placeholder page and the same headers, including `x-robots-tag: noindex`; `/missing` returns 404.
+- [x] `david-krapka.eu` still has working email (DNS is untouched in this milestone). Evidence: `dig MX david-krapka.eu` returns `10 mx10.active24.cz.` and `100 mx20.active24.cz.`; nameservers are still `ns1`/`ns2.websupport.cz` and `ns3.websupport.eu`.
 
 ## 10. Wrap-up
 
-- [ ] Update MILESTONES.md: milestone 1 status `done`, completion evidence (PR link), status date.
+- [x] Update MILESTONES.md: milestone 1 status `done`, completion evidence (PR link), status date.
 - [x] SPEC.md "Commands" and technical approach table updated for Astro.
-- [ ] David reviews and merges. Merging is David's call.
+- [x] David reviewed and merged [PR #3](https://github.com/Phunkhouse/david-krapka/pull/3).
 
 ## Risks and notes
 

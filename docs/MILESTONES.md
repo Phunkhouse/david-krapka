@@ -2,7 +2,7 @@
 
 Delivery plan for david-krapka.eu, aligned with [the specification](SPEC.md) and [the approved design](design/README.md). Milestones are delivered in order. A milestone may span several PRs; PRs go **one at a time** (the next PR starts only after the current one is merged or closed).
 
-Status as of 4 November 2026: milestone 0 done (PR #2), milestone 1 in progress, the rest planned.
+Status as of 4 November 2026: milestones 0 and 1 done, the rest planned.
 
 ## How every milestone is delivered
 
@@ -30,7 +30,7 @@ Status as of 4 November 2026: milestone 0 done (PR #2), milestone 1 in progress,
 
 ## Milestone 1: Foundation and delivery pipeline
 
-**Status:** in progress
+**Status:** done
 
 **Goal:** An empty but real Astro site that builds, is checked in CI under the Budget-conscious policy, and deploys to Cloudflare.
 
@@ -48,14 +48,16 @@ Status as of 4 November 2026: milestone 0 done (PR #2), milestone 1 in progress,
 
 **Acceptance checks:**
 
-- [ ] `pnpm verify` passes locally on a fresh clone; verify by running it and recording output in the PR.
-- [ ] A draft PR skips `check` without installing dependencies; marking it ready runs the full suite and passes; verify on the milestone PR itself.
-- [ ] A new commit to the ready PR triggers a new full run; verify in the Actions tab.
-- [ ] Merging into `main` is blocked while `check` is failing or missing; verify with a throwaway PR that fails formatting.
-- [ ] The preview URL for the PR and the production `*.workers.dev` URL both serve the built page, with `noindex`; verify with `curl -I`.
-- [ ] `david-krapka.eu` still has working email (MX untouched); verify with `dig MX`.
+- [x] `pnpm verify` passes locally on a fresh clone; verify by running it and recording output in the PR.
+- [x] A draft PR skips `check` without installing dependencies; marking it ready runs the full suite and passes; verify on the milestone PR itself.
+- [x] A new commit to the ready PR triggers a new full run; verify in the Actions tab.
+- [x] Merging into `main` is blocked while `check` is failing or missing; verify with a throwaway PR that fails formatting.
+- [x] The preview URL for the PR and the production `*.workers.dev` URL both serve the built page, with `noindex`; verify with `curl -I`.
+- [x] `david-krapka.eu` still has working email (MX untouched); verify with `dig MX`.
 
 **Dependencies and risks:** access to Cloudflare and GitHub settings.
+
+**Completion evidence:** [PR #3](https://github.com/Phunkhouse/david-krapka/pull/3), merged 4 November 2026 as `4710592`. Per-check evidence is in the [milestone 1 checklist](milestone-1-checklist.md#9-acceptance-checks-from-milestonesmd). Unplanned changes: framework switched to Astro ([0006](decisions/0006-astro-static-site.md)) and hosting to Cloudflare ([0007](decisions/0007-cloudflare-workers-hosting.md)).
 
 ## Milestone 2: Design system and site shell
 
