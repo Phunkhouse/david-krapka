@@ -124,6 +124,8 @@ Chosen direction **E3 “Big team. Small team.”**
 
 Proposed behaviour: both card links open an email to the published address with a prefilled subject (“Role: …” / “Project: …”). No form and no stored data in the first release (see [SPEC](../SPEC.md#data-and-trust-boundaries)).
 
+**Legal note (LEG-001, decided):** the “Have a project?” card and “Start a project →” link stay as in the mockup, as an invitation to talk. While the trade licence is suspended, do not add prices, rates, terms or availability claims for paid services anywhere on the page. See [SPEC](../SPEC.md#legal-requirements) and [0008](../decisions/0008-keep-project-invitation-while-trade-suspended.md).
+
 ## 7. Footer
 
 Ink background, small text.
@@ -133,4 +135,4 @@ Ink background, small text.
 | © 2026 David Křapka | © 2026 David Křapka |
 | Printed in three inks: blue, yellow and a little pink. | Tištěno třemi barvami: modrou, žlutou a trochou růžové. |
 
-The year should come from the build date. The language switcher and any legal links will probably live here or in the header (not designed yet).
+The year should come from the build date. The language switcher and any legal links will probably live here or in the header (not designed yet). The footer needs a link to the privacy notice (LEG-003) and a reserved slot for business identification (name, place of business, IČO and registration note) that appears once the IČO is active (LEG-002).
