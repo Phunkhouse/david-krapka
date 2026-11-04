@@ -175,7 +175,7 @@ Record evidence here and in the PR that completes each check.
 
 ## Wrap-up
 
-- [ ] Update MILESTONES.md: milestone 2 status `done`, completion evidence (PR links), status date, and any unplanned changes.
+- [x] Update MILESTONES.md: milestone 2 status `done`, completion evidence (PR links), status date, and any unplanned changes.
 - [x] Update SPEC.md: languages row from proposal to confirmed, fonts row with the chosen provider, commands with `test:e2e`, and resolved open questions.
 - [x] `AGENTS.md` lists every new command and the e2e job.
 

@@ -2,7 +2,7 @@
 
 Delivery plan for david-krapka.eu, aligned with [the specification](SPEC.md) and [the approved design](design/README.md). Milestones are delivered in order. A milestone may span several PRs; PRs go **one at a time** (the next PR starts only after the current one is merged or closed).
 
-Status as of 4 November 2026: milestones 0 and 1 done, milestone 2 planned in detail ([checklist](milestone-2-checklist.md)), the rest planned.
+Status as of 4 November 2026: milestones 0, 1 and 2 done, the rest planned.
 
 ## How every milestone is delivered
 
@@ -61,7 +61,7 @@ Status as of 4 November 2026: milestones 0 and 1 done, milestone 2 planned in de
 
 ## Milestone 2: Design system and site shell
 
-**Status:** planned; working plan and PR split in the [milestone 2 checklist](milestone-2-checklist.md)
+**Status:** done
 
 **Goal:** The shared look and structure every page uses, in both languages.
 
@@ -79,17 +79,19 @@ Status as of 4 November 2026: milestones 0 and 1 done, milestone 2 planned in de
 
 **Acceptance checks:**
 
-- [ ] `/` and `/cs/` render the shell with `<html lang="en">` and `<html lang="cs">`, and the switcher links between them; verify with Playwright.
-- [ ] A missing Czech key fails `pnpm typecheck`; verify by deleting one key locally.
-- [ ] No request leaves the site's own origin on page load; verify in the browser network panel and with a Playwright request listener.
-- [ ] The site stores nothing on the device: no cookies, `localStorage`, `sessionStorage` or IndexedDB after load and after using the language switcher; verify with Playwright and `curl -I` (no `Set-Cookie`) ([LEG-005](SPEC.md#legal-requirements)).
-- [ ] The three licence files, or readable font metadata, are in the build output ([LEG-008](SPEC.md#legal-requirements)); verify in `dist/`.
-- [ ] Keyboard alone reaches every link and the menu, with a visible focus ring on paper and on ink; verify manually and with an axe check in Playwright.
-- [ ] No horizontal scroll at 320 px; verify in Playwright at 320 × 640.
-- [ ] Draft PR defers both `check` and `playwright`; ready PR runs both; verify in the Actions tab.
-- [ ] David signs off on the design system and the shell on the preview URL.
+- [x] `/` and `/cs/` render the shell with `<html lang="en">` and `<html lang="cs">`, and the switcher links between them; verify with Playwright.
+- [x] A missing Czech key fails `pnpm typecheck`; verify by deleting one key locally.
+- [x] No request leaves the site's own origin on page load; verify in the browser network panel and with a Playwright request listener.
+- [x] The site stores nothing on the device: no cookies, `localStorage`, `sessionStorage` or IndexedDB after load and after using the language switcher; verify with Playwright and `curl -I` (no `Set-Cookie`) ([LEG-005](SPEC.md#legal-requirements)).
+- [x] The three licence files, or readable font metadata, are in the build output ([LEG-008](SPEC.md#legal-requirements)); verify in `dist/`.
+- [x] Keyboard alone reaches every link and the menu, with a visible focus ring on paper and on ink; verify manually and with an axe check in Playwright.
+- [x] No horizontal scroll at 320 px; verify in Playwright at 320 × 640.
+- [x] Draft PR defers both `check` and `playwright`; ready PR runs both; verify in the Actions tab.
+- [x] David signs off on the design system and the shell on the preview URL (specimen on PR B, shell on PR C).
 
 **Dependencies and risks:** Mobile menu, language switcher and pause toggle use a first proposal (canvas page “Site shell”, [Shell components](design/shell-components.md)); expect to iterate.
+
+**Completion evidence:** delivered as three PRs: [#8](https://github.com/Phunkhouse/david-krapka/pull/8) routing, dictionaries and Playwright; [#9](https://github.com/Phunkhouse/david-krapka/pull/9) tokens, fonts, print utilities and CSP; [#10](https://github.com/Phunkhouse/david-krapka/pull/10) site shell. Planning in [#6](https://github.com/Phunkhouse/david-krapka/pull/6) and the optional Claude review workflow in [#7](https://github.com/Phunkhouse/david-krapka/pull/7). Per-check evidence is in the [milestone 2 checklist](milestone-2-checklist.md#acceptance-checks-from-milestonesmd). Unplanned changes: font files are committed locally instead of fetched from a provider ([0009](decisions/0009-self-hosted-font-files.md)); the pause control is built but shown only on the temporary `/specimen/` page until milestone 4; the `playwright` check is required on `main`. Open items carried forward: remove `/specimen/` and the `noindex` header in milestone 6; Claude review suggestions on #10 (inert page behind the open menu, document-level Escape, shared breakpoint note, sturdier keyboard-reach test) are not yet applied.
 
 ## Milestone 3: Landing page (static)
 
@@ -122,7 +124,7 @@ Status as of 4 November 2026: milestones 0 and 1 done, milestone 2 planned in de
 **Acceptance checks:**
 
 - [ ] With `prefers-reduced-motion: reduce` emulated, no element has a running animation; verify with Playwright reading `getAnimations()`.
-- [ ] The pause toggle stops all looping animations and is reachable by keyboard; verify with Playwright.
+- [ ] The pause control (`PauseControl`, built in milestone 2) is placed on every page before any looping motion (WCAG 2.2.2), stops all looping animations and is reachable by keyboard; verify with Playwright.
 - [ ] Using the pause toggle writes no cookie, `localStorage`, `sessionStorage` or IndexedDB entry; verify with Playwright.
 - [ ] Looping animations pause when scrolled off-screen; verify with Playwright.
 - [ ] The portrait glitch passes a flash analysis (≤ 3 flashes per second); verify with a flash-analysis tool and record the result.
