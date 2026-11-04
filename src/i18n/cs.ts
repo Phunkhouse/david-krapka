@@ -90,6 +90,61 @@ export const cs: Dictionary = {
         textShort: 'Právě vzniká. Studie přijde, až bude hotový.',
       },
     },
+    approach: {
+      title: 'Jak přemýšlím a tvořím',
+      intro:
+        'Stejné tři otáčky válce u každého projektu, velkého i malého. Dobré produkty začínají dobrými otázkami.',
+      introShort:
+        'Stejné tři otáčky válce u každého projektu. Dobré produkty začínají dobrými otázkami.',
+      listLabel: 'Tři kroky',
+      steps: [
+        {
+          counter: '1/3',
+          title: 'Think',
+          text: 'Pochopit problém, ptát se a stanovit priority. Pro koho to je a co se stane, když to nepostavíme?',
+          textShort: 'Pochopit problém, ptát se a stanovit priority.',
+        },
+        {
+          counter: '2/3',
+          title: 'Make',
+          text: 'Proměnit záměr ve fungující produkt: UX, implementace, spolupráce a provoz.',
+          textShort: 'Proměnit záměr ve fungující produkt a provozovat ho.',
+        },
+        {
+          counter: '3/3',
+          title: 'Rethink',
+          text: 'Ověřit, poučit se a změnit směr. Zpětná vazba, iterace a věci, které jsem se rozhodl nestavět.',
+          textShort: 'Ověřit, poučit se a změnit směr, když to pomůže.',
+        },
+      ],
+      ai: {
+        tag: 'AI a já',
+        text: 'V práci otevřeně používám nástroje AI. Každá případová studie říká, co jsem zadal, navrhl a rozhodl já, s čím pomohla AI a jak jsem výsledek zkontroloval a otestoval.',
+        textShort:
+          'Nástroje AI používám otevřeně. Každá studie říká, co jsem rozhodl já, s čím pomohla AI a jak jsem výsledek zkontroloval a otestoval.',
+      },
+    },
+    experience: {
+      eyebrow: 'Zkušenosti · Co mi která dala',
+      title: 'Velký tým. Malý tým.',
+      lessonLabel: 'Co mě to naučilo',
+      cv: '[Stáhnout životopis] →',
+      emplifi: {
+        name: 'Emplifi',
+        dates: '[20XX – 20XX]',
+        meta: '[Role] · zaměstnání',
+        lesson: '[Jak dodávat ve velkém produktu, aniž by se rozbil.]',
+        detail: '[Odpovědnosti a jedno konkrétní rozhodnutí, k potvrzení.]',
+      },
+      freelance: {
+        name: 'Freelance',
+        dates: '[20XX – dnes]',
+        meta: 'Nezávisle · pro klienty',
+        lesson: 'Vlastnit celou věc, od první otázky po spuštění.',
+        detail: 'Eucal, Vladan Vaněk, UpVideo.',
+        link: 'Prohlédnout projekty ↑',
+      },
+    },
   },
   privacy: {
     title: 'Ochrana osobních údajů',

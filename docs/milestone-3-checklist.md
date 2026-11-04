@@ -81,23 +81,23 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 ### B1. How I think & build (`#approach`)
 
-- [ ] H2 left, intro right; three columns with a 3 px ink border and 18 px rollers on both sides; counter, title, paragraph and a huge small-dot halftone letter bleeding off the bottom right. The middle column is yellow paper with the pink “M” copy.
-- [ ] Static state of A5: the halftone letters fully developed, columns in their resting state (this is also the reduced-motion state).
-- [ ] Column titles stay in English in Czech. Mobile: stacked columns (min-height 170 px) with the first-sentence paragraph.
-- [ ] “AI + me” strip on tint below the columns; tag above the text on mobile.
+- [x] H2 left, intro right; three columns with a 3 px ink border and 18 px rollers on both sides; counter, title, paragraph and a huge small-dot halftone letter bleeding off the bottom right. The middle column is yellow paper with the pink “M” copy.
+- [x] Static state of A5: the halftone letters fully developed, columns in their resting state (this is also the reduced-motion state).
+- [x] Column titles stay in English in Czech. Mobile: stacked columns (min-height 170 px) with the first-sentence paragraph.
+- [x] “AI + me” strip on tint below the columns; tag above the text on mobile.
 
 ### B2. Experience (`#experience`)
 
-- [ ] Yellow paper with 36 px rollers; eyebrow and H2 “Big team. Small team.”.
-- [ ] Emplifi card (paper, ink shadow) and Freelance card (ink, yellow title, pink shadow) joined by a large halftone “+” (`aria-hidden`). Stacked on mobile with the “+” between them.
-- [ ] CV line per the section 0 decision; on mobile below both cards.
-- [ ] “See the projects ↑” links to `#work`.
-- [ ] Placeholders kept: `[Role]`, dates, lesson and detail, unless David supplies them.
+- [x] Yellow paper with 36 px rollers; eyebrow and H2 “Big team. Small team.”.
+- [x] Emplifi card (paper, ink shadow) and Freelance card (ink, yellow title, pink shadow) joined by a large halftone “+” (`aria-hidden`). Stacked on mobile with the “+” between them.
+- [x] CV line as plain placeholder text (section 0 decision); on mobile below both cards.
+- [x] “See the projects ↑” links to `#work`.
+- [x] Placeholders kept: `[Role]`, dates, lesson and detail, unless David supplies them.
 
 ### B3. Tests
 
-- [ ] Playwright: heading order and anchors still correct with the new sections.
-- [ ] axe, 320 px scroll, request, storage and CSP checks pass.
+- [x] Playwright: heading order (`h2` ×3, `h3` ×10), `#approach` anchor and focus, three ordered steps with the AI disclosure, and the Experience link back to `#work` (`tests/e2e/landing.spec.ts`).
+- [x] axe, 320 px scroll, request, storage and CSP checks pass.
 
 ## PR C: About, Contact and milestone wrap-up
 

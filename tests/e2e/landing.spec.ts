@@ -5,22 +5,36 @@ const pages = [
   {
     path: '/',
     lang: 'en',
-    work: 'Selected work',
     workButton: 'See selected work',
     navWork: 'Work',
+    navApproach: 'Approach',
+    headings: ['Selected work', 'How I think & build', 'Big team. Small team.'],
     contact: 'Get in touch',
   },
   {
     path: '/cs/',
     lang: 'cs',
-    work: 'Vybraná práce',
     workButton: 'Prohlédnout práci',
     navWork: 'Práce',
+    navApproach: 'Přístup',
+    headings: [
+      'Vybraná práce',
+      'Jak přemýšlím a tvořím',
+      'Velký tým. Malý tým.',
+    ],
     contact: 'Napište mi',
   },
 ]
 
-for (const { path, lang, work, workButton, navWork, contact } of pages) {
+for (const {
+  path,
+  lang,
+  workButton,
+  navWork,
+  navApproach,
+  headings,
+  contact,
+} of pages) {
   test.describe(`landing ${lang}`, () => {
     test('has one h1 with the claim and the section headings in order', async ({
       page,
@@ -29,7 +43,7 @@ for (const { path, lang, work, workButton, navWork, contact } of pages) {
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(
         'Think. Make. Rethink.',
       )
-      await expect(page.getByRole('heading', { level: 2 })).toHaveText([work])
+      await expect(page.getByRole('heading', { level: 2 })).toHaveText(headings)
       // Project names are third-level headings under the work section.
       await expect(page.getByRole('heading', { level: 3 })).toHaveText([
         'Kultomat',
@@ -37,6 +51,11 @@ for (const { path, lang, work, workButton, navWork, contact } of pages) {
         'Vladan Vaněk',
         'UpVideo',
         'Systerna',
+        'Think',
+        'Make',
+        'Rethink',
+        'Emplifi',
+        'Freelance',
       ])
     })
 
@@ -65,6 +84,63 @@ for (const { path, lang, work, workButton, navWork, contact } of pages) {
       await expect(page).toHaveURL(/#work$/)
       await expect(page.locator('#work')).toBeFocused()
       await expect(page.locator('#work')).toBeInViewport()
+    })
+
+    test('header link Approach lands in the approach section', async ({
+      page,
+    }) => {
+      await page.goto(path)
+      await page
+        .getByRole('navigation', { name: lang === 'en' ? 'Main' : 'Hlavní' })
+        .getByRole('link', { name: navApproach })
+        .click()
+      await expect(page).toHaveURL(/#approach$/)
+      await expect(page.locator('#approach')).toBeFocused()
+      await expect(page.locator('#approach')).toBeInViewport()
+    })
+
+    test('the English claim is marked as English on the Czech page', async ({
+      page,
+    }) => {
+      await page.goto(path)
+      const claims = page.locator('h1, #approach h3')
+      expect(await claims.count()).toBe(4)
+      for (const claim of await claims.all()) {
+        if (lang === 'cs') await expect(claim).toHaveAttribute('lang', 'en')
+        else await expect(claim).not.toHaveAttribute('lang')
+      }
+    })
+
+    test('opening a section by its address focuses it', async ({ page }) => {
+      for (const id of ['approach', 'experience']) {
+        await page.goto(`${path}#${id}`)
+        await expect(page.locator(`#${id}`)).toBeFocused()
+      }
+    })
+
+    test('approach has three ordered steps and the AI disclosure', async ({
+      page,
+    }) => {
+      await page.goto(path)
+      const steps = page.locator('#approach').getByRole('listitem')
+      await expect(steps).toHaveCount(3)
+      await expect(steps.first()).toContainText('1/3')
+      await expect(steps.last()).toContainText('3/3')
+      await expect(page.locator('#approach')).toContainText(
+        lang === 'en' ? 'AI + me' : 'AI a já',
+      )
+    })
+
+    test('experience links back to the projects', async ({ page }) => {
+      await page.goto(path)
+      await page
+        .locator('#experience')
+        .getByRole('link', {
+          name: lang === 'en' ? 'See the projects' : 'Prohlédnout projekty',
+        })
+        .click()
+      await expect(page).toHaveURL(/#work$/)
+      await expect(page.locator('#work')).toBeFocused()
     })
 
     test('the mobile menu link Work lands in the work section', async ({
