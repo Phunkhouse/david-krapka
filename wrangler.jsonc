@@ -10,4 +10,6 @@
   },
   "workers_dev": true,
   "preview_urls": true,
+  // Required by `wrangler preview` (non-production branch builds), even if empty.
+  "previews": {},
 }
