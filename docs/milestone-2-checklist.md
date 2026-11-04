@@ -30,7 +30,7 @@ The milestone is split so work can start before the missing canvas designs exist
 - [x] Decide on the optional Claude PR review workflow from the starter pack (carried over from milestone 1): yes, 4 November 2026, as its own small PR right after the planning PR and before PR A. Not required for milestone 2.
   - [x] David installs the [Claude GitHub App](https://github.com/apps/claude) on the repository and saves a `claude setup-token` token as the Actions secret `CLAUDE_CODE_OAUTH_TOKEN` (never in chat or files). Done 4 November 2026; `gh secret list` shows the secret (created 19:03 UTC). The app install is confirmed by the first review run.
   - [x] Copy `recipes/claude-pr-review/files/.github/workflows/claude.yml` from the starter pack (commit `e948314`, unchanged); `actionlint` clean; mentioned in `AGENTS.md`.
-  - [ ] After merge (the workflow must be on `main`), comment `@claude review` on the next PR and record the run and response.
+  - [x] After merge (the workflow must be on `main`), comment `@claude review` on the next PR and record the run and response. Evidence: on [PR #8](https://github.com/Phunkhouse/david-krapka/pull/8), [run 41895470292](https://github.com/Phunkhouse/david-krapka/actions/runs/41895470292) succeeded in 30 s and replied with a review comment; this also confirms the Claude GitHub App is installed.
 
 ## PR A: Routing, layout and end-to-end tests
 

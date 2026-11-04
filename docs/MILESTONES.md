@@ -169,7 +169,7 @@ Status as of 4 November 2026: milestones 0 and 1 done, milestone 2 planned in de
 - Final security headers in `public/_headers`, including a Content-Security-Policy; HSTS.
 - Placeholder check that fails the production build if any `[…]` placeholder remains.
 - Pre-launch reviews: `audit-legal-readiness` (Pre-launch mode, reconciling the [planning report](audits/2026-11-04/legal-planning.md)), `audit-web-quality` (accessibility, SEO, performance), and a light `audit-security` of headers and dependencies.
-- Remove `noindex`. Move DNS to Cloudflare: add the zone, compare every record with Websupport (especially Active24 MX, SPF, DKIM and DMARC), switch nameservers at Websupport, then attach `david-krapka.eu` as a Custom Domain and redirect `www` to the apex.
+- Remove `noindex` from `public/_headers` and update the `noindex` assertion in `tests/e2e/smoke.spec.ts`. Move DNS to Cloudflare: add the zone, compare every record with Websupport (especially Active24 MX, SPF, DKIM and DMARC), switch nameservers at Websupport, then attach `david-krapka.eu` as a Custom Domain and redirect `www` to the apex.
 
 **Acceptance checks:**
 
