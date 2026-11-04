@@ -2,49 +2,50 @@
 
 Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery-pipeline). Scope and acceptance checks come from MILESTONES.md; this file only sequences the work. Tick items as they are done and record evidence in the PR.
 
-**Goal:** an empty but real Next.js site that builds, is checked in CI under the Budget-conscious policy, and deploys to Vercel.
+**Goal:** an empty but real Astro site that builds, is checked in CI under the Budget-conscious policy, and deploys to Vercel.
 
 ## 0. Before starting (David)
 
-- [ ] Milestone 0 PR merged, so `main` holds SPEC, MILESTONES and decision records.
-- [ ] Confirm decisions [0001](decisions/0001-starter-pack-and-nextjs.md) (Next.js + starter pack) and [0003](decisions/0003-vercel-static-hosting.md) (static export on Vercel), or name alternatives. Flip their status to `accepted`.
+- [x] Milestone 0 PR merged, so `main` holds SPEC, MILESTONES and decision records ([PR #2](https://github.com/Phunkhouse/david-krapka/pull/2)).
+- [x] Framework decided: Astro ([0006](decisions/0006-astro-static-site.md), supersedes the Next.js choice in [0001](decisions/0001-starter-pack-and-nextjs.md)).
+- [ ] Confirm [0003](decisions/0003-vercel-static-hosting.md) (static files on Vercel), or name an alternative. Flip its status to `accepted`.
 - [ ] Decide on legal planning with `audit-legal-readiness` (recommended) and the optional Claude PR review workflow.
 - [ ] Confirm access: Vercel account, GitHub repository settings (admin), Websupport DNS.
-- [ ] Make the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack) available locally (it is not cloned on this machine); `template/core/` and `recipes/` are copied from it.
+- [x] Starter pack available (cloned to a scratch directory for copying).
 
 ## 1. Branch and PR hygiene
 
-- [ ] Branch from up-to-date `main` (for example `feat/foundation`); one PR at a time.
-- [ ] Open the PR as a **draft** early; expect `check` to be skipped (intended).
+- [x] Branch `feat/foundation` from up-to-date `main`; one PR at a time.
+- [x] Draft PR open ([PR #3](https://github.com/Phunkhouse/david-krapka/pull/3)); `check` is skipped on drafts (intended).
 
 ## 2. Generate the app
 
-- [ ] Check installed Node matches the recipe (`.nvmrc`, recipe default 26 LTS; local machine has Node 24.18, so install the pinned version via nvm).
-- [ ] Run the official Next.js generator in the repo root: TypeScript, App Router, `src/`, pnpm, ESLint, no Tailwind. `docs/`, `README.md` and `.git` stay untouched (generate in a scratch directory and copy if the generator refuses a non-empty directory).
-- [ ] Read `node_modules/next/dist/docs/` for the installed version before configuring anything; note the version in the PR.
-- [ ] Remove generator boilerplate (demo page, logos, default styles) and leave a minimal placeholder home page.
+- [x] Node 26 from `.nvmrc` (installed via nvm; the machine default is 24.18).
+- [x] `create astro` (minimal template, strict TypeScript, pnpm) in a scratch directory, copied in without touching `docs/` or `README.md`. Astro 7.4.5.
+- [x] Checked the docs for the installed version (configuration, editor setup, CLI, fonts, i18n) at docs.astro.build.
+- [x] Placeholder home page only; no demo content.
 
 ## 3. Starter pack files
 
-- [ ] Copy `template/core/`: `AGENTS.md`, `CLAUDE.md`, `.editorconfig`. Merge with the existing `README.md` and docs rather than overwrite.
-- [ ] Copy recipe files: `.nvmrc`, `.prettierrc` (`semi: false`, `singleQuote: true`), `.prettierignore`, `eslint.config.mjs`.
-- [ ] Pin `packageManager` in `package.json`.
+- [x] `template/core/`: `AGENTS.md` (merged with Astro's generated guidance), `CLAUDE.md`, `.editorconfig`.
+- [x] Recipe conventions adapted to Astro: `.nvmrc`, `.prettierrc` (`semi: false`, `singleQuote: true`, `prettier-plugin-astro`), `.prettierignore` (also ignores `docs/`, so planning docs and mockups are not reformatted), ESLint flat config (`@eslint/js`, `typescript-eslint`, `eslint-plugin-astro`).
+- [x] `packageManager` pinned (`pnpm@12.9.1`); dev dependencies pinned exactly; TypeScript held at 6.0.x for tool compatibility.
 
 ## 4. Scripts and config
 
-- [ ] Scripts: `format`, `format:check`, `lint`, `typecheck` (`next typegen && tsc --noEmit`), `build`, `verify` (format check, lint, typecheck, build in sequence).
-- [ ] `next.config.ts`: `output: 'export'`, `trailingSlash: true`, `images.unoptimized: true`.
-- [ ] Vercel config (`vercel.json`): `X-Robots-Tag: noindex` header for now, and the security headers listed in SPEC if cheap to add (HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, frame protection; CSP can wait for milestone 2 once fonts and styles exist). Note that the `noindex` header is removed at launch (milestone 6).
-- [ ] No Playwright, `test:e2e` or `budget-e2e.yml` yet: they arrive when there is something to test. `AGENTS.md` lists only commands that exist.
-- [ ] `pnpm verify` passes locally; save the output for the PR.
+- [x] Scripts: `dev`, `build`, `preview`, `format`, `format:check`, `lint`, `typecheck` (`astro check`), `verify` (format check, lint, typecheck, build in sequence).
+- [x] `astro.config.mjs`: `output: 'static'`, `trailingSlash: 'always'`.
+- [x] `vercel.json`: `X-Robots-Tag: noindex` plus basic security headers (HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options`). CSP waits for milestone 2. `noindex` is removed at launch (milestone 6).
+- [x] No Playwright, `test:e2e` or `budget-e2e.yml` yet. `AGENTS.md` lists only commands that exist.
+- [x] `pnpm verify` passes locally.
 
 ## 5. CI
 
-- [ ] Adapt `recipes/ci-strategy/examples/budget-ci.yml` to `.github/workflows/ci.yml` with job name `check` (format, lint, typecheck, build; Node from `.nvmrc`; pnpm cache).
-- [ ] Draft PRs fail `check` immediately without installing dependencies; ready PRs run the full suite.
-- [ ] Install `actionlint` (`brew install actionlint`) and validate the workflow.
-- [ ] Write `AGENTS.md` with the real commands, `CI strategy: Budget-conscious`, and pointers to SPEC, design docs and MILESTONES. Same commit as the workflow, per [0002](decisions/0002-budget-conscious-ci.md).
-- [ ] Update README with install, dev and verify commands and links to docs.
+- [x] `.github/workflows/ci.yml` adapted from the pack's `budget-ci.yml`, job `check` (format, lint, typecheck, build; Node from `.nvmrc`; pnpm cache).
+- [x] Draft PRs skip `check` without installing dependencies; ready PRs run the full suite (amends [0002](decisions/0002-budget-conscious-ci.md)).
+- [x] `actionlint` installed and clean.
+- [x] `AGENTS.md` has the real commands, `CI strategy: Budget-conscious`, and pointers to SPEC, design docs and MILESTONES.
+- [x] README has install, dev and verify commands.
 
 ## 6. GitHub ruleset on `main` (David or with David's approval)
 
@@ -56,7 +57,7 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 
 ## 7. Vercel
 
-- [ ] Create the project and link the repository; framework preset Next.js, production branch `main`, preview deployments for other branches.
+- [ ] Create the project and link the repository; framework preset Astro (output `dist/`), production branch `main`, preview deployments for other branches.
 - [ ] Node version matches `.nvmrc`.
 - [ ] Production lives on the `*.vercel.app` URL; **do not attach `david-krapka.eu`** until milestone 6.
 - [ ] Reuse existing DNS records only at milestone 6. If Vercel later reports the domain as in use, verify ownership with the TXT record it asks for.
@@ -78,20 +79,14 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 
 ## 10. Wrap-up
 
-- [ ] Update MILESTONES.md: status of milestone 1, completion evidence (PR link), status date.
-- [ ] Update SPEC.md "Commands" section from "to be created" to actual, and the technical approach table statuses for 0001 and 0003.
+- [ ] Update MILESTONES.md: milestone 1 status `done`, completion evidence (PR link), status date.
+- [x] SPEC.md "Commands" and technical approach table updated for Astro.
 - [ ] David reviews and merges. Merging is David's call.
-
-## Suggested PR split
-
-Everything may go in one PR; if it grows, split in this order (each PR starts only after the previous one is merged):
-
-1. App scaffold, starter pack files, scripts, `AGENTS.md`, CI workflow (this PR proves the draft/ready behaviour).
-2. Vercel config and headers, README updates, completion evidence. Ruleset and Vercel project setup are settings changes made outside the repo.
 
 ## Risks and notes
 
-- Starter pack recipe was drafted against Next.js 16; the generator may install a newer version. Follow the installed docs.
-- `next/font` fetches at build time in CI; not used until milestone 2, so no network risk yet.
-- The `check` required status must exist on `main` before the ruleset can require it; otherwise merges block forever. Order: merge the workflow PR, then enforce, or enable the ruleset after the first run on the PR.
+- No starter pack recipe exists for Astro; this project maintains its own ESLint config, scripts and agent guidance ([0006](decisions/0006-astro-static-site.md)).
+- TypeScript is pinned to 6.0.x until `@astrojs/check` and `typescript-eslint` support 7.
+- The Astro Fonts API downloads fonts at build time; not used until milestone 2.
+- The `check` required status must exist before the ruleset can require it; enable the ruleset after the first full run on this PR.
 - Draft PRs skip `check` (job-level `if`). GitHub cannot merge a draft, and marking ready triggers the job, so the skip never gates a merge. Do not replace the skip with a step that passes without validating.

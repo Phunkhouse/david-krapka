@@ -2,7 +2,7 @@
 
 Project overview: `README.md`. Detailed scope, workflows, limitations and open questions: `docs/SPEC.md`. Approved design: `docs/design/`. Agreed development stages, when present: `docs/MILESTONES.md`. Decision records: `docs/decisions/`.
 
-Before changing code, inspect the relevant files and the installed framework's documentation. Do not assume that remembered APIs match this project.
+Before changing code, inspect the relevant files and the documentation for the installed Astro version (`astro` in `package.json`; docs at https://docs.astro.build, upgrade guides for breaking changes). Do not assume that remembered APIs match this project.
 
 ## Commands
 
@@ -11,11 +11,11 @@ Before changing code, inspect the relevant files and the installed framework's d
 - When adding or changing a script, update this section with its exact command and purpose.
 
 - Package manager: pnpm (pinned in `packageManager`). Node version: `.nvmrc`.
-- `pnpm dev`: start the dev server.
-- `pnpm build`: static export to `out/` (`output: 'export'`).
+- `pnpm dev`: start the dev server (http://localhost:4321). Agents run it in the background with `pnpm astro dev --background`, managed with `pnpm astro dev stop|status|logs`.
+- `pnpm build`: static build to `dist/` (`output: 'static'`). `pnpm preview` serves it locally.
 - `pnpm format` / `pnpm format:check`: write / check Prettier formatting (`docs/` is excluded).
-- `pnpm lint`: ESLint.
-- `pnpm typecheck`: `next typegen && tsc --noEmit`.
+- `pnpm lint`: ESLint (`@eslint/js`, `typescript-eslint`, `eslint-plugin-astro`).
+- `pnpm typecheck`: `astro check` (runs `astro sync`, then type-checks `.astro` and `.ts` files). TypeScript is pinned to 6.0.x because `@astrojs/check` and `typescript-eslint` do not support 7 yet.
 - `pnpm verify`: format check, lint, typecheck and build in sequence. Run it before asking for review.
 - No test suite exists yet; `pnpm test:e2e` arrives with Playwright.
 
@@ -29,10 +29,10 @@ Before changing code, inspect the relevant files and the installed framework's d
 
 ## Architecture
 
-- Keep business rules separate from route handlers and UI components. Put validation and trust-boundary checks on the server.
-- If a framework-free server layer exists, keep its dependency boundary enforced by lint. Do not create layers or directories just to match a template.
-- Introduce external-service interfaces when they make a real dependency replaceable or testable.
-- Keep files and APIs close to the workflows they serve; avoid broad barrel exports.
+- Astro, fully static (decision 0006). Pages in `src/pages/`, components in `src/components/`, shared layouts in `src/layouts/`. Do not create directories just to match a template.
+- Ship no client JavaScript by default. Add a `<script>` or a hydrated island only where the spec needs behaviour (motion pause control, mobile menu), and keep content and navigation working without JavaScript.
+- Do not add a UI framework integration (React, etc.) without recording the reason in `docs/decisions/`.
+- Keep files close to the pages they serve; avoid broad barrel exports.
 
 ## UI
 
@@ -61,13 +61,3 @@ Before changing code, inspect the relevant files and the installed framework's d
 - Work through multiple PRs sequentially. Keep at most one agent-authored PR awaiting user review at a time.
 - Finish checks and address feedback in the current PR. Wait for the user to merge or close it before starting the next PR's implementation, unless the user explicitly requests parallel PR work.
 - Leave the final merge to the user unless they explicitly ask you to perform it.
-
-<!-- BEGIN:nextjs-agent-rules -->
-
-## This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->

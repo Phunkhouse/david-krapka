@@ -1,7 +1,7 @@
 # 0001. Use the AI starter pack with its Next.js recipe
 
 Date: 2026-11-04  
-Status: proposed
+Status: superseded by [0006](0006-astro-static-site.md) (framework choice; the starter pack is still used)
 
 ## Context
 

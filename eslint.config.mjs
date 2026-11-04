@@ -1,11 +1,11 @@
 import { defineConfig, globalIgnores } from 'eslint/config'
-import nextVitals from 'eslint-config-next/core-web-vitals'
-import nextTs from 'eslint-config-next/typescript'
+import js from '@eslint/js'
+import tseslint from 'typescript-eslint'
+import astro from 'eslint-plugin-astro'
 
 export default defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
-  // If the project creates a framework-free src/server layer, add a
-  // no-restricted-imports rule for next, react and UI-layer imports here.
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...astro.configs.recommended,
+  globalIgnores(['dist/**', '.astro/**', 'docs/**']),
 ])

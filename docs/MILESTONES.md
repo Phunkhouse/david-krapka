@@ -2,7 +2,7 @@
 
 Delivery plan for david-krapka.eu, aligned with [the specification](SPEC.md) and [the approved design](design/README.md). Milestones are delivered in order. A milestone may span several PRs; PRs go **one at a time** (the next PR starts only after the current one is merged or closed).
 
-Status as of 4 November 2026: milestone 0 in review, the rest planned.
+Status as of 4 November 2026: milestone 0 done (PR #2), milestone 1 in progress, the rest planned.
 
 ## How every milestone is delivered
 
@@ -14,7 +14,7 @@ Status as of 4 November 2026: milestone 0 in review, the rest planned.
 
 ## Milestone 0: Plan and design handoff
 
-**Status:** in review
+**Status:** done
 
 **Goal:** One source of truth for scope, design and delivery before any code.
 
@@ -26,20 +26,20 @@ Status as of 4 November 2026: milestone 0 in review, the rest planned.
 - [ ] Open questions are listed with the milestone they block; verify in [SPEC](SPEC.md#planning-and-open-questions).
 - [ ] David approves the plan, or names changes; verify in PR review.
 
-**Completion evidence:** PR link once merged.
+**Completion evidence:** [PR #2](https://github.com/Phunkhouse/david-krapka/pull/2), merged 4 November 2026.
 
 ## Milestone 1: Foundation and delivery pipeline
 
-**Status:** planned
+**Status:** in progress
 
-**Goal:** An empty but real Next.js site that builds, is checked in CI under the Budget-conscious policy, and deploys to Vercel.
+**Goal:** An empty but real Astro site that builds, is checked in CI under the Budget-conscious policy, and deploys to Vercel.
 
 **Scope:**
 
-- Generate the app with the official Next.js generator (TypeScript, App Router, `src/`, pnpm, ESLint, no Tailwind) in the repository root without touching `docs/`. Check the installed version's docs in `node_modules/next/dist/docs/` before configuring.
-- Copy from the starter pack: `template/core/` (`AGENTS.md`, `CLAUDE.md`, `.editorconfig`; merge with existing `README.md` and docs rather than overwrite) and the Next.js recipe files (`.nvmrc`, `.prettierrc`, `.prettierignore`, `eslint.config.mjs`).
-- Pin `packageManager`; add scripts `format`, `format:check`, `lint`, `typecheck` (`next typegen && tsc --noEmit`), `build`, `verify`.
-- `next.config.ts`: `output: 'export'`, `trailingSlash: true`, `images.unoptimized: true`.
+- Generate the app with `create astro` (minimal template, strict TypeScript, pnpm) without touching `docs/` ([0006](decisions/0006-astro-static-site.md)). Check the installed version's docs at docs.astro.build before configuring.
+- Copy from the starter pack: `template/core/` (`AGENTS.md`, `CLAUDE.md`, `.editorconfig`; merge with existing `README.md` and docs rather than overwrite) and the Next.js recipe's tooling conventions adapted to Astro (`.nvmrc`, Prettier settings with `prettier-plugin-astro`, `.prettierignore`, ESLint flat config with `eslint-plugin-astro`).
+- Pin `packageManager`; add scripts `format`, `format:check`, `lint`, `typecheck` (`astro check`), `build`, `verify`.
+- `astro.config.mjs`: `output: 'static'`, `trailingSlash: 'always'`.
 - Adapt `recipes/ci-strategy/examples/budget-ci.yml` to `.github/workflows/ci.yml` (job name `check`). Validate with `actionlint`.
 - Write `AGENTS.md` with real commands, `CI strategy: Budget-conscious`, pointers to SPEC, design and milestones.
 - GitHub ruleset on `main`: pull request required, required status check `check` from GitHub Actions, branch must be up to date, no force pushes or deletion.
@@ -55,7 +55,7 @@ Status as of 4 November 2026: milestone 0 in review, the rest planned.
 - [ ] The Vercel preview for the PR and the production `*.vercel.app` URL both serve the built page, with `noindex`; verify with `curl -I`.
 - [ ] `david-krapka.eu` still has working email (MX untouched); verify with `dig MX`.
 
-**Dependencies and risks:** David's confirmation of decisions 0001 and 0003; access to Vercel, GitHub settings and Websupport DNS. Vercel Hobby terms (see SPEC risks).
+**Dependencies and risks:** David's confirmation of decision 0003; access to Vercel, GitHub settings and Websupport DNS. Vercel Hobby terms (see SPEC risks).
 
 ## Milestone 2: Design system and site shell
 
@@ -66,10 +66,10 @@ Status as of 4 November 2026: milestone 0 in review, the rest planned.
 **Scope:**
 
 - Design tokens as CSS custom properties ([Visual system](design/visual-system.md)); global reset and base typography; fluid type with `clamp()`.
-- Self-hosted fonts through `next/font` with Latin Extended.
+- Self-hosted fonts through the Astro Fonts API with Latin Extended.
 - Print utilities: halftone text (three densities), misregistered copy, yellow paper, pink dot screen, rollers, offset shadows, highlight.
 - Components: header with wordmark and navigation, mobile menu, language switcher, footer, buttons, section heading, focus styles, pause-motion toggle (static for now).
-- Routing for `/` (English) and `/cs/` (Czech) with the correct `lang`, typed dictionaries, `metadataBase` `https://david-krapka.eu`, `hreflang` alternates, bilingual 404.
+- Routing for `/` (English) and `/cs/` (Czech) with the correct `lang`, typed dictionaries, Astro i18n routing (`prefixDefaultLocale: false`), `site` `https://david-krapka.eu`, `hreflang` alternates, bilingual 404.
 - Playwright installed with a first smoke test, plus the adapted `budget-e2e.yml` (required result `playwright`) added to the ruleset.
 
 **Acceptance checks:**

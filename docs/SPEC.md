@@ -2,7 +2,7 @@
 
 The current description of the portfolio site at **david-krapka.eu**. This file is the single source of truth for scope, requirements and technical approach. Background and reasoning from the brainstorming are in the [product and design brief](portfolio-brief.md); project facts are tracked in [content and case studies](content-and-case-studies.md); the approved design is in [docs/design/](design/README.md); delivery stages are in [milestones](MILESTONES.md).
 
-Status: planning, 4 November 2026. A placeholder Next.js site exists (milestone 1). Statements marked **proposal** need confirmation; everything else is confirmed by the user or by the approved mockups.
+Status: planning, 4 November 2026. A placeholder Astro site exists (milestone 1). Statements marked **proposal** need confirmation; everything else is confirmed by the user or by the approved mockups.
 
 ## Purpose and users
 
@@ -90,19 +90,19 @@ Slugs: `kultomat`, `eucal`, `vladan-vanek`, `upvideo`. Canonical host is `https:
 
 ## Technical approach
 
-Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack): core templates plus the Next.js recipe and the Budget-conscious CI strategy. Reasons are in [decision records](decisions/README.md).
+Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack): core templates, the tooling conventions of its Next.js recipe adapted to Astro, and the Budget-conscious CI strategy. Reasons are in [decision records](decisions/README.md).
 
 | Area | Choice | Status |
 | --- | --- | --- |
-| Framework | Next.js, App Router, TypeScript, `src/` directory, generated with the official generator. Version checked at setup; the recipe was drafted against Next.js 16. | Proposal ([0001](decisions/0001-starter-pack-and-nextjs.md)) |
-| Rendering | Fully static (`output: 'export'`), no server runtime | Proposal ([0003](decisions/0003-vercel-static-hosting.md)) |
+| Framework | Astro 7, strict TypeScript, generated with `create astro`. No client JavaScript by default; scripts or islands only where behaviour needs them. | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
+| Rendering | Fully static (`output: 'static'`, build to `dist/`), no server runtime | Proposal ([0003](decisions/0003-vercel-static-hosting.md)) |
 | Package manager and runtime | pnpm (pinned with `packageManager`), Node from `.nvmrc` (recipe default 26 LTS) | From recipe |
-| Styling | CSS Modules plus global design tokens as CSS custom properties; no Tailwind; Sass only if a real need appears | From recipe |
-| Fonts | Rubik 900, Sora 400/600/700, Space Mono 400/700, self-hosted through `next/font`, Latin + Latin Extended | Confirmed design |
+| Styling | Astro component-scoped styles plus global design tokens as CSS custom properties; no Tailwind; Sass only if a real need appears | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
+| Fonts | Rubik 900, Sora 400/600/700, Space Mono 400/700, self-hosted through the Astro Fonts API (to verify in milestone 2), Latin + Latin Extended | Confirmed design |
 | Languages | English (default, `/`) and Czech (`/cs/`); typed dictionaries so a missing key fails type checking | Proposal ([0005](decisions/0005-bilingual-routing.md)) |
-| Case study content | MDX files in the repository, one per project and language | Proposal |
-| Images | Pre-optimised AVIF/WebP with fixed dimensions (static export cannot use the on-demand image optimiser) | Proposal |
-| Formatting and linting | Prettier (`semi: false`, `singleQuote: true`), ESLint flat config with `eslint-config-next` | From recipe |
+| Case study content | MDX files in an Astro content collection, one per project and language; a schema enforces role, collaborators and AI share | Proposal |
+| Images | Optimised at build time (Astro `<Image>`/`<Picture>`, AVIF/WebP with fixed dimensions) | Proposal |
+| Formatting and linting | Prettier (`semi: false`, `singleQuote: true`), ESLint flat config with `@eslint/js`, `typescript-eslint` and `eslint-plugin-astro` | From recipe |
 | Tests | Playwright for smoke, navigation, reduced-motion and accessibility checks (with axe). Vitest only when there is logic worth unit testing. | Proposal |
 | CI | GitHub Actions, **Budget-conscious**: draft PRs defer cloud jobs; ready PRs run the full suite | Confirmed ([0002](decisions/0002-budget-conscious-ci.md)) |
 | Hosting | Vercel, production from `main`, preview deployments for branches; domain `david-krapka.eu` | Proposal ([0003](decisions/0003-vercel-static-hosting.md)) |
@@ -111,11 +111,11 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 
 ### Commands
 
-`pnpm dev`, `pnpm build`, `pnpm format`, `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test:e2e`, and `pnpm verify` running format check, lint, typecheck and build in sequence. `AGENTS.md` will list only commands that exist.
+`pnpm dev`, `pnpm build`, `pnpm preview`, `pnpm format`, `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test:e2e`, and `pnpm verify` running format check, lint, typecheck and build in sequence. `AGENTS.md` will list only commands that exist.
 
 ### Local and cloud differences to document
 
-macOS locally versus Ubuntu in CI; Playwright browser version tied to the installed package; fonts downloaded at build time by `next/font` (network needed during build).
+macOS locally versus Ubuntu in CI; Playwright browser version tied to the installed package; fonts downloaded at build time by the Astro Fonts API (network needed during build).
 
 ## Known limitations and risks
 
@@ -123,7 +123,7 @@ macOS locally versus Ubuntu in CI; Playwright browser version tied to the instal
 - **Case study pages are not designed.** Milestone 5 cannot start building until the canvas has a case study template.
 - **Vercel Hobby plan terms** allow non-commercial personal use only. A portfolio that also invites client work may count as commercial; confirm before launch or use the Pro plan.
 - **Looping motion** carries accessibility risk; the pause control and flash check are launch requirements.
-- **Static export** rules out middleware-based language detection; visitors choose the language themselves.
+- **Static output** rules out middleware-based language detection; visitors choose the language themselves.
 - **Branch protection** is technically enforceable because the repository is public. If it becomes private, rulesets need a paid GitHub plan.
 
 ## Planning and open questions
@@ -132,7 +132,7 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 
 | Blocks | Question |
 | --- | --- |
-| Milestone 1 | Confirm Next.js and Vercel (records 0001, 0003), or name alternatives. |
+| Milestone 1 | Confirm Vercel (record 0003), or name an alternative. Framework settled as Astro (0006). |
 | Milestone 1 | Enable legal planning with the `audit-legal-readiness` skill? (Recommended: EU audience, freelance offer, possible identification duties for a sole trader.) |
 | Milestone 2 | Design the mobile menu panel, language switcher and pause control. |
 | Milestone 3 | Should the mobile hero show the intro sentence? What does the reduced-motion hero show? Should Experience be in the navigation? |

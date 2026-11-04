@@ -1,10 +1,9 @@
-.next/
+dist/
+.astro/
 node_modules/
 coverage/
 playwright-report/
 test-results/
-*.tsbuildinfo
-next-env.d.ts
 pnpm-lock.yaml
 
 # Planning docs and design mockups are not reformatted
