@@ -124,6 +124,8 @@ Chosen direction **E3 “Big team. Small team.”**
 
 Proposed behaviour: both card links open an email to the published address with a prefilled subject (“Role: …” / “Project: …”). No form and no stored data in the first release (see [SPEC](../SPEC.md#data-and-trust-boundaries)).
 
+**Legal note (LEG-001, proposal):** while the trade licence is suspended, the “Have a project?” card and “Start a project →” link are not shown as an offer of paid work. Replace them with neutral wording or remove the card; the approved mockup stays the reference for layout. See [SPEC](../SPEC.md#legal-requirements). The same applies to the Freelance card meta “for clients · [20XX – now]” in Experience: use a closed range or “client projects”.
+
 ## 7. Footer
 
 Ink background, small text.
@@ -133,4 +135,4 @@ Ink background, small text.
 | © 2026 David Křapka | © 2026 David Křapka |
 | Printed in three inks: blue, yellow and a little pink. | Tištěno třemi barvami: modrou, žlutou a trochou růžové. |
 
-The year should come from the build date. The language switcher and any legal links will probably live here or in the header (not designed yet).
+The year should come from the build date. The language switcher and any legal links will probably live here or in the header (not designed yet). The footer needs a link to the privacy notice (LEG-003) and a reserved slot for business identification (name, place of business, IČO and registration note) that appears once the IČO is active (LEG-002).

@@ -11,7 +11,7 @@ A personal portfolio for David Křapka, positioned as a **product-minded enginee
 | Audience | Needs to learn | Main path |
 | --- | --- | --- |
 | Hiring managers, recruiters, technical and product leads | Focus, experience, contribution inside a team, how decisions are made | Hero → Kultomat case study → Experience / CV → “Hiring?” |
-| Potential clients | Can he understand a brief, deliver and communicate? | Relevant client project → Approach → “Have a project?” |
+| Potential clients (**proposal, [LEG-001](#legal-requirements):** shown as past client work only while the trade is suspended; no invitation to commission paid projects) | Can he understand a brief, deliver and communicate? | Relevant client project → Approach → Contact |
 
 Success (qualitative, from the brief): a visitor can say in their own words what David does, find a relevant project, tell his contribution apart from team or AI work, and reach contact details without help.
 
@@ -23,14 +23,15 @@ Success (qualitative, from the brief): a visitor can say in their own words what
 - **Kultomat case study** (long form) and **short pages** for Eucal, Vladan Vaněk and UpVideo, once their facts are verified. **Proposal:** short client projects get their own pages only if there is enough verified material; otherwise their cards link to the live site.
 - **Systerna** as the labelled “In progress” card only, without a page.
 - **Emplifi** inside the Experience section, with confirmed role and dates.
-- **Contact** via email links (separate subjects for roles and projects), LinkedIn and GitHub.
+- **Contact** via email links (**proposal:** a role subject; a project subject only once [LEG-001](#legal-requirements) allows the client offer), LinkedIn and GitHub.
+- **Privacy notice** in both languages, linked from every footer ([LEG-003](#legal-requirements)).
 - **CV** as a downloadable PDF (**proposal:** English only at first).
 - Motion as designed, with reduced-motion support and a pause control.
 - Search and sharing basics: titles, descriptions, Open Graph images, sitemap, `hreflang`, canonical URLs.
 
 ### Out of scope for the first release
 
-Blog, Playground, services catalogue, contact form, newsletter, CMS, comments, analytics with cookies, and dark mode. Each can be reconsidered after launch.
+Blog, Playground, services catalogue, an offer of paid services (until the trade is active again, [LEG-001](#legal-requirements)), contact form, newsletter, CMS, comments, analytics with cookies, and dark mode. Each can be reconsidered after launch.
 
 ## Important workflows and requirements
 
@@ -72,7 +73,7 @@ Slugs: `kultomat`, `eucal`, `vladan-vanek`, `upvideo`. Canonical host is `https:
 
 - No square-bracket placeholders (`[Role]`, `[20XX]`) on the published site. An automated check fails the build for production when any remain.
 - Every case study states David's role, collaborators and the share of AI assistance, following the structure in [content and case studies](content-and-case-studies.md#proposed-shared-case-study-structure).
-- Screenshots are authentic and approved for publication.
+- Screenshots are authentic and approved for publication, with written permission from the client and from any identifiable person shown ([LEG-006](#legal-requirements)).
 
 ### Failure cases
 
@@ -83,10 +84,30 @@ Slugs: `kultomat`, `eucal`, `vladan-vanek`, `upvideo`. Canonical host is `https:
 ## Data and trust boundaries
 
 - The site is fully static. It has no server code, database, forms, accounts or user input.
-- It sets no cookies and loads no third-party scripts, fonts or embeds in the first release. **Proposal:** no analytics at launch; if wanted later, choose a cookieless, EU-hosted option and run legal planning again.
-- The only personal data processed is what the hosting provider logs for each request (IP address, user agent). This must be covered by the legal review.
+- It sets no cookies, stores nothing on visitors' devices and loads no third-party scripts, fonts or embeds in the first release ([LEG-005](#legal-requirements)). **Proposal:** no analytics at launch; if wanted later, choose a cookieless, EU-hosted option and run legal planning again.
+- The only personal data processed on the site itself is what Cloudflare handles for each request (IP address, user agent), plus emails people send and collaborators named in case studies. The privacy notice covers it ([LEG-003](#legal-requirements)); Cloudflare is the processor ([LEG-004](#legal-requirements)).
 - Email links expose a public address; spam is an accepted risk. The address must be one David is happy to publish.
 - Security headers are set by the host through `public/_headers`: HSTS, Content-Security-Policy, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and frame protection.
+
+## Legal requirements
+
+From the [legal planning audit of 4 November 2026](audits/2026-11-04/legal-planning.md) (Planning mode; not legal advice, and not a statement that the site complies). Requirements keep their audit IDs. Each is checked again in the Pre-launch audit in milestone 6.
+
+**Operator facts (David, 4 November 2026):** a natural person in the Czech Republic with an IČO whose trade licence is suspended while on social-security support; the site offers no paid work for now and is a showcase and job search; the public email address is undecided; no client contract or NDA restricts showing past work.
+
+| ID | Requirement | When |
+| --- | --- | --- |
+| LEG-001 | **Proposal (David to confirm):** the first release is a showcase and job search. It does not invite paid projects: no “Start a project” call to action, no “for clients · [20XX – now]”. The client offer returns when the IČO is reactivated, together with LEG-002. | Copy decided before milestone 3 |
+| LEG-002 | When the site offers services as an entrepreneur: name, place of business (*sídlo*), IČO and registration note in the footer of every page (Civil Code § 435). Decide early whether the place of business is a home or a separate business address. Reserve a footer slot in the shell. | Slot in milestone 2; content on IČO reactivation |
+| LEG-003 | Bilingual privacy notice (for example `/privacy/` and `/cs/soukromi/`), linked from every footer: controller and contact, purposes and lawful basis, Cloudflare as processor, transfers outside the EEA, retention, rights, right to complain to ÚOOU. Needs the public email address. | Page route and footer link in milestone 2; text in milestone 6 |
+| LEG-004 | Private dated record of the accepted Cloudflare Self-Serve agreement and Data Processing Addendum versions. Keep Workers logs and observability off unless the privacy notice covers them. | Before launch |
+| LEG-005 | The site stores nothing on visitors' devices: no cookies, `localStorage`, `sessionStorage` or IndexedDB, including for the pause control. This is why no cookie banner is planned. Cloudflare features that set cookies stay off. | Milestones 2 and 4 acceptance checks |
+| LEG-006 | Written permission per project for names, logos, screenshots and quotes; permission from any identifiable person shown (Civil Code § 84–85) or blur or crop them; ask named collaborators first. Record the date and form of each permission in the project card. | Before each case study is published (milestone 5) |
+| LEG-007 | Portrait photo with documented rights; CV PDF and images free of personal data you do not want public; EXIF and location metadata removed from committed images. | Milestone 6 |
+| LEG-008 | The three fonts are under SIL OFL 1.1. Ship each font's `OFL.txt`, or verify that the served font files keep copyright and licence in readable metadata. | Milestone 2 |
+| LEG-009 | Add a `LICENSE` file (code) and a content note (texts, case studies, images and CV: all rights reserved). Keep a one-page private record of processing. | Milestone 6 |
+
+Out of scope by the audit's reasoning, to be re-checked if the facts change: consumer-contract and marketing-communication rules (nothing is sold or sent), the Czech accessibility act (a personal portfolio and micro-enterprise exemption; WCAG 2.2 AA remains a product requirement), and information-society-service duties. Not covered by the audit: social-security, tax and employment questions.
 
 ## Technical approach
 
@@ -123,6 +144,7 @@ macOS locally versus Ubuntu in CI; Playwright browser version tied to the instal
 - **Case study pages are not designed.** Milestone 5 cannot start building until the canvas has a case study template.
 - **DNS move at launch.** Moving the zone to Cloudflare can break email if a mail record is missed; compare records one by one before switching nameservers and send a test email afterwards.
 - **Looping motion** carries accessibility risk; the pause control and flash check are launch requirements.
+- **Trade suspension.** The planned client-facing copy conflicts with a suspended trade licence ([LEG-001](#legal-requirements)); the legal classification and the conditions of David's social-security support are unresolved and outside the audit's scope.
 - **Static output** rules out middleware-based language detection; visitors choose the language themselves.
 - **Branch protection** is technically enforceable because the repository is public. If it becomes private, rulesets need a paid GitHub plan.
 
@@ -132,13 +154,14 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 
 | Blocks | Question |
 | --- | --- |
-| Milestone 1 | Enable legal planning with the `audit-legal-readiness` skill? (Recommended: EU audience, freelance offer, possible identification duties for a sole trader.) |
+| Milestone 2 | Business identification in the footer ([LEG-002](#legal-requirements)): which place of business will be published when the IČO is active? Needed to size the footer slot. |
+| Milestone 3 | Confirm the LEG-001 proposal and write the Contact and Experience copy without a client offer, or ask the trade licensing office and the office paying the support whether publishing a portfolio with a contact email is acceptable while the trade is suspended. |
 | Milestone 2 | Design the mobile menu panel, language switcher and pause control. |
 | Milestone 3 | Should the mobile hero show the intro sentence? What does the reduced-motion hero show? Should Experience be in the navigation? |
 | Milestone 3 | Tablet layout (720–1100 px): accept the proposal in [Visual system](design/visual-system.md#breakpoints-proposal) or design it. |
 | Milestone 5 | Case study page design; whether short client projects get their own pages; Czech translations of case studies at launch or later. |
 | Milestone 5 | How Systerna is presented (card only, teaser, or left out). |
-| Milestone 6 | Public email address, LinkedIn and GitHub URLs, CV content and languages. |
+| Milestone 6 | Public email address (**also blocks the privacy notice, [LEG-003](#legal-requirements)**), LinkedIn and GitHub URLs, CV content and languages. |
 | Milestone 6 | Final role title, availability statement and which audience comes first. |
 | Milestone 6 | Analytics at launch: none (proposal) or a cookieless tool. |
 
