@@ -33,8 +33,11 @@
 
 /* Misregistered copy: a pink copy of the same glyph, slipped right and down.
    Usage: <span class="misregister" data-text="T" aria-hidden="true">T</span>
-   The copy sits behind the glyph (z-index: -1), so a panel with a background
-   must be a stacking context (.paper-yellow and .surface-ink are). */
+   The copy sits behind the glyph (z-index: -1), so the nearest ancestor with
+   a background must be a stacking context (.paper-yellow and .surface-ink
+   are; add isolation: isolate to any other panel), or the copy disappears
+   behind that background. Isolating .misregister itself would break the
+   multiply blend with the panel colour. */
 .misregister {
   --slip-x: 0.06em;
   --slip-y: 0.05em;

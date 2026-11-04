@@ -57,7 +57,11 @@ export default defineConfig({
   },
   // Content-Security-Policy <meta> with hashes for every inline style and
   // script Astro renders. Directives a <meta> CSP cannot carry
-  // (frame-ancestors) are sent as a header from public/_headers.
+  // (frame-ancestors) are sent as a header from public/_headers, which also
+  // repeats object-src and base-uri on purpose, so they apply even without
+  // the <meta>. Scripts injected by Cloudflare (Web Analytics, Rocket Loader,
+  // email obfuscation) would be blocked silently: keep those features off or
+  // add their hashes or origins here.
   // No code blocks on the site; Shiki's inline styles would conflict with CSP.
   markdown: { syntaxHighlight: false },
   security: {
@@ -68,6 +72,7 @@ export default defineConfig({
         "font-src 'self'",
         "object-src 'none'",
         "base-uri 'self'",
+        // No forms on the site; loosen this if a contact form is ever added.
         "form-action 'none'",
       ],
     },
