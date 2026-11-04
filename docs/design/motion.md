@@ -28,7 +28,7 @@ The drum is a 3D prism with three faces, T, M and R, rotated around the X axis (
 - Easing for the drum and counter: `cubic-bezier(.7, 0, .3, 1)` (mechanical stop-start). Words: `ease-in-out`.
 - **Kick:** on each turn the letter jolts 10 px right and back, like paper catching on a roller.
 - Shading: a vertical gradient darkens the top and bottom of the drum to suggest curvature.
-- **Reduced motion:** the drum stays on T and the counter on 1/3. See the [open question](README.md#open-design-questions) about showing all three words.
+- **Reduced motion:** the drum stays on T and the counter on 1/3; the H1 and all three sublines are visible as static text (decided 4 November 2026, [Landing page](landing-page.md#implementation-decisions-milestone-3)).
 
 ## Approach section: A5 “develops on scroll + reacts on hover”
 

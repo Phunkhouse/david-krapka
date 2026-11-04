@@ -61,7 +61,7 @@ These are needed before the related milestone can finish (see [milestones](../MI
 
 | Question | Why it matters |
 | --- | --- |
-| What should the reduced-motion hero show? Today only “Think.” and its subline remain visible, because the other two words are hidden. | The static version should still say all three words. Proposal: show “Think. Make. Rethink.” on three lines, or one line at a smaller size, and freeze the drum on T. |
-| Should the mobile hero include the intro sentence (“I'm David Křapka, a product-minded engineer…”)? Desktop has it; mobile drops it. | Without it, mobile visitors and search engines see no plain description of the role above the fold. |
-| Should Experience get a nav item? | The section exists but is reachable only by scrolling. |
+| ~~What should the reduced-motion hero show?~~ **Decided 4 November 2026:** “Think. Make. Rethink.” on three lines, all three sublines as a list, drum frozen on T with the counter at 1/3. | Built in milestone 3 ([Landing page](landing-page.md#1-header-and-hero-top)). |
+| ~~Should the mobile hero include the intro sentence?~~ **Decided 4 November 2026:** no, mobile keeps the mockup. | The role stays in the header and the page description. |
+| ~~Should Experience get a nav item?~~ **Decided 4 November 2026:** no; the four designed items stay. | The section keeps its `#experience` anchor. |
 | How are project thumbnails replaced by real screenshots? | Cards currently show halftone letters with a “[Screenshot … goes here]” label. Decide whether screenshots replace the letter art or sit inside it. |

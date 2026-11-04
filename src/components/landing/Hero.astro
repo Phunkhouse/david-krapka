@@ -1,0 +1,318 @@
+---
+import Button from '../Button.astro'
+import { t, type Locale } from '../../i18n'
+import { pathFor } from '../../i18n/routes'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { hero } = t(locale).home
+const home = pathFor(locale, 'home')
+---
+
+<!--
+  Static hero: the state a visitor sees with reduced motion. The drum is
+  frozen on T with the counter at 1/3; milestone 4 adds the turning drum
+  and cycling words on top of this markup (docs/design/motion.md).
+-->
+<section id="top" class="hero" tabindex="-1">
+  <div class="text">
+    <p class="label eyebrow">{hero.eyebrow}</p>
+    <h1>
+      {hero.heading.map((word) => (
+        <>
+          <span class="line">
+            {word.startsWith(hero.highlight) ? (
+              <>
+                <span class="highlight">{hero.highlight}</span>
+                {word.slice(hero.highlight.length)}
+              </>
+            ) : (
+              word
+            )}
+          </span>{' '}
+        </>
+      ))}
+    </h1>
+    <ul class="sublines" role="list">
+      {hero.sublines.map((line) => (
+        <li>{line}</li>
+      ))}
+    </ul>
+    <p class="intro">{hero.intro}</p>
+    <div class="actions">
+      <Button href={`${home}#work`}>{hero.work}</Button>
+      <Button variant="secondary" href={`${home}#contact`} class="contact">
+        <span class="contact-label">{hero.contact}</span>
+        <svg
+          class="contact-icon"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linejoin="round"
+        >
+          <rect x="3" y="5" width="18" height="14"></rect>
+          <path d="M3 6 L12 13 L21 6"></path>
+        </svg>
+      </Button>
+    </div>
+  </div>
+
+  <div class="drum paper-yellow" aria-hidden="true">
+    <span class="face halftone misregister" data-text="T">
+      T
+    </span>
+    <span class="shade"></span>
+    <span class="roller roller--left"></span>
+    <span class="roller roller--right"></span>
+    <span class="counter">1/3</span>
+  </div>
+</section>
+
+<style>
+  /* Focus target for anchor links; not a control, so no ring. */
+  .hero:focus {
+    outline: none;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    max-width: var(--content-max);
+    margin-inline: auto;
+  }
+
+  /* Mobile and tablet: drum band first, then the text. */
+  .drum {
+    order: -1;
+    position: relative;
+    flex: 0 0 410px;
+    overflow: hidden;
+    border-block: var(--border);
+  }
+
+  .face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--family-display);
+    font-weight: 900;
+    font-size: 330px;
+    line-height: 1;
+    /* The glyph and its pink copy sit centred; the copy slips right and down. */
+    --slip-x: 0.027em;
+    --slip-y: 0.021em;
+    --dot: 3.4px;
+    --grid: 10px;
+  }
+
+  /* The utility positions the pink copy absolutely: re-centre it with the glyph. */
+  .face::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgb(150 120 0 / 0.45) 0%,
+      rgb(255 232 0 / 0) 26%,
+      rgb(255 232 0 / 0) 74%,
+      rgb(150 120 0 / 0.45) 100%
+    );
+  }
+
+  .roller {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--roller);
+    background: var(--ink);
+  }
+
+  .roller--left {
+    left: 0;
+  }
+
+  .roller--right {
+    right: 0;
+  }
+
+  .counter {
+    position: absolute;
+    top: 14px;
+    right: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border: var(--border);
+    border-radius: 50%;
+    background: var(--paper);
+    font-family: var(--family-mono);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 22px var(--pad-inline) 24px;
+  }
+
+  .eyebrow,
+  .intro {
+    display: none;
+  }
+
+  h1 {
+    font-size: var(--text-hero);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+  }
+
+  .line {
+    display: block;
+  }
+
+  /* "Re" in Rethink: yellow behind the fragment, not a separate word. */
+  .highlight {
+    padding-inline: 4px;
+  }
+
+  .sublines {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-hero-sub);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .actions > :first-child {
+    flex: 1;
+  }
+
+  /* Mobile: the secondary button becomes a round icon button. */
+  .hero .contact {
+    flex: 0 0 58px;
+    width: 58px;
+    height: 58px;
+    min-height: 0;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .contact-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 720px) {
+    .eyebrow,
+    .intro {
+      display: block;
+    }
+
+    .intro {
+      max-width: 560px;
+      font-size: var(--text-body-lg);
+    }
+
+    .text {
+      gap: 26px;
+      padding-block: 48px 56px;
+    }
+
+    .actions {
+      gap: 14px;
+    }
+
+    .actions > :first-child {
+      flex: 0 0 auto;
+    }
+
+    .hero .contact {
+      flex: 0 0 auto;
+      width: auto;
+      height: auto;
+      min-height: 52px;
+      padding: 0 26px;
+      border-radius: var(--radius-pill);
+    }
+
+    .contact-label {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip-path: none;
+    }
+
+    .contact-icon {
+      display: none;
+    }
+  }
+
+  /* Desktop: text column and a 720 px drum panel, filling the first screen. */
+  @media (min-width: 1100px) {
+    .hero {
+      display: grid;
+      /* 720 px at 1440 and wider; narrower below so the headline fits. */
+      grid-template-columns: minmax(0, 1fr) clamp(400px, 50vw, 720px);
+      /* The shared header sits above; together they fill about one screen. */
+      min-height: clamp(600px, calc(100svh - 76px), 824px);
+    }
+
+    .text {
+      justify-content: flex-end;
+    }
+
+    .drum {
+      order: 0;
+      flex: none;
+      border-block: 0;
+      border-left: var(--border);
+    }
+
+    .face {
+      font-size: clamp(420px, 47.2vw, 680px);
+      --dot: 6px;
+      --grid: 18px;
+    }
+
+    .counter {
+      top: 28px;
+      right: 64px;
+      width: 80px;
+      height: 80px;
+      font-size: 15px;
+    }
+  }
+</style>

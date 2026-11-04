@@ -32,8 +32,65 @@ export const en = {
     start: 'Start the press',
   },
   home: {
-    heading: 'Think. Make. Rethink.',
-    placeholder: 'This site is being built.',
+    hero: {
+      eyebrow: 'How every project goes',
+      // The claim stays in English in the Czech version (design README).
+      heading: ['Think.', 'Make.', 'Rethink.'],
+      // Start of a heading word shown highlighted ("Re" in Rethink).
+      highlight: 'Re',
+      sublines: [
+        'Understand the problem and ask the questions.',
+        'Turn it into a working product.',
+        'Learn from it and change direction when it helps.',
+      ],
+      intro:
+        "I'm David Křapka, a product-minded engineer. I find the real problem, build the product and keep improving it after it ships.",
+      work: 'See selected work',
+      contact: 'Get in touch',
+    },
+    work: {
+      title: 'Selected work',
+      intro:
+        'One product I own end to end, a few client projects, and one that is still being built.',
+      listLabel: 'Projects',
+      featured: {
+        label: 'Main case study · Own product',
+        name: 'Kultomat',
+        text: 'From the first question to a product that runs every day: the problem, the decisions, the build and what changed afterwards.',
+        textShort: 'From the first question to a product that runs every day.',
+        // Square brackets: the milestone 6 build check fails while these remain.
+        summary: '[One-line summary to be confirmed]',
+        screenshot: '[Screenshot of Kultomat goes here]',
+        screenshotShort: '[Screenshot of Kultomat]',
+      },
+      projects: [
+        {
+          name: 'Eucal',
+          label: 'Client · Business needs',
+          text: 'Turning business needs into a website visitors can find their way through.',
+          textShort:
+            'Business needs turned into a website visitors can find their way through.',
+        },
+        {
+          name: 'Vladan Vaněk',
+          label: 'Client · Personal identity',
+          text: "Content structure and personal presentation for an individual's website.",
+          textShort: 'Content structure and personal presentation.',
+        },
+        {
+          name: 'UpVideo',
+          label: 'Client · Visual & multimedia',
+          text: 'Visual communication and video content delivered against a client brief.',
+          textShort: 'Visual communication and video against a client brief.',
+        },
+      ],
+      inProgress: {
+        name: 'Systerna',
+        label: 'In progress',
+        text: "Being built now. The case study comes when it's ready.",
+        textShort: "Being built now. Case study when it's ready.",
+      },
+    },
   },
   privacy: {
     title: 'Privacy notice',

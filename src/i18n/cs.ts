@@ -33,9 +33,63 @@ export const cs: Dictionary = {
     start: 'Spustit tisk',
   },
   home: {
-    // The claim stays in English in the Czech version (design README).
-    heading: 'Think. Make. Rethink.',
-    placeholder: 'Web se právě staví.',
+    hero: {
+      eyebrow: 'Tak probíhá každý projekt',
+      heading: ['Think.', 'Make.', 'Rethink.'],
+      // Start of a heading word shown highlighted ("Re" in Rethink).
+      highlight: 'Re',
+      sublines: [
+        'Pochopit problém a položit otázky.',
+        'Proměnit to ve fungující produkt.',
+        'Poučit se a změnit směr, když to pomůže.',
+      ],
+      intro:
+        'Jsem David Křapka, inženýr s produktovým myšlením. Najdu skutečný problém, postavím produkt a zlepšuji ho i po spuštění.',
+      work: 'Prohlédnout práci',
+      contact: 'Napište mi',
+    },
+    work: {
+      title: 'Vybraná práce',
+      intro:
+        'Jeden vlastní produkt od začátku do konce, několik projektů pro klienty a jeden, který ještě vzniká.',
+      listLabel: 'Projekty',
+      featured: {
+        label: 'Hlavní případová studie · Vlastní produkt',
+        name: 'Kultomat',
+        text: 'Od první otázky k produktu, který běží každý den: problém, rozhodnutí, vývoj a co se změnilo potom.',
+        textShort: 'Od první otázky k produktu, který běží každý den.',
+        summary: '[Jednovětý souhrn k potvrzení]',
+        screenshot: '[Sem přijde snímek Kultomatu]',
+        screenshotShort: '[Snímek Kultomatu]',
+      },
+      projects: [
+        {
+          name: 'Eucal',
+          label: 'Klient · Potřeby firmy',
+          text: 'Potřeby firmy převedené do webu, ve kterém se návštěvníci vyznají.',
+          textShort:
+            'Potřeby firmy převedené do webu, ve kterém se návštěvníci vyznají.',
+        },
+        {
+          name: 'Vladan Vaněk',
+          label: 'Klient · Osobní prezentace',
+          text: 'Struktura obsahu a osobní prezentace na webu jednotlivce.',
+          textShort: 'Struktura obsahu a osobní prezentace.',
+        },
+        {
+          name: 'UpVideo',
+          label: 'Klient · Vizuál a multimédia',
+          text: 'Vizuální komunikace a video obsah podle zadání klienta.',
+          textShort: 'Vizuální komunikace a video podle zadání klienta.',
+        },
+      ],
+      inProgress: {
+        name: 'Systerna',
+        label: 'Rozpracováno',
+        text: 'Právě vzniká. Případová studie přijde, až bude hotový.',
+        textShort: 'Právě vzniká. Studie přijde, až bude hotový.',
+      },
+    },
   },
   privacy: {
     title: 'Ochrana osobních údajů',

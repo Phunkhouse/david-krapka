@@ -20,15 +20,15 @@ Sections are grouped so each PR is a reviewable part of the page on the preview 
 
 Each item has a recommendation; answering “as recommended” is enough. Decisions go into the design docs in the PR that implements them.
 
-- [ ] Milestone 2 merged and complete ([PR #10](https://github.com/Phunkhouse/david-krapka/pull/10), follow-ups in [PR #11](https://github.com/Phunkhouse/david-krapka/pull/11)).
-- [ ] Approve this plan, or name changes.
-- [ ] **Reduced-motion / static hero** (blocks PR A). Recommendation: the H1 shows “Think. Make. Rethink.” as visible text on three lines (no hidden duplicate needed in the static state); the drum is frozen on T with the counter at 1/3; the subline shows all three sentences as a short list, or only the first one. Pick: three sublines or one.
-- [ ] **Mobile intro sentence** (blocks PR A). Recommendation: show it on mobile too, below the subline, so the role is described above the fold for visitors and search engines.
-- [ ] **Experience in the navigation.** Recommendation: no; keep the four designed items. The section keeps its `#experience` anchor.
-- [ ] **Sticky header** (carried from the milestone 2 review). Recommendation: not sticky; the mockups do not show one. If sticky, PR A re-checks the menu layout and adds `scroll-margin-top` to every section.
-- [ ] **Tablet range (720–1099 px).** Recommendation: accept the [breakpoint proposal](design/visual-system.md#breakpoints-proposal) and judge it from screenshots at 768 and 1024 px in PR C, rather than designing it on the canvas first.
-- [ ] **Project card links before case studies exist** (milestone 5). Recommendation: cards render as designed but are not links yet, and the “Read the case study →” line is left out until the pages exist. Milestone 5 adds the links and its acceptance check already covers them. Alternative: keep the line as a `[…]` placeholder.
-- [ ] **Contact links before the email address is decided** (milestone 6). Recommendation: build both card links as `mailto:` with the prefilled subjects (“Role: …” / “Project: …”) from one constant, whose address is a `[email address]` placeholder for now; LinkedIn and GitHub stay `[…]` text, not links. The CV link in Experience stays `[Download CV]` text, not a link.
+- [x] Milestone 2 merged and complete ([PR #10](https://github.com/Phunkhouse/david-krapka/pull/10), follow-ups in [PR #11](https://github.com/Phunkhouse/david-krapka/pull/11)).
+- [x] Approve this plan, or name changes. Approved by merging [PR #12](https://github.com/Phunkhouse/david-krapka/pull/12).
+- [x] **Reduced-motion / static hero** (blocks PR A). Recommendation: the H1 shows “Think. Make. Rethink.” as visible text on three lines (no hidden duplicate needed in the static state); the drum is frozen on T with the counter at 1/3; the subline shows all three sentences as a short list, or only the first one. Pick: three sublines or one. **Decided:** three lines, all three sublines, drum frozen on T.
+- [x] **Mobile intro sentence** (blocks PR A). Recommendation: show it on mobile too, below the subline, so the role is described above the fold for visitors and search engines. **Decided:** no, keep the mockup (desktop and tablet only).
+- [x] **Experience in the navigation.** Recommendation: no; keep the four designed items. The section keeps its `#experience` anchor. **Decided:** no.
+- [x] **Sticky header** (carried from the milestone 2 review). Recommendation: not sticky; the mockups do not show one. If sticky, PR A re-checks the menu layout and adds `scroll-margin-top` to every section. **Decided:** not sticky.
+- [x] **Tablet range (720–1099 px).** Recommendation: accept the [breakpoint proposal](design/visual-system.md#breakpoints-proposal) and judge it from screenshots at 768 and 1024 px in PR C, rather than designing it on the canvas first. **Decided:** accept the proposal; judged from screenshots in PR C.
+- [x] **Project card links before case studies exist** (milestone 5). Recommendation: cards render as designed but are not links yet, and the “Read the case study →” line is left out until the pages exist. Milestone 5 adds the links and its acceptance check already covers them. Alternative: keep the line as a `[…]` placeholder. **Decided:** cards are not links yet.
+- [x] **Contact links before the email address is decided** (milestone 6). Recommendation: build both card links as `mailto:` with the prefilled subjects (“Role: …” / “Project: …”) from one constant, whose address is a `[email address]` placeholder for now; LinkedIn and GitHub stay `[…]` text, not links. The CV link in Experience stays `[Download CV]` text, not a link. **Decided:** mailto with a `[email address]` placeholder and prefilled subjects; LinkedIn, GitHub, CV as placeholder text.
 - [ ] Any confirmed copy that can replace placeholders now: Emplifi role and dates, freelance start year, About personal note, Kultomat one-line summary (see [Content inputs](MILESTONES.md#content-inputs-owner-david)). Placeholders are allowed in this milestone.
 
 ## Shared rules for every PR
@@ -46,36 +46,36 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 ### A1. Branch and docs
 
-- [ ] Branch from up-to-date `main`; draft PR; `check` and `playwright` skipped on the draft (intended).
-- [ ] Record the section 0 decisions in [Landing page](design/landing-page.md), [Motion](design/motion.md) (reduced-motion hero) and the [design README](design/README.md#open-design-questions); mark the SPEC open questions resolved.
+- [x] Branch from up-to-date `main`; draft PR; `check` and `playwright` skipped on the draft (intended).
+- [x] Record the section 0 decisions in [Landing page](design/landing-page.md), [Motion](design/motion.md) (reduced-motion hero) and the [design README](design/README.md#open-design-questions); mark the SPEC open questions resolved.
 
 ### A2. Page scaffold
 
-- [ ] Replace the placeholder `home` keys with the landing structure; remove `home.placeholder`.
-- [ ] Both landing pages render the sections in order with the designed anchors: `#top`, `#work`, `#approach`, `#experience`, `#about`, `#contact`.
-- [ ] Anchor targets work with the header (desktop links and mobile menu): the section is scrolled into view and the next Tab continues inside it. No smooth scrolling yet (motion is milestone 4).
+- [x] Replace the placeholder `home` keys with the landing structure; remove `home.placeholder`.
+- [x] Both landing pages render the sections in order. Only `#top` and `#work` exist after PR A; the other anchors arrive with their sections in PR B and C.
+- [x] Anchor targets work with the header (desktop links and mobile menu): the section is scrolled into view and the next Tab continues inside it. No smooth scrolling yet (motion is milestone 4).
 
 ### A3. Hero (`#top`)
 
-- [ ] Desktop: full-height first screen, text column aligned to the bottom (eyebrow, H1, subline, intro, two buttons), 720 px yellow-paper drum panel with rollers, halftone T with the pink misregistered copy, round counter at 1/3.
-- [ ] Mobile: 410 px drum band, then headline, subline, intro (if decided) and buttons; the secondary button becomes the 58 px round “Get in touch” icon button with an accessible name.
-- [ ] H1 and sublines follow the static-hero decision; drum panel `aria-hidden`.
-- [ ] Buttons: “See selected work” → `#work`, “Get in touch” → `#contact`.
-- [ ] The H1 or the hero text is the Largest Contentful Paint element, not decorative art; check in Lighthouse.
+- [x] Desktop: full-height first screen, text column aligned to the bottom (eyebrow, H1, subline, intro, two buttons), 720 px yellow-paper drum panel with rollers, halftone T with the pink misregistered copy, round counter at 1/3.
+- [x] Mobile: 410 px drum band, then headline, sublines and buttons (no intro, as decided); the secondary button becomes the 58 px round “Get in touch” icon button with an accessible name.
+- [x] H1 and sublines follow the static-hero decision; drum panel `aria-hidden`.
+- [x] Buttons: “See selected work” → `#work`, “Get in touch” → `#contact`.
+- [ ] The H1 or the hero text is the Largest Contentful Paint element, not decorative art; check in Lighthouse (PR C, on the preview URL).
 
 ### A4. Selected work (`#work`)
 
-- [ ] Ink section, yellow H2 with pink offset shadow, intro on the right (stacked on mobile).
-- [ ] Kultomat feature card: 560 px yellow art panel with the huge “K” and pink copy, text side with label, summary and the `[Screenshot…]` placeholder, 12 px pink offset shadow. Stacks on mobile.
-- [ ] Four-card grid: Eucal, Vladan Vaněk, UpVideo (initial in medium halftone with its shape) and the dashed Systerna “In progress” card. Mobile: horizontal rows with a 104 px thumbnail.
-- [ ] Card links per the section 0 decision; Systerna is never a link.
-- [ ] Cards are a list (`ul`/`li`) with `h3` titles.
+- [x] Ink section, yellow H2 with pink offset shadow, intro on the right (stacked on mobile).
+- [x] Kultomat feature card: 560 px yellow art panel with the huge “K” and pink copy, text side with label, summary and the `[Screenshot…]` placeholder, 12 px pink offset shadow. Stacks on mobile.
+- [x] Four-card grid: Eucal, Vladan Vaněk, UpVideo (initial in medium halftone with its shape) and the dashed Systerna “In progress” card. Mobile: horizontal rows with a 104 px thumbnail.
+- [x] Card links per the section 0 decision; Systerna is never a link.
+- [x] Cards are a list (`ul`/`li`) with `h3` titles.
 
 ### A5. Tests
 
-- [ ] Playwright: both pages have the six section anchors in order, one `h1`, and `h2` headings in the right order.
-- [ ] Playwright: header links (desktop and mobile menu) move to the right section and the next Tab focuses an element inside it.
-- [ ] Existing checks still pass on the new content: axe at 1280 and 320 px, no horizontal scroll at 320 × 640, no off-origin requests, no storage, no CSP violations.
+- [x] Playwright: both pages have one `h1`, `h2` and the five `h3` headings in the right order (`tests/e2e/landing.spec.ts`).
+- [x] Playwright: header links (desktop and mobile menu) and the hero button move to `#work` and focus it (sections are `tabindex="-1"` focus targets).
+- [x] Existing checks still pass on the new content: axe at 1280 and 320 px, no horizontal scroll at 320 × 640, no off-origin requests, no storage, no CSP violations.
 
 ## PR B: Approach and Experience
 
