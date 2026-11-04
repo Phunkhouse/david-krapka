@@ -91,6 +91,64 @@ export const en = {
         textShort: "Being built now. Case study when it's ready.",
       },
     },
+    approach: {
+      title: 'How I think & build',
+      intro:
+        'The same three turns of the drum on every project, big or small. Good products start with good questions.',
+      introShort:
+        'The same three turns of the drum on every project. Good products start with good questions.',
+      listLabel: 'Three steps',
+      // Titles stay in English in Czech: they match the hero claim.
+      steps: [
+        {
+          counter: '1/3',
+          title: 'Think',
+          text: "Understand the problem, ask the questions and choose priorities. Who is this for, and what happens if we don't build it?",
+          textShort:
+            'Understand the problem, ask the questions and choose priorities.',
+        },
+        {
+          counter: '2/3',
+          title: 'Make',
+          text: 'Turn the intention into a working product: UX, implementation, collaboration and running it in production.',
+          textShort: 'Turn the intention into a working product and run it.',
+        },
+        {
+          counter: '3/3',
+          title: 'Rethink',
+          text: 'Validate, learn and change direction. Feedback, iteration, and the things I chose not to build.',
+          textShort: 'Validate, learn and change direction when it helps.',
+        },
+      ],
+      ai: {
+        tag: 'AI + me',
+        text: 'I use AI tools in my work, openly. Each case study says what I specified, designed and decided, what AI helped with, and how I reviewed and tested the result.',
+        textShort:
+          'I use AI tools openly. Each case study says what I decided, what AI helped with, and how I reviewed and tested the result.',
+      },
+    },
+    experience: {
+      eyebrow: 'Experience · What each one taught me',
+      title: 'Big team. Small team.',
+      lessonLabel: 'What it taught me',
+      // Square brackets: the milestone 6 build check fails while these remain.
+      cv: '[Download CV] →',
+      emplifi: {
+        name: 'Emplifi',
+        dates: '[20XX – 20XX]',
+        meta: '[Role] · employed',
+        lesson: '[How to ship inside a big product without breaking it.]',
+        detail: '[Responsibilities and one concrete decision, to confirm.]',
+      },
+      freelance: {
+        name: 'Freelance',
+        dates: '[20XX – now]',
+        meta: 'Independent · for clients',
+        lesson: 'Owning the whole thing, from the first question to launch.',
+        detail: 'Eucal, Vladan Vaněk, UpVideo.',
+        link: 'See the projects ↑',
+      },
+    },
   },
   privacy: {
     title: 'Privacy notice',

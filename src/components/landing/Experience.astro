@@ -1,0 +1,256 @@
+---
+import SectionHeading from '../SectionHeading.astro'
+import { t, type Locale } from '../../i18n'
+import { pathFor } from '../../i18n/routes'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { experience } = t(locale).home
+const { emplifi, freelance } = experience
+const home = pathFor(locale, 'home')
+---
+
+<!--
+  E3 "Big team. Small team." The CV line stays plain text until the CV exists
+  (milestone 6). Placeholders in square brackets are listed in the PR.
+-->
+<section
+  id="experience"
+  class="experience paper-yellow rollers"
+  tabindex="-1"
+  aria-labelledby="experience-title"
+>
+  <div class="inner">
+    <SectionHeading id="experience-title" eyebrow={experience.eyebrow}>
+      {experience.title}
+    </SectionHeading>
+
+    <div class="cards">
+      <article class="card card--paper">
+        <div class="head">
+          <h3>{emplifi.name}</h3>
+          <p class="dates label">{emplifi.dates}</p>
+        </div>
+        <p class="meta">{emplifi.meta}</p>
+        <p class="label lesson-label">{experience.lessonLabel}</p>
+        <p class="lesson">{emplifi.lesson}</p>
+        <p class="detail">{emplifi.detail}</p>
+        <p class="cv cv--card">{experience.cv}</p>
+      </article>
+
+      <div class="plus" aria-hidden="true">
+        <span class="halftone">+</span>
+      </div>
+
+      <article class="card card--ink">
+        <div class="head">
+          <h3>{freelance.name}</h3>
+          <p class="dates label">{freelance.dates}</p>
+        </div>
+        <p class="meta">{freelance.meta}</p>
+        <p class="label lesson-label">{experience.lessonLabel}</p>
+        <p class="lesson">{freelance.lesson}</p>
+        <p class="detail">
+          {freelance.detail} <a href={`${home}#work`}>{freelance.link}</a>
+        </p>
+      </article>
+    </div>
+
+    <p class="cv cv--after">{experience.cv}</p>
+  </div>
+</section>
+
+<style>
+  .experience {
+    /* Rollers: 14 px on mobile, fluid 22 to 36 px from 720 px. */
+    --roller-width: 14px;
+
+    border-block: var(--border);
+  }
+
+  .experience:focus {
+    outline: none;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: var(--pad-section) var(--gap-m);
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px 20px;
+    border: var(--border);
+    box-shadow: 7px 6px 0 var(--ink);
+  }
+
+  .card--paper {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .card--ink {
+    --focus-color: var(--yellow);
+
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 7px 6px 0 var(--pink);
+  }
+
+  .card--ink h3 {
+    color: var(--yellow);
+  }
+
+  /* On mobile the heading row dissolves so the dates can sit below the role. */
+  .head {
+    display: contents;
+  }
+
+  .card h3 {
+    order: 0;
+    font-size: var(--text-experience);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .meta {
+    order: 1;
+    font-weight: 700;
+  }
+
+  .dates {
+    order: 2;
+    margin-top: -6px;
+  }
+
+  .lesson-label {
+    order: 3;
+    margin-top: 6px;
+  }
+
+  .lesson {
+    order: 4;
+    font-family: var(--family-display);
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  .detail {
+    order: 5;
+    line-height: 1.55;
+  }
+
+  .detail a {
+    color: var(--yellow);
+    font-weight: 700;
+  }
+
+  .cv {
+    font-weight: 700;
+  }
+
+  .cv--card {
+    display: none;
+  }
+
+  /* Halftone plus between the cards. */
+  .plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+  }
+
+  .plus span {
+    font-family: var(--family-display);
+    font-weight: 900;
+    font-size: 84px;
+    line-height: 1;
+    --dot: 2px;
+    --grid: 7px;
+  }
+
+  @media (min-width: 720px) {
+    .experience {
+      --roller-width: var(--roller);
+    }
+
+    .inner {
+      gap: var(--gap-xl);
+      padding-inline: var(--gap-xl);
+    }
+
+    .card {
+      padding: 36px;
+      box-shadow: 10px 9px 0 var(--ink);
+    }
+
+    .card--ink {
+      box-shadow: 10px 9px 0 var(--pink);
+    }
+
+    .lesson {
+      font-size: 30px;
+    }
+
+    .plus {
+      height: 100px;
+    }
+
+    .plus span {
+      font-size: 120px;
+      --dot: 3.4px;
+      --grid: 11px;
+    }
+  }
+
+  /* Side by side: two cards joined by the plus, CV line inside the first. */
+  @media (min-width: 1100px) {
+    .inner {
+      padding-inline: 80px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr);
+    }
+
+    .head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--gap-s);
+    }
+
+    .dates {
+      margin-top: 0;
+    }
+
+    .cv--card {
+      display: block;
+      order: 6;
+      margin-top: auto;
+    }
+
+    .cv--after {
+      display: none;
+    }
+  }
+</style>
