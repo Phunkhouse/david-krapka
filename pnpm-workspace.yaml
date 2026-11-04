@@ -1,0 +1,5 @@
+# pnpm 12 fails installs in CI when a dependency's build script is neither
+# allowed nor denied. Both scripts fetch or verify platform binaries.
+allowBuilds:
+  esbuild: true # bundler used by Astro (Vite) and Wrangler
+  workerd: true # Cloudflare runtime used by `wrangler dev`
