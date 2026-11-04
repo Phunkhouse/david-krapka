@@ -1,0 +1,32 @@
+{
+  "name": "david-krapka",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build"
+  },
+  "dependencies": {
+    "next": "16.4.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.4",
+    "prettier": "3.9.10",
+    "typescript": "^5"
+  },
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": ">=26"
+  }
+}

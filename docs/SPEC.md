@@ -2,7 +2,7 @@
 
 The current description of the portfolio site at **david-krapka.eu**. This file is the single source of truth for scope, requirements and technical approach. Background and reasoning from the brainstorming are in the [product and design brief](portfolio-brief.md); project facts are tracked in [content and case studies](content-and-case-studies.md); the approved design is in [docs/design/](design/README.md); delivery stages are in [milestones](MILESTONES.md).
 
-Status: planning, 4 November 2026. No code exists yet. Statements marked **proposal** need confirmation; everything else is confirmed by the user or by the approved mockups.
+Status: planning, 4 November 2026. A placeholder Next.js site exists (milestone 1). Statements marked **proposal** need confirmation; everything else is confirmed by the user or by the approved mockups.
 
 ## Purpose and users
 
@@ -109,7 +109,7 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 | Domain and DNS | `david-krapka.eu`, DNS at Websupport. Apex and `www` still point to Vercel from a previous project that has since been deleted, so the domain is free to attach to the new Vercel project. Mail (MX) is at Active24 and must not be changed. | Confirmed |
 | Repository | `git@github.com:Phunkhouse/david-krapka.git`, public, default branch `main` | Confirmed |
 
-### Commands (to be created in milestone 1)
+### Commands
 
 `pnpm dev`, `pnpm build`, `pnpm format`, `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test:e2e`, and `pnpm verify` running format check, lint, typecheck and build in sequence. `AGENTS.md` will list only commands that exist.
 
