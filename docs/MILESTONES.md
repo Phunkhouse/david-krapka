@@ -2,7 +2,7 @@
 
 Delivery plan for david-krapka.eu, aligned with [the specification](SPEC.md) and [the approved design](design/README.md). Milestones are delivered in order. A milestone may span several PRs; PRs go **one at a time** (the next PR starts only after the current one is merged or closed).
 
-Status as of 4 November 2026: milestones 0 and 1 done, the rest planned.
+Status as of 4 November 2026: milestones 0 and 1 done, milestone 2 planned in detail ([checklist](milestone-2-checklist.md)), the rest planned.
 
 ## How every milestone is delivered
 
@@ -61,7 +61,7 @@ Status as of 4 November 2026: milestones 0 and 1 done, the rest planned.
 
 ## Milestone 2: Design system and site shell
 
-**Status:** planned
+**Status:** planned; working plan and PR split in the [milestone 2 checklist](milestone-2-checklist.md)
 
 **Goal:** The shared look and structure every page uses, in both languages.
 
@@ -71,10 +71,11 @@ Status as of 4 November 2026: milestones 0 and 1 done, the rest planned.
 - Self-hosted fonts through the Astro Fonts API with Latin Extended.
 - Print utilities: halftone text (three densities), misregistered copy, yellow paper, pink dot screen, rollers, offset shadows, highlight.
 - Components: header with wordmark and navigation, mobile menu, language switcher, footer (with a privacy-notice link and a reserved, initially empty slot for business identification), buttons, section heading, focus styles, pause-motion toggle (static for now).
-- Privacy notice routes (`/privacy/`, `/cs/soukromi/`) with a placeholder page, so the footer link exists ([LEG-003](SPEC.md#legal-requirements)).
+- Privacy notice routes (`/privacy/`, `/cs/privacy/`) with a placeholder page, so the footer link exists ([LEG-003](SPEC.md#legal-requirements)).
 - Ship the `OFL.txt` of Rubik, Sora and Space Mono with the site, or verify that the served font files keep copyright and licence metadata ([LEG-008](SPEC.md#legal-requirements)).
 - Routing for `/` (English) and `/cs/` (Czech) with the correct `lang`, typed dictionaries, Astro i18n routing (`prefixDefaultLocale: false`), `site` `https://david-krapka.eu`, `hreflang` alternates, bilingual 404.
 - Playwright installed with a first smoke test, plus the adapted `budget-e2e.yml` (required result `playwright`) added to the ruleset.
+- Baseline Content-Security-Policy in `public/_headers` (deferred from milestone 1); final review in milestone 6.
 
 **Acceptance checks:**
 
@@ -86,8 +87,9 @@ Status as of 4 November 2026: milestones 0 and 1 done, the rest planned.
 - [ ] Keyboard alone reaches every link and the menu, with a visible focus ring on paper and on ink; verify manually and with an axe check in Playwright.
 - [ ] No horizontal scroll at 320 px; verify in Playwright at 320 × 640.
 - [ ] Draft PR defers both `check` and `playwright`; ready PR runs both; verify in the Actions tab.
+- [ ] David signs off on the design system and the shell on the preview URL.
 
-**Dependencies and risks:** Mobile menu, language switcher and pause toggle need a design on the canvas first (small additions).
+**Dependencies and risks:** Mobile menu, language switcher and pause toggle use a first proposal (canvas page “Site shell”, [Shell components](design/shell-components.md)); expect to iterate.
 
 ## Milestone 3: Landing page (static)
 

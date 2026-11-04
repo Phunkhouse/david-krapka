@@ -1,6 +1,6 @@
 # Mockup sources
 
-Copies of the approved landing-page artboards from the [Personal Portfolio mockups](https://claude.ai/artifact/4ZHRJaJupE3YgvXMZrBdk5) canvas, taken on 4 November 2026 (canvas version `1793790030-28cb`). They are reference material for exact CSS values and keyframes, not code to ship.
+Copies of artboards from the [Personal Portfolio mockups](https://claude.ai/artifact/4ZHRJaJupE3YgvXMZrBdk5) canvas, taken on 4 November 2026: the approved landing pages (canvas version `1793790030-28cb`, unchanged since) and the site shell proposal (canvas version `1793818431-5e1b`). They are reference material for exact CSS values and keyframes, not code to ship.
 
 | File | Board | Size |
 | --- | --- | --- |
@@ -8,6 +8,10 @@ Copies of the approved landing-page artboards from the [Personal Portfolio mocku
 | [M-Home.dc.html](M-Home.dc.html) | Landing page · mobile · English | 390 × 6047 |
 | [D-Home-CS.dc.html](D-Home-CS.dc.html) | Úvodní stránka · desktop · Czech | 1440 × 5301 |
 | [M-Home-CS.dc.html](M-Home-CS.dc.html) | Úvodní stránka · mobil · Czech | 390 × 6050 |
+| [M-Menu-Closed.dc.html](M-Menu-Closed.dc.html) | Site shell · mobile · menu closed, pause control on the drum band (proposal) | 390 × 844 |
+| [M-Menu-Open.dc.html](M-Menu-Open.dc.html) | Site shell · mobile · menu open · English (proposal) | 390 × 844 |
+| [M-Menu-Open-CS.dc.html](M-Menu-Open-CS.dc.html) | Site shell · mobile · menu open · Czech (proposal) | 390 × 844 |
+| [D-Shell.dc.html](D-Shell.dc.html) | Site shell · desktop · header with switcher, pause control, footer, component states (proposal) | 1440 × 1040 |
 | [canvas.json](canvas.json) | Canvas index: all boards, pages and titles, including the explorations | — |
 
 The landing boards already contain the chosen section variants (E3 experience, A5 approach motion, G4 portrait glitch). The explored alternatives stay on the canvas only; they are listed in the [design README](../README.md#explored-and-not-chosen).

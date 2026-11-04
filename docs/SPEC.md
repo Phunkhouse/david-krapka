@@ -37,7 +37,7 @@ Blog, Playground, services catalogue, prices, rates, terms or availability claim
 
 ### Navigation and structure
 
-- One landing page with anchor navigation: Work · Approach · About · Contact (desktop) and a menu button (mobile). The mobile menu panel still needs design.
+- One landing page with anchor navigation: Work · Approach · About · Contact (desktop) and a menu button (mobile). The mobile menu panel has a first proposal in [Shell components](design/shell-components.md).
 - Every project card is a real link (except Systerna). Every section offers a path to work, CV or contact.
 - A language switcher on every page links to the same page in the other language. Its position still needs design.
 
@@ -99,7 +99,7 @@ From the [legal planning audit of 4 November 2026](audits/2026-11-04/legal-plann
 | --- | --- | --- |
 | LEG-001 | **Decided (accepted risk, [0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)):** the “Have a project?” card and “Start a project →” link stay as an invitation to talk, as in the mockups. While the trade licence is suspended, David accepts no paid work, and the site gives no prices, rates, terms or availability claims. Revisit when the IČO is reactivated or before the first paid job. | Copy in milestone 3; revisit on IČO reactivation |
 | LEG-002 | When David accepts paid work or the site offers services as an entrepreneur: name, place of business (*sídlo*), IČO and registration note in the footer of every page (Civil Code § 435). Decide early whether the place of business is a home or a separate business address. Reserve a footer slot in the shell. | Slot in milestone 2; content on IČO reactivation |
-| LEG-003 | Bilingual privacy notice (for example `/privacy/` and `/cs/soukromi/`), linked from every footer: controller and contact, purposes and lawful basis, Cloudflare as processor, transfers outside the EEA, retention, rights, right to complain to ÚOOU. Needs the public email address. | Page route and footer link in milestone 2; text in milestone 6 |
+| LEG-003 | Bilingual privacy notice (`/privacy/` and `/cs/privacy/`), linked from every footer: controller and contact, purposes and lawful basis, Cloudflare as processor, transfers outside the EEA, retention, rights, right to complain to ÚOOU. Needs the public email address. | Page route and footer link in milestone 2; text in milestone 6 |
 | LEG-004 | Private dated record of the accepted Cloudflare Self-Serve agreement and Data Processing Addendum versions. Keep Workers logs and observability off unless the privacy notice covers them. | Before launch |
 | LEG-005 | The site stores nothing on visitors' devices: no cookies, `localStorage`, `sessionStorage` or IndexedDB, including for the pause control. This is why no cookie banner is planned. Cloudflare features that set cookies stay off. | Milestones 2 and 4 acceptance checks |
 | LEG-006 | Written permission per project for names, logos, screenshots and quotes; permission from any identifiable person shown (Civil Code § 84–85) or blur or crop them; ask named collaborators first. Record the date and form of each permission in the project card. | Before each case study is published (milestone 5) |
@@ -155,7 +155,7 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 | Blocks | Question |
 | --- | --- |
 | Milestone 2 | Business identification in the footer ([LEG-002](#legal-requirements)): which place of business will be published when the IČO is active? Needed to size the footer slot. |
-| Milestone 2 | Design the mobile menu panel, language switcher and pause control. |
+| Milestone 2 | Mobile menu, language switcher and pause control: first proposal on the canvas and in [Shell components](design/shell-components.md); David to iterate. |
 | Milestone 3 | Should the mobile hero show the intro sentence? What does the reduced-motion hero show? Should Experience be in the navigation? |
 | Milestone 3 | Tablet layout (720–1100 px): accept the proposal in [Visual system](design/visual-system.md#breakpoints-proposal) or design it. |
 | Milestone 5 | Case study page design; whether short client projects get their own pages; Czech translations of case studies at launch or later. |

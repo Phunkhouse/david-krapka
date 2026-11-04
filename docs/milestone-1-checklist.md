@@ -9,7 +9,7 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 - [x] Milestone 0 PR merged, so `main` holds SPEC, MILESTONES and decision records ([PR #2](https://github.com/Phunkhouse/david-krapka/pull/2)).
 - [x] Framework decided: Astro ([0006](decisions/0006-astro-static-site.md), supersedes the Next.js choice in [0001](decisions/0001-starter-pack-and-nextjs.md)).
 - [x] Hosting decided: Cloudflare Workers static assets ([0007](decisions/0007-cloudflare-workers-hosting.md), supersedes Vercel in [0003](decisions/0003-vercel-static-hosting.md)).
-- [ ] Decide on legal planning with `audit-legal-readiness` (recommended) and the optional Claude PR review workflow. Still open; not required to close milestone 1.
+- [x] Decide on legal planning with `audit-legal-readiness`: done ([report](audits/2026-11-04/legal-planning.md), merged in [PR #5](https://github.com/Phunkhouse/david-krapka/pull/5)). The optional Claude PR review workflow is still undecided and moves to the [milestone 2 checklist](milestone-2-checklist.md).
 - [x] Confirm access: Cloudflare account, GitHub repository settings (admin). Websupport access is needed only at launch.
 - [x] Starter pack available (cloned to a scratch directory for copying).
 
@@ -66,8 +66,8 @@ Ruleset `protect-main` (active, default branch, no bypass actors):
 
 ## 8. Optional
 
-- [ ] Legal planning with `audit-legal-readiness` (Planning mode, top-tier model, high effort) against SPEC; report to `docs/audits/`.
-- [ ] Claude PR review workflow from the starter pack.
+- [x] Legal planning with `audit-legal-readiness` (Planning mode, top-tier model, high effort) against SPEC; report in [docs/audits/2026-11-04/](audits/2026-11-04/legal-planning.md).
+- [ ] Claude PR review workflow from the starter pack. Moved to the [milestone 2 checklist](milestone-2-checklist.md) (decided yes).
 
 ## 9. Acceptance checks (from MILESTONES.md)
 

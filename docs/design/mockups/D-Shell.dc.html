@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Desktop site shell</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@900&amp;family=Sora:wght@400;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0;background:#FAFAF7}
+a{color:#1B2F7A}
+.d-paper{background-color:#FFE800;background-image:radial-gradient(rgba(27,47,122,.10) 2px,transparent 2.4px);background-size:12px 12px}
+.d-ht{color:transparent;-webkit-background-clip:text;background-clip:text;background-image:radial-gradient(#1B2F7A 6px,transparent 6.6px);background-size:18px 18px}
+.nv a:hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-color:#FF48B0}
+.pz:focus-visible,.lg a:focus-visible{outline:3px solid #1B2F7A;outline-offset:3px}
+.ft a:focus-visible{outline:3px solid #FFE800;outline-offset:3px}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1040px; background: #FAFAF7; color: #1B2F7A; font-family: 'Sora', system-ui, sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 24px 56px">
+    <a href="#top" style="text-decoration: none; display: flex; flex-direction: column; line-height: 1.15"><span style="font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 24px; text-transform: uppercase">David Křapka</span><span style="font-size: 13px; font-weight: 600">Product-minded engineer</span></a>
+    <nav class="nv" aria-label="Main" style="display: flex; align-items: center; gap: 32px; font-weight: 600; font-size: 16px">
+      <a href="#work" style="text-decoration: none">Work</a>
+      <a href="#approach" style="text-decoration: none">Approach</a>
+      <a href="#about" style="text-decoration: none">About</a>
+      <a href="#contact" style="text-decoration: none">Contact</a>
+      <div class="lg" style="display: inline-flex; border: 3px solid #1B2F7A; border-radius: 999px; overflow: hidden; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em">
+        <a href="#" lang="en" hreflang="en" aria-current="page" style="display: flex; align-items: center; justify-content: center; min-width: 44px; height: 34px; padding: 0 10px; background: #1B2F7A; color: #FFE800; text-decoration: none">EN</a>
+        <a href="#" lang="cs" hreflang="cs" aria-label="Česky" style="display: flex; align-items: center; justify-content: center; min-width: 44px; height: 34px; padding: 0 10px; background: #FAFAF7; color: #1B2F7A; text-decoration: none">CS</a>
+      </div>
+    </nav>
+  </header>
+  <div style="padding: 8px 56px 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; align-items: center">
+    <div style="display: flex; flex-direction: column; gap: 16px">
+      <h1 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 104px; line-height: 116px; text-transform: uppercase; letter-spacing: -0.035em">Think.</h1>
+      <p style="margin: 0; font-size: 24px; font-weight: 600; line-height: 1.35">Understand the problem and ask the questions.</p>
+    </div>
+    <div class="d-paper" style="position: relative; height: 340px; border: 3px solid #1B2F7A; overflow: hidden; display: flex; align-items: center; justify-content: center">
+      <span aria-hidden="true" style="position: relative; display: block; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 300px; line-height: 1">
+        <span style="position: absolute; left: 14px; top: 12px; color: #FF48B0; mix-blend-mode: multiply; opacity: 0.5">T</span><span class="d-ht" style="position: relative">T</span>
+      </span>
+      <button type="button" class="pz" style="position: absolute; left: 20px; bottom: 18px; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 16px 0 10px; border: 3px solid #1B2F7A; border-radius: 999px; background: #FFE800; color: #1B2F7A; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 4px 4px 0 rgba(255,72,176,.6); cursor: pointer">
+        <span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; background: #1B2F7A; display: flex; align-items: center; justify-content: center; gap: 3px"><span style="width: 3px; height: 9px; background: #FFE800"></span><span style="width: 3px; height: 9px; background: #FFE800"></span></span>
+        Stop the press
+      </button>
+    </div>
+  </div>
+  <div style="flex: 1 1 auto; background: #E9ECF7; border-top: 3px solid #1B2F7A; padding: 40px 56px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px">
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <span style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Pause control · Ovládání pohybu</span>
+      <div style="display: flex; flex-wrap: wrap; gap: 18px">
+        <button type="button" class="pz" style="display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 16px 0 10px; border: 3px solid #1B2F7A; border-radius: 999px; background: #FFE800; color: #1B2F7A; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 4px 4px 0 rgba(255,72,176,.6)"><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; background: #1B2F7A; display: flex; align-items: center; justify-content: center; gap: 3px"><span style="width: 3px; height: 9px; background: #FFE800"></span><span style="width: 3px; height: 9px; background: #FFE800"></span></span>Stop the press</button>
+        <button type="button" class="pz" style="display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 16px 0 10px; border: 3px solid #1B2F7A; border-radius: 999px; background: #FAFAF7; color: #1B2F7A; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 4px 4px 0 rgba(255,72,176,.6)"><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; background: #1B2F7A; display: flex; align-items: center; justify-content: center"><span style="width: 0; height: 0; margin-left: 2px; border-left: 7px solid #FFE800; border-top: 5px solid transparent; border-bottom: 5px solid transparent"></span></span>Start the press</button>
+        <button type="button" class="pz" style="display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 16px 0 10px; border: 3px solid #1B2F7A; border-radius: 999px; background: #FFE800; color: #1B2F7A; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 4px 4px 0 rgba(255,72,176,.6)" lang="cs"><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; background: #1B2F7A; display: flex; align-items: center; justify-content: center; gap: 3px"><span style="width: 3px; height: 9px; background: #FFE800"></span><span style="width: 3px; height: 9px; background: #FFE800"></span></span>Zastavit tisk</button>
+        <button type="button" class="pz" style="display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 16px 0 10px; border: 3px solid #1B2F7A; border-radius: 999px; background: #FAFAF7; color: #1B2F7A; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 4px 4px 0 rgba(255,72,176,.6)" lang="cs"><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; background: #1B2F7A; display: flex; align-items: center; justify-content: center"><span style="width: 0; height: 0; margin-left: 2px; border-left: 7px solid #FFE800; border-top: 5px solid transparent; border-bottom: 5px solid transparent"></span></span>Spustit tisk</button>
+        <button type="button" class="pz" style="display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 16px 0 10px; border: 3px solid #1B2F7A; border-radius: 999px; background: #FFE800; color: #1B2F7A; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 4px 4px 0 rgba(255,72,176,.6); outline: 3px solid #1B2F7A; outline-offset: 3px"><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; background: #1B2F7A; display: flex; align-items: center; justify-content: center; gap: 3px"><span style="width: 3px; height: 9px; background: #FFE800"></span><span style="width: 3px; height: 9px; background: #FFE800"></span></span>Stop the press</button>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <span style="font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Language switcher · Přepínač jazyka</span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 18px">
+        <div style="display: inline-flex; border: 3px solid #1B2F7A; border-radius: 999px; overflow: hidden; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em"><a href="#" aria-current="page" style="display: flex; align-items: center; justify-content: center; min-width: 44px; height: 34px; padding: 0 10px; background: #1B2F7A; color: #FFE800; text-decoration: none">EN</a><a href="#" style="display: flex; align-items: center; justify-content: center; min-width: 44px; height: 34px; padding: 0 10px; background: #FAFAF7; color: #1B2F7A; text-decoration: none">CS</a></div>
+        <div style="display: inline-flex; border: 3px solid #1B2F7A; border-radius: 999px; overflow: hidden; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em"><a href="#" style="display: flex; align-items: center; justify-content: center; min-width: 44px; height: 34px; padding: 0 10px; background: #FAFAF7; color: #1B2F7A; text-decoration: none">EN</a><a href="#" aria-current="page" style="display: flex; align-items: center; justify-content: center; min-width: 44px; height: 34px; padding: 0 10px; background: #1B2F7A; color: #FFE800; text-decoration: none">CS</a></div>
+        <div style="display: inline-flex; padding: 12px; background: #1B2F7A"><div style="display: inline-flex; border: 3px solid #FFE800; border-radius: 999px; overflow: hidden; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em"><a href="#" aria-current="page" style="display: flex; align-items: center; justify-content: center; min-width: 44px; height: 34px; padding: 0 10px; background: #FFE800; color: #1B2F7A; text-decoration: none">EN</a><a href="#" style="display: flex; align-items: center; justify-content: center; min-width: 44px; height: 34px; padding: 0 10px; color: #FFE800; text-decoration: none">CS</a></div></div>
+      </div>
+    </div>
+  </div>
+  <footer class="ft" style="background: #1B2F7A; color: #FAFAF7; padding: 28px 56px; display: flex; flex-direction: column; gap: 14px">
+    <div style="padding-bottom: 12px; border-bottom: 1px dashed #8C9BD6; display: flex; gap: 24px; font-size: 14px; line-height: 1.5; color: #D6DCF2">
+      <span>[Name]</span><span>[Place of business]</span><span>IČO [00000000]</span><span>[Registration note]</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px">
+      <span style="font-size: 13px">© 2026 David Křapka · Printed in three inks: blue, yellow and a little pink.</span>
+      <div style="display: flex; align-items: center; gap: 22px; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase">
+        <a href="#work" style="color: #FFE800; text-decoration: none">Work</a>
+        <a href="#approach" style="color: #FFE800; text-decoration: none">Approach</a>
+        <a href="#about" style="color: #FFE800; text-decoration: none">About</a>
+        <a href="#contact" style="color: #FFE800; text-decoration: none">Contact</a>
+        <a href="#" style="color: #FFE800; text-decoration: none">Privacy</a>
+        <div style="display: inline-flex; border: 3px solid #FFE800; border-radius: 999px; overflow: hidden"><a href="#" lang="en" hreflang="en" aria-current="page" style="display: flex; align-items: center; justify-content: center; min-width: 44px; height: 34px; padding: 0 10px; background: #FFE800; color: #1B2F7A; text-decoration: none">EN</a><a href="#" lang="cs" hreflang="cs" aria-label="Česky" style="display: flex; align-items: center; justify-content: center; min-width: 44px; height: 34px; padding: 0 10px; color: #FFE800; text-decoration: none">CS</a></div>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1040}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

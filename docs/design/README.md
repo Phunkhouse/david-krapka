@@ -2,7 +2,7 @@
 
 The approved design lives in the **[Personal Portfolio mockups](https://claude.ai/artifact/4ZHRJaJupE3YgvXMZrBdk5)** canvas. This directory records what that canvas decides, so implementation does not depend on reading the canvas. If this directory and the canvas disagree, the canvas wins; update these documents in the same PR that implements the change.
 
-Snapshot taken on 4 November 2026 from canvas version `1793790030-28cb`. Source copies of the four landing-page artboards are in [mockups/](mockups/README.md).
+Snapshot taken on 4 November 2026 from canvas version `1793818431-5e1b` (landing boards unchanged since `1793790030-28cb`; site shell boards added). Source copies are in [mockups/](mockups/README.md).
 
 ## Documents
 
@@ -11,6 +11,7 @@ Snapshot taken on 4 November 2026 from canvas version `1793790030-28cb`. Source 
 | [Visual system](visual-system.md) | Colours, typefaces, type scale, print motifs (halftone, misregistration, rollers), borders, shadows, spacing and breakpoints. |
 | [Landing page](landing-page.md) | Section-by-section layout for desktop and mobile, with English and Czech copy and every placeholder that still needs content. |
 | [Motion](motion.md) | Hero print drum, approach section, portrait glitch and hover behaviour, with timings, reduced-motion rules and the pause requirement. |
+| [Shell components](shell-components.md) | First proposal for the mobile menu, language switcher and pause control (canvas page “Site shell”), to iterate. |
 | [Mockup sources](mockups/README.md) | Snapshot of the canvas index and the four landing-page artboards. |
 
 ## Product and interaction principles
@@ -50,9 +51,7 @@ Kept on the canvas for reference; do not implement.
 These are needed before the related milestone can finish (see [milestones](../MILESTONES.md)):
 
 1. **Case study page** template (desktop and mobile), including the Kultomat long form and the shorter client format.
-2. **Mobile menu** panel opened by the round button.
-3. **Language switcher** position and style (the mockups have no switcher).
-4. **Motion pause control** (see [Motion](motion.md#pause-requirement)).
+2. **Mobile menu**, **language switcher** and **motion pause control**: first proposal in [Shell components](shell-components.md) and on the canvas; to iterate.
 5. **Tablet range** (roughly 720–1100 px). The mockups cover 390 px and 1440 px only.
 6. **404 page**, CV download treatment, and any legal or privacy page the legal planning requires.
 7. **Social preview image** (Open Graph) and favicon / monogram.
@@ -65,5 +64,4 @@ These are needed before the related milestone can finish (see [milestones](../MI
 | What should the reduced-motion hero show? Today only “Think.” and its subline remain visible, because the other two words are hidden. | The static version should still say all three words. Proposal: show “Think. Make. Rethink.” on three lines, or one line at a smaller size, and freeze the drum on T. |
 | Should the mobile hero include the intro sentence (“I'm David Křapka, a product-minded engineer…”)? Desktop has it; mobile drops it. | Without it, mobile visitors and search engines see no plain description of the role above the fold. |
 | Should Experience get a nav item? | The section exists but is reachable only by scrolling. |
-| What does the yellow focus outline look like on paper backgrounds? | Yellow on `#FAFAF7` is nearly invisible. A two-tone focus ring (blue outline with a yellow offset) is proposed in [Visual system](visual-system.md#focus). |
 | How are project thumbnails replaced by real screenshots? | Cards currently show halftone letters with a “[Screenshot … goes here]” label. Decide whether screenshots replace the letter art or sit inside it. |
