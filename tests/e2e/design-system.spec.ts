@@ -2,31 +2,7 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
 // The specimen page is temporary (removed before launch, milestone 6).
-// Move these checks to the real shell components when they exist.
-
-const ink = 'rgb(27, 47, 122)'
-const yellow = 'rgb(255, 232, 0)'
-
-test('focus ring is ink on light backgrounds and yellow on ink', async ({
-  page,
-}) => {
-  await page.goto('/specimen/')
-  const cases = [
-    { selector: '.surface:not(.paper-yellow):not(.surface-ink) a', color: ink },
-    { selector: '.surface.paper-yellow a', color: ink },
-    { selector: '.surface.surface-ink a', color: yellow },
-  ]
-  for (const { selector, color } of cases) {
-    const link = page.locator(selector).first()
-    await link.focus()
-    await page.keyboard.press('Shift+Tab')
-    await page.keyboard.press('Tab')
-    await expect(link).toBeFocused()
-    await expect(link).toHaveCSS('outline-color', color)
-    await expect(link).toHaveCSS('outline-style', 'solid')
-    await expect(link).toHaveCSS('outline-width', '3px')
-  }
-})
+// Focus checks now run against the real shell (shell.spec.ts).
 
 test('self-hosted fonts load from the site itself', async ({ page }) => {
   await page.goto('/specimen/', { waitUntil: 'networkidle' })

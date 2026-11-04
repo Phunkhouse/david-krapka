@@ -1,5 +1,7 @@
 ---
 import { Font } from 'astro:assets'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
 import { isLocale, t, type Locale } from '../i18n'
 import { alternatesFor, urlFor, type RouteKey } from '../i18n/routes'
 import '../styles/global.css'
@@ -18,6 +20,8 @@ const locale: Locale =
   localeProp ?? (isLocale(Astro.currentLocale) ? Astro.currentLocale : 'en')
 const copy = t(locale)
 const alternates = route ? alternatesFor(route) : []
+// Pages without a route (404, specimen) switch to the home pages.
+const shellRoute: RouteKey = route ?? 'home'
 ---
 
 <html lang={locale}>
@@ -44,8 +48,32 @@ const alternates = route ? alternatesFor(route) : []
     <a class="skip-link" href="#main">
       {copy.skipLink}
     </a>
+    <Header locale={locale} route={shellRoute} />
     <main id="main" tabindex="-1">
       <slot />
     </main>
+    <Footer locale={locale} route={shellRoute} />
   </body>
 </html>
+
+<style>
+  main {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: var(--gap-xl) var(--pad-inline) 0;
+  }
+
+  main:focus {
+    outline: none;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+    width: 100%;
+  }
+</style>

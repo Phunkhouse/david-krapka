@@ -17,7 +17,7 @@ The milestone is split so work can start before the missing canvas designs exist
 ## 0. Before starting (David)
 
 - [x] Milestone 1 merged and complete ([PR #3](https://github.com/Phunkhouse/david-krapka/pull/3), evidence in [PR #5](https://github.com/Phunkhouse/david-krapka/pull/5)).
-- [ ] Approve this plan, or name changes.
+- [x] Approve this plan, or name changes. Approved by merging [PR #6](https://github.com/Phunkhouse/david-krapka/pull/6).
 - [x] **Shell designs** (were blocking PR C): first proposal for the mobile menu, language switcher and pause toggle in [Shell components](design/shell-components.md), on the canvas page “Site shell · menu, switcher, pause”, made in the existing style (4 November 2026). David will iterate on it later, so PR C builds from this and updates the docs if the design changes. The 404 page and tablet header are still undesigned; PR C uses the proposal's rules for both.
 - [x] **Focus ring**: agreed 4 November 2026: 3 px ink outline with 3 px offset on light backgrounds, 3 px yellow outline on ink ([Visual system](design/visual-system.md#focus)).
 - [x] **Privacy notice Czech slug**: `/cs/privacy/` (decided 4 November 2026; same slug as English, recorded in [0005](decisions/0005-bilingual-routing.md)).
@@ -125,59 +125,59 @@ Each utility is a class or small component, decorative output `aria-hidden="true
 
 ### C1. Design handoff
 
-- [ ] Build from [Shell components](design/shell-components.md). If David's iteration changes the design before or during this PR, update that document (and the canvas version, once the canvas has boards for these) in the same PR.
+- [x] Build from [Shell components](design/shell-components.md). If David's iteration changes the design before or during this PR, update that document (and the canvas version, once the canvas has boards for these) in the same PR.
 
 ### C2. Header and navigation
 
-- [ ] `Header.astro`: wordmark “DAVID KŘAPKA” with “Product-minded engineer”, anchor links Work · Approach · About · Contact pointing to the landing sections (`/#work` from other pages), in a `<nav>` with an accessible name.
-- [ ] Mobile menu: round 48 px button that opens the designed panel. Without JavaScript the button is a link to the footer navigation (SPEC failure case). With JavaScript: `aria-expanded`, `aria-controls`, Escape closes and returns focus to the button, focus stays reachable in the panel. Script inline in the component, no framework.
+- [x] `Header.astro`: wordmark “DAVID KŘAPKA” with “Product-minded engineer”, anchor links Work · Approach · About · Contact pointing to the landing sections (`/#work` from other pages), in a `<nav>` with an accessible name.
+- [x] Mobile menu: round 48 px button that opens the designed panel. Without JavaScript the button is a link to the footer navigation (SPEC failure case). With JavaScript: `aria-expanded`, `aria-controls`, Escape closes and returns focus to the button, focus stays reachable in the panel. Script inline in the component, no framework.
 
 ### C3. Language switcher
 
-- [ ] Links to the same page in the other language using the route map from A2, with `hreflang` and `lang` on the link and an accessible label (“Česky” / “English”). No automatic redirect, nothing stored ([0005](decisions/0005-bilingual-routing.md), [LEG-005](SPEC.md#legal-requirements)).
+- [x] Links to the same page in the other language using the route map from A2, with `hreflang` and `lang` on the link and an accessible label (“Česky” / “English”). No automatic redirect, nothing stored ([0005](decisions/0005-bilingual-routing.md), [LEG-005](SPEC.md#legal-requirements)).
 
 ### C4. Footer
 
-- [ ] Ink background; © year from the build date; “Printed in three inks…” line in both languages.
-- [ ] Footer navigation (also the no-JavaScript target for the menu).
-- [ ] Link to the privacy notice in the current language ([LEG-003](SPEC.md#legal-requirements)).
-- [ ] Business identification slot ([LEG-002](SPEC.md#legal-requirements)): an optional dictionary or config entry that renders the block only when present. Empty now, so nothing renders.
+- [x] Ink background; © year from the build date; “Printed in three inks…” line in both languages.
+- [x] Footer navigation (also the no-JavaScript target for the menu).
+- [x] Link to the privacy notice in the current language ([LEG-003](SPEC.md#legal-requirements)).
+- [x] Business identification slot ([LEG-002](SPEC.md#legal-requirements)): `businessIdentification` in `Footer.astro`, `null` now, so nothing renders (Playwright checks). Checked by filling it temporarily: the block renders above the © line.
 
 ### C5. Pause-motion toggle (static)
 
-- [ ] Rendered as designed, keyboard reachable, with a text label in both languages. No behaviour yet (milestone 4); hide it or mark it inert so it does not mislead before motion exists. Decide which with David.
+- [x] Rendered as designed, keyboard reachable, with a text label in both languages (`PauseControl.astro`). Hidden: shown only on the specimen until milestone 4 adds motion, so no page offers a control that does nothing. Proposed in PR C for David to confirm.
 
 ### C6. Privacy notice placeholder
 
-- [ ] Routes `/privacy/` and the Czech route chosen in section 0, added to the route map, `hreflang` paired, linked from every footer.
-- [ ] Placeholder body that says the notice is being prepared. Use the `[…]` placeholder convention so the milestone 6 build check catches it.
+- [x] Routes `/privacy/` and the Czech route chosen in section 0, added to the route map, `hreflang` paired, linked from every footer.
+- [x] Placeholder body that says the notice is being prepared. Use the `[…]` placeholder convention so the milestone 6 build check catches it.
 
 ### C7. Tests
 
-- [ ] Playwright: the switcher links `/` ↔ `/cs/` and `/privacy/` ↔ its Czech page; storage stays empty after using the switcher and the menu.
-- [ ] Playwright: keyboard tabbing reaches every header, menu and footer link; the menu opens, traps nothing, and closes with Escape.
-- [ ] axe on both pages, the 404 and both privacy pages, at desktop and 320 px widths.
-- [ ] No horizontal scroll at 320 × 640 on every page.
+- [x] Playwright: the switcher links `/` ↔ `/cs/` and `/privacy/` ↔ its Czech page; storage stays empty after using the switcher and the menu.
+- [x] Playwright: keyboard tabbing reaches every header, menu and footer link; the menu opens, traps nothing, and closes with Escape.
+- [x] axe on both pages, the 404 and both privacy pages, at desktop and 320 px widths.
+- [x] No horizontal scroll at 320 × 640 on every page.
 
 ## Acceptance checks (from MILESTONES.md)
 
 Record evidence here and in the PR that completes each check.
 
-- [ ] `/` and `/cs/` render the shell with `<html lang="en">` and `<html lang="cs">`, and the switcher links between them; verify with Playwright. (PR A for `lang`, PR C for the switcher.)
+- [x] `/` and `/cs/` render the shell with `<html lang="en">` and `<html lang="cs">`, and the switcher links between them; verify with Playwright. (PR A for `lang`, PR C for the switcher.) Evidence: `smoke.spec.ts` (lang) and `shell.spec.ts` (switcher on `/`, `/cs/`, `/privacy/`, `/cs/privacy/`).
 - [x] A missing Czech key fails `pnpm typecheck`; verify by deleting one key locally. (PR A) Evidence: TS2741 on `cs.ts` with `skipLink` removed, recorded in PR A.
 - [x] No request leaves the site's own origin on page load; verify in the browser network panel and with a Playwright request listener. (PR A, re-checked after fonts in PR B) Evidence: the request-listener test passes on `/` and `/cs/` with self-hosted fonts loading; the CSP `default-src 'self'` would also block any other origin. Re-check in PR C once the shell exists.
-- [ ] The site stores nothing on the device: no cookies, `localStorage`, `sessionStorage` or IndexedDB after load and after using the language switcher; verify with Playwright and `curl -I` (no `Set-Cookie`) ([LEG-005](SPEC.md#legal-requirements)). (PR A, completed in PR C)
+- [x] The site stores nothing on the device: no cookies, `localStorage`, `sessionStorage` or IndexedDB after load and after using the language switcher; verify with Playwright and `curl -I` (no `Set-Cookie`) ([LEG-005](SPEC.md#legal-requirements)). (PR A, completed in PR C) Evidence: storage checks after load (`smoke.spec.ts`), after each switcher click and after opening the menu (`shell.spec.ts`); no `Set-Cookie` header from `wrangler dev`. Re-check `curl -I` on the preview URL.
 - [x] The three licence files, or readable font metadata, are in the build output ([LEG-008](SPEC.md#legal-requirements)); verify in `dist/`. (PR B) Evidence: `dist/fonts/licenses/{Rubik,Sora,SpaceMono}-OFL.txt`, served with status 200 (Playwright).
-- [ ] Keyboard alone reaches every link and the menu, with a visible focus ring on paper and on ink; verify manually and with an axe check in Playwright. (PR C)
-- [ ] No horizontal scroll at 320 px; verify in Playwright at 320 × 640. (PR A, re-checked in PR C)
+- [x] Keyboard alone reaches every link and the menu, with a visible focus ring on paper and on ink; verify manually and with an axe check in Playwright. (PR C) Evidence: Playwright tabbing reaches the skip link, header and footer links; the menu opens, takes focus on Tab, closes with Escape and returns focus; ring colour checked (ink in the header, yellow in the footer); axe clean on all pages at 1280 and 320 px and with the menu open. Manual check in the browser at 390 px.
+- [x] No horizontal scroll at 320 px; verify in Playwright at 320 × 640. (PR A, re-checked in PR C) Evidence: every page, including privacy and 404, in `shell.spec.ts`.
 - [x] Draft PR defers both `check` and `playwright`; ready PR runs both; verify in the Actions tab. (PR A) Evidence: PR #8 runs on `b4b8b06` and the draft push of `801d719` were skipped; marking ready ran `check` and `E2E` on `801d719`, both successful.
 - [ ] David signs off on the specimen page (PR B) and the shell on the preview URL (PR C). Specimen: approved by David on 4 November 2026 (“Looks good”), on the PR B preview URL. Shell: pending PR C.
 
 ## Wrap-up
 
 - [ ] Update MILESTONES.md: milestone 2 status `done`, completion evidence (PR links), status date, and any unplanned changes.
-- [ ] Update SPEC.md: languages row from proposal to confirmed, fonts row with the chosen provider, commands with `test:e2e`, and resolved open questions.
-- [ ] `AGENTS.md` lists every new command and the e2e job.
+- [x] Update SPEC.md: languages row from proposal to confirmed, fonts row with the chosen provider, commands with `test:e2e`, and resolved open questions.
+- [x] `AGENTS.md` lists every new command and the e2e job.
 
 ## Risks and notes
 

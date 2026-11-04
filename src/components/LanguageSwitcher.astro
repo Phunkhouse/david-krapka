@@ -1,0 +1,106 @@
+---
+import { locales, t, type Locale } from '../i18n'
+import { pathFor, type RouteKey } from '../i18n/routes'
+
+interface Props {
+  locale: Locale
+  /** The page to link to in each language. */
+  route: RouteKey
+  /** Larger touch targets, used in the mobile menu. */
+  size?: 'md' | 'lg'
+}
+
+const { locale, route, size = 'md' } = Astro.props
+const copy = t(locale)
+---
+
+<div
+  class:list={['switcher', `switcher--${size}`]}
+  role="group"
+  aria-label={copy.language.label}
+>
+  {locales.map((target) => (
+    <a
+      href={pathFor(target, route)}
+      lang={target}
+      hreflang={target}
+      aria-current={target === locale ? 'page' : undefined}
+    >
+      <span>{target.toUpperCase()}</span>
+      <span class="visually-hidden">{` ${t(target).language[target]}`}</span>
+    </a>
+  ))}
+</div>
+
+<style>
+  /* Segmented pill: shell-components.md#language-switcher */
+  .switcher {
+    --switcher-line: var(--ink);
+    --switcher-current-bg: var(--ink);
+    --switcher-current-fg: var(--yellow);
+    --switcher-fg: var(--ink);
+    --switcher-bg: var(--paper);
+
+    display: inline-flex;
+    flex-shrink: 0;
+    border: 3px solid var(--switcher-line);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    font-family: var(--family-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+  }
+
+  /* On ink (footer, mobile menu): yellow line and text */
+  :global(.surface-ink) .switcher {
+    --switcher-line: var(--yellow);
+    --switcher-current-bg: var(--yellow);
+    --switcher-current-fg: var(--ink);
+    --switcher-fg: var(--yellow);
+    --switcher-bg: transparent;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 34px;
+    padding: 0 10px;
+    background: var(--switcher-bg);
+    color: var(--switcher-fg);
+    text-decoration: none;
+  }
+
+  a[aria-current='page'] {
+    background: var(--switcher-current-bg);
+    color: var(--switcher-current-fg);
+  }
+
+  /* The ring sits inside the pill, which clips anything outside it. */
+  a:focus-visible {
+    outline-offset: -6px;
+    outline-color: var(--switcher-current-fg);
+  }
+
+  a:not([aria-current]):focus-visible {
+    outline-color: var(--switcher-fg);
+  }
+
+  /* The hidden language name ("Česky") would otherwise pull in Space Mono's
+     Latin Extended file on every page; Sora 400 is already loaded. */
+  .visually-hidden {
+    font-family: var(--family-body);
+    font-weight: 400;
+  }
+
+  .switcher--lg {
+    font-size: 14px;
+  }
+
+  .switcher--lg a {
+    min-width: 64px;
+    height: 48px;
+  }
+</style>

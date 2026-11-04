@@ -5,6 +5,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Button from '../components/Button.astro'
 import SectionHeading from '../components/SectionHeading.astro'
+import PauseControl from '../components/PauseControl.astro'
 
 const inks = [
   { name: '--ink', value: '#1B2F7A', note: 'Text, borders, rollers' },
@@ -148,6 +149,11 @@ const czech = 'Příliš žluťoučký kůň úpěl ďábelské ódy · ŘĚŮČ
           <Button href="#buttons">See selected work</Button>
           <Button>Button element</Button>
           <a href="#buttons">A text link</a>
+        </div>
+        <div class="surface paper-yellow">
+          <span class="label">Pause control (static until milestone 4)</span>
+          <PauseControl locale="en" />
+          <PauseControl locale="cs" />
         </div>
         <div class="surface surface-ink">
           <span class="label">On ink</span>

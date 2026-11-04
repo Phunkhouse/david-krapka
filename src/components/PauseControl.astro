@@ -1,0 +1,61 @@
+---
+import { t, type Locale } from '../i18n'
+
+interface Props {
+  locale: Locale
+}
+
+// Static for now (milestone 2): rendered and labelled, no behaviour, and not
+// placed on any page until the looping motion exists (milestone 4). Then it
+// toggles all decorative loops, starts paused under prefers-reduced-motion
+// and keeps its state in page memory only (LEG-005).
+const { locale } = Astro.props
+const copy = t(locale)
+---
+
+<button class="pause" type="button" aria-pressed="false">
+  <span class="icon" aria-hidden="true">
+    <span></span>
+    <span></span>
+  </span>
+  {copy.pause.stop}
+</button>
+
+<style>
+  /* shell-components.md#pause-control */
+  .pause {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 40px;
+    padding: 0 16px 0 10px;
+    border: var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--yellow);
+    box-shadow: 4px 4px 0 rgb(255 72 176 / 0.6);
+    color: var(--ink);
+    font-family: var(--family-mono);
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+
+  .icon span {
+    width: 3px;
+    height: 9px;
+    background: var(--yellow);
+  }
+</style>
