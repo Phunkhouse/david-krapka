@@ -49,11 +49,12 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 
 ## 6. GitHub ruleset on `main` (David or with David's approval)
 
-- [ ] Pull request required before merge.
-- [ ] Required status check `check`, source GitHub Actions.
-- [ ] Branch must be up to date before merging.
-- [ ] Block force pushes and deletion.
-- [ ] Note: the `check` context only becomes selectable after it has run once, so enable the ruleset after the first full run.
+Ruleset `protect-main` (active, default branch, no bypass actors):
+
+- [x] Pull request required before merge (squash merges only, 0 approvals).
+- [x] Required status check `check`, source GitHub Actions.
+- [ ] Branch must be up to date before merging: **off** (`strict_required_status_checks_policy: false`); needs turning on.
+- [x] Block force pushes and deletion.
 
 ## 7. Cloudflare
 
@@ -71,7 +72,7 @@ Working plan for [Milestone 1](MILESTONES.md#milestone-1-foundation-and-delivery
 ## 9. Acceptance checks (from MILESTONES.md)
 
 - [ ] `pnpm verify` passes locally on a fresh clone. Evidence: output pasted in the PR.
-- [ ] Draft PR skips `check` without installing dependencies. Marking it ready (after David's permission) runs the full suite and passes. Evidence: the milestone PR itself.
+- [x] Draft PR skips `check` without installing dependencies. Marking it ready runs the full suite and passes. Evidence: skipped runs on `f91b8e3` and `c7ced9e`; [run 41879722163](https://github.com/Phunkhouse/david-krapka/actions/runs/41879722163) on `74f7daa` passed install, format check, lint, typecheck and build in 28 s. The first ready runs stayed queued during a GitHub Actions partial outage on 4 Nov 2026.
 - [ ] A new commit to the ready PR triggers a new full run. Evidence: Actions tab.
 - [ ] Merging into `main` is blocked while `check` is failing or missing. Evidence: a throwaway PR that fails formatting, closed afterwards.
 - [ ] The PR's preview URL and the production `*.workers.dev` URL both serve the built page with `noindex`. Evidence: `curl -I` output.
