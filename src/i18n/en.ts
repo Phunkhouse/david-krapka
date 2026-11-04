@@ -36,6 +36,8 @@ export const en = {
       eyebrow: 'How every project goes',
       // The claim stays in English in the Czech version (design README).
       heading: ['Think.', 'Make.', 'Rethink.'],
+      // Start of a heading word shown highlighted ("Re" in Rethink).
+      highlight: 'Re',
       sublines: [
         'Understand the problem and ask the questions.',
         'Turn it into a working product.',

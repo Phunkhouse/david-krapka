@@ -36,6 +36,8 @@ export const cs: Dictionary = {
     hero: {
       eyebrow: 'Tak probíhá každý projekt',
       heading: ['Think.', 'Make.', 'Rethink.'],
+      // Start of a heading word shown highlighted ("Re" in Rethink).
+      highlight: 'Re',
       sublines: [
         'Pochopit problém a položit otázky.',
         'Proměnit to ve fungující produkt.',

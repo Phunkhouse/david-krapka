@@ -2,11 +2,25 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
 const pages = [
-  { path: '/', lang: 'en', work: 'Selected work', contact: 'Get in touch' },
-  { path: '/cs/', lang: 'cs', work: 'Vybraná práce', contact: 'Napište mi' },
+  {
+    path: '/',
+    lang: 'en',
+    work: 'Selected work',
+    workButton: 'See selected work',
+    navWork: 'Work',
+    contact: 'Get in touch',
+  },
+  {
+    path: '/cs/',
+    lang: 'cs',
+    work: 'Vybraná práce',
+    workButton: 'Prohlédnout práci',
+    navWork: 'Práce',
+    contact: 'Napište mi',
+  },
 ]
 
-for (const { path, lang, work, contact } of pages) {
+for (const { path, lang, work, workButton, navWork, contact } of pages) {
   test.describe(`landing ${lang}`, () => {
     test('has one h1 with the claim and the section headings in order', async ({
       page,
@@ -35,7 +49,7 @@ for (const { path, lang, work, contact } of pages) {
       await expect(page).toHaveURL(/#contact$/)
 
       await page.goto(path)
-      await page.locator('#top').getByRole('link').first().click()
+      await page.locator('#top').getByRole('link', { name: workButton }).click()
       await expect(page).toHaveURL(/#work$/)
       await expect(page.locator('#work')).toBeFocused()
     })
@@ -43,10 +57,9 @@ for (const { path, lang, work, contact } of pages) {
     test('header link Work lands in the work section', async ({ page }) => {
       await page.goto(path)
       await page
-        .getByRole('navigation')
-        .first()
+        .getByRole('navigation', { name: lang === 'en' ? 'Main' : 'Hlavní' })
         .getByRole('link', {
-          name: work === 'Selected work' ? 'Work' : 'Práce',
+          name: navWork,
         })
         .click()
       await expect(page).toHaveURL(/#work$/)
@@ -63,7 +76,7 @@ for (const { path, lang, work, contact } of pages) {
       await page
         .locator('#mobile-menu')
         .getByRole('link', {
-          name: work === 'Selected work' ? 'Work' : 'Práce',
+          name: navWork,
         })
         .click()
       await expect(page).toHaveURL(/#work$/)
@@ -74,17 +87,25 @@ for (const { path, lang, work, contact } of pages) {
       page,
     }) => {
       await page.goto(path)
-      await expect(page.locator('#work').getByRole('link')).toHaveCount(0)
+      const work = page.locator('#work')
+      await expect(work.getByRole('link')).toHaveCount(0)
+      await expect(work.getByRole('listitem')).toHaveCount(4)
+      await expect(
+        work.getByRole('listitem').filter({ hasText: 'Systerna' }),
+      ).toContainText(lang === 'en' ? 'In progress' : 'Rozpracováno')
     })
 
     test('the drum and card art are hidden from assistive technology', async ({
       page,
     }) => {
       await page.goto(path)
-      const decorative = page.locator(
-        '#top [aria-hidden="true"], #work [aria-hidden="true"]',
+      // The drum panel and the cards' art carry no meaning of their own.
+      await expect(page.locator('#top [aria-hidden="true"].drum')).toHaveCount(
+        1,
       )
-      expect(await decorative.count()).toBeGreaterThan(0)
+      await expect(
+        page.locator('#work [aria-hidden="true"]').first(),
+      ).toBeAttached()
       // Meaning is carried by real text: all three sublines are visible.
       await expect(page.locator('#top ul li')).toHaveCount(3)
     })

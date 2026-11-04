@@ -21,13 +21,13 @@ const home = pathFor(locale, 'home')
   <div class="text">
     <p class="label eyebrow">{hero.eyebrow}</p>
     <h1>
-      {hero.heading.map((word, index) => (
+      {hero.heading.map((word) => (
         <>
           <span class="line">
-            {index === 2 ? (
+            {word.startsWith(hero.highlight) ? (
               <>
-                <span class="highlight">{word.slice(0, 2)}</span>
-                {word.slice(2)}
+                <span class="highlight">{hero.highlight}</span>
+                {word.slice(hero.highlight.length)}
               </>
             ) : (
               word
