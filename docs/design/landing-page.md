@@ -6,6 +6,17 @@ Copy below is the mockup copy. Square brackets mark **missing content** that mus
 
 Anchors: `#top`, `#work`, `#approach`, `#experience`, `#about`, `#contact`.
 
+## Implementation decisions (milestone 3)
+
+Agreed 4 November 2026, while building the static page:
+
+- **Static hero (reduced-motion look):** the H1 shows “Think. Make. Rethink.” as visible text on three lines (“Re” highlighted), all three sublines show as a list, and the drum is frozen on T with the counter at 1/3. Milestone 4 adds the turning drum and cycling words on top.
+- **Mobile intro sentence:** not shown, as in the mockup. Desktop and tablet show it.
+- **Header:** not sticky. It is the shared site header above the hero, so the drum panel starts below it instead of running behind it as in the mockup, and the desktop hero fills about one screen together with the header.
+- **Cards and links:** project cards are not links until the case studies exist (milestone 5), so the “Read the case study →” line is left out. Contact links, LinkedIn, GitHub and the CV stay placeholders until milestone 6.
+- **Fluid desktop hero:** the drum column is 720 px at 1440 px and wider, and narrows (50 vw, at least 400 px) down to 1100 px so the headline fits.
+- **Kultomat card:** art above text from 720 to 1099 px; side by side from 1100 px with an art column of 380–560 px.
+
 ## 1. Header and hero (`#top`)
 
 **Desktop.** Full-height first screen (900 px in the mockup) split into a text column and a 720 px drum panel on the right.

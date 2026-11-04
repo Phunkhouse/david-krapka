@@ -1,0 +1,459 @@
+---
+import SectionHeading from '../SectionHeading.astro'
+import { t, type Locale } from '../../i18n'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { work } = t(locale).home
+const { featured, inProgress } = work
+
+// Card art per client project: tint or yellow paper, plus one shape.
+const art = ['circle', 'paper', 'play'] as const
+const projects = work.projects.map((project, index) => ({
+  ...project,
+  initial: project.name[0],
+  art: art[index],
+}))
+---
+
+<!--
+  Cards are not links yet: the case study pages come in milestone 5, which
+  adds the links and the "Read the case study" line.
+-->
+<section
+  id="work"
+  class="work surface-ink"
+  aria-labelledby="work-title"
+  tabindex="-1"
+>
+  <div class="inner">
+    <div class="heading">
+      <SectionHeading id="work-title">{work.title}</SectionHeading>
+      <p class="intro">{work.intro}</p>
+    </div>
+
+    <article class="featured">
+      <div class="featured-art paper-yellow" aria-hidden="true">
+        <span class="k halftone misregister" data-text="K">
+          K
+        </span>
+        <span class="screenshot">
+          <span class="long">{featured.screenshot}</span>
+          <span class="short">{featured.screenshotShort}</span>
+        </span>
+      </div>
+      <div class="featured-body">
+        <p class="label">{featured.label}</p>
+        <h3>{featured.name}</h3>
+        <p class="featured-text">
+          <span class="long">{featured.text}</span>
+          <span class="short">{featured.textShort}</span>{' '}
+          <span class="placeholder">{featured.summary}</span>
+        </p>
+      </div>
+    </article>
+
+    <ul class="cards" role="list" aria-label={work.listLabel}>
+      {projects.map((project) => (
+        <li class="card">
+          <div
+            class:list={[
+              'card-art',
+              project.art === 'paper' ? 'paper-yellow' : 'tint',
+            ]}
+            aria-hidden="true"
+          >
+            <span class="initial halftone">{project.initial}</span>
+            {project.art === 'circle' && <span class="shape circle" />}
+            {project.art === 'play' && <span class="shape play" />}
+          </div>
+          <div class="card-body">
+            <p class="label">{project.label}</p>
+            <h3>{project.name}</h3>
+            <p>
+              <span class="long">{project.text}</span>
+              <span class="short">{project.textShort}</span>
+            </p>
+          </div>
+        </li>
+      ))}
+      <li class="card card--progress">
+        <div class="card-art" aria-hidden="true">
+          <span class="dots dots-pink"></span>
+          <span class="initial-s">{inProgress.name[0]}</span>
+        </div>
+        <div class="card-body">
+          <p class="label">{inProgress.label}</p>
+          <h3>{inProgress.name}</h3>
+          <p>
+            <span class="long">{inProgress.text}</span>
+            <span class="short">{inProgress.textShort}</span>
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .work {
+    /* Mobile heading shadow; desktop below. Solid pink on ink. */
+    --shadow-heading: 4px 3px 0 var(--pink);
+    --focus-color: var(--yellow);
+
+    border-top: var(--border);
+  }
+
+  .work:focus {
+    outline: none;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-l);
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: var(--pad-section) var(--pad-inline);
+  }
+
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+  }
+
+  .work :global(h2) {
+    color: var(--yellow);
+  }
+
+  .intro {
+    max-width: 440px;
+    color: var(--ink-soft);
+    font-size: var(--text-body-lg);
+  }
+
+  .long {
+    display: none;
+  }
+
+  .placeholder {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+
+  /* Featured card */
+  .featured {
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 8px 8px 0 var(--pink);
+  }
+
+  .featured-art {
+    position: relative;
+    overflow: hidden;
+    height: 230px;
+    border-bottom: var(--border);
+  }
+
+  .k {
+    position: absolute;
+    top: -46px;
+    left: 24px;
+    font-family: var(--family-display);
+    font-weight: 900;
+    font-size: 300px;
+    line-height: 1;
+    --slip-x: 10px;
+    --slip-y: 6px;
+    --dot: 3.4px;
+    --grid: 10px;
+  }
+
+  .screenshot {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    padding: 5px 8px;
+    background: var(--paper);
+    font-family: var(--family-mono);
+    font-size: 11px;
+  }
+
+  .featured-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: var(--gap-m);
+  }
+
+  .featured-body h3 {
+    font-size: var(--text-feature);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .featured-text {
+    max-width: 520px;
+    font-size: var(--text-body-lg);
+  }
+
+  /* Project cards: horizontal rows on mobile */
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+    padding: 0;
+    list-style: none;
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .card-art {
+    position: relative;
+    overflow: hidden;
+    border-right: var(--border);
+  }
+
+  .tint {
+    background: var(--tint);
+  }
+
+  .initial {
+    position: absolute;
+    top: -10px;
+    left: 6px;
+    font-family: var(--family-display);
+    font-weight: 900;
+    font-size: 140px;
+    line-height: 1;
+    --dot: 2px;
+    --grid: 7px;
+  }
+
+  .shape {
+    display: none;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    padding: var(--gap-s);
+  }
+
+  .card-body h3 {
+    font-size: var(--text-card);
+  }
+
+  .card-body p:last-child {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* In progress: dashed outline on the ink section, not a link */
+  .card--progress {
+    grid-template-columns: 98px minmax(0, 1fr);
+    border: 3px dashed var(--ink-line);
+    background: none;
+    color: var(--paper);
+  }
+
+  .card--progress .card-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 0;
+  }
+
+  .card--progress .label {
+    color: var(--yellow);
+  }
+
+  .card--progress .card-body p:last-child {
+    color: var(--ink-soft);
+  }
+
+  .dots {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+
+  .initial-s {
+    position: relative;
+    color: var(--yellow);
+    font-family: var(--family-display);
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 1;
+  }
+
+  /* From 720 px: long copy, stacked cards in two columns */
+  @media (min-width: 720px) {
+    .work {
+      --shadow-heading: 6px 5px 0 var(--pink);
+    }
+
+    .heading {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--gap-m);
+    }
+
+    .inner {
+      gap: var(--gap-xl);
+    }
+
+    .long {
+      display: inline;
+    }
+
+    .short {
+      display: none;
+    }
+
+    .featured {
+      box-shadow: 12px 12px 0 var(--pink);
+    }
+
+    .featured-art {
+      height: 320px;
+    }
+
+    .k {
+      top: -80px;
+      left: 36px;
+      font-size: 520px;
+      --slip-x: 14px;
+      --slip-y: 10px;
+      --grid: 11px;
+    }
+
+    .screenshot {
+      bottom: 20px;
+      left: 24px;
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+
+    .featured-body {
+      justify-content: center;
+      gap: 20px;
+      padding: var(--gap-xl);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gap-l);
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-art {
+      height: 190px;
+      border-right: 0;
+      border-bottom: var(--border);
+    }
+
+    .card--progress {
+      grid-template-columns: none;
+    }
+
+    .card--progress .card-art {
+      border-bottom: 0;
+    }
+
+    .initial {
+      top: -46px;
+      left: 18px;
+      font-size: 260px;
+      --dot: 3.4px;
+      --grid: 11px;
+    }
+
+    .shape {
+      display: block;
+      position: absolute;
+    }
+
+    .circle {
+      top: 22px;
+      right: 22px;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: var(--yellow);
+      mix-blend-mode: multiply;
+    }
+
+    .play {
+      right: 22px;
+      bottom: 22px;
+      border-top: 42px solid transparent;
+      border-bottom: 42px solid transparent;
+      border-left: 70px solid var(--pink);
+      mix-blend-mode: multiply;
+      opacity: 0.8;
+    }
+
+    .card-body {
+      gap: 10px;
+      padding: 26px;
+    }
+
+    .card-body p:last-child {
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+    }
+
+    .dots {
+      width: 150px;
+      height: 150px;
+    }
+
+    .initial-s {
+      font-size: 80px;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    /* Art and text side by side; the art column is 560 px on the mockup. */
+    .featured {
+      display: grid;
+      grid-template-columns: clamp(380px, 42vw, 560px) minmax(0, 1fr);
+    }
+
+    .featured-art {
+      height: 420px;
+      border-right: var(--border);
+      border-bottom: 0;
+    }
+
+    .featured-body {
+      padding: var(--gap-2xl);
+    }
+
+    .cards {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

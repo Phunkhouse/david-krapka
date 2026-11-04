@@ -1,15 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import Hero from '../../components/landing/Hero.astro'
+import Work from '../../components/landing/Work.astro'
 import { t } from '../../i18n'
 
-const copy = t(Astro.currentLocale)
+const locale = Astro.currentLocale === 'cs' ? 'cs' : 'en'
+const copy = t(locale)
 ---
 
 <BaseLayout
   title={`${copy.site.name} · ${copy.site.role}`}
   description={copy.site.description}
   route="home"
+  bleed
 >
-  <h1>{copy.home.heading}</h1>
-  <p>{copy.home.placeholder}</p>
+  <Hero locale={locale} />
+  <Work locale={locale} />
 </BaseLayout>

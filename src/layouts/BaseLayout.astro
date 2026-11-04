@@ -13,9 +13,11 @@ interface Props {
   route?: RouteKey
   /** Overrides the locale Astro derives from the URL (used by the 404 page). */
   locale?: Locale
+  /** Full-bleed content (the landing page): no padding or max width on main. */
+  bleed?: boolean
 }
 
-const { title, description, route, locale: localeProp } = Astro.props
+const { title, description, route, locale: localeProp, bleed } = Astro.props
 const locale: Locale =
   localeProp ?? (isLocale(Astro.currentLocale) ? Astro.currentLocale : 'en')
 const copy = t(locale)
@@ -49,7 +51,7 @@ const shellRoute: RouteKey = route ?? 'home'
       {copy.skipLink}
     </a>
     <Header locale={locale} route={shellRoute} />
-    <main id="main" tabindex="-1">
+    <main id="main" tabindex="-1" class:list={{ bleed }}>
       <slot />
     </main>
     <Footer locale={locale} route={shellRoute} />
@@ -61,6 +63,16 @@ const shellRoute: RouteKey = route ?? 'home'
     max-width: var(--content-max);
     margin-inline: auto;
     padding: var(--gap-xl) var(--pad-inline) 0;
+  }
+
+  main.bleed {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Full-bleed pages end in their own section: no gap above the footer. */
+  main.bleed ~ :global(.site-footer) {
+    margin-top: 0;
   }
 
   main:focus {
