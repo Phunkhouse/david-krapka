@@ -95,7 +95,7 @@ Status as of 4 November 2026: milestones 0 and 1 done, the rest planned.
 
 **Goal:** The full landing page in both languages matching the mockups, with no motion yet.
 
-**Scope:** Hero, Selected work, How I think & build with “AI + me”, Experience (E3), About, Contact and footer, as in [Landing page](design/landing-page.md). Desktop, tablet and mobile layouts. Static states of the drum, columns and portrait (the reduced-motion look). Confirmed copy where available; placeholders allowed but listed. While the trade is suspended, the Contact and Experience copy does not invite paid projects ([LEG-001](SPEC.md#legal-requirements)).
+**Scope:** Hero, Selected work, How I think & build with “AI + me”, Experience (E3), About, Contact and footer, as in [Landing page](design/landing-page.md). Desktop, tablet and mobile layouts. Static states of the drum, columns and portrait (the reduced-motion look). Confirmed copy where available; placeholders allowed but listed. While the trade is suspended, the project invitation stays an invitation to talk, with no prices, rates, terms or availability claims ([LEG-001](SPEC.md#legal-requirements)).
 
 **Acceptance checks:**
 
@@ -105,7 +105,7 @@ Status as of 4 November 2026: milestones 0 and 1 done, the rest planned.
 - [ ] axe reports no violations on both language versions; verify with Playwright + axe.
 - [ ] Lighthouse mobile scores meet the SPEC targets on the preview URL; verify with a recorded Lighthouse run.
 - [ ] A list of remaining placeholders is in the PR description.
-- [ ] Neither language version offers paid services (no “Start a project”, no “for clients · – now”) unless David has confirmed otherwise in SPEC; verify by reading the rendered pages ([LEG-001](SPEC.md#legal-requirements)).
+- [ ] Neither language version states prices, rates, terms or availability for paid services; verify by reading the rendered pages ([LEG-001](SPEC.md#legal-requirements)).
 
 **Dependencies and risks:** Answers to the hero and mobile-intro questions in the [design README](design/README.md#open-design-questions); tablet layout approval.
 
@@ -162,7 +162,7 @@ Status as of 4 November 2026: milestones 0 and 1 done, the rest planned.
 - Private record of the accepted Cloudflare agreement and Data Processing Addendum versions ([LEG-004](SPEC.md#legal-requirements)); Workers logs and observability off or covered by the notice.
 - Portrait and CV hygiene ([LEG-007](SPEC.md#legal-requirements)): rights to the portrait documented, CV free of unwanted personal data, EXIF removed from committed images.
 - `LICENSE` for the code and a content note for texts and images; one-page private record of processing ([LEG-009](SPEC.md#legal-requirements)).
-- If the IČO is active again by launch and the site offers services: business identification in the footer and the client offer restored ([LEG-001](SPEC.md#legal-requirements), [LEG-002](SPEC.md#legal-requirements)).
+- If the IČO is active again by launch, or before any paid job: business identification in the footer ([LEG-002](SPEC.md#legal-requirements)) and a review of the project-invitation wording ([LEG-001](SPEC.md#legal-requirements)).
 - Favicon / monogram, Open Graph images, `sitemap.xml`, `robots.txt`, canonical URLs, JSON-LD `Person`.
 - Final security headers in `public/_headers`, including a Content-Security-Policy; HSTS.
 - Placeholder check that fails the production build if any `[…]` placeholder remains.
@@ -198,7 +198,6 @@ These run in parallel with development and gate the milestones shown.
 | Completed project cards for Kultomat, Eucal, Vladan Vaněk, UpVideo; screenshots and permissions | Milestone 5 |
 | Decision on Systerna's presentation | Milestone 5 |
 | Public email, LinkedIn, GitHub; CV PDF | Milestone 6 |
-| Decision on the first-release offer wording ([LEG-001](SPEC.md#legal-requirements)) | Milestone 3 |
 | Written permissions for client names, screenshots and identifiable people ([LEG-006](SPEC.md#legal-requirements)) | Milestone 5 |
 | Portrait photo with documented rights ([LEG-007](SPEC.md#legal-requirements)) | Milestone 6 |
 

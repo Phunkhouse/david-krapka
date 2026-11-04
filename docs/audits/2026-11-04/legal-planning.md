@@ -14,6 +14,8 @@
   - Font licences were read on GitHub (`google/fonts`).
   - Live behaviour was checked with `curl` on `https://david-krapka.services-d43.workers.dev/`.
 
+> **Follow-up, 4 November 2026:** David reviewed LEG-001 and chose to keep the project invitation as an invitation to talk, accepting the risk and no paid work until the IČO is active. Recorded in [decision 0008](../../decisions/0008-keep-project-invitation-while-trade-suspended.md). The audit's text below is unchanged; this risk is accepted by David, not cleared by the audit.
+
 ## Executive summary
 
 The site is a static, cookie-free personal portfolio with no forms, payments or third-party requests. Most consumer, marketing and accessibility regimes do not apply. Four things do matter before launch:

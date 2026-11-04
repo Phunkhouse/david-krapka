@@ -11,7 +11,7 @@ A personal portfolio for David Křapka, positioned as a **product-minded enginee
 | Audience | Needs to learn | Main path |
 | --- | --- | --- |
 | Hiring managers, recruiters, technical and product leads | Focus, experience, contribution inside a team, how decisions are made | Hero → Kultomat case study → Experience / CV → “Hiring?” |
-| Potential clients (**proposal, [LEG-001](#legal-requirements):** shown as past client work only while the trade is suspended; no invitation to commission paid projects) | Can he understand a brief, deliver and communicate? | Relevant client project → Approach → Contact |
+| Potential clients (an invitation to talk only while the trade is suspended; David accepts no paid work until the IČO is active, [LEG-001](#legal-requirements)) | Can he understand a brief, deliver and communicate? | Relevant client project → Approach → Contact |
 
 Success (qualitative, from the brief): a visitor can say in their own words what David does, find a relevant project, tell his contribution apart from team or AI work, and reach contact details without help.
 
@@ -23,7 +23,7 @@ Success (qualitative, from the brief): a visitor can say in their own words what
 - **Kultomat case study** (long form) and **short pages** for Eucal, Vladan Vaněk and UpVideo, once their facts are verified. **Proposal:** short client projects get their own pages only if there is enough verified material; otherwise their cards link to the live site.
 - **Systerna** as the labelled “In progress” card only, without a page.
 - **Emplifi** inside the Experience section, with confirmed role and dates.
-- **Contact** via email links (**proposal:** a role subject; a project subject only once [LEG-001](#legal-requirements) allows the client offer), LinkedIn and GitHub.
+- **Contact** via email links (separate subjects for roles and projects; the project link is an invitation to talk, see [LEG-001](#legal-requirements)), LinkedIn and GitHub.
 - **Privacy notice** in both languages, linked from every footer ([LEG-003](#legal-requirements)).
 - **CV** as a downloadable PDF (**proposal:** English only at first).
 - Motion as designed, with reduced-motion support and a pause control.
@@ -31,7 +31,7 @@ Success (qualitative, from the brief): a visitor can say in their own words what
 
 ### Out of scope for the first release
 
-Blog, Playground, services catalogue, an offer of paid services (until the trade is active again, [LEG-001](#legal-requirements)), contact form, newsletter, CMS, comments, analytics with cookies, and dark mode. Each can be reconsidered after launch.
+Blog, Playground, services catalogue, prices, rates, terms or availability claims for paid services (until the trade is active again, [LEG-001](#legal-requirements)), contact form, newsletter, CMS, comments, analytics with cookies, and dark mode. Each can be reconsidered after launch.
 
 ## Important workflows and requirements
 
@@ -97,8 +97,8 @@ From the [legal planning audit of 4 November 2026](audits/2026-11-04/legal-plann
 
 | ID | Requirement | When |
 | --- | --- | --- |
-| LEG-001 | **Proposal (David to confirm):** the first release is a showcase and job search. It does not invite paid projects: no “Start a project” call to action, no “for clients · [20XX – now]”. The client offer returns when the IČO is reactivated, together with LEG-002. | Copy decided before milestone 3 |
-| LEG-002 | When the site offers services as an entrepreneur: name, place of business (*sídlo*), IČO and registration note in the footer of every page (Civil Code § 435). Decide early whether the place of business is a home or a separate business address. Reserve a footer slot in the shell. | Slot in milestone 2; content on IČO reactivation |
+| LEG-001 | **Decided (accepted risk, [0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)):** the “Have a project?” card and “Start a project →” link stay as an invitation to talk, as in the mockups. While the trade licence is suspended, David accepts no paid work, and the site gives no prices, rates, terms or availability claims. Revisit when the IČO is reactivated or before the first paid job. | Copy in milestone 3; revisit on IČO reactivation |
+| LEG-002 | When David accepts paid work or the site offers services as an entrepreneur: name, place of business (*sídlo*), IČO and registration note in the footer of every page (Civil Code § 435). Decide early whether the place of business is a home or a separate business address. Reserve a footer slot in the shell. | Slot in milestone 2; content on IČO reactivation |
 | LEG-003 | Bilingual privacy notice (for example `/privacy/` and `/cs/soukromi/`), linked from every footer: controller and contact, purposes and lawful basis, Cloudflare as processor, transfers outside the EEA, retention, rights, right to complain to ÚOOU. Needs the public email address. | Page route and footer link in milestone 2; text in milestone 6 |
 | LEG-004 | Private dated record of the accepted Cloudflare Self-Serve agreement and Data Processing Addendum versions. Keep Workers logs and observability off unless the privacy notice covers them. | Before launch |
 | LEG-005 | The site stores nothing on visitors' devices: no cookies, `localStorage`, `sessionStorage` or IndexedDB, including for the pause control. This is why no cookie banner is planned. Cloudflare features that set cookies stay off. | Milestones 2 and 4 acceptance checks |
@@ -144,7 +144,7 @@ macOS locally versus Ubuntu in CI; Playwright browser version tied to the instal
 - **Case study pages are not designed.** Milestone 5 cannot start building until the canvas has a case study template.
 - **DNS move at launch.** Moving the zone to Cloudflare can break email if a mail record is missed; compare records one by one before switching nameservers and send a test email afterwards.
 - **Looping motion** carries accessibility risk; the pause control and flash check are launch requirements.
-- **Trade suspension.** The planned client-facing copy conflicts with a suspended trade licence ([LEG-001](#legal-requirements)); the legal classification and the conditions of David's social-security support are unresolved and outside the audit's scope.
+- **Trade suspension (accepted risk, [LEG-001](#legal-requirements)).** The “Have a project?” invitation sits in a grey area while the trade licence is suspended; the legal classification and the conditions of David's social-security support are unresolved and outside the audit's scope. David accepted the risk on 4 November 2026 on the basis that it is only an invitation to talk ([0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)).
 - **Static output** rules out middleware-based language detection; visitors choose the language themselves.
 - **Branch protection** is technically enforceable because the repository is public. If it becomes private, rulesets need a paid GitHub plan.
 
@@ -155,7 +155,6 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 | Blocks | Question |
 | --- | --- |
 | Milestone 2 | Business identification in the footer ([LEG-002](#legal-requirements)): which place of business will be published when the IČO is active? Needed to size the footer slot. |
-| Milestone 3 | Confirm the LEG-001 proposal and write the Contact and Experience copy without a client offer, or ask the trade licensing office and the office paying the support whether publishing a portfolio with a contact email is acceptable while the trade is suspended. |
 | Milestone 2 | Design the mobile menu panel, language switcher and pause control. |
 | Milestone 3 | Should the mobile hero show the intro sentence? What does the reduced-motion hero show? Should Experience be in the navigation? |
 | Milestone 3 | Tablet layout (720–1100 px): accept the proposal in [Visual system](design/visual-system.md#breakpoints-proposal) or design it. |

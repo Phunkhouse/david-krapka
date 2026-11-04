@@ -124,7 +124,7 @@ Chosen direction **E3 “Big team. Small team.”**
 
 Proposed behaviour: both card links open an email to the published address with a prefilled subject (“Role: …” / “Project: …”). No form and no stored data in the first release (see [SPEC](../SPEC.md#data-and-trust-boundaries)).
 
-**Legal note (LEG-001, proposal):** while the trade licence is suspended, the “Have a project?” card and “Start a project →” link are not shown as an offer of paid work. Replace them with neutral wording or remove the card; the approved mockup stays the reference for layout. See [SPEC](../SPEC.md#legal-requirements). The same applies to the Freelance card meta “for clients · [20XX – now]” in Experience: use a closed range or “client projects”.
+**Legal note (LEG-001, decided):** the “Have a project?” card and “Start a project →” link stay as in the mockup, as an invitation to talk. While the trade licence is suspended, do not add prices, rates, terms or availability claims for paid services anywhere on the page. See [SPEC](../SPEC.md#legal-requirements) and [0008](../decisions/0008-keep-project-invitation-while-trade-suspended.md).
 
 ## 7. Footer
 
