@@ -9,7 +9,7 @@ The design needs Rubik 900, Sora 400/600/700 and Space Mono 400/700 with Latin E
 
 ## Decision
 
-Commit `woff2` files, subset to Latin and Latin Extended, in `src/assets/fonts/` and load them with `fontProviders.local()`. Commit each family's `OFL.txt` next to its files and copy the licences into the build output.
+Commit `woff2` files, subset to Latin and Latin Extended, in `src/assets/fonts/` and load them with `fontProviders.local()`. Ship each family's OFL licence in `public/fonts/licenses/`, so it is served with the site; `src/assets/fonts/README.md` records the source and version of every file.
 
 ## Alternatives considered
 

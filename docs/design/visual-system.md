@@ -1,6 +1,6 @@
 # Visual system
 
-Taken from the [mockups](README.md). Values here become CSS custom properties in the implementation. Once they exist in code, the code is the reference for exact values and this document explains what they are for.
+Taken from the [mockups](README.md). The values are implemented as CSS custom properties in [`src/styles/tokens.css`](../../src/styles/tokens.css) and the print motifs as classes in [`src/styles/print.css`](../../src/styles/print.css). The code is the reference for exact values; this document explains what they are for.
 
 ## Concept: a three-ink print run
 

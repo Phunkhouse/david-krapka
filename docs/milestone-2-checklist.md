@@ -76,50 +76,50 @@ The milestone is split so work can start before the missing canvas designs exist
 
 - [x] Re-clone the starter pack to a scratch directory and adapt `recipes/ci-strategy/examples/budget-e2e.yml` to `.github/workflows/e2e.yml`, job name `playwright`: same draft skip as `check` (job-level `if`, no install on drafts), Node from `.nvmrc`, pnpm cache, Playwright browsers installed with dependencies (cache them if the recipe does), report uploaded as an artifact on failure.
 - [x] `actionlint` clean.
-- [ ] After the first full `playwright` run on the ready PR, add `playwright` (source GitHub Actions) as a required status in `protect-main` (David or with David's approval).
+- [x] After the first full `playwright` run on the ready PR, add `playwright` (source GitHub Actions) as a required status in `protect-main` (David or with David's approval). Evidence: on [PR #8](https://github.com/Phunkhouse/david-krapka/pull/8), [run 41900389314](https://github.com/Phunkhouse/david-krapka/actions/runs/41900389314) passed `browser_tests` in the container (58 s) and `playwright`; ruleset 26546585 now requires `check` and `playwright` (4 November 2026).
 - [x] Update `AGENTS.md` (Validation strategy, Commands). [0002](decisions/0002-budget-conscious-ci.md) is unchanged: the e2e job follows the same draft rule.
 
 ## PR B: Design system
 
 ### B1. Tokens and base styles
 
-- [ ] `src/styles/tokens.css`: colours from [Visual system](design/visual-system.md#colours) (`--ink`, `--paper`, `--yellow`, `--pink`, `--tint`, `--ink-soft`, `--ink-line`), border width, offset shadows, spacing steps (14, 18, 24, 28, 48, 56 px and section padding), breakpoints as comments (custom media is not native CSS), content max width 1440 px.
-- [ ] Fluid type scale with `clamp()` between the 390 px and 1440 px values in the [type scale](design/visual-system.md#type-scale) (H1, H2, contact, about, card titles, body large, body, mono label).
-- [ ] `src/styles/global.css`: modern reset, paper background, ink text, Sora body, Rubik 900 uppercase headings with tight tracking, Space Mono label class, `prefers-reduced-motion` base rule. Imported once from `BaseLayout`.
-- [ ] From this PR on, `docs/design/visual-system.md` points to `tokens.css` as the reference for exact values.
+- [x] `src/styles/tokens.css`: colours from [Visual system](design/visual-system.md#colours) (`--ink`, `--paper`, `--yellow`, `--pink`, `--tint`, `--ink-soft`, `--ink-line`), border width, offset shadows, spacing steps (14, 18, 24, 28, 48, 56 px and section padding), breakpoints as comments (custom media is not native CSS), content max width 1440 px.
+- [x] Fluid type scale with `clamp()` between the 390 px and 1440 px values in the [type scale](design/visual-system.md#type-scale) (H1, H2, contact, about, card titles, body large, body, mono label).
+- [x] `src/styles/global.css`: modern reset, paper background, ink text, Sora body, Rubik 900 uppercase headings with tight tracking, Space Mono label class, `prefers-reduced-motion` base rule. Imported once from `BaseLayout`.
+- [x] From this PR on, `docs/design/visual-system.md` points to `tokens.css` as the reference for exact values.
 
 ### B2. Fonts and licences
 
-- [ ] Configure Rubik 900, Sora 400/600/700 and Space Mono 400/700 through the Astro Fonts API (`fonts` in `astro.config.mjs`, `<Font cssVariable preload />` in the layout) with the provider chosen in section 0. Latin + Latin Extended only.
-- [ ] Check Czech glyphs render in all three faces (ř, ě, ů, č, Ř, Ů) on a test string in the placeholder page.
-- [ ] Measure total font payload in `dist/` (target ≤ 150 KB, SPEC performance). Record the number in the PR.
-- [ ] Ship `OFL.txt` for Rubik, Sora and Space Mono (for example `public/fonts/licenses/<family>-OFL.txt`), or show that the served files keep copyright and licence metadata ([LEG-008](SPEC.md#legal-requirements)). Evidence: list the files in `dist/`.
-- [ ] No request to Google Fonts or any other host at runtime (the PR A request test keeps passing).
+- [x] Configure Rubik 900, Sora 400/600/700 and Space Mono 400/700 through the Astro Fonts API (`fonts` in `astro.config.mjs`, `<Font cssVariable preload />` in the layout) with the provider chosen in section 0. Latin + Latin Extended only.
+- [x] Check Czech glyphs render in all three faces (ř, ě, ů, č, Ř, Ů): pangram on the specimen page, checked in the browser.
+- [x] Measure font payload (target ≤ 150 KB). All 12 files in `dist/`: 176 KB on disk, but `unicode-range` means a page loads only what it uses: `/` 63.8 KB (5 files), `/cs/` 71.1 KB (6), specimen with every face 141.8 KB (10).
+- [x] Ship `OFL.txt` for Rubik, Sora and Space Mono (for example `public/fonts/licenses/<family>-OFL.txt`), or show that the served files keep copyright and licence metadata ([LEG-008](SPEC.md#legal-requirements)). Evidence: list the files in `dist/`.
+- [x] No request to Google Fonts or any other host at runtime (the PR A request test keeps passing).
 
 ### B3. Print utilities
 
 Each utility is a class or small component, decorative output `aria-hidden="true"`, documented in a comment with its source in the visual system.
 
-- [ ] Halftone text in three densities (large, medium, small).
-- [ ] Misregistered pink copy (offset, 45–55 % opacity, `multiply`).
-- [ ] Yellow paper surface (faint ink dot screen).
-- [ ] Pink dot screen.
-- [ ] Rollers (36 / 18 / 22 px variants).
-- [ ] Offset shadows (heading and card).
-- [ ] Highlight (yellow behind a word fragment).
-- [ ] A temporary, unlinked specimen page (for example `/_specimen/`, excluded from the sitemap later and `noindex` already) showing every token, type step and utility, for David's visual review on the preview URL. Remove it before launch (track in milestone 6) or keep it out of the production build.
+- [x] Halftone text in three densities (large, medium, small).
+- [x] Misregistered pink copy (offset, 45–55 % opacity, `multiply`).
+- [x] Yellow paper surface (faint ink dot screen).
+- [x] Pink dot screen.
+- [x] Rollers (fluid 22 → 36 px, and an 18 px thin variant).
+- [x] Offset shadows (heading and card).
+- [x] Highlight (yellow behind a word fragment).
+- [x] A temporary, unlinked specimen page (`/specimen/`; Astro does not route files starting with `_`; excluded from the sitemap later and `noindex` already) showing every token, type step and utility, for David's visual review on the preview URL. Remove it before launch (track in milestone 6) or keep it out of the production build.
 
 ### B4. Shared components
 
-- [ ] `Button` (primary: ink with yellow text; secondary: yellow with ink border; pill shape; renders `<a>` or `<button>`).
-- [ ] `SectionHeading` (eyebrow label, heading level as a prop, offset shadow).
-- [ ] Focus styles from the agreed rule: visible on paper, yellow and ink backgrounds; never yellow on paper.
+- [x] `Button` (primary: ink with yellow text; secondary: yellow with ink border; pill shape; renders `<a>` or `<button>`).
+- [x] `SectionHeading` (eyebrow label, heading level as a prop, offset shadow).
+- [x] Focus styles from the agreed rule: visible on paper, yellow and ink backgrounds; never yellow on paper. Playwright checks the ring colour on all three surfaces (it caught a token that froze the ring to ink on ink).
 
 ### B5. Security headers
 
-- [ ] Check the Astro 7.4 docs for its CSP support and for inline scripts or styles in the build output.
-- [ ] Add a baseline `Content-Security-Policy` to `public/_headers` that allows only `'self'` (plus hashes if Astro inlines anything). Final review stays in milestone 6. Note: the milestone 1 checklist deferred CSP to this milestone.
-- [ ] `pnpm preview:cloudflare` shows the header and the browser console has no CSP violations on both pages and the specimen.
+- [x] Check the Astro 7.4 docs for its CSP support and for inline scripts or styles in the build output.
+- [x] Baseline CSP: Astro `security.csp` emits a hashed `<meta>` policy (`default-src 'self'`, hashes for inline styles and scripts, `object-src 'none'`, `form-action 'none'`), and `public/_headers` adds `frame-ancestors 'none'; object-src 'none'; base-uri 'self'`. Markdown syntax highlighting is off (Shiki's inline styles conflict with CSP). Final review stays in milestone 6.
+- [x] `wrangler dev` serves the header and the browser reports no CSP violations on `/`, `/cs/`, the specimen and the 404 page (Playwright; the check was confirmed to catch an injected inline style).
 
 ## PR C: Site shell
 
@@ -165,12 +165,12 @@ Record evidence here and in the PR that completes each check.
 
 - [ ] `/` and `/cs/` render the shell with `<html lang="en">` and `<html lang="cs">`, and the switcher links between them; verify with Playwright. (PR A for `lang`, PR C for the switcher.)
 - [x] A missing Czech key fails `pnpm typecheck`; verify by deleting one key locally. (PR A) Evidence: TS2741 on `cs.ts` with `skipLink` removed, recorded in PR A.
-- [ ] No request leaves the site's own origin on page load; verify in the browser network panel and with a Playwright request listener. (PR A, re-checked after fonts in PR B)
+- [x] No request leaves the site's own origin on page load; verify in the browser network panel and with a Playwright request listener. (PR A, re-checked after fonts in PR B) Evidence: the request-listener test passes on `/` and `/cs/` with self-hosted fonts loading; the CSP `default-src 'self'` would also block any other origin. Re-check in PR C once the shell exists.
 - [ ] The site stores nothing on the device: no cookies, `localStorage`, `sessionStorage` or IndexedDB after load and after using the language switcher; verify with Playwright and `curl -I` (no `Set-Cookie`) ([LEG-005](SPEC.md#legal-requirements)). (PR A, completed in PR C)
-- [ ] The three licence files, or readable font metadata, are in the build output ([LEG-008](SPEC.md#legal-requirements)); verify in `dist/`. (PR B)
+- [x] The three licence files, or readable font metadata, are in the build output ([LEG-008](SPEC.md#legal-requirements)); verify in `dist/`. (PR B) Evidence: `dist/fonts/licenses/{Rubik,Sora,SpaceMono}-OFL.txt`, served with status 200 (Playwright).
 - [ ] Keyboard alone reaches every link and the menu, with a visible focus ring on paper and on ink; verify manually and with an axe check in Playwright. (PR C)
 - [ ] No horizontal scroll at 320 px; verify in Playwright at 320 × 640. (PR A, re-checked in PR C)
-- [ ] Draft PR defers both `check` and `playwright`; ready PR runs both; verify in the Actions tab. (PR A)
+- [x] Draft PR defers both `check` and `playwright`; ready PR runs both; verify in the Actions tab. (PR A) Evidence: PR #8 runs on `b4b8b06` and the draft push of `801d719` were skipped; marking ready ran `check` and `E2E` on `801d719`, both successful.
 - [ ] David signs off on the specimen page (PR B) and the shell on the preview URL (PR C).
 
 ## Wrap-up
