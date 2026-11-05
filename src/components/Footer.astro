@@ -1,5 +1,6 @@
 ---
 import LanguageSwitcher from './LanguageSwitcher.astro'
+import Mark from './Mark.astro'
 import { t, type Locale } from '../i18n'
 import { pathFor, type RouteKey } from '../i18n/routes'
 
@@ -39,7 +40,8 @@ const links = [
     )}
     <div class="row">
       <p class="colophon">
-        {`© ${year} ${copy.site.name} · ${copy.footer.printed}`}
+        <Mark class="colophon-mark" />
+        <span>{`© ${year} ${copy.site.name} · ${copy.footer.printed}`}</span>
       </p>
       <div class="links">
         <nav id="footer-nav" aria-label={copy.footer.navLabel} tabindex="-1">
@@ -93,7 +95,15 @@ const links = [
   }
 
   .colophon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: 13px;
+  }
+
+  .colophon :global(.colophon-mark) {
+    width: 24px;
+    height: 24px;
   }
 
   .links {

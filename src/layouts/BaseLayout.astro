@@ -38,15 +38,27 @@ const alternates = route ? alternatesFor(route) : []
 // Pages without a route (404) switch to the home pages.
 const shellRoute: RouteKey = route ?? 'home'
 const ogLocales: Record<Locale, string> = { en: 'en_GB', cs: 'cs_CZ' }
-const ogImage = og.image && new URL(og.image.src, Astro.site)
+// Pages without their own image (landing, privacy, case studies until their
+// OG-Case image exists) share the site-wide one for their language.
+const image = og.image ?? {
+  src: `/og/site-${locale}.png`,
+  width: 1200,
+  height: 630,
+  alt: copy.site.ogImageAlt,
+}
+const ogImage = new URL(image.src, Astro.site)
 ---
 
 <html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Icons from the canvas page "Logo & favicon" (scripts/brand-assets.mjs). -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1B2F7A" />
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-body" preload={[{ weight: 400 }]} />
     <Font cssVariable="--font-mono" />
@@ -77,12 +89,13 @@ const ogImage = og.image && new URL(og.image.src, Astro.site)
           ))}
       </>
     )}
-    {route && og.image && ogImage && (
+    {route && (
       <>
         <meta property="og:image" content={ogImage.href} />
-        <meta property="og:image:width" content={String(og.image.width)} />
-        <meta property="og:image:height" content={String(og.image.height)} />
-        <meta property="og:image:alt" content={og.image.alt} />
+        <meta property="og:image:width" content={String(image.width)} />
+        <meta property="og:image:height" content={String(image.height)} />
+        <meta property="og:image:alt" content={image.alt} />
+        <meta name="twitter:card" content="summary_large_image" />
       </>
     )}
     <!-- Motion is on only with JavaScript (the pause control needs it) and

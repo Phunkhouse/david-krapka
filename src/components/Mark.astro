@@ -1,0 +1,47 @@
+---
+// The háček mark (canvas page "Logo & favicon", board Logo-H2): ink háček
+// on yellow paper with the pink pass behind. Decorative next to the name;
+// size comes from the parent through `class`. The same drawing is in
+// public/favicon.svg (scripts/brand-assets.mjs).
+interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<svg
+  class:list={['mark', className]}
+  viewBox="0 0 100 100"
+  aria-hidden="true"
+  focusable="false"
+>
+  <rect class="paper" width="100" height="100" rx="22"></rect>
+  <path class="pass" d="M22 38 L50 66 L78 38" transform="translate(5 5)"></path>
+  <path class="ink" d="M22 38 L50 66 L78 38"></path>
+</svg>
+
+<style>
+  .mark {
+    flex: 0 0 auto;
+    display: block;
+  }
+
+  .paper {
+    fill: var(--yellow);
+  }
+
+  .pass,
+  .ink {
+    fill: none;
+    stroke-width: 20;
+  }
+
+  .pass {
+    stroke: var(--pink);
+  }
+
+  .ink {
+    stroke: var(--ink);
+  }
+</style>

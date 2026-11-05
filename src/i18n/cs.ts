@@ -8,6 +8,8 @@ export const cs: Dictionary = {
     role: 'Inženýr s produktovým myšlením',
     description:
       'Jsem David Křapka, inženýr s produktovým myšlením. Najdu skutečný problém, postavím produkt a zlepšuji ho i po spuštění.',
+    ogImageAlt:
+      'David Křapka, inženýr s produktovým myšlením. Think. Make. Rethink. Háček vytištěný modře na žlutém papíře.',
   },
   nav: {
     label: 'Hlavní',

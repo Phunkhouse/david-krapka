@@ -5,6 +5,9 @@ export const en = {
     role: 'Product-minded engineer',
     description:
       "I'm David Křapka, a product-minded engineer. I find the real problem, build the product and keep improving it after it ships.",
+    // Alternative text of the site-wide social preview image (public/og/).
+    ogImageAlt:
+      'David Křapka, product-minded engineer. Think. Make. Rethink. The háček mark printed in blue on yellow paper.',
   },
   nav: {
     label: 'Main',
