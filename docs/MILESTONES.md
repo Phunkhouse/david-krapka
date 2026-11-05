@@ -117,7 +117,7 @@ Status as of 5 November 2026: milestones 0, 1, 2 and 3 done, the rest planned.
 
 ## Milestone 4: Motion
 
-**Status:** planned
+**Status:** planning; work plan in the [milestone 4 checklist](milestone-4-checklist.md) (three PRs: motion switch, hero drum and pause control; approach and small interactions; portrait, checks and wrap-up).
 
 **Goal:** The print-drum hero, approach A5, portrait G4 and card hovers, without hurting accessibility or performance.
 
@@ -134,7 +134,7 @@ Status as of 5 November 2026: milestones 0, 1, 2 and 3 done, the rest planned.
 - [ ] Lighthouse performance and CLS targets still met; verify with Lighthouse.
 - [ ] David signs off on the feel of each animation compared with the canvas.
 
-**Dependencies and risks:** 3D text rendering on Safari; fallback to a 2D flip if needed.
+**Dependencies and risks:** 3D text rendering on Safari; fallback to a 2D flip if needed. Decisions before PR A: whether motion needs JavaScript (so the pause control always works), one pause control or two, what pausing mid-turn looks like, and the pause control under reduced motion. Project cards are not links until milestone 5, so their hover may move there. The flash check needs a flash-analysis tool, and the device checks need David's phones.
 
 ## Milestone 5: Case studies
 
