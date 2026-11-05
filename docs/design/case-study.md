@@ -32,6 +32,14 @@ Design for `/work/<slug>/` and `/cs/work/<slug>/`, from the canvas page “Case 
 - **Long (Kultomat):** the eight sections of the [shared structure](../content-and-case-studies.md#proposed-shared-case-study-structure): Summary, What I owned, Problem and constraints, Key decisions, The build, AI and collaboration, Outcomes and validation, What I would rethink.
 - **Short (client projects):** five sections: Summary, What I owned, One decision (with one figure), Outcome, What I would rethink. No “On this page” list and no “Built with” row; the AI share stays in the facts panel.
 
+## Adding a case study
+
+1. Create `src/content/case-studies/<slug>/en.mdx` and `cs.mdx` (same `order` rules: unique per language; both languages share the `draft` flag).
+2. Add the project to `artFor` in `src/content/projects.ts` (card letter and kind).
+3. Give its landing card the same `slug` in `src/i18n/en.ts` and `cs.ts`; the build fails when a built case study has no card.
+4. Every `Figure` needs a screenshot (`src`) before `draft` is removed; a build without drafts fails otherwise.
+5. Export the Open Graph image once the summary is final and set `ogImage`.
+
 ## Breakpoints
 
 - Below 720 px: mobile boards.

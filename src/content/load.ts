@@ -61,7 +61,7 @@ async function loadAll(): Promise<CaseStudy[]> {
     const repeated = orders.find((order, i) => orders.indexOf(order) !== i)
     if (repeated !== undefined) {
       throw new Error(
-        `Two case studies share order ${repeated} (${locale}); "Next project" needs a unique order.`,
+        `Two case studies share order ${repeated} (${locale}, drafts included); "Next project" needs a unique order, so a draft cannot be published later with a clashing one.`,
       )
     }
   }
