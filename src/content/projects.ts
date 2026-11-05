@@ -1,4 +1,24 @@
+import type { ImageMetadata } from 'astro'
 import { t, type Locale } from '../i18n'
+
+// Project previews: 1200 × 630 images from the canvas page "Selected work
+// previews", built by scripts/work-previews.mjs. One per project, named by
+// slug. The landing cards show them and the case study pages use them as
+// their social preview image.
+const previews = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/work/*.jpg',
+  { eager: true },
+)
+
+export function previewFor(slug: string): ImageMetadata {
+  const found = previews[`../assets/work/${slug}.jpg`]
+  if (!found) {
+    throw new Error(
+      `No preview image for project "${slug}": add src/assets/work/${slug}.jpg (scripts/work-previews.mjs).`,
+    )
+  }
+  return found.default
+}
 
 /** Card art per project, shared by the case study header and "Next project". */
 export type ArtKind = 'k' | 'circle' | 'paper' | 'play'

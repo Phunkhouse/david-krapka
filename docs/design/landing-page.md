@@ -63,6 +63,8 @@ Accessibility: the H1 contains a visually hidden “Think. Make. Rethink.”; th
 | UpVideo | Client · Visual & multimedia — Visual communication and video content delivered against a client brief. | Klient · Vizuál a multimédia — Vizuální komunikace a video obsah podle zadání klienta. |
 | Systerna | In progress — Being built now. The case study comes when it's ready. | Rozpracováno — Právě vzniká. Případová studie přijde, až bude hotový. |
 
+Card previews (revised 5 November 2026): the featured card and the three client cards show a 1200 × 630 project preview (`src/assets/work/<slug>.jpg`, from the canvas boards `Prev-*` and `D-Work-Previews`): the letter art with a browser window holding the project's home page. The image is cropped to the card (`object-fit: cover`); on mobile the cards stack with a 150 px preview band. The Systerna card keeps its dashed letter art. The older description of the letter art follows.
+
 Card art: each client card shows its initial in medium halftone on tint or yellow paper with one shape (Eucal: yellow circle; UpVideo: pink play triangle). Kultomat shows a huge “K” with a pink copy. Systerna shows a yellow “S” over a pink dot circle.
 
 Card links currently point to anchors (`#kultomat`, `#eucal` …). In the build they link to case study pages. Whether short client projects get their own pages is decided in [milestone 5](../MILESTONES.md).
