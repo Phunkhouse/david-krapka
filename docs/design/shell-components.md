@@ -32,7 +32,7 @@ Required by [Motion](motion.md#pause-requirement) (WCAG 2.2.2). It pauses all lo
 - Labels: “Stop the press” / “Start the press”; Czech “Zastavit tisk” / “Spustit tisk”. The label states the action; use `aria-pressed` or swap the label, not both.
 - Placement: on the hero drum band, bottom-left (16–20 px from the edges), 40 px high on desktop and 36 px on mobile. It sits early in the tab order, before the animation it controls. Yellow on the yellow band is separated by the ink border and the shadow; focus ring is ink.
 - Default state: playing, except under `prefers-reduced-motion`, where it starts paused. State lives in page memory only: no cookie, `localStorage` or `sessionStorage`.
-- Milestone 2 builds it as a static component (`src/components/PauseControl.astro`) shown only on the specimen page. It is not placed on real pages until the looping motion exists (milestone 4), so it never offers a control that does nothing.
+- Milestone 2 built it as a static component (`src/components/PauseControl.astro`) shown only on the specimen page. Milestone 4 places it on the landing pages with `live`: hidden until JavaScript runs (so it never offers a control that does nothing), label swapped between the two states (no `aria-pressed`), play triangle while paused. Details in [Motion](motion.md#implementation-decisions-milestone-4).
 
 ## Header and footer additions
 
@@ -43,5 +43,5 @@ Required by [Motion](motion.md#pause-requirement) (WCAG 2.2.2). It pauses all lo
 
 - Whether the switcher should also appear in the mobile header, next to the menu button.
 - Whether the menu panel should slide, and how (needs a motion decision).
-- Whether the pause control should also exist on the portrait glitch, or one control for the whole page is enough.
+- ~~Whether the pause control should also exist on the portrait glitch~~ decided 5 November 2026: one control for the whole page.
 - Tablet range (720–1100 px): this proposal switches to the desktop header at 720 px; check that all four links plus the switcher fit, otherwise raise the breakpoint for the header only.

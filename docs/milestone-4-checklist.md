@@ -23,14 +23,14 @@ The drum is first because it is the biggest risk (3D text on Safari, LCP) and be
 Each item has a recommendation; answering “as recommended” is enough. Decisions go into the design docs in the PR that implements them.
 
 - [x] Milestone 3 merged and complete ([PR #16](https://github.com/Phunkhouse/david-krapka/pull/16)).
-- [ ] Approve this plan, or name changes.
-- [ ] **Motion without JavaScript** (blocks PR A). Recommendation: motion runs only when JavaScript is available. A tiny inline script in `<head>` adds a `motion` class to `<html>` before first paint when reduced motion is not requested; every animation and the motion layout of the hero hang off that class. Reason: without JavaScript the pause control cannot work, and a loop without a pause fails WCAG 2.2.2. Adding the class before paint means no layout shift. Alternative: pure CSS motion for everyone, with the pause control only where JavaScript runs (fails 2.2.2 without JavaScript).
-- [ ] **One pause control or two** (blocks PR A; open in [Shell components](design/shell-components.md#to-iterate)). Recommendation: one control on the hero drum band, as designed, that stops every looping animation on the page, including the portrait far below. WCAG 2.2.2 needs a mechanism, not one per animation. Alternative: a second, smaller control next to the portrait.
-- [ ] **What “Stop the press” does to a loop mid-turn** (blocks PR A). Recommendation: freeze in place (`animation-play-state: paused`) and resume from the same point, like stopping a press. If a freeze mid cross-fade looks broken (two half-visible words), PR A instead lets the current turn finish and holds on the next face. Alternative: jump back to the static, reduced-motion layout (the headline changes from one line to three, a visible jump).
-- [ ] **Reduced motion and the pause control** (blocks PR A). Recommendation: as designed, the control is shown under reduced motion and starts as “Start the press”; pressing it starts the motion for that page view only. Alternative: hide the control under reduced motion and never animate.
-- [ ] **Project card hover** (affects PR B). Recommendation: leave it out of this milestone. The cards are not links until milestone 5, and a lift on hover suggests something clickable. Milestone 5 adds the hover and `:focus-visible` lift together with the links. Alternative: add the lift now on hover only.
-- [ ] **Smooth scrolling for anchor links** (affects PR B). Recommendation: yes, `scroll-behavior: smooth` only under `prefers-reduced-motion: no-preference`; focus still moves to the section as today. Alternative: keep the instant jump.
-- [ ] **Mobile menu slide** (open in [Shell components](design/shell-components.md#to-iterate)). Recommendation: not in this milestone; the menu keeps opening instantly. Alternative: a short slide from the header, designed first.
+- [x] Approve this plan, or name changes. Approved by merging [PR #17](https://github.com/Phunkhouse/david-krapka/pull/17).
+- [x] **Motion without JavaScript** (blocks PR A). Recommendation: motion runs only when JavaScript is available. A tiny inline script in `<head>` adds a `motion` class to `<html>` before first paint when reduced motion is not requested; every animation and the motion layout of the hero hang off that class. Reason: without JavaScript the pause control cannot work, and a loop without a pause fails WCAG 2.2.2. Adding the class before paint means no layout shift. Alternative: pure CSS motion for everyone, with the pause control only where JavaScript runs (fails 2.2.2 without JavaScript). **Decided 5 November 2026: as recommended.**
+- [x] **One pause control or two** (blocks PR A; open in [Shell components](design/shell-components.md#to-iterate)). Recommendation: one control on the hero drum band, as designed, that stops every looping animation on the page, including the portrait far below. WCAG 2.2.2 needs a mechanism, not one per animation. Alternative: a second, smaller control next to the portrait. **Decided 5 November 2026: as recommended.**
+- [x] **What “Stop the press” does to a loop mid-turn** (blocks PR A). Recommendation: freeze in place (`animation-play-state: paused`) and resume from the same point, like stopping a press. If a freeze mid cross-fade looks broken (two half-visible words), PR A instead lets the current turn finish and holds on the next face. Alternative: jump back to the static, reduced-motion layout (the headline changes from one line to three, a visible jump). **Decided 5 November 2026: as recommended.**
+- [x] **Reduced motion and the pause control** (blocks PR A). Recommendation: as designed, the control is shown under reduced motion and starts as “Start the press”; pressing it starts the motion for that page view only. Alternative: hide the control under reduced motion and never animate. **Decided 5 November 2026: as recommended.**
+- [x] **Project card hover** (affects PR B). Recommendation: leave it out of this milestone. The cards are not links until milestone 5, and a lift on hover suggests something clickable. Milestone 5 adds the hover and `:focus-visible` lift together with the links. Alternative: add the lift now on hover only. **Decided 5 November 2026: as recommended.**
+- [x] **Smooth scrolling for anchor links** (affects PR B). Recommendation: yes, `scroll-behavior: smooth` only under `prefers-reduced-motion: no-preference`; focus still moves to the section as today. Alternative: keep the instant jump. **Decided 5 November 2026: as recommended.**
+- [x] **Mobile menu slide** (open in [Shell components](design/shell-components.md#to-iterate)). Recommendation: not in this milestone; the menu keeps opening instantly. Alternative: a short slide from the header, designed first. **Decided 5 November 2026: as recommended.**
 
 ## Shared rules for every PR
 
@@ -49,40 +49,40 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 ### A1. Branch and docs
 
-- [ ] Branch from up-to-date `main`; draft PR; `check` and `playwright` skipped on the draft (intended).
-- [ ] Record the section 0 decisions in [Motion](design/motion.md), [Shell components](design/shell-components.md) and the [design README](design/README.md#open-design-questions); mark the SPEC open question for milestone 2 (pause control) resolved.
+- [x] Branch from up-to-date `main`; draft PR; `check` and `playwright` skipped on the draft (intended).
+- [x] Record the section 0 decisions in [Motion](design/motion.md), [Shell components](design/shell-components.md) and the [design README](design/README.md#open-design-questions); mark the SPEC open question for milestone 2 (pause control) resolved.
 
 ### A2. Motion switch and helper
 
-- [ ] Inline `<head>` script in `BaseLayout.astro` sets the motion class before first paint when `matchMedia('(prefers-reduced-motion: no-preference)')` matches; listens for preference changes during the visit.
-- [ ] Motion module: page-wide paused state, a `data-paused` (or class) switch on `<html>` that sets `animation-play-state: paused` on every looping animation, and an IntersectionObserver that pauses each looping section while it is off-screen. User pause and off-screen pause are separate; the user's choice always wins.
-- [ ] Without JavaScript and under reduced motion the page is identical to milestone 3 (compare screenshots).
+- [x] Inline `<head>` script in `BaseLayout.astro` sets the motion class before first paint when `matchMedia('(prefers-reduced-motion: no-preference)')` matches; listens for preference changes during the visit.
+- [x] Motion module: page-wide paused state, a `data-paused` (or class) switch on `<html>` that sets `animation-play-state: paused` on every looping animation, and an IntersectionObserver that pauses each looping section while it is off-screen. User pause and off-screen pause are separate; the user's choice always wins.
+- [x] Without JavaScript and under reduced motion the page is identical to milestone 3 (compare screenshots).
 
 ### A3. Hero print drum (`#top`)
 
-- [ ] Drum: three faces T, M, R on a prism (`perspective` 1300 px desktop, 620 px mobile; `translateZ` 180 / 88 px), each with the pink misregistered copy; the 9 s turn with `cubic-bezier(.7, 0, .3, 1)`, the 10 px kick and the curvature shade, as in [Motion](design/motion.md#hero-print-drum-9-s-loop).
-- [ ] Counter sheet slides 1/3 → 2/3 → 3/3 → 1/3 in step with the drum.
-- [ ] Headline in motion: one line cycling “Think.” → “Make.” → “**Re**think.” with the 36 px slide and cross-fade, and the matching subline under it. The H1 keeps the full claim as text for assistive technology; the cycling words and sublines are `aria-hidden`. On the Czech page the claim stays marked `lang="en"`.
-- [ ] Reserve the headline and subline height so the motion layout does not shift the intro and buttons (CLS 0).
-- [ ] The LCP element is still text and still paints without waiting for fonts or script; check in Lighthouse (the visually hidden H1 text does not count as LCP, so check which element Lighthouse picks).
+- [x] Drum: three faces T, M, R on a prism (`perspective` 1300 px desktop, 620 px mobile; `translateZ` 180 / 88 px), each with the pink misregistered copy; the 9 s turn with `cubic-bezier(.7, 0, .3, 1)`, the 10 px kick and the curvature shade, as in [Motion](design/motion.md#hero-print-drum-9-s-loop).
+- [x] Counter sheet slides 1/3 → 2/3 → 3/3 → 1/3 in step with the drum.
+- [x] Headline in motion: one line cycling “Think.” → “Make.” → “**Re**think.” with the 36 px slide and cross-fade, and the matching subline under it. The H1 keeps the full claim as text for assistive technology; the cycling words and sublines are `aria-hidden`. On the Czech page the claim stays marked `lang="en"`.
+- [x] Reserve the headline and subline height so the motion layout does not shift the intro and buttons (CLS 0).
+- [x] The LCP element is still text and still paints without waiting for fonts or script; check in Lighthouse (the visually hidden H1 text does not count as LCP, so check which element Lighthouse picks).
 - [ ] Safari (macOS, and iOS on a real phone): drum letters are sharp during and after a turn. If not, fall back to a 2D flip (`scaleY` with the shade) and record it in [Motion](design/motion.md).
 
 ### A4. Pause control
 
-- [ ] `PauseControl` placed on the hero drum band, bottom-left, 40 px desktop / 36 px mobile, early in the tab order, before the drum ([Shell components](design/shell-components.md#pause-control)). Both landing pages.
-- [ ] Toggles between “Stop the press” / “Start the press” (Czech “Zastavit tisk” / “Spustit tisk”) and the pause / play icon. Use either `aria-pressed` or the swapped label, not both (as specified); recommended: swap the label and drop `aria-pressed`.
-- [ ] Behaviour per section 0 (freeze or finish the turn; reduced-motion start state).
-- [ ] Without JavaScript the control is not shown (it would do nothing). Remove the “not placed on any page” comment from the component.
-- [ ] The `/specimen/` page keeps its static copies or uses the working component; either way its tests still pass.
+- [x] `PauseControl` placed on the hero drum band, bottom-left, 40 px desktop / 36 px mobile, early in the tab order, before the drum ([Shell components](design/shell-components.md#pause-control)). Both landing pages.
+- [x] Toggles between “Stop the press” / “Start the press” (Czech “Zastavit tisk” / “Spustit tisk”) and the pause / play icon. Use either `aria-pressed` or the swapped label, not both (as specified); recommended: swap the label and drop `aria-pressed`.
+- [x] Behaviour per section 0 (freeze or finish the turn; reduced-motion start state).
+- [x] Without JavaScript the control is not shown (it would do nothing). Remove the “not placed on any page” comment from the component.
+- [x] The `/specimen/` page keeps its static copies or uses the working component; either way its tests still pass.
 
 ### A5. Tests
 
-- [ ] Playwright, reduced motion emulated: no animation has `playState === 'running'` (read with `document.getAnimations()`), the hero shows the milestone 3 static layout, the pause control starts as “Start the press”.
-- [ ] Playwright, no preference: the drum animations run; pressing the control (mouse and keyboard) pauses every looping animation and pressing again resumes them; the label and accessible name change.
-- [ ] Playwright: after using the control there are no cookies and nothing in `localStorage`, `sessionStorage` or IndexedDB (extend the existing storage check).
-- [ ] Playwright: scrolling the hero out of view pauses its animations; scrolling back resumes them unless the user paused.
-- [ ] Playwright with JavaScript disabled: no running animations and no pause control.
-- [ ] The H1 accessible name is still “Think. Make. Rethink.” on both pages; axe, 320 px scroll, request, storage and CSP checks pass.
+- [x] Playwright, reduced motion emulated: no animation has `playState === 'running'` (read with `document.getAnimations()`), the hero shows the milestone 3 static layout, the pause control starts as “Start the press”.
+- [x] Playwright, no preference: the drum animations run; pressing the control (mouse and keyboard) pauses every looping animation and pressing again resumes them; the label and accessible name change.
+- [x] Playwright: after using the control there are no cookies and nothing in `localStorage`, `sessionStorage` or IndexedDB (extend the existing storage check).
+- [x] Playwright: scrolling the hero out of view pauses its animations; scrolling back resumes them unless the user paused.
+- [x] Playwright with JavaScript disabled: no running animations and no pause control.
+- [x] The H1 accessible name is still “Think. Make. Rethink.” on both pages; axe, 320 px scroll, request, storage and CSP checks pass.
 - [ ] Lighthouse mobile on the preview for `/` (one run is enough here; the full record is in PR C): LCP and CLS still within target.
 
 ## PR B: Approach A5 and small interactions

@@ -1,5 +1,6 @@
 ---
 import Button from '../Button.astro'
+import PauseControl from '../PauseControl.astro'
 import { t, type Locale } from '../../i18n'
 import { pathFor } from '../../i18n/routes'
 
@@ -13,11 +14,42 @@ const home = pathFor(locale, 'home')
 ---
 
 <!--
-  Static hero: the state a visitor sees with reduced motion. The drum is
-  frozen on T with the counter at 1/3; milestone 4 adds the turning drum
-  and cycling words on top of this markup (docs/design/motion.md).
+  The markup is the static hero: the state a visitor sees with reduced motion
+  or without JavaScript (drum frozen on T, counter at 1/3, all words and
+  sublines listed). Under html.motion the same markup becomes the print drum:
+  the three heading lines and sublines cross-fade in turn and the drum turns
+  (docs/design/motion.md). The text stays real text, so assistive technology
+  always gets the whole claim.
+  The drum comes first in the DOM so the pause control is reached before the
+  text and buttons; CSS places it.
 -->
-<section id="top" class="hero" tabindex="-1">
+<section id="top" class="hero" tabindex="-1" data-loop>
+  <div class="drum paper-yellow">
+    <div class="art" aria-hidden="true">
+      <div class="turn">
+        {['T', 'M', 'R'].map((letter) => (
+          <span class="face halftone misregister" data-text={letter}>
+            {letter}
+          </span>
+        ))}
+      </div>
+      <span class="shade"></span>
+      <span class="roller roller--left"></span>
+      <span class="roller roller--right"></span>
+      <span class="counter">
+        <span class="sheet">
+          <span>1/3</span>
+          <span>2/3</span>
+          <span>3/3</span>
+          <span>1/3</span>
+        </span>
+      </span>
+    </div>
+    <div class="pause-slot">
+      <PauseControl locale={locale} live />
+    </div>
+  </div>
+
   <div class="text">
     <p class="label eyebrow">{hero.eyebrow}</p>
     <!-- The claim stays in English on the Czech page: mark its language. -->
@@ -64,16 +96,6 @@ const home = pathFor(locale, 'home')
       </Button>
     </div>
   </div>
-
-  <div class="drum paper-yellow" aria-hidden="true">
-    <span class="face halftone misregister" data-text="T">
-      T
-    </span>
-    <span class="shade"></span>
-    <span class="roller roller--left"></span>
-    <span class="roller roller--right"></span>
-    <span class="counter">1/3</span>
-  </div>
 </section>
 
 <style>
@@ -89,30 +111,54 @@ const home = pathFor(locale, 'home')
     margin-inline: auto;
   }
 
-  /* Mobile and tablet: drum band first, then the text. */
+  /* Mobile and tablet: drum band first (it is first in the DOM), then the text. */
   .drum {
-    order: -1;
+    --face-font: 330px;
+    --kick: 5px;
+    --shift: 24px;
+
     position: relative;
     flex: 0 0 410px;
     overflow: hidden;
     border-block: var(--border);
   }
 
-  .face {
+  /* Everything decorative; the pause control is a sibling, outside aria-hidden. */
+  .art {
     position: absolute;
     inset: 0;
+  }
+
+  .turn {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* A face is as tall as the glyph box (0.91 em), centred in the band. */
+  .face {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: calc(var(--face-font) * 0.91);
+    margin-top: calc(var(--face-font) * -0.455);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--family-display);
     font-weight: 900;
-    font-size: 330px;
+    font-size: var(--face-font);
     line-height: 1;
     /* The glyph and its pink copy sit centred; the copy slips right and down. */
     --slip-x: 0.027em;
     --slip-y: 0.021em;
     --dot: 3.4px;
     --grid: 10px;
+  }
+
+  /* Static state: only the T face. M and R exist for the turning drum. */
+  .face:nth-child(n + 2) {
+    display: none;
   }
 
   /* The utility positions the pink copy absolutely: re-centre it with the glyph. */
@@ -154,17 +200,39 @@ const home = pathFor(locale, 'home')
     position: absolute;
     top: 14px;
     right: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 58px;
-    height: 58px;
+    --counter: 58px;
+
+    width: var(--counter);
+    height: var(--counter);
+    box-sizing: border-box;
+    overflow: hidden;
     border: var(--border);
     border-radius: 50%;
     background: var(--paper);
     font-family: var(--family-mono);
     font-size: 12px;
     font-weight: 700;
+  }
+
+  /* Four steps (1/3, 2/3, 3/3, 1/3) in a column; the circle shows one. */
+  .sheet {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+  }
+
+  .sheet > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(var(--counter) - 6px);
+  }
+
+  .pause-slot {
+    position: absolute;
+    z-index: 2;
+    bottom: 16px;
+    left: calc(var(--roller) + 14px);
   }
 
   .text {
@@ -295,25 +363,230 @@ const home = pathFor(locale, 'home')
       justify-content: flex-end;
     }
 
+    .text {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
     .drum {
-      order: 0;
+      --face-font: clamp(420px, 47.2vw, 680px);
+      --kick: 10px;
+      --shift: 36px;
+
+      grid-column: 2;
+      grid-row: 1;
       flex: none;
       border-block: 0;
       border-left: var(--border);
     }
 
     .face {
-      font-size: clamp(420px, 47.2vw, 680px);
       --dot: 6px;
       --grid: 18px;
     }
 
     .counter {
+      --counter: 80px;
+
       top: 28px;
       right: 64px;
-      width: 80px;
-      height: 80px;
       font-size: 15px;
+    }
+
+    .pause-slot {
+      bottom: 20px;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Motion (milestone 4): the print drum. Only under html.motion, which is
+     set before paint when motion is wanted. 9 s loop, see motion.md.
+     --------------------------------------------------------------------- */
+  :global(html.motion) .art {
+    perspective: calc(var(--face-font) * 1.9);
+  }
+
+  :global(html.motion) .turn {
+    transform-style: preserve-3d;
+    animation: turn 9s cubic-bezier(0.7, 0, 0.3, 1) infinite;
+  }
+
+  :global(html.motion) .face {
+    --apothem: calc(var(--face-font) * 0.263);
+
+    backface-visibility: hidden;
+    animation: kick 9s ease-in-out infinite;
+  }
+
+  :global(html.motion) .face:nth-child(n + 2) {
+    display: flex;
+  }
+
+  :global(html.motion) .face:nth-child(1) {
+    transform: rotateX(0deg) translateZ(var(--apothem));
+  }
+
+  :global(html.motion) .face:nth-child(2) {
+    transform: rotateX(-120deg) translateZ(var(--apothem));
+  }
+
+  :global(html.motion) .face:nth-child(3) {
+    transform: rotateX(-240deg) translateZ(var(--apothem));
+  }
+
+  :global(html.motion) .sheet {
+    animation: sheet 9s cubic-bezier(0.7, 0, 0.3, 1) infinite;
+  }
+
+  /* One heading line and one subline at a time, stacked in the same place.
+     The space is reserved (one line, two sublines' height) so nothing shifts. */
+  :global(html.motion) h1 {
+    position: relative;
+    height: 1.12em;
+  }
+
+  :global(html.motion) .line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+  }
+
+  :global(html.motion) .sublines {
+    position: relative;
+    display: block;
+    max-width: 560px;
+    height: calc(2 * 1.4em);
+  }
+
+  :global(html.motion) .sublines li {
+    position: absolute;
+    inset: 0 0 auto 0;
+  }
+
+  :global(html.motion) :is(.line, .sublines li) {
+    animation: word 9s ease-in-out infinite;
+  }
+
+  :global(html.motion) :is(.line, .sublines li):nth-child(1) {
+    animation-name: word-1;
+  }
+
+  :global(html.motion) :is(.line, .sublines li):nth-child(2) {
+    animation-name: word-2;
+    opacity: 0;
+  }
+
+  :global(html.motion) :is(.line, .sublines li):nth-child(3) {
+    animation-name: word-3;
+    opacity: 0;
+  }
+
+  @keyframes turn {
+    0%,
+    26% {
+      transform: rotateX(0);
+    }
+    33%,
+    59% {
+      transform: rotateX(120deg);
+    }
+    66%,
+    92% {
+      transform: rotateX(240deg);
+    }
+    100% {
+      transform: rotateX(360deg);
+    }
+  }
+
+  /* Four steps of a column a quarter of its height each. */
+  @keyframes sheet {
+    0%,
+    26% {
+      transform: translateY(0);
+    }
+    33%,
+    59% {
+      transform: translateY(-25%);
+    }
+    66%,
+    92% {
+      transform: translateY(-50%);
+    }
+    100% {
+      transform: translateY(-75%);
+    }
+  }
+
+  /* The glyph jolts sideways at each turn, like paper catching on a roller. */
+  @keyframes kick {
+    0%,
+    26%,
+    33%,
+    59%,
+    66%,
+    92%,
+    100% {
+      translate: 0;
+    }
+    29%,
+    62%,
+    95% {
+      translate: var(--kick);
+    }
+  }
+
+  @keyframes word-1 {
+    0%,
+    24% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    30%,
+    94% {
+      opacity: 0;
+      transform: translateY(calc(var(--shift) * -1));
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes word-2 {
+    0%,
+    28% {
+      opacity: 0;
+      transform: translateY(var(--shift));
+    }
+    35%,
+    57% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    63%,
+    100% {
+      opacity: 0;
+      transform: translateY(calc(var(--shift) * -1));
+    }
+  }
+
+  @keyframes word-3 {
+    0%,
+    61% {
+      opacity: 0;
+      transform: translateY(var(--shift));
+    }
+    68%,
+    90% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    96%,
+    100% {
+      opacity: 0;
+      transform: translateY(calc(var(--shift) * -1));
     }
   }
 </style>
