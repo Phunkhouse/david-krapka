@@ -11,12 +11,21 @@ const [before, highlighted, after] = about.title
 ---
 
 <!--
-  Static state of the G4 portrait glitch: inks in their resting register, no
-  scan bar. The silhouette stands in for the photo; the real photo gets the
-  same two-ink halftone once it exists (docs/design/visual-system.md).
-  Milestone 4 adds the glitch loop.
+  G4 portrait. The SVG is the static state (inks in their resting register, no
+  scan bar: reduced motion and no JavaScript). Under html.motion it is swapped
+  for the glitch layers: six horizontal strips, each with a pink and a blue
+  halftone layer masked to the silhouette, plus the scan bar (7 s loop), and
+  the pink dot circle drifts (4 s). The silhouette stands in for the photo; a
+  real photo needs the same two-ink halftone, see docs/design/motion.md.
+  data-loop: the pause control and the off-screen pause apply.
 -->
-<section id="about" class="about" tabindex="-1" aria-labelledby="about-title">
+<section
+  id="about"
+  class="about"
+  tabindex="-1"
+  aria-labelledby="about-title"
+  data-loop
+>
   <div class="inner">
     <div class="portrait" aria-hidden="true">
       <span class="screen dots-pink"></span>
@@ -53,6 +62,15 @@ const [before, highlighted, after] = about.title
           ></use>
           <use href="#silhouette" fill="url(#dots-ink)"></use>
         </svg>
+        <div class="glitch">
+          {[0, 1, 2, 3, 4, 5].map((strip) => (
+            <div class={`strip strip--${strip}`}>
+              <div class="ink ink--pink"></div>
+              <div class="ink ink--blue"></div>
+            </div>
+          ))}
+          <div class="bar"></div>
+        </div>
       </div>
     </div>
 
@@ -86,6 +104,10 @@ const [before, highlighted, after] = about.title
 
   /* Portrait: yellow paper circle, ink border, pink dot circle offset behind. */
   .portrait {
+    /* Scale of the 400 px design (see the motion block below). */
+    --u: 0.6;
+    --size: calc(var(--u) * 400px);
+
     position: relative;
     flex: none;
     width: 240px;
@@ -151,6 +173,8 @@ const [before, highlighted, after] = about.title
 
   @media (min-width: 720px) {
     .portrait {
+      --u: 0.8;
+
       width: 320px;
       height: 320px;
       align-self: flex-start;
@@ -178,12 +202,348 @@ const [before, highlighted, after] = about.title
     }
 
     .portrait {
+      --u: 1;
+
       width: 400px;
       height: 400px;
     }
 
     .screen {
       inset: 40px -16px -16px 40px;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Motion (milestone 4): G4 ink slip and roller jam. --u scales the
+     400 px design to the portrait size, so jumps and dots keep their
+     proportions. Only under html.motion.
+     --------------------------------------------------------------------- */
+  .glitch {
+    display: none;
+    position: absolute;
+    inset: 0;
+  }
+
+  :global(html.motion) .glitch {
+    display: block;
+  }
+
+  :global(html.motion) svg {
+    display: none;
+  }
+
+  :global(html.motion) .screen {
+    animation: drift 4s ease-in-out infinite;
+  }
+
+  .strip {
+    position: absolute;
+    inset: 0;
+    animation-duration: 7s;
+    animation-timing-function: steps(1, end);
+    animation-iteration-count: infinite;
+  }
+
+  .strip--0 {
+    clip-path: inset(0% 0 82% 0);
+    animation-name: slip-0;
+  }
+
+  .strip--1 {
+    clip-path: inset(18% 0 64% 0);
+    animation-name: slip-1;
+  }
+
+  .strip--2 {
+    clip-path: inset(36% 0 48% 0);
+    animation-name: slip-2;
+  }
+
+  .strip--3 {
+    clip-path: inset(52% 0 30% 0);
+    animation-name: slip-3;
+  }
+
+  .strip--4 {
+    clip-path: inset(70% 0 14% 0);
+    animation-name: slip-4;
+  }
+
+  .strip--5 {
+    clip-path: inset(86% 0 0% 0);
+    animation-name: slip-5;
+  }
+
+  /* One ink layer: a dot screen masked to the silhouette. */
+  .ink {
+    position: absolute;
+    inset: 0;
+    -webkit-mask: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%20400%22%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%22165%22%20rx%3D%2272%22%20ry%3D%2288%22/%3E%3Crect%20x%3D%22168%22%20y%3D%22230%22%20width%3D%2264%22%20height%3D%2250%22/%3E%3Cpath%20d%3D%22M50%20400%20C60%20300%20125%20262%20200%20262%20C275%20262%20340%20300%20350%20400%20Z%22/%3E%3C/svg%3E')
+      center / 100% 100% no-repeat;
+    mask: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%20400%22%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%22165%22%20rx%3D%2272%22%20ry%3D%2288%22/%3E%3Crect%20x%3D%22168%22%20y%3D%22230%22%20width%3D%2264%22%20height%3D%2250%22/%3E%3Cpath%20d%3D%22M50%20400%20C60%20300%20125%20262%20200%20262%20C275%20262%20340%20300%20350%20400%20Z%22/%3E%3C/svg%3E')
+      center / 100% 100% no-repeat;
+    background-size: calc(var(--u) * 9px) calc(var(--u) * 9px);
+    animation-duration: 7s;
+    animation-timing-function: steps(1, end);
+    animation-iteration-count: infinite;
+  }
+
+  .ink--blue {
+    background-image: radial-gradient(
+      var(--ink) calc(var(--u) * 2.6px),
+      transparent calc(var(--u) * 3px)
+    );
+    animation-name: ink-blue;
+  }
+
+  .ink--pink {
+    background-image: radial-gradient(
+      var(--pink) calc(var(--u) * 2.6px),
+      transparent calc(var(--u) * 3px)
+    );
+    mix-blend-mode: multiply;
+    opacity: 0.75;
+    animation-name: ink-pink;
+  }
+
+  .bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--u) * 14px);
+    background: var(--pink);
+    mix-blend-mode: multiply;
+    opacity: 0;
+    animation: bar 7s linear infinite;
+  }
+
+  @keyframes ink-pink {
+    0%,
+    62% {
+      transform: translate(calc(var(--u) * 8px), calc(var(--u) * 6px));
+    }
+    63% {
+      transform: translate(calc(var(--u) * -22px), calc(var(--u) * 10px));
+    }
+    64% {
+      transform: translate(calc(var(--u) * 18px), calc(var(--u) * -8px))
+        skewX(-8deg);
+    }
+    65.5% {
+      transform: translate(calc(var(--u) * -6px), calc(var(--u) * 4px));
+    }
+    67%,
+    88% {
+      transform: translate(calc(var(--u) * 8px), calc(var(--u) * 6px));
+    }
+    88.6% {
+      transform: translate(calc(var(--u) * 26px), 0);
+    }
+    89.4%,
+    100% {
+      transform: translate(calc(var(--u) * 8px), calc(var(--u) * 6px));
+    }
+  }
+
+  @keyframes ink-blue {
+    0%,
+    63% {
+      transform: translate(0, 0);
+    }
+    63.6% {
+      transform: translate(calc(var(--u) * 12px), calc(var(--u) * -6px));
+    }
+    64.8% {
+      transform: translate(calc(var(--u) * -10px), calc(var(--u) * 3px));
+    }
+    66%,
+    89% {
+      transform: translate(0, 0);
+    }
+    89.6% {
+      transform: translate(calc(var(--u) * -8px), 0) scaleY(1.04);
+    }
+    90.4%,
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  /* The scan bar sweeps down the portrait (top -10 % → 110 %), moved with
+     transform instead of top so nothing triggers layout. */
+  @keyframes bar {
+    0%,
+    57% {
+      opacity: 0;
+      transform: translateY(calc(var(--size) * -0.1));
+    }
+    58% {
+      opacity: 1;
+      transform: translateY(calc(var(--size) * 0.1));
+    }
+    62% {
+      opacity: 1;
+      transform: translateY(calc(var(--size) * 0.7));
+    }
+    63%,
+    100% {
+      opacity: 0;
+      transform: translateY(calc(var(--size) * 1.1));
+    }
+  }
+
+  @keyframes slip-0 {
+    0%,
+    58.0% {
+      transform: translateX(0);
+    }
+    58.6% {
+      transform: translateX(calc(var(--u) * 14px));
+    }
+    60.2% {
+      transform: translateX(calc(var(--u) * -26px));
+    }
+    61.4%,
+    84.0% {
+      transform: translateX(0);
+    }
+    84.6% {
+      transform: translateX(calc(var(--u) * -26px));
+    }
+    85.4%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slip-1 {
+    0%,
+    58.7% {
+      transform: translateX(0);
+    }
+    59.3% {
+      transform: translateX(calc(var(--u) * -18px));
+    }
+    60.9% {
+      transform: translateX(calc(var(--u) * 10px));
+    }
+    62.1%,
+    84.5% {
+      transform: translateX(0);
+    }
+    85.1% {
+      transform: translateX(calc(var(--u) * 10px));
+    }
+    85.9%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slip-2 {
+    0%,
+    59.4% {
+      transform: translateX(0);
+    }
+    60.0% {
+      transform: translateX(calc(var(--u) * 30px));
+    }
+    61.6% {
+      transform: translateX(calc(var(--u) * -8px));
+    }
+    62.8%,
+    85.0% {
+      transform: translateX(0);
+    }
+    85.6% {
+      transform: translateX(calc(var(--u) * -8px));
+    }
+    86.4%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slip-3 {
+    0%,
+    60.1% {
+      transform: translateX(0);
+    }
+    60.7% {
+      transform: translateX(calc(var(--u) * -12px));
+    }
+    62.3% {
+      transform: translateX(calc(var(--u) * 22px));
+    }
+    63.5%,
+    85.5% {
+      transform: translateX(0);
+    }
+    86.1% {
+      transform: translateX(calc(var(--u) * 22px));
+    }
+    86.9%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slip-4 {
+    0%,
+    60.8% {
+      transform: translateX(0);
+    }
+    61.4% {
+      transform: translateX(calc(var(--u) * 22px));
+    }
+    63.0% {
+      transform: translateX(calc(var(--u) * -16px));
+    }
+    64.2%,
+    86.0% {
+      transform: translateX(0);
+    }
+    86.6% {
+      transform: translateX(calc(var(--u) * -16px));
+    }
+    87.4%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slip-5 {
+    0%,
+    61.5% {
+      transform: translateX(0);
+    }
+    62.1% {
+      transform: translateX(calc(var(--u) * -26px));
+    }
+    63.7% {
+      transform: translateX(calc(var(--u) * 6px));
+    }
+    64.9%,
+    86.5% {
+      transform: translateX(0);
+    }
+    87.1% {
+      transform: translateX(calc(var(--u) * 6px));
+    }
+    87.9%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes drift {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: calc(var(--u) * 6px) calc(var(--u) * -4px);
     }
   }
 </style>

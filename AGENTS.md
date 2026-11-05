@@ -20,6 +20,7 @@ Before changing code, inspect the relevant files and the documentation for the i
 - `pnpm verify`: format check, lint, typecheck, build and font coverage check in sequence. Run it before asking for review.
 - `pnpm check:fonts`: after `pnpm build`, fails if any built page shows a character the site fonts do not cover (it would render in a fallback font). Fix by regenerating the fonts with `scripts/subset-fonts.py` (see `src/assets/fonts/README.md`). Also run in CI job `check`.
 - `pnpm placeholders`: after `pnpm build`, lists every `[…]` placeholder left in `dist/` per page (report only; `--fail` exits 1 when any remain, for the milestone 6 production check).
+- `scripts/flash-check.mjs` (manual, not a pnpm script): approximate WCAG 2.3.1 flash check of a looping element on a served build (`node scripts/flash-check.mjs <url> <selector>`). Usage and limits are in its header and in `docs/audits/2026-11-05/flash-analysis.md`.
 - `scripts/subset-fonts.py` (manual, not a pnpm script): rebuilds the site-subset font files in `src/assets/fonts/` when new copy needs a character they lack. Steps and requirements are in `src/assets/fonts/README.md`.
 - `pnpm test:e2e`: Playwright end-to-end tests in `tests/e2e/` (Chromium, with axe). It builds the site and serves it with `wrangler dev` on port 8788, so `public/_headers` and production 404 handling apply. First run: `pnpm exec playwright install chromium`. Not part of `pnpm verify`; CI runs it in its own job.
 

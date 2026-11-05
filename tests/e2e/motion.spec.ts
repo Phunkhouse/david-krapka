@@ -15,6 +15,20 @@ const running = (page: Page) =>
       document.getAnimations().filter((a) => a.playState === 'running').length,
   )
 
+/** Running animations whose target is inside the element `selector`. */
+const runningIn = (page: Page, selector: string) =>
+  page.evaluate(
+    (sel) =>
+      document
+        .getAnimations()
+        .filter(
+          (a) =>
+            a.playState === 'running' &&
+            (a.effect as KeyframeEffect | null)?.target?.closest(sel),
+        ).length,
+    selector,
+  )
+
 const animated = (page: Page) =>
   page.evaluate(() => document.getAnimations().length)
 
@@ -83,18 +97,18 @@ for (const { path, stop, start } of pages) {
 
       test('loops hold while the hero is off-screen', async ({ page }) => {
         await page.goto(path)
-        await expect.poll(() => running(page)).toBeGreaterThan(0)
+        await expect.poll(() => runningIn(page, '#top')).toBeGreaterThan(0)
         await page.evaluate(() =>
           window.scrollTo({
             top: document.body.scrollHeight,
             behavior: 'instant',
           }),
         )
-        await expect.poll(() => running(page)).toBe(0)
+        await expect.poll(() => runningIn(page, '#top')).toBe(0)
         await page.evaluate(() =>
           window.scrollTo({ top: 0, behavior: 'instant' }),
         )
-        await expect.poll(() => running(page)).toBeGreaterThan(0)
+        await expect.poll(() => runningIn(page, '#top')).toBeGreaterThan(0)
       })
 
       test('scrolling back does not restart a press the visitor stopped', async ({

@@ -73,6 +73,7 @@ The portrait is two halftone layers (ink and pink, 9 px dot grid) masked to a he
 - **Second, smaller burst (~84–90 %):** strips and inks twitch once more.
 - A pink dot circle behind the portrait drifts slowly on its own 4 s loop (`6px, -4px`).
 - **Reduced motion:** everything holds in the calm state, and the scan bar is hidden.
+- **Implementation (milestone 4, PR C).** `About.astro` keeps the SVG as the static state and swaps it for the glitch layers under `html.motion`: six strips (`clip-path`), each with a pink and a blue halftone layer masked to the silhouette, plus the scan bar (moved with `transform`, not `top`). Keyframes are the mockup's, with every pixel value multiplied by `--u` (portrait size / 400 px), so jumps and dots keep their proportions at 240, 320 and 400 px. `#about` is `data-loop`, so the one pause control and the off-screen pause cover it. Flash analysis: [report](../audits/2026-11-05/flash-analysis.md). **A real photo** replaces the silhouette mask with its own two-colour halftone layers (ink and pink, same 9 px grid) used as the `.ink` backgrounds; the strips, offsets and keyframes stay.
 - The silhouette is a placeholder. With a real photo, prepare two-colour halftone layers (or apply the dot screen with CSS masks) so the effect still works.
 
 ## Small interactions

@@ -112,38 +112,38 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 ### C1. Portrait (`#about`)
 
-- [ ] Two halftone layers (ink and pink, 9 px dot grid) masked to the silhouette and sliced into six strips; the 7 s loop with the calm phase, the first burst with the 14 px scan bar, and the smaller second burst, `steps(1)` frames, as in the mockup keyframes `pg-*` ([Motion](design/motion.md#about-portrait-g4-ink-slip--roller-jam-7-s-loop)).
-- [ ] Pink dot circle drifts on its own 4 s loop (`6px, -4px`).
-- [ ] Both loops stop with the pause control and pause off-screen.
-- [ ] Reduced motion and no JavaScript: calm state, no scan bar (as today).
-- [ ] Build it so the real photo can replace the silhouette later (two-colour halftone layers or CSS masks over one image); note how in [Motion](design/motion.md).
+- [x] Two halftone layers (ink and pink, 9 px dot grid) masked to the silhouette and sliced into six strips; the 7 s loop with the calm phase, the first burst with the 14 px scan bar, and the smaller second burst, `steps(1)` frames, as in the mockup keyframes `pg-*` ([Motion](design/motion.md#about-portrait-g4-ink-slip--roller-jam-7-s-loop)).
+- [x] Pink dot circle drifts on its own 4 s loop (`6px, -4px`).
+- [x] Both loops stop with the pause control and pause off-screen.
+- [x] Reduced motion and no JavaScript: calm state, no scan bar (as today).
+- [x] Build it so the real photo can replace the silhouette later (two-colour halftone layers or CSS masks over one image); note how in [Motion](design/motion.md).
 
 ### C2. Flash analysis
 
-- [ ] Record the portrait loop at 60 fps at 1440 and 390 px and run a flash-analysis tool on it (for example EA's open-source IRIS, or PEAT on Windows); record the tool, version and result in `docs/audits/` ([WCAG 2.3.1](design/motion.md#global-rules): no more than three flashes per second).
-- [ ] If it fails, soften the burst (fewer frames, smaller jumps, lower contrast of the scan bar) and re-run.
+- [x] Record the portrait loop at 60 fps at 1440 and 390 px and run a flash-analysis tool on it (for example EA's open-source IRIS, or PEAT on Windows); record the tool, version and result in `docs/audits/` ([WCAG 2.3.1](design/motion.md#global-rules): no more than three flashes per second).
+- [x] If it fails, soften the burst (fewer frames, smaller jumps, lower contrast of the scan bar) and re-run.
 
 ### C3. Real devices and performance
 
 - [ ] Mid-range Android phone and Safari on iOS (David's devices): hero, approach and portrait run smoothly, drum text is sharp; a short screen recording of each in the PR.
 - [ ] Performance panel on a throttled profile: no long tasks while scrolling the landing page; record the trace summary.
 - [ ] Lighthouse mobile on the preview for `/` and `/cs/`, three runs each, compared with the [milestone 3 baseline](audits/2026-11-05/lighthouse-landing.md): Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05 (SEO `noindex` exception as before). Save a summary in `docs/audits/`.
-- [ ] Motion script size recorded (target under 2 KB compressed).
+- [x] Motion script size recorded (target under 2 KB compressed).
 
 ### C4. Tests
 
-- [ ] Playwright: portrait loops stop with the pause control and when scrolled off-screen; reduced motion shows the calm state with no scan bar.
-- [ ] Full suite on both languages: axe at 1280, 768 and 320 px, 320 px scroll, request, storage and CSP checks.
+- [x] Playwright: portrait loops stop with the pause control and when scrolled off-screen; reduced motion shows the calm state with no scan bar.
+- [x] Full suite on both languages: axe at 1280, 768 and 320 px, 320 px scroll, request, storage and CSP checks. Evidence: 138 e2e tests pass, including axe at 1280, 768 and 320 px on both pages.
 
 ## Acceptance checks (from MILESTONES.md)
 
 Record evidence here and in the PR that completes each check.
 
-- [ ] With `prefers-reduced-motion: reduce` emulated, no element has a running animation; verify with Playwright reading `getAnimations()`. (PR A, extended in B and C)
-- [ ] The pause control (`PauseControl`, built in milestone 2) is placed on every page before any looping motion (WCAG 2.2.2), stops all looping animations and is reachable by keyboard; verify with Playwright. (PR A; portrait added in C. Only the landing pages have looping motion.)
-- [ ] Using the pause toggle writes no cookie, `localStorage`, `sessionStorage` or IndexedDB entry; verify with Playwright. (PR A)
-- [ ] Looping animations pause when scrolled off-screen; verify with Playwright. (PR A for the drum, C for the portrait)
-- [ ] The portrait glitch passes a flash analysis (≤ 3 flashes per second); verify with a flash-analysis tool and record the result. (PR C)
+- [x] With `prefers-reduced-motion: reduce` emulated, no element has a running animation; verify with Playwright reading `getAnimations()`. (PR A, extended in B and C) Evidence: `motion.spec.ts`, `approach-motion.spec.ts`, `portrait-motion.spec.ts` (nothing runs, static hero, developed approach, calm portrait).
+- [x] The pause control (`PauseControl`, built in milestone 2) is placed on every page before any looping motion (WCAG 2.2.2), stops all looping animations and is reachable by keyboard; verify with Playwright. (PR A; portrait added in C. Only the landing pages have looping motion.) Evidence: `motion.spec.ts` (keyboard stop and restart, tab order before the hero text) and `portrait-motion.spec.ts` (the one control also stops the portrait).
+- [x] Using the pause toggle writes no cookie, `localStorage`, `sessionStorage` or IndexedDB entry; verify with Playwright. (PR A) Evidence: `motion.spec.ts` (and the reduced-motion opt-in test).
+- [x] Looping animations pause when scrolled off-screen; verify with Playwright. (PR A for the drum, C for the portrait) Evidence: `motion.spec.ts` (hero) and `portrait-motion.spec.ts` (portrait).
+- [x] The portrait glitch passes a flash analysis (≤ 3 flashes per second); verify with a flash-analysis tool and record the result. (PR C) Evidence: [flash analysis](audits/2026-11-05/flash-analysis.md): 0 flashes per second at 1440 and 390 px (largest changed area 15 % of the threshold). Approximate tool of our own, not PEAT or IRIS; the hero drum also passes (0, and 2 at a quarter of the area).
 - [ ] Smooth on a real mid-range phone and on Safari iOS (drum text not blurry); verify manually with a screen recording. (PR A for the drum on Safari, C for the whole page; David's devices)
 - [ ] Lighthouse performance and CLS targets still met; verify with Lighthouse. (PR C, spot check in A)
 - [ ] David signs off on the feel of each animation compared with the canvas. (Each PR) **Decided 5 November 2026: animations stay as built in PRs A and B; the sign-off moves to one comprehensive review before launch (milestone 6).** David checked the hero drum on Safari macOS and iOS and found it good.
