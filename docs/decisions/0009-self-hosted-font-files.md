@@ -1,7 +1,7 @@
 # 0009. Commit the font files and load them with the local font provider
 
 Date: 2026-11-04  
-Status: accepted
+Status: accepted (the subsetting is refined by [0010](0010-subset-fonts-to-site-characters.md))
 
 ## Context
 

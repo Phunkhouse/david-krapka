@@ -43,7 +43,7 @@ Pink at 45–60 % opacity is used with `mix-blend-mode: multiply`, so it reads a
 | Body | Sora | 400, 600, 700 | Paragraphs, buttons, navigation, card text. |
 | Mono | Space Mono | 400, 700 | Eyebrow labels, counters (1/3), tags, placeholders, footer line. Uppercase with `0.08em` tracking when used as a label. |
 
-All three must include the **latin-ext** subset for Czech (ř, ě, ů, č). Self-host them through the framework's font loader rather than linking Google Fonts at runtime, so no visitor data goes to Google and there is no layout shift from late font swaps.
+All three must cover Czech (ř, ě, ů, č); the site files are subset to the characters the site uses ([0010](../decisions/0010-subset-fonts-to-site-characters.md)). Self-host them through the framework's font loader rather than linking Google Fonts at runtime, so no visitor data goes to Google and there is no layout shift from late font swaps.
 
 ## Type scale
 

@@ -66,7 +66,7 @@ Slugs: `kultomat`, `eucal`, `vladan-vanek`, `upvideo`. Canonical host is `https:
 - Largest Contentful Paint ≤ 2.0 s in lab tests, ≤ 2.5 s at the 75th percentile for real visitors.
 - Cumulative Layout Shift ≤ 0.05; Interaction to Next Paint ≤ 200 ms.
 - Lighthouse mobile: Performance ≥ 95; Accessibility, Best Practices and SEO 100.
-- Fonts self-hosted, subset to Latin and Latin Extended, total font payload ≤ 150 KB.
+- Fonts self-hosted, subset to the characters the site uses (Latin and Czech), total font payload ≤ 150 KB (56.6 KB per page since [0010](decisions/0010-subset-fonts-to-site-characters.md)).
 - No third-party requests on page load.
 
 ### Content honesty (required)
@@ -119,7 +119,7 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 | Rendering | Fully static (`output: 'static'`, build to `dist/`), no server runtime | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
 | Package manager and runtime | pnpm (pinned with `packageManager`), Node from `.nvmrc` (recipe default 26 LTS) | From recipe |
 | Styling | Astro component-scoped styles plus global design tokens as CSS custom properties; no Tailwind; Sass only if a real need appears | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
-| Fonts | Rubik 900, Sora 400/600/700, Space Mono 400/700, committed as Latin and Latin Extended `woff2` subsets and loaded with the Astro Fonts API local provider and `unicode-range`; OFL licences served from `/fonts/licenses/` | Confirmed ([0009](decisions/0009-self-hosted-font-files.md)) |
+| Fonts | Rubik 900, Sora 400/600/700, Space Mono 400/700, committed as one site-subset `woff2` per weight ([0010](decisions/0010-subset-fonts-to-site-characters.md)) and loaded with the Astro Fonts API local provider; OFL licences served from `/fonts/licenses/` | Confirmed ([0009](decisions/0009-self-hosted-font-files.md)) |
 | Languages | English (default, `/`) and Czech (`/cs/`) with Astro i18n routing; typed dictionaries in `src/i18n/` so a missing key fails type checking | Confirmed ([0005](decisions/0005-bilingual-routing.md)) |
 | Case study content | MDX files in an Astro content collection, one per project and language; a schema enforces role, collaborators and AI share | Proposal |
 | Images | Optimised at build time (Astro `<Image>`/`<Picture>`, AVIF/WebP with fixed dimensions) | Proposal |
