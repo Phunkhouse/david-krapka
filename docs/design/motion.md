@@ -46,9 +46,9 @@ The drum is a 3D prism with three faces, T, M and R, rotated around the X axis (
 
 **On first scroll into view (plays once):**
 
-- The small-dot halftone letters develop: dot radius `--r` grows from 0 to 2.2 px over 1.6 s, `ease-out`. Requires `@property --r` (supported in all current evergreen browsers; without support the letters simply appear).
+- The small-dot halftone letters develop: dot radius `--r` grows from 0 to 2.2 px over 1.6 s in six steps (`steps(6, end)`; was `ease-out`, see *Performance* below). Requires `@property --r` (supported in all current evergreen browsers; without support the letters simply appear).
 - The pink “M” slides into register from `translate(18px, -14px)` and fades to 12 % opacity over 1.4 s.
-- Column text fades in from 6 px blur over 0.9 s.
+- Column text fades in over 0.9 s (opacity only; the 6 px blur was dropped, see *Performance* below).
 - Stagger per column: 0.2 s, 0.45 s, 0.7 s.
 
 The mockup's landing page plays these on load; on the live site they start when the section enters the viewport (IntersectionObserver, once).
@@ -62,7 +62,9 @@ The mockup's landing page plays these on load; on the live site they start when 
 
 **Letters faded (5 November 2026, David's review of PR B):** the big halftone letters and the pink M rest at 12 % opacity instead of full ink and 45 % pink, so the column text stays readable over them, also when a letter lifts into the copy on hover. The column paragraphs are semibold (Sora 600) for the same reason. One variable (`--letter-fade` in `Approach.astro`); the canvas still shows the stronger letters, so the canvas needs the same change.
 
-**Implementation (milestone 4, PR B).** Under `html.motion` a small script arms `#approach` (`data-develop="armed"`: letters at `--r: 0`, pink M offset and transparent, column text blurred) and sets `data-develop="play"` once, when the columns first reach 10 % visibility. If the script or `IntersectionObserver` is missing, nothing is armed and the static, developed state shows. `--r` is a registered property (`@property`, `global.css`); without support the letters appear. These one-time animations are not looped, so the pause control leaves them alone. Hover applies on `(hover: hover)`; the lift and tilt only without a reduced-motion preference, while the colour change stays. Anchor links scroll smoothly only under `prefers-reduced-motion: no-preference`.
+**Implementation (milestone 4, PR B).** Under `html.motion` a small script arms `#approach` (`data-develop="armed"`: letters at `--r: 0`, pink M offset and transparent, column text transparent) and sets `data-develop="play"` once, when the columns first reach 10 % visibility. If the script or `IntersectionObserver` is missing, nothing is armed and the static, developed state shows. `--r` is a registered property (`@property`, `global.css`); without support the letters appear. These one-time animations are not looped, so the pause control leaves them alone. Hover applies on `(hover: hover)`; the lift and tilt only without a reduced-motion preference, while the colour change stays. Anchor links scroll smoothly only under `prefers-reduced-motion: no-preference`.
+
+**Performance (5 November 2026).** A trace of one scroll down the landing page (Chromium, 2× pixel density) showed this animation caused about 80 % of the paints while scrolling: a change to `--r` inside a gradient repaints the letters on the main thread every frame, and it plays exactly while the visitor scrolls. Stepping it cuts that to six paints per letter; the blur on the column text was dropped because filters are heavy for a throttled GPU. The hero drum and the About portrait loops already animate only `transform` and `opacity` and pause off-screen; they cost no paints.
 
 Keyboard users should get the same highlight with `:focus-within` if a column ever contains a link. Today the columns contain no interactive elements, so no focus state is needed.
 
