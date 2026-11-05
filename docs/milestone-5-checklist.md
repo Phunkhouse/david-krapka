@@ -155,11 +155,11 @@ Record evidence here and in the PR that completes each check.
 
 ## Wrap-up
 
-- [ ] Update MILESTONES.md: milestone 5 status `done`, completion evidence (PR links), status date, unplanned changes and items carried forward (for example short pages or Czech versions left for after launch).
-- [ ] Update SPEC.md: case study scope, content row (no longer a proposal), images row, resolved open questions.
-- [ ] Update [content and case studies](content-and-case-studies.md) with the filled project cards, and the [design README](design/README.md) (case study page designed, screenshot question resolved).
-- [ ] `AGENTS.md` lists every new command or environment variable (`SHOW_DRAFTS`, if added).
-- [ ] Milestone 6 scope still lists the site-wide Open Graph image, sitemap (now including case study pages) and the placeholder `--fail` check.
+- [x] Update MILESTONES.md: milestone 5 status, completion evidence (PR links), unplanned changes and items carried forward. Done as "done except content", with the content carried to milestone 6 (David, 5 November 2026).
+- [x] Update SPEC.md: case study scope, content row, images row, resolved open questions, limitations.
+- [x] Update [content and case studies](content-and-case-studies.md) and the [design README](design/README.md). The project cards themselves are not filled yet (carried to milestone 6); the design README now links the designed case study page.
+- [x] `AGENTS.md` lists every new command or environment variable (`check:drafts`, `SHOW_DRAFTS`).
+- [x] Milestone 6 scope lists the site-wide Open Graph image, the sitemap (including case study pages), the placeholder `--fail` check, and now the carried case study content.
 
 ## Risks and notes
 

@@ -141,7 +141,7 @@ macOS locally versus Ubuntu in CI; Playwright browser version tied to the instal
 ## Known limitations and risks
 
 - **Content is the critical path.** Most project facts, Emplifi details, the portrait photo, the CV and the public email address are still missing. Design and code can progress, but launch cannot.
-- **Case study pages are not designed.** Milestone 5 cannot start building until the canvas has a case study template.
+- **Case study content is still placeholder.** The template, pipeline and four draft pages are built (milestone 5); the real text and screenshots are written from David's project cards in the milestone 6 pre-release pass. Drafts are never built on `main`.
 - **DNS move at launch.** Moving the zone to Cloudflare can break email if a mail record is missed; compare records one by one before switching nameservers and send a test email afterwards.
 - **Looping motion** carries accessibility risk; the pause control and flash check are launch requirements.
 - **Trade suspension (accepted risk, [LEG-001](#legal-requirements)).** The “Have a project?” invitation sits in a grey area while the trade licence is suspended; the legal classification and the conditions of David's social-security support are unresolved and outside the audit's scope. David accepted the risk on 4 November 2026 on the basis that it is only an invitation to talk ([0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)).
@@ -158,8 +158,7 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 | Milestone 2 | Mobile menu and language switcher: first proposal on the canvas and in [Shell components](design/shell-components.md); David to iterate. Pause control: ~~placement and behaviour~~ decided 5 November 2026 ([Motion](design/motion.md#implementation-decisions-milestone-4)). |
 | Milestone 3 | ~~Mobile hero intro, reduced-motion hero, Experience in the navigation~~ decided 4 November 2026 ([Landing page](design/landing-page.md#implementation-decisions-milestone-3)). |
 | Milestone 3 | ~~Tablet layout (720–1100 px)~~ built from the proposal in [Visual system](design/visual-system.md#breakpoints-proposal) and accepted by David on the previews, 5 November 2026. |
-| Milestone 5 | Case study page design; whether short client projects get their own pages; Czech translations of case studies at launch or later. |
-| Milestone 5 | How Systerna is presented (card only, teaser, or left out). |
+| Milestone 5 | ~~Case study page design; Czech translations; Systerna~~ decided 5 November 2026: designed on the canvas, both languages ship together, Systerna stays a card in progress. Whether each client project keeps a short page or links out is decided when David fills its card (milestone 6). |
 | Milestone 6 | Public email address (**also blocks the privacy notice, [LEG-003](#legal-requirements)**), LinkedIn and GitHub URLs, CV content and languages. |
 | Milestone 6 | Final role title, availability statement and which audience comes first. |
 | Milestone 6 | Analytics at launch: none (proposal) or a cookieless tool. |
