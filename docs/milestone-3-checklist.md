@@ -103,27 +103,27 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 ### C1. About (`#about`)
 
-- [ ] 400 px round portrait: yellow paper, ink border, pink dot circle offset behind it, silhouette placeholder in the static G4 state (calm, no scan bar), `aria-hidden` or with alternative text once a real photo exists. Portrait above the text on mobile.
-- [ ] Eyebrow, H2 “Playful by design. **Serious** about the work.” with the designed emphasis, text with the `[personal note]` placeholder.
+- [x] 400 px round portrait: yellow paper, ink border, pink dot circle offset behind it, silhouette placeholder in the static G4 state (calm, no scan bar), `aria-hidden` or with alternative text once a real photo exists. Portrait above the text on mobile.
+- [x] Eyebrow, H2 “Playful by design. **Serious** about the work.” with the designed emphasis, text with the `[personal note]` placeholder.
 
 ### C2. Contact (`#contact`)
 
-- [ ] Yellow paper with rollers and the huge halftone “?” with pink copy bleeding off the bottom right (`aria-hidden`).
-- [ ] H2, “Hiring?” card (paper) and “Have a project?” card (ink, pink shadow), stacked on mobile with the shorter Hiring text.
-- [ ] Card links per the section 0 decision, with prefilled subjects in both languages.
-- [ ] Mono link line: email · LinkedIn · GitHub (placeholders until milestone 6).
-- [ ] LEG-001: wording as designed, an invitation to talk; no prices, rates, terms or availability anywhere ([0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)).
+- [x] Yellow paper with rollers and the huge halftone “?” with pink copy bleeding off the bottom right (`aria-hidden`).
+- [x] H2, “Hiring?” card (paper) and “Have a project?” card (ink, pink shadow), stacked on mobile with the shorter Hiring text.
+- [x] Card links per the section 0 decision, with prefilled subjects in both languages.
+- [x] Mono link line: email · LinkedIn · GitHub (placeholders until milestone 6).
+- [x] LEG-001: wording as designed, an invitation to talk; no prices, rates, terms or availability anywhere ([0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)).
 
 ### C3. Tablet pass
 
-- [ ] Apply the breakpoint proposal across all sections: < 720 px mobile, 720–1099 px stacked hero with 2-column work cards and approach columns becoming a grid at ≥ 960 px, ≥ 1100 px desktop.
-- [ ] Check the header at 720 px fits four links and the switcher in both languages ([Shell components](design/shell-components.md)); raise the header breakpoint if not.
-- [ ] Screenshots at 768 and 1024 px in both languages for David.
+- [x] Apply the breakpoint proposal across all sections: < 720 px mobile, 720–1099 px stacked hero with 2-column work cards and approach columns becoming a grid at ≥ 960 px, ≥ 1100 px desktop.
+- [x] Check the header at 720 px fits four links and the switcher in both languages ([Shell components](design/shell-components.md)); raise the header breakpoint if not.
+- [x] Screenshots at 768 and 1024 px in both languages for David.
 
 ### C4. Placeholder report
 
-- [ ] A small script lists every `[…]` placeholder in the built HTML per page (for example `pnpm placeholders`, reading `dist/`). It reports only; milestone 6 turns it into a failing check for production. Add it to `AGENTS.md` Commands.
-- [ ] Paste its output in the PR description as the list of remaining placeholders.
+- [x] `pnpm placeholders` (`scripts/placeholders.mjs`) lists every `[…]` placeholder in the built HTML per page. It reports only; `--fail` is there for the milestone 6 production check. Added to `AGENTS.md` Commands.
+- [x] Paste its output in the PR description as the list of remaining placeholders.
 
 ### C5. Performance and quality
 
@@ -134,8 +134,8 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 ### C6. Tests
 
-- [ ] Playwright: full landing on both languages: anchors, heading order, contact links (`mailto:` with the right subject, if decided), no price or rate wording (a simple text check for currency symbols and “per hour / za hodinu”) as a LEG-001 guard.
-- [ ] axe, 320 px scroll, request, storage and CSP checks pass on the finished page.
+- [x] Playwright: full landing on both languages: anchors, heading order, contact links (`mailto:` with the right subject, if decided), no price or rate wording (a simple text check for currency symbols and “per hour / za hodinu”) as a LEG-001 guard.
+- [x] axe, 320 px scroll, request, storage and CSP checks pass on the finished page.
 
 ## Acceptance checks (from MILESTONES.md)
 
