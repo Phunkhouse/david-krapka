@@ -59,6 +59,8 @@ const ogImage = new URL(image.src, Astro.site)
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#1B2F7A" />
+    <!-- Name under the iOS home-screen icon; without it iOS uses the long page title. -->
+    <meta name="apple-mobile-web-app-title" content={copy.site.name} />
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-body" preload={[{ weight: 400 }]} />
     <Font cssVariable="--font-mono" />
