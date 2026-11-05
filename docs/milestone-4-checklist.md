@@ -127,7 +127,7 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 - [ ] Mid-range Android phone and Safari on iOS (David's devices): hero, approach and portrait run smoothly, drum text is sharp; a short screen recording of each in the PR.
 - [ ] Performance panel on a throttled profile: no long tasks while scrolling the landing page; record the trace summary.
-- [ ] Lighthouse mobile on the preview for `/` and `/cs/`, three runs each, compared with the [milestone 3 baseline](audits/2026-11-05/lighthouse-landing.md): Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05 (SEO `noindex` exception as before). Save a summary in `docs/audits/`.
+- [x] Lighthouse mobile on the preview for `/` and `/cs/`, three runs each, compared with the [milestone 3 baseline](audits/2026-11-05/lighthouse-landing.md): Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05 (SEO `noindex` exception as before). Save a summary in `docs/audits/`. Evidence (PR #20 preview, Lighthouse 12.6.1, three runs per page): Performance 100, Best Practices 100, LCP 1.2 to 1.4 s, CLS 0, TBT 0 ms on `/` and `/cs/` (milestone 3 baseline: 99, LCP 1.7 to 1.8 s). Accessibility **96 in all six runs**, not 100: axe samples the hero heading line and subline mid cross-fade (contrast 1.4 to 2.0 at partial opacity), the effect accepted on 5 November 2026, but here it happens every run rather than occasionally. SEO 66 from the expected `noindex`.
 - [x] Motion script size recorded (target under 2 KB compressed).
 
 ### C4. Tests
@@ -145,7 +145,7 @@ Record evidence here and in the PR that completes each check.
 - [x] Looping animations pause when scrolled off-screen; verify with Playwright. (PR A for the drum, C for the portrait) Evidence: `motion.spec.ts` (hero) and `portrait-motion.spec.ts` (portrait).
 - [x] The portrait glitch passes a flash analysis (≤ 3 flashes per second); verify with a flash-analysis tool and record the result. (PR C) Evidence: [flash analysis](audits/2026-11-05/flash-analysis.md): 0 flashes per second at 1440 and 390 px (largest changed area 15 % of the threshold). Approximate tool of our own, not PEAT or IRIS; the hero drum also passes (0, and 2 at a quarter of the area).
 - [ ] Smooth on a real mid-range phone and on Safari iOS (drum text not blurry); verify manually with a screen recording. (PR A for the drum on Safari, C for the whole page; David's devices)
-- [ ] Lighthouse performance and CLS targets still met; verify with Lighthouse. (PR C, spot check in A)
+- [x] Lighthouse performance and CLS targets still met; verify with Lighthouse. (PR C, spot check in A) Evidence (PR #20 preview, Lighthouse 12.6.1, three runs per page): Performance 100, Best Practices 100, LCP 1.2 to 1.4 s, CLS 0, TBT 0 ms on `/` and `/cs/` (milestone 3 baseline: 99, LCP 1.7 to 1.8 s). Accessibility **96 in all six runs**, not 100: axe samples the hero heading line and subline mid cross-fade (contrast 1.4 to 2.0 at partial opacity), the effect accepted on 5 November 2026, but here it happens every run rather than occasionally. SEO 66 from the expected `noindex`.
 - [ ] David signs off on the feel of each animation compared with the canvas. (Each PR) **Decided 5 November 2026: animations stay as built in PRs A and B; the sign-off moves to one comprehensive review before launch (milestone 6).** David checked the hero drum on Safari macOS and iOS and found it good.
 
 ## Wrap-up
