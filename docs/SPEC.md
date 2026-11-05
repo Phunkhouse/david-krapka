@@ -93,7 +93,7 @@ Slugs: `kultomat`, `eucal`, `vladan-vanek`, `upvideo`. Canonical host is `https:
 
 From the [legal planning audit of 4 November 2026](audits/2026-11-04/legal-planning.md) (Planning mode; not legal advice, and not a statement that the site complies). Requirements keep their audit IDs. Each is checked again in the Pre-launch audit in milestone 6.
 
-**Operator facts (David, 4 November 2026):** a natural person in the Czech Republic with an IČO whose trade licence is suspended while on social-security support; the site offers no paid work for now and is a showcase and job search; the public email address is undecided; no client contract or NDA restricts showing past work.
+**Operator facts (David, 4 November 2026):** a natural person in the Czech Republic with an IČO whose trade licence is suspended while on social-security support; the site offers no paid work for now and is a showcase and job search; the public email address is `hello@david-krapka.eu`, an alias to be set up at Active24 (decided 5 November 2026); no client contract or NDA restricts showing past work.
 
 | ID | Requirement | When |
 | --- | --- | --- |

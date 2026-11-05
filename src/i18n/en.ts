@@ -143,14 +143,14 @@ export const en = {
       cv: '[Download CV] →',
       emplifi: {
         name: 'Emplifi',
-        dates: '[20XX – 20XX]',
-        meta: '[Role] · employed',
+        dates: 'Oct 2019 – Jun 2026',
+        meta: 'UI engineer, team lead · employed',
         lesson: '[How to ship inside a big product without breaking it.]',
         detail: '[Responsibilities and one concrete decision, to confirm.]',
       },
       freelance: {
         name: 'Freelance',
-        dates: '[20XX – now]',
+        dates: '2016 – now',
         meta: 'Independent · for clients',
         lesson: 'Owning the whole thing, from the first question to launch.',
         detail: 'Eucal, Vladan Vaněk, UpVideo.',
@@ -183,10 +183,9 @@ export const en = {
         link: 'Start a project →',
         subject: 'Project: ',
       },
-      // Placeholders until milestone 6 (public email, LinkedIn, GitHub).
-      email: '[email address]',
-      linkedin: '[LinkedIn]',
-      github: '[GitHub]',
+      // The address and profile URLs live in src/content/profiles.ts.
+      linkedin: 'LinkedIn',
+      github: 'GitHub',
     },
   },
   privacy: {

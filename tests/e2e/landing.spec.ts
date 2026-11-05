@@ -131,8 +131,33 @@ for (const {
       await expect(links).toHaveCount(2)
       for (const [index, subject] of subjects.entries()) {
         const href = (await links.nth(index).getAttribute('href')) ?? ''
-        expect(href).toMatch(/^mailto:/)
+        expect(href).toMatch(/^mailto:hello@david-krapka\.eu\?/)
         expect(href).toContain(`subject=${encodeURIComponent(subject)}`)
+      }
+    })
+
+    test('the contact line links the email, LinkedIn and GitHub', async ({
+      page,
+    }) => {
+      await page.goto(path)
+      const links = page.locator('#contact .links').getByRole('link')
+      await expect(links).toHaveCount(3)
+      await expect(links.nth(0)).toHaveAttribute(
+        'href',
+        'mailto:hello@david-krapka.eu',
+      )
+      await expect(links.nth(1)).toHaveAccessibleName('LinkedIn')
+      await expect(links.nth(1)).toHaveAttribute(
+        'href',
+        'https://www.linkedin.com/in/david-krapka/',
+      )
+      await expect(links.nth(2)).toHaveAttribute(
+        'href',
+        'https://github.com/Phunkhouse',
+      )
+      // External profiles do not leak the opener.
+      for (const index of [1, 2]) {
+        await expect(links.nth(index)).toHaveAttribute('rel', /noopener/)
       }
     })
 

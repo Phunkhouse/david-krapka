@@ -1,13 +1,14 @@
 ---
 import { t, type Locale } from '../../i18n'
 import { urlFor } from '../../i18n/routes'
+import { profiles } from '../../content/profiles'
 
 interface Props {
   locale: Locale
 }
 
-// schema.org Person for search engines (landing pages only). LinkedIn and
-// GitHub join as `sameAs` once their real URLs are known (milestone 6 PR C).
+// schema.org Person for search engines (landing pages only); `sameAs` lists
+// the external profiles.
 const { locale } = Astro.props
 const copy = t(locale)
 const person = {
@@ -17,6 +18,7 @@ const person = {
   jobTitle: copy.site.role,
   description: copy.site.description,
   url: urlFor(locale, 'home'),
+  sameAs: [profiles.linkedin, profiles.github],
 }
 // A data block, not a script: CSP does not apply. Escape "<" so the JSON can
 // never close the element.

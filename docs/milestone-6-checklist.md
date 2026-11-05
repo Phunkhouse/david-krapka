@@ -31,7 +31,7 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 - [x] Milestone 5 merged and wrapped up ([PR #27](https://github.com/Phunkhouse/david-krapka/pull/27)), with the case study content carried here.
 - [x] Approve this plan, or name changes. Approved by merging [PR #28](https://github.com/Phunkhouse/david-krapka/pull/28).
-- [ ] **1. Public email address** (blocks C and D; SPEC open question, legal planning Q3). Recommendation: one address on the domain, for example `hello@david-krapka.eu`, set up as an alias at Active24 that forwards to the inbox David reads. It is easy to change or retire if spam grows, keeps the private inbox private, and stays valid if the mail provider changes. Alternative: an existing personal address.
+- [x] **1. Public email address** (blocks C and D; SPEC open question, legal planning Q3). Recommendation: one address on the domain, for example `hello@david-krapka.eu`, set up as an alias at Active24 that forwards to the inbox David reads. It is easy to change or retire if spam grows, keeps the private inbox private, and stays valid if the mail provider changes. Alternative: an existing personal address. **Decided 5 November 2026: as recommended, `hello@david-krapka.eu`.** The alias must exist at Active24 and forward to David's inbox before launch (private to-do; a test mail goes with the DNS move, Ops 1).
 - [ ] **2. CV** (blocks C; SPEC proposal). Recommendation: English only at launch, served at `/cv/david-krapka-cv.pdf` (both languages link to the same file; the Czech link reads “Stáhnout životopis (v angličtině)”). David supplies the PDF; before committing, check it for data he does not want public (home address, date of birth, personal phone) and strip document metadata (author, software, edit history) with `exiftool` (LEG-007). Alternative: a Czech CV as well, at `/cv/david-krapka-zivotopis.pdf`.
 - [ ] **3. Role title, availability and audience order** (blocks C; SPEC open question). Recommendation: keep “product-minded engineer” and the current order (hiring first, projects second). If an availability line is wanted, make it about employment only (“Open to product engineering roles”), with no availability for paid client work while the trade is suspended ([LEG-001](SPEC.md#legal-requirements), [0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)). Alternative: no availability statement.
 - [ ] **4. Analytics at launch** (SPEC open question). Recommendation: none. The site stays storage-free and third-party-free, which is why there is no cookie banner ([LEG-005](SPEC.md#legal-requirements)). Revisit after launch with a cookieless EU tool and a new legal planning pass.
@@ -50,7 +50,7 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 These gate PRs C, D and E, not PR A.
 
-- [ ] Public email address (decision 1), LinkedIn URL, GitHub URL.
+- [x] Public email address (decision 1), LinkedIn URL, GitHub URL.
 - [ ] CV PDF, checked for unwanted personal data (decision 2, LEG-007).
 - [ ] Emplifi role, dates, responsibilities and one concrete decision; the Experience card headline.
 - [ ] Freelance start year.
@@ -122,12 +122,12 @@ Not committed, because the repository is public and they are for David's own com
 
 ## PR C: Contact, CV and landing facts
 
-- [ ] Email address in the three contact links with the prefilled subjects (“Role: ” / “Project: ”, “Pozice: ” / “Projekt: ”); LinkedIn and GitHub links (external, marked as such); JSON-LD `sameAs`.
-- [ ] CV PDF at `/cv/david-krapka-cv.pdf` per decision 2, metadata stripped; both “Download CV” links point to it with a file type and size hint.
-- [ ] Emplifi card, freelance start year, personal note, Kultomat card summary and any role or availability copy per decision 3, in both languages.
+- [x] Email address in the three contact links with the prefilled subjects (“Role: ” / “Project: ”, “Pozice: ” / “Projekt: ”); LinkedIn and GitHub links (external, marked ↗, `rel="noopener"`); JSON-LD `sameAs`. Details in `src/content/profiles.ts`. The alias `hello@david-krapka.eu` is not set up yet (see decision 1).
+- [ ] **Deferred by David (5 November 2026):** the CV on his machine shows his personal phone number, photo and email, so a public version has to be exported first. CV PDF at `/cv/david-krapka-cv.pdf` per decision 2, metadata stripped; both “Download CV” links point to it with a file type and size hint.
+- [ ] Emplifi card, freelance start year, personal note, Kultomat card summary and any role or availability copy per decision 3, in both languages. Done from David's CV: Emplifi dates (Oct 2019 – Jun 2026, Socialbakers and Emplifi), role line (UI engineer, team lead), freelance start (2016). Still open: the Emplifi lesson and concrete decision, the personal note, the Kultomat summary, decision 3.
 - [ ] Re-read both landing pages for LEG-001: no prices, rates, terms or availability for paid work.
 - [ ] `pnpm placeholders` shows no placeholder on the landing pages.
-- [ ] Playwright: the `mailto:` links carry the address and the encoded subjects; the CV link returns a PDF.
+- [ ] Playwright: the `mailto:` links carry the address and the encoded subjects (done, `tests/e2e/landing.spec.ts`); the CV link returns a PDF (waits for the CV).
 
 ## PR D: Privacy notice
 
