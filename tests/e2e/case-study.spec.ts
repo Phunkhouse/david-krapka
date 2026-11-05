@@ -188,17 +188,21 @@ for (const v of versions) {
   })
 }
 
-test('cards without a built case study are not links', async ({ page }) => {
+test('only Systerna has no case study link', async ({ page }) => {
   await page.goto('/')
   const work = page.getByRole('region', { name: 'Selected work' })
-  await expect(work.getByRole('link', { name: 'Eucal' })).toHaveAttribute(
-    'href',
-    '/work/eucal/',
-  )
-  for (const name of ['Vladan Vaněk', 'UpVideo', 'Systerna']) {
-    await expect(work.getByRole('link', { name })).toHaveCount(0)
-    await expect(work.getByRole('heading', { name })).toBeVisible()
+  for (const [name, slug] of [
+    ['Eucal', 'eucal'],
+    ['Vladan Vaněk', 'vladan-vanek'],
+    ['UpVideo', 'upvideo'],
+  ]) {
+    await expect(work.getByRole('link', { name })).toHaveAttribute(
+      'href',
+      `/work/${slug}/`,
+    )
   }
+  await expect(work.getByRole('link', { name: 'Systerna' })).toHaveCount(0)
+  await expect(work.getByRole('heading', { name: 'Systerna' })).toBeVisible()
 })
 
 test.describe('case study template', () => {
@@ -254,7 +258,9 @@ test.describe('case study template', () => {
 
   const order = [
     ['/work/kultomat/', '/work/eucal/', 'Eucal'],
-    ['/work/eucal/', '/work/kultomat/', 'Kultomat'],
+    ['/work/eucal/', '/work/vladan-vanek/', 'Vladan Vaněk'],
+    ['/work/vladan-vanek/', '/work/upvideo/', 'UpVideo'],
+    ['/work/upvideo/', '/work/kultomat/', 'Kultomat'],
     ['/cs/work/kultomat/', '/cs/work/eucal/', 'Eucal'],
   ] as const
   for (const [from, to, name] of order) {
@@ -271,7 +277,12 @@ test.describe('case study template', () => {
   test('images have fixed dimensions and alternative text', async ({
     page,
   }) => {
-    for (const path of ['/work/kultomat/', '/work/eucal/']) {
+    for (const path of [
+      '/work/kultomat/',
+      '/work/eucal/',
+      '/work/vladan-vanek/',
+      '/work/upvideo/',
+    ]) {
       await page.goto(path)
       for (const img of await page.locator('main img').all()) {
         await expect(img).toHaveAttribute('width', /\d+/)

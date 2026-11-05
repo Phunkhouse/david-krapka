@@ -140,7 +140,7 @@ Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device ch
 
 ## Milestone 5: Case studies
 
-**Status:** planning; work plan in the [milestone 5 checklist](milestone-5-checklist.md) (four PRs: case study pipeline and card links; designed template; Kultomat; client projects and wrap-up).
+**Status:** in progress; the pipeline, the designed template and draft placeholder pages for all four projects are merged or in review. Kultomat's real content, the client projects' content and screenshots are pending from David (his decision, 5 November 2026: the cards stay placeholders until he fills them before launch). Work plan in the [milestone 5 checklist](milestone-5-checklist.md).
 
 **Goal:** Kultomat as the main case study and short client project pages, built on verified facts.
 
