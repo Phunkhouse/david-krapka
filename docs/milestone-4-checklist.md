@@ -83,7 +83,7 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 - [x] Playwright: scrolling the hero out of view pauses its animations; scrolling back resumes them unless the user paused.
 - [x] Playwright with JavaScript disabled: no running animations and no pause control.
 - [x] The H1 accessible name is still “Think. Make. Rethink.” on both pages; axe, 320 px scroll, request, storage and CSP checks pass.
-- [x] Lighthouse mobile on the preview for `/` (one run is enough here; the full record is in PR C): LCP and CLS still within target. Evidence (preview, Lighthouse 12.6.1, two runs): Performance 100, Best Practices 100, LCP 1.3 s, CLS 0, TBT 0. Accessibility 100 in one run and 96 in the other: axe sampled a heading line and subline mid cross-fade (contrast 1.36 at partial opacity). It is a timing artefact of the fade, not text that stays unreadable; open question for David whether to accept it or drop the fade in favour of a slide only.
+- [x] Lighthouse mobile on the preview for `/` (one run is enough here; the full record is in PR C): LCP and CLS still within target. Evidence (preview, Lighthouse 12.6.1, two runs): Performance 100, Best Practices 100, LCP 1.3 s, CLS 0, TBT 0. Accessibility 100 in one run and 96 in the other: axe sampled a heading line and subline mid cross-fade (contrast 1.36 at partial opacity). It is a timing artefact of the fade, not text that stays unreadable; **Decided 5 November 2026: accept it**; the cross-fade stays as designed and an occasional 96 is a known measurement effect, not a defect.
 
 ## PR B: Approach A5 and small interactions
 
