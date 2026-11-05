@@ -15,15 +15,30 @@ interface Props {
   locale?: Locale
   /** Full-bleed content (the landing page): no padding or max width on main. */
   bleed?: boolean
+  /** Open Graph, for pages with a route. Title defaults to the page title. */
+  og?: {
+    type?: 'website' | 'article'
+    title?: string
+    image?: { src: string; width: number; height: number; alt: string }
+  }
 }
 
-const { title, description, route, locale: localeProp, bleed } = Astro.props
+const {
+  title,
+  description,
+  route,
+  locale: localeProp,
+  bleed,
+  og = {},
+} = Astro.props
 const locale: Locale =
   localeProp ?? (isLocale(Astro.currentLocale) ? Astro.currentLocale : 'en')
 const copy = t(locale)
 const alternates = route ? alternatesFor(route) : []
-// Pages without a route (404, specimen) switch to the home pages.
+// Pages without a route (404) switch to the home pages.
 const shellRoute: RouteKey = route ?? 'home'
+const ogLocales: Record<Locale, string> = { en: 'en_GB', cs: 'cs_CZ' }
+const ogImage = og.image && new URL(og.image.src, Astro.site)
 ---
 
 <html lang={locale}>
@@ -43,6 +58,32 @@ const shellRoute: RouteKey = route ?? 'home'
     ))}
     {route && (
       <link rel="alternate" hreflang="x-default" href={urlFor('en', route)} />
+    )}
+    {route && (
+      <>
+        <meta property="og:type" content={og.type ?? 'website'} />
+        <meta property="og:site_name" content={copy.site.name} />
+        <meta property="og:title" content={og.title ?? title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={urlFor(locale, route)} />
+        <meta property="og:locale" content={ogLocales[locale]} />
+        {alternates
+          .filter((alt) => alt.locale !== locale)
+          .map((alt) => (
+            <meta
+              property="og:locale:alternate"
+              content={ogLocales[alt.locale]}
+            />
+          ))}
+      </>
+    )}
+    {route && og.image && ogImage && (
+      <>
+        <meta property="og:image" content={ogImage.href} />
+        <meta property="og:image:width" content={String(og.image.width)} />
+        <meta property="og:image:height" content={String(og.image.height)} />
+        <meta property="og:image:alt" content={og.image.alt} />
+      </>
     )}
     <!-- Motion is on only with JavaScript (the pause control needs it) and
          without a reduced-motion preference. Set before first paint so the

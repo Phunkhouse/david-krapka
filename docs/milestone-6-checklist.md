@@ -30,20 +30,20 @@ PR A comes first because nothing blocks it and it shrinks the launch PR to a few
 Each item has a recommendation; answering “as recommended” is enough. Decisions go into SPEC, the design docs or a decision record in the PR that implements them.
 
 - [x] Milestone 5 merged and wrapped up ([PR #27](https://github.com/Phunkhouse/david-krapka/pull/27)), with the case study content carried here.
-- [ ] Approve this plan, or name changes.
+- [x] Approve this plan, or name changes. Approved by merging [PR #28](https://github.com/Phunkhouse/david-krapka/pull/28).
 - [ ] **1. Public email address** (blocks C and D; SPEC open question, legal planning Q3). Recommendation: one address on the domain, for example `hello@david-krapka.eu`, set up as an alias at Active24 that forwards to the inbox David reads. It is easy to change or retire if spam grows, keeps the private inbox private, and stays valid if the mail provider changes. Alternative: an existing personal address.
 - [ ] **2. CV** (blocks C; SPEC proposal). Recommendation: English only at launch, served at `/cv/david-krapka-cv.pdf` (both languages link to the same file; the Czech link reads “Stáhnout životopis (v angličtině)”). David supplies the PDF; before committing, check it for data he does not want public (home address, date of birth, personal phone) and strip document metadata (author, software, edit history) with `exiftool` (LEG-007). Alternative: a Czech CV as well, at `/cv/david-krapka-zivotopis.pdf`.
 - [ ] **3. Role title, availability and audience order** (blocks C; SPEC open question). Recommendation: keep “product-minded engineer” and the current order (hiring first, projects second). If an availability line is wanted, make it about employment only (“Open to product engineering roles”), with no availability for paid client work while the trade is suspended ([LEG-001](SPEC.md#legal-requirements), [0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)). Alternative: no availability statement.
 - [ ] **4. Analytics at launch** (SPEC open question). Recommendation: none. The site stays storage-free and third-party-free, which is why there is no cookie banner ([LEG-005](SPEC.md#legal-requirements)). Revisit after launch with a cookieless EU tool and a new legal planning pass.
-- [ ] **5. Sitemap** (blocks A). Recommendation: a small static endpoint `src/pages/sitemap.xml.ts` that lists every page in both languages with `xhtml:link` `hreflang` alternates, built from `src/i18n/routes.ts` and the same published-case-study helper the routes use, so drafts can never leak into it. No new dependency. `robots.txt` allows everything and points to the sitemap. Alternative: the official `@astrojs/sitemap` integration with its i18n option and a filter for drafts (one dependency, less control over the draft rule).
+- [x] **5. Sitemap** (blocks A). Recommendation: a small static endpoint `src/pages/sitemap.xml.ts` that lists every page in both languages with `xhtml:link` `hreflang` alternates, built from `src/i18n/routes.ts` and the same published-case-study helper the routes use, so drafts can never leak into it. No new dependency. `robots.txt` allows everything and points to the sitemap. Alternative: the official `@astrojs/sitemap` integration with its i18n option and a filter for drafts (one dependency, less control over the draft rule). **Decided 5 November 2026: as recommended.**
 - [ ] **6. Favicon, monogram and site Open Graph image** (blocks B; [design README](design/README.md#not-designed-yet) item 7). Needs boards on the [canvas](https://claude.ai/artifact/4ZHRJaJupE3YgvXMZrBdk5). Recommendation for the brief: a “DK” monogram in Rubik 900, ink on yellow paper with the pink misregistered copy, legible at 16 px (simplify to a single letter or the halftone dot if “DK” blurs); delivered as `favicon.svg`, a 32 px `favicon.ico` and a 180 px `apple-touch-icon.png`. The site image follows `OG-Case` (1200 × 630, ink frame) with “Think. Make. Rethink.” and the role line, one per language. David designs it, or asks for a design session; the boards are exported to `docs/design/mockups/`.
 - [ ] **7. DNS move timing** (blocks Ops 1). Recommendation: move the zone to Cloudflare **before** launch, as its own step after PR A, in a quiet moment: import the zone, compare every record with Websupport one by one (Active24 MX, SPF, DKIM, DMARC, autodiscover and any webmail host), **drop** the dead Vercel apex and `www` records instead of copying them, switch the nameservers, then send and receive test mail. The domain is attached to the Worker only at launch (PR G). This separates an email failure from the site launch and gives propagation time. Alternative: everything on launch day.
-- [ ] **8. `workers.dev` and preview URLs after launch** (affects A and G). Recommendation: set `workers_dev: false` at launch so production answers only on the domain; keep `preview_urls` for PR review. Once `noindex` leaves `_headers`, previews lose it too, because static `_headers` cannot vary by host. PR A checks whether Cloudflare marks preview URLs as `noindex` by itself; if not, the canonical links (already pointing at the apex) tell search engines which copy counts. Alternative: keep `workers_dev` on (a second indexable copy of the site, mitigated only by canonical links).
-- [ ] **9. Final headers** (affects A). Recommendation: keep the current set and add `Cross-Origin-Opener-Policy: same-origin`; keep HSTS at two years with `includeSubDomains` but **without** `preload` at launch (preload is hard to undo). Before launch, confirm in the DNS records that no subdomain (webmail, autodiscover) is served over plain HTTP, because `includeSubDomains` forces HTTPS on all of them once a browser has seen the header on the apex. Alternative: add `preload` and submit to the preload list after a few weeks without problems.
+- [x] **8. `workers.dev` and preview URLs after launch** (affects A and G). Recommendation: set `workers_dev: false` at launch so production answers only on the domain; keep `preview_urls` for PR review. Once `noindex` leaves `_headers`, previews lose it too, because static `_headers` cannot vary by host. PR A checks whether Cloudflare marks preview URLs as `noindex` by itself; if not, the canonical links (already pointing at the apex) tell search engines which copy counts. Alternative: keep `workers_dev` on (a second indexable copy of the site, mitigated only by canonical links). **Decided 5 November 2026: as recommended.** Cloudflare's docs say `workers.dev` preview URLs carry `X-Robots-Tag: noindex` by themselves ([Previews](https://developers.cloudflare.com/workers/previews/)); `preview_urls: true` is set explicitly in `wrangler.jsonc`, so previews keep working when `workers_dev` is off.
+- [x] **9. Final headers** (affects A). Recommendation: keep the current set and add `Cross-Origin-Opener-Policy: same-origin`; keep HSTS at two years with `includeSubDomains` but **without** `preload` at launch (preload is hard to undo). Before launch, confirm in the DNS records that no subdomain (webmail, autodiscover) is served over plain HTTP, because `includeSubDomains` forces HTTPS on all of them once a browser has seen the header on the apex. Alternative: add `preload` and submit to the preload list after a few weeks without problems. **Decided 5 November 2026: as recommended.**
 - [ ] **10. Client case studies: page or link out** (affects E; milestone 5 decision 3, carried). Decided per project when its card is filled: a short page when the card has the role, the problem, one real decision and a verifiable outcome; otherwise its draft is removed and the card links out to the live site.
 - [ ] **11. Minimum content for launch** (affects G). Recommendation: launch needs Kultomat in both languages plus every other project either as a finished short page or as a link-out card; no draft case study blocks launch. If Kultomat is not ready, the launch waits. Alternative: launch the landing page with Kultomat as a link-out too.
 - [ ] **12. Certified flash check** (affects F; optional, carried from milestone 4). Recommendation: skip. Our own analysis measured 0 flashes per second for every looping element ([flash analysis](audits/2026-11-05/flash-analysis.md)), well under the WCAG 2.3.1 limit of 3. Alternative: run PEAT or IRIS on a screen recording and save the result in `docs/audits/`.
-- [ ] **13. Licences** (blocks A; [LEG-009](SPEC.md#legal-requirements)). Recommendation: code under MIT in `LICENSE`; a short `CONTENT-LICENSE.md` (or a section in the README) saying that texts, case studies, images, the portrait and the CV are all rights reserved, and that the OFL fonts keep their own licence. Alternative: no open licence (everything all rights reserved).
+- [x] **13. Licences** (blocks A; [LEG-009](SPEC.md#legal-requirements)). Recommendation: code under MIT in `LICENSE`; a short `CONTENT-LICENSE.md` (or a section in the README) saying that texts, case studies, images, the portrait and the CV are all rights reserved, and that the OFL fonts keep their own licence. Alternative: no open licence (everything all rights reserved). **Decided 5 November 2026: as recommended.** Recorded in [0013](decisions/0013-mit-code-and-reserved-content.md).
 - [ ] **14. Footer year** (open item since milestone 2). Recommendation: keep the build year. Workers Builds rebuilds on every merge, and a portfolio is updated at least yearly; close the open item. Alternative: a fixed “© 2026” or a range.
 
 ## Content inputs for this milestone (David)
@@ -82,36 +82,36 @@ Not committed, because the repository is public and they are for David's own com
 
 ### A1. Branch and docs
 
-- [ ] Branch from up-to-date `main`; draft PR; `check` and `playwright` skipped on the draft (intended).
-- [ ] Record decisions 4, 5, 8, 9, 13 and 14 in SPEC (open questions, data and trust boundaries, technical approach) and, where lasting, a decision record.
+- [x] Branch from up-to-date `main`; draft PR; `check` and `playwright` skipped on the draft (intended).
+- [x] Record decisions 4, 5, 8, 9, 13 and 14 in SPEC (open questions, data and trust boundaries, technical approach) and, where lasting, a decision record. Done for 5, 8, 9 and 13 (SPEC: data and trust boundaries, technical approach; decision 0013). Decisions 4 and 14 are still open.
 
 ### A2. Licences
 
-- [ ] `LICENSE` (MIT, David Křapka, 2026) and the content note per decision 13; README links both.
+- [x] `LICENSE` (MIT, David Křapka, 2026) and the content note per decision 13; README links both.
 
 ### A3. Search and sharing
 
-- [ ] `sitemap.xml` per decision 5: every published page in both languages with `hreflang` alternates and `x-default`; no draft, no 404, no `/specimen/`, no privacy page if David prefers it left out.
-- [ ] `robots.txt`: allow all, `Sitemap: https://david-krapka.eu/sitemap.xml`.
-- [ ] Landing and privacy pages get `og:type`, `og:site_name`, `og:title`, `og:description`, `og:url` and `og:locale` (+ `og:locale:alternate`), shared with the case study layout rather than duplicated. `og:image` follows in PR B.
-- [ ] JSON-LD `Person` on both landing pages: name, job title, URL, `sameAs` (LinkedIn and GitHub as placeholders until PR C; omit rather than ship a placeholder URL).
+- [x] `sitemap.xml` per decision 5: every published page in both languages with `hreflang` alternates and `x-default`; no draft, no 404, no `/specimen/`, no privacy page if David prefers it left out. The privacy pages are listed.
+- [x] `robots.txt`: allow all, `Sitemap: https://david-krapka.eu/sitemap.xml`.
+- [x] Landing and privacy pages get `og:type`, `og:site_name`, `og:title`, `og:description`, `og:url` and `og:locale` (+ `og:locale:alternate`), shared with the case study layout rather than duplicated. `og:image` follows in PR B. Moved into `BaseLayout` (prop `og`), which the case study layout now uses.
+- [x] JSON-LD `Person` on both landing pages: name, job title, URL, `sameAs` (LinkedIn and GitHub as placeholders until PR C; omit rather than ship a placeholder URL). `sameAs` left out until PR C.
 
 ### A4. Headers and hosting
 
-- [ ] `public/_headers` per decision 9; `noindex` stays until PR G. Update the header comment.
-- [ ] `wrangler.jsonc` has no `observability` block and Workers Logs are off in the dashboard (LEG-004); record it in the PR.
-- [ ] Find out whether Cloudflare preview URLs send `X-Robots-Tag: noindex` on their own (decision 8); record the answer.
+- [x] `public/_headers` per decision 9; `noindex` stays until PR G. Update the header comment.
+- [x] `wrangler.jsonc` has no `observability` block and Workers Logs are off in the dashboard (LEG-004); record it in the PR. Checked by David on 5 November 2026: the Worker's Observability settings show no Workers Logs or Traces option, and say that Logpush and Tail Workers “cannot be added to a Worker that only has static assets”. Re-check if a Worker script is ever added.
+- [x] Find out whether Cloudflare preview URLs send `X-Robots-Tag: noindex` on their own (decision 8); record the answer. Yes, per Cloudflare's docs (decision 8).
 
 ### A5. Remove `/specimen/`
 
-- [ ] Move the self-hosted font, font licence and CSP checks in `tests/e2e/design-system.spec.ts` to real pages (landing, privacy, a case study, 404), then delete `src/pages/specimen.astro`, its test and any code used only by it.
-- [ ] `PauseControl` and `BaseLayout` lose their specimen-only branches, if any.
+- [x] Move the self-hosted font, font licence and CSP checks in `tests/e2e/design-system.spec.ts` to real pages (landing, privacy, a case study, 404), then delete `src/pages/specimen.astro`, its test and any code used only by it. Fonts on `/`, CSP on `/privacy/` instead of `/specimen/`.
+- [x] `PauseControl` and `BaseLayout` lose their specimen-only branches, if any. `PauseControl` lost its static `live`-less mode; it is always the working control.
 
 ### A6. Tests
 
-- [ ] Playwright: `sitemap.xml` is valid XML, lists exactly the expected URLs for a drafts-off build (or the check runs in `pnpm check:drafts`, since the Playwright build includes drafts), and every listed URL returns 200.
-- [ ] Playwright: `robots.txt` content; Open Graph and JSON-LD present and in the right language on both landing pages; JSON-LD parses.
-- [ ] Playwright: the new header is present; `/specimen/` returns the 404.
+- [x] Playwright: `sitemap.xml` is valid XML, lists exactly the expected URLs for a drafts-off build (or the check runs in `pnpm check:drafts`, since the Playwright build includes drafts), and every listed URL returns 200. `tests/e2e/seo.spec.ts`; the drafts-off build is covered by `pnpm check:drafts`, which already scans `.xml` files for `/work/`.
+- [x] Playwright: `robots.txt` content; Open Graph and JSON-LD present and in the right language on both landing pages; JSON-LD parses.
+- [x] Playwright: the new header is present; `/specimen/` returns the 404.
 
 ## PR B: Icons and site Open Graph image
 

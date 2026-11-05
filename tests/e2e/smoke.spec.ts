@@ -103,4 +103,8 @@ test('sends the security headers from public/_headers', async ({ page }) => {
   // noindex is removed at launch (milestone 6); change this assertion then.
   expect(headers['x-robots-tag']).toBe('noindex')
   expect(headers['x-content-type-options']).toBe('nosniff')
+  expect(headers['cross-origin-opener-policy']).toBe('same-origin')
+  expect(headers['strict-transport-security']).toBe(
+    'max-age=63072000; includeSubDomains',
+  )
 })

@@ -6,7 +6,7 @@ import ProjectArt from '../components/case-study/ProjectArt.astro'
 import { nextCaseStudy, type CaseStudy } from '../content/load'
 import { cardFor } from '../content/projects'
 import { t } from '../i18n'
-import { pathFor, urlFor } from '../i18n/routes'
+import { pathFor } from '../i18n/routes'
 
 interface Props {
   study: CaseStudy
@@ -26,7 +26,6 @@ const next = await nextCaseStudy(study)
 // While the summary is still a placeholder it gets the yellow placeholder mark.
 const summaryIsPlaceholder = /^\[.*\]$/.test(data.summary)
 const route = `work/${slug}` as const
-const ogImage = data.ogImage && new URL(data.ogImage.src, Astro.site)
 ---
 
 <BaseLayout
@@ -34,30 +33,17 @@ const ogImage = data.ogImage && new URL(data.ogImage.src, Astro.site)
   description={data.summary}
   route={route}
   bleed
+  og={{
+    type: 'article',
+    title: data.title,
+    image: data.ogImage && {
+      src: data.ogImage.src,
+      width: data.ogImage.width,
+      height: data.ogImage.height,
+      alt: `${labels.caseStudyLabel}: ${data.title}`,
+    },
+  }}
 >
-  <Fragment slot="head">
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content={copy.site.name} />
-    <meta property="og:title" content={data.title} />
-    <meta property="og:description" content={data.summary} />
-    <meta property="og:url" content={urlFor(locale, route)} />
-    <meta property="og:locale" content={locale === 'cs' ? 'cs_CZ' : 'en_GB'} />
-    {ogImage && data.ogImage && (
-      <>
-        <meta property="og:image" content={ogImage.href} />
-        <meta property="og:image:width" content={String(data.ogImage.width)} />
-        <meta
-          property="og:image:height"
-          content={String(data.ogImage.height)}
-        />
-        <meta
-          property="og:image:alt"
-          content={`${labels.caseStudyLabel}: ${data.title}`}
-        />
-      </>
-    )}
-  </Fragment>
-
   <article class:list={['case-study', `case-study--${data.kind}`]}>
     <header class="page-head">
       <div class="head-text">

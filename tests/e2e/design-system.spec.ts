@@ -1,11 +1,10 @@
-import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
-// The specimen page is temporary (removed before launch, milestone 6).
-// Focus checks now run against the real shell (shell.spec.ts).
+// Site-wide design system checks on real pages. Focus checks are in
+// shell.spec.ts. The temporary /specimen/ page was removed in milestone 6.
 
 test('self-hosted fonts load from the site itself', async ({ page }) => {
-  await page.goto('/specimen/', { waitUntil: 'networkidle' })
+  await page.goto('/', { waitUntil: 'networkidle' })
   const loaded = await page.evaluate(async () => {
     await document.fonts.ready
     return [...document.fonts]
@@ -24,14 +23,9 @@ test('self-hosted fonts load from the site itself', async ({ page }) => {
   )
 })
 
-test('specimen is noindex and has no axe violations', async ({ page }) => {
-  await page.goto('/specimen/')
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
-    'content',
-    'noindex',
-  )
-  const results = await new AxeBuilder({ page }).analyze()
-  expect(results.violations).toEqual([])
+test('the removed specimen page is a 404', async ({ request }) => {
+  const response = await request.get('/specimen/')
+  expect(response.status()).toBe(404)
 })
 
 test('font licences ship with the site (LEG-008)', async ({ request }) => {
@@ -45,7 +39,7 @@ test('font licences ship with the site (LEG-008)', async ({ request }) => {
 for (const path of [
   '/',
   '/cs/',
-  '/specimen/',
+  '/privacy/',
   '/missing-page/',
   '/work/kultomat/',
   '/cs/work/kultomat/',

@@ -3,26 +3,21 @@ import { t, type Locale } from '../i18n'
 
 interface Props {
   locale: Locale
-  /**
-   * Working control (landing page): hidden until JavaScript runs, because it
-   * would do nothing without it. Without this flag the component is a static
-   * specimen.
-   */
-  live?: boolean
 }
 
-const { locale, live = false } = Astro.props
+// Hidden until JavaScript runs, because it would do nothing without it.
+const { locale } = Astro.props
 const copy = t(locale)
 ---
 
 <button
   class="pause"
   type="button"
-  data-pause={live ? '' : undefined}
+  data-pause
   data-label-stop={copy.pause.stop}
   data-label-start={copy.pause.start}
   data-state="playing"
-  hidden={live}
+  hidden
 >
   <span class="icon" aria-hidden="true">
     <span></span>
