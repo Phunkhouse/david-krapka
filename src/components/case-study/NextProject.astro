@@ -1,0 +1,225 @@
+---
+import ProjectArt from './ProjectArt.astro'
+import type { CaseStudy } from '../../content/load'
+import { cardFor } from '../../content/projects'
+import { t, type Locale } from '../../i18n'
+import { pathFor } from '../../i18n/routes'
+
+interface Props {
+  locale: Locale
+  /** The next case study; without one only the "All work" link shows. */
+  next?: CaseStudy
+}
+
+const { locale, next } = Astro.props
+const copy = t(locale)
+const labels = copy.caseStudy
+const card = next && cardFor(locale, next.slug)
+---
+
+<section
+  class:list={['next', 'surface-ink', { 'next--empty': !next }]}
+  aria-labelledby="next-title"
+>
+  <div class="inner">
+    <div class="heading">
+      <h2 id="next-title" class:list={{ 'visually-hidden': !next }}>
+        {labels.next}
+      </h2>
+      <a class="all" href={`${pathFor(locale, 'home')}#work`}>
+        {labels.allWork}
+      </a>
+    </div>
+    {next && card && (
+      <article class="card">
+        <div class="card-art">
+          <ProjectArt slug={next.slug} place="card" />
+        </div>
+        <div class="card-body">
+          <p class="label">{card.label}</p>
+          <h3>
+            <a class="card-link" href={pathFor(locale, `work/${next.slug}`)}>
+              {card.name}
+            </a>
+          </h3>
+          <p class="text">{card.text}</p>
+          <p class="more">{copy.home.work.readMore}</p>
+        </div>
+      </article>
+    )}
+  </div>
+</section>
+
+<style>
+  .next {
+    border-top: var(--border);
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: 56px var(--pad-inline);
+  }
+
+  .heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  h2 {
+    color: var(--yellow);
+    font-size: clamp(2.75rem, 2.1rem + 2.6667vw, 4.5rem);
+    line-height: 1;
+    text-shadow: 4px 3px 0 var(--pink);
+  }
+
+  .all {
+    color: var(--yellow);
+    font-weight: 700;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 8px 8px 0 var(--pink);
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+  }
+
+  .card-art {
+    border-bottom: var(--border);
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .card-body .label {
+    font-size: 12px;
+  }
+
+  h3 {
+    font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem);
+    line-height: 1;
+  }
+
+  .card-link {
+    text-decoration: none;
+  }
+
+  /* The name's link covers the whole card (as on the landing cards). */
+  .card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .card-link:focus-visible {
+    outline: none;
+  }
+
+  .card-link:focus-visible::after {
+    outline: var(--focus-width) solid var(--focus-color);
+    outline-offset: var(--focus-offset);
+  }
+
+  .text {
+    max-width: 520px;
+    font-size: var(--text-body-lg);
+    line-height: 1.55;
+  }
+
+  .more {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .card:has(.card-link:focus-visible) {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--pink);
+  }
+
+  @media (hover: hover) {
+    .card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0 var(--pink);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition: none;
+    }
+  }
+
+  /* Only one case study: just the way back, no tall empty band. */
+  .next--empty .inner {
+    padding-block: 32px;
+  }
+
+  @media (min-width: 720px) {
+    .inner {
+      gap: 40px;
+      padding-block: 96px;
+    }
+
+    .next--empty .inner {
+      padding-block: 40px;
+    }
+
+    h2 {
+      text-shadow: 6px 5px 0 var(--pink);
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      box-shadow: 12px 12px 0 var(--pink);
+    }
+
+    .card-art {
+      border-right: var(--border);
+      border-bottom: 0;
+    }
+
+    .card-body {
+      justify-content: center;
+      gap: 16px;
+      padding: 48px;
+    }
+
+    .card-body .label {
+      font-size: 13px;
+    }
+
+    .card:has(.card-link:focus-visible) {
+      box-shadow: 16px 16px 0 var(--pink);
+    }
+
+    @media (hover: hover) {
+      .card:hover {
+        box-shadow: 16px 16px 0 var(--pink);
+      }
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .card {
+      grid-template-columns: 420px minmax(0, 1fr);
+    }
+  }
+</style>

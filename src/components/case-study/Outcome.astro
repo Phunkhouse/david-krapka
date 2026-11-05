@@ -1,0 +1,54 @@
+---
+import { t } from '../../i18n'
+
+interface Props {
+  /** The number, if there is one. Without it the row is a qualitative outcome. */
+  metric?: string
+  /** Where the number comes from, the time frame and how it was measured. */
+  source?: string
+}
+
+const { metric, source } = Astro.props
+const labels = t(Astro.currentLocale).caseStudy
+---
+
+<li class="outcome">
+  {metric && <p class="metric">{metric}</p>}
+  <div class="text">
+    <slot />
+  </div>
+  {source && (
+    <p class="source">
+      {labels.source}: {source}
+    </p>
+  )}
+</li>
+
+<style>
+  .outcome {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 18px 0;
+    border-top: var(--border);
+  }
+
+  .metric {
+    font-family: var(--family-display);
+    font-size: clamp(2rem, 1.85rem + 0.6vw, 2.5rem);
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .text {
+    font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+    line-height: 1.55;
+  }
+
+  .source {
+    font-family: var(--family-mono);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+</style>

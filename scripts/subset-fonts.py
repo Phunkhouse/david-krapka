@@ -38,7 +38,7 @@ FAMILIES = {
 # typographic punctuation and the arrows and symbols the design uses.
 NBSP = '\u00a0'
 CZECH = 'ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž'
-EXTRAS = CZECH + NBSP + '·–—‘’“”„…•©®×€→↑←↓'
+EXTRAS = CZECH + NBSP + '·–—‘’“”„…•©®×€→↑←↓↗'
 
 
 def site_characters(src_dir: Path) -> set[str]:

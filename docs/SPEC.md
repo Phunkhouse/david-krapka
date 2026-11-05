@@ -66,7 +66,7 @@ Slugs: `kultomat`, `eucal`, `vladan-vanek`, `upvideo`. Canonical host is `https:
 - Largest Contentful Paint ≤ 2.0 s in lab tests, ≤ 2.5 s at the 75th percentile for real visitors.
 - Cumulative Layout Shift ≤ 0.05; Interaction to Next Paint ≤ 200 ms.
 - Lighthouse mobile: Performance ≥ 95; Accessibility, Best Practices and SEO 100.
-- Fonts self-hosted, subset to the characters the site uses (Latin and Czech), total font payload ≤ 150 KB (56.6 KB per page since [0010](decisions/0010-subset-fonts-to-site-characters.md)).
+- Fonts self-hosted, subset to the characters the site uses (Latin and Czech), total font payload ≤ 150 KB (about 57 KB per page since [0010](decisions/0010-subset-fonts-to-site-characters.md)).
 - No third-party requests on page load.
 
 ### Content honesty (required)
@@ -122,7 +122,7 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 | Fonts | Rubik 900, Sora 400/600/700, Space Mono 400/700, committed as one site-subset `woff2` per weight ([0010](decisions/0010-subset-fonts-to-site-characters.md)) and loaded with the Astro Fonts API local provider; OFL licences served from `/fonts/licenses/` | Confirmed ([0009](decisions/0009-self-hosted-font-files.md)) |
 | Languages | English (default, `/`) and Czech (`/cs/`) with Astro i18n routing; typed dictionaries in `src/i18n/` so a missing key fails type checking | Confirmed ([0005](decisions/0005-bilingual-routing.md)) |
 | Case study content | MDX files in an Astro content collection, one per project and language; a schema enforces role, collaborators and AI share; drafts are built on preview branches only | Confirmed ([0011](decisions/0011-case-studies-as-mdx-collection.md)) |
-| Images | Optimised at build time (Astro `<Image>`/`<Picture>`, AVIF/WebP with fixed dimensions) | Proposal |
+| Images | Optimised at build time: case study screenshots through the `Figure` MDX component (Astro `<Picture>`, AVIF and WebP, fixed dimensions, `sizes`, required `alt`) | Confirmed (milestone 5) |
 | Formatting and linting | Prettier (`semi: false`, `singleQuote: true`), ESLint flat config with `@eslint/js`, `typescript-eslint` and `eslint-plugin-astro` | From recipe |
 | Tests | Playwright for smoke, navigation, reduced-motion and accessibility checks (with axe), against the built site served by `wrangler dev`. Vitest only when there is logic worth unit testing. | Confirmed (milestone 2) |
 | CI | GitHub Actions, **Budget-conscious**: draft PRs defer cloud jobs; ready PRs run the full suite | Confirmed ([0002](decisions/0002-budget-conscious-ci.md)) |

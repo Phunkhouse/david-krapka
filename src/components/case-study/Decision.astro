@@ -1,0 +1,116 @@
+---
+import { t } from '../../i18n'
+
+interface Props {
+  /** Position among the page's decisions: "Decision 1". */
+  n: number
+  name: string
+  chose: string
+  insteadOf: string
+  because: string
+  checkedBy: string
+}
+
+const { n, name, chose, insteadOf, because, checkedBy } = Astro.props
+const labels = t(Astro.currentLocale).caseStudy
+const rows = [
+  [labels.chose, chose],
+  [labels.insteadOf, insteadOf],
+  [labels.because, because],
+  [labels.checkedBy, checkedBy],
+]
+---
+
+<section class="decision" aria-label={`${labels.decision} ${n}: ${name}`}>
+  <div class="head">
+    <p class="label">
+      {labels.decision} {n}
+    </p>
+    <h3>{name}</h3>
+  </div>
+  <dl>
+    {rows.map(([term, value]) => (
+      <div>
+        <dt class="label">{term}</dt>
+        <dd>{value}</dd>
+      </div>
+    ))}
+  </dl>
+</section>
+
+<style>
+  .decision {
+    border: var(--border);
+    background: var(--paper);
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px 16px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .head .label {
+    color: var(--yellow);
+    font-size: 12px;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
+    line-height: 1.1;
+  }
+
+  dl {
+    margin: 0;
+    padding: 4px 16px;
+  }
+
+  dl > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+  }
+
+  dl > div + div {
+    border-top: 1px dashed var(--ink-line);
+  }
+
+  dt {
+    font-size: 12px;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  @media (min-width: 720px) {
+    .head {
+      padding: 16px 24px;
+    }
+
+    dl {
+      padding: 6px 24px;
+    }
+
+    dl > div {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 20px;
+      padding: 14px 0;
+    }
+
+    dt {
+      padding-top: 3px;
+    }
+
+    dd {
+      font-size: 17px;
+    }
+  }
+</style>

@@ -100,29 +100,29 @@ These gate PRs C and D, not PR A. The [working project card](content-and-case-st
 
 ### B1. Design handoff
 
-- [ ] Export the case study boards to `docs/design/mockups/`, record the canvas version, and write `docs/design/case-study.md` (layout, type sizes, colours, spacing, breakpoints, copy for labels in both languages). Resolve decision 8 in the design README.
+- [x] Export the case study boards to `docs/design/mockups/`, record the canvas version, and write `docs/design/case-study.md` (layout, type sizes, colours, spacing, breakpoints, copy for labels in both languages). Resolve decision 8 in the design README.
 
 ### B2. Layout
 
-- [ ] `CaseStudyLayout` to the design: page header with the project's print motif, facts panel, reading column, section headings for the shared structure, desktop, tablet and mobile.
-- [ ] Long and short variants from the same layout (`kind`), not two templates.
-- [ ] “Next project” per decision 10, with the card lift from PR A.
+- [x] `CaseStudyLayout` to the design: page header with the project's print motif, facts panel, reading column, section headings for the shared structure, desktop, tablet and mobile.
+- [x] Long and short variants from the same layout (`kind`), not two templates.
+- [x] “Next project” per decision 10, with the card lift from PR A. With only one case study built, the section shrinks to the “← All work” link.
 
 ### B3. Figures and images
 
-- [ ] `Figure` MDX component: `<Picture>` (AVIF, WebP), fixed dimensions, `sizes`, caption, reading-width and full-bleed variants; `alt` required by its props.
-- [ ] Screenshots kept in the project's content folder, pre-optimised sources (sensible maximum width, metadata stripped); record the size budget per page in the PR.
-- [ ] The first screen of a case study stays text-first so LCP is text or a properly prioritised image (`loading="eager"`, `fetchpriority="high"` only for a first-screen image).
+- [x] `Figure` MDX component: `<Picture>` (AVIF, WebP), fixed dimensions, `sizes`, caption, reading-width and full-bleed variants; `alt` required by its props.
+- [ ] Screenshots kept in the project's content folder, pre-optimised sources (sensible maximum width, metadata stripped); record the size budget per page in the PR. **Moved to PR C:** there are no screenshots yet; `Figure` shows a labelled placeholder box until `src` is set.
+- [x] The first screen of a case study stays text-first so LCP is text or a properly prioritised image (`loading="eager"`, `fetchpriority="high"` only for a first-screen image).
 
 ### B4. Open Graph
 
-- [ ] Per decision 9: `og:title`, `og:description`, `og:url`, `og:locale`, `og:image` (with width, height and alt) on case study pages; image files from the canvas template, metadata stripped.
+- [ ] Per decision 9: `og:title`, `og:description`, `og:url`, `og:locale`, `og:image` (with width, height and alt) on case study pages; image files from the canvas template, metadata stripped. **Partly:** the tags are in; `og:image` is emitted once a case study sets the optional `ogImage` field. The images are exported from `OG-Case` in PRs C and D, when each summary is final.
 
 ### B5. Tests
 
-- [ ] Playwright: every image on a case study page has `width`, `height` and non-empty `alt` (or is `aria-hidden` decorative art); no layout shift while images load (read `layout-shift` entries with a PerformanceObserver).
-- [ ] Playwright: “Next project” goes to the next published case study in the agreed order and wraps around.
-- [ ] Screenshots against the boards at 1440 and 390 px in the PR, plus 768 and 1024 px.
+- [x] Playwright: every image on a case study page has `width`, `height` and non-empty `alt` (or is `aria-hidden` decorative art); no layout shift while images load (read `layout-shift` entries with a PerformanceObserver).
+- [x] Playwright: “Next project” goes to the next published case study in the agreed order and wraps around.
+- [x] Screenshots against the boards at 1440 and 390 px in the PR, plus 768 and 1024 px. Compared locally at 390, 768, 1024, 1100 and 1440 px; fixes from that pass: the H1 sized to its column (container units), the reading column capped at 720 px at every width, the header letter scaled between 1100 and 1440 px.
 
 ## PR C: Kultomat
 

@@ -1,97 +1,197 @@
 ---
+import type { MarkdownHeading } from 'astro'
 import BaseLayout from './BaseLayout.astro'
-import type { CaseStudy } from '../content/load'
+import NextProject from '../components/case-study/NextProject.astro'
+import ProjectArt from '../components/case-study/ProjectArt.astro'
+import { nextCaseStudy, type CaseStudy } from '../content/load'
+import { cardFor } from '../content/projects'
 import { t } from '../i18n'
-import { pathFor } from '../i18n/routes'
+import { pathFor, urlFor } from '../i18n/routes'
 
 interface Props {
   study: CaseStudy
+  /** Headings from render(); the H2s make the "On this page" list. */
+  headings: MarkdownHeading[]
 }
 
-// Basic structure only: the designed template comes with the case study
-// boards (milestone 5, PR B). The facts are the schema's required fields.
-const { study } = Astro.props
+// Design: docs/design/case-study.md (canvas page "Case study pages").
+const { study, headings } = Astro.props
 const { data, locale, slug } = study
-const labels = t(locale).caseStudy
 const copy = t(locale)
+const labels = copy.caseStudy
+const card = cardFor(locale, slug)
+const long = data.kind === 'long'
+const sections = headings.filter((heading) => heading.depth === 2)
+const next = await nextCaseStudy(study)
+// While the summary is still a placeholder it gets the yellow placeholder mark.
+const summaryIsPlaceholder = /^\[.*\]$/.test(data.summary)
+const route = `work/${slug}` as const
+const ogImage = data.ogImage && new URL(data.ogImage.src, Astro.site)
 ---
 
 <BaseLayout
   title={`${data.title} · ${copy.site.name}`}
   description={data.summary}
-  route={`work/${slug}`}
+  route={route}
+  bleed
 >
-  <article class="case-study">
-    <p class="back">
-      <a href={`${pathFor(locale, 'home')}#work`}>{labels.back}</a>
-    </p>
-    {data.draft && <p class="label draft">{labels.draft}</p>}
-    <h1>{data.title}</h1>
-    <p class="summary">{data.summary}</p>
+  <Fragment slot="head">
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content={copy.site.name} />
+    <meta property="og:title" content={data.title} />
+    <meta property="og:description" content={data.summary} />
+    <meta property="og:url" content={urlFor(locale, route)} />
+    <meta property="og:locale" content={locale === 'cs' ? 'cs_CZ' : 'en_GB'} />
+    {ogImage && data.ogImage && (
+      <>
+        <meta property="og:image" content={ogImage.href} />
+        <meta property="og:image:width" content={String(data.ogImage.width)} />
+        <meta
+          property="og:image:height"
+          content={String(data.ogImage.height)}
+        />
+        <meta
+          property="og:image:alt"
+          content={`${labels.caseStudyLabel}: ${data.title}`}
+        />
+      </>
+    )}
+  </Fragment>
 
-    <section class="facts" aria-labelledby="facts-title">
-      <h2 id="facts-title" class="label">
-        {labels.factsTitle}
-      </h2>
-      <dl>
-        <div>
-          <dt>{labels.status}</dt>
-          <dd>{data.status}</dd>
-        </div>
-        <div>
-          <dt>{labels.dates}</dt>
-          <dd>{data.dates}</dd>
-        </div>
-        <div>
-          <dt>{labels.role}</dt>
-          <dd>{data.role}</dd>
-        </div>
-        <div>
-          <dt>{labels.collaborators}</dt>
-          <dd>
-            {data.collaborators.length === 0
-              ? labels.noCollaborators
-              : data.collaborators
-                  .map(({ name, role }) => `${name} (${role})`)
-                  .join(', ')}
-          </dd>
-        </div>
-        <div>
-          <dt>{labels.ai}</dt>
-          <dd>{data.ai}</dd>
-        </div>
-        {data.stack && (
-          <div>
-            <dt>{labels.stack}</dt>
-            <dd>{data.stack.join(', ')}</dd>
-          </div>
-        )}
-        {data.liveUrl && (
-          <div>
-            <dt>{labels.liveSite}</dt>
-            <dd>
-              <a href={data.liveUrl} rel="noopener">
-                {new URL(data.liveUrl).host}
-              </a>
-            </dd>
-          </div>
-        )}
-      </dl>
-    </section>
+  <article class:list={['case-study', `case-study--${data.kind}`]}>
+    <header class="page-head">
+      <div class="head-text">
+        <a class="back" href={`${pathFor(locale, 'home')}#work`}>
+          {labels.back}
+        </a>
+        {data.draft && <p class="label draft">{labels.draft}</p>}
+        <p class="label">{card.label}</p>
+        <h1>{data.title}</h1>
+        <p class="summary">
+          <span class:list={{ highlight: summaryIsPlaceholder }}>
+            {data.summary}
+          </span>
+        </p>
+      </div>
+      <div class="head-art">
+        <ProjectArt slug={slug} place="header" long={long} />
+      </div>
+    </header>
 
     <div class="body">
-      <slot />
+      <aside class="facts-col">
+        <section class="facts" aria-labelledby="facts-title">
+          <h2 id="facts-title" class="label">
+            {labels.factsTitle}
+          </h2>
+          <dl>
+            <div>
+              <dt class="label">{labels.status}</dt>
+              <dd>{data.status}</dd>
+            </div>
+            <div>
+              <dt class="label">{labels.dates}</dt>
+              <dd>{data.dates}</dd>
+            </div>
+            <div>
+              <dt class="label">{labels.role}</dt>
+              <dd>{data.role}</dd>
+            </div>
+            <div>
+              <dt class="label">{labels.collaborators}</dt>
+              {data.collaborators.length === 0 ? (
+                <dd>{labels.noCollaborators}</dd>
+              ) : (
+                data.collaborators.map(({ name, role }) => (
+                  <dd>
+                    {name} · {role}
+                  </dd>
+                ))
+              )}
+            </div>
+            <div>
+              <dt class="label">{labels.ai}</dt>
+              <dd>{data.ai}</dd>
+            </div>
+            {data.stack && (
+              <div>
+                <dt class="label">{labels.stack}</dt>
+                <dd>{data.stack.join(', ')}</dd>
+              </div>
+            )}
+            {data.liveUrl && (
+              <div>
+                <dt class="label">{labels.liveSite}</dt>
+                <dd class="live">
+                  <a href={data.liveUrl} rel="noopener">
+                    {new URL(data.liveUrl).host} ↗
+                  </a>
+                </dd>
+              </div>
+            )}
+          </dl>
+        </section>
+
+        {long && sections.length > 0 && (
+          <nav class="toc" aria-labelledby="toc-title">
+            <h2 id="toc-title" class="label">
+              {labels.toc}
+            </h2>
+            <ol>
+              {sections.map((section, index) => (
+                <li>
+                  <a href={`#${section.slug}`}>
+                    <span class="toc-number" aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span>{section.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )}
+      </aside>
+
+      <div class="prose">
+        <slot />
+      </div>
     </div>
   </article>
+
+  <NextProject locale={locale} next={next} />
 </BaseLayout>
 
 <style>
-  .case-study {
+  /* Page header: text on paper, the card art as the print motif. Mobile:
+     art band above the text; from 720 px side by side. */
+  .page-head {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-m);
-    max-width: 44rem;
-    padding-bottom: var(--pad-section);
+    border-block: var(--border);
+  }
+
+  .head-art {
+    order: -1;
+    border-bottom: var(--border);
+  }
+
+  .head-text {
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 28px var(--pad-inline) 36px;
+  }
+
+  .back {
+    align-self: flex-start;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .label {
+    font-size: 12px;
   }
 
   .draft {
@@ -100,49 +200,264 @@ const copy = t(locale)
     background: var(--yellow);
   }
 
+  /* Fluid with the page, but never wider than its column (a one-word name
+     such as KULTOMAT must not break), hence the container units. */
+  h1 {
+    font-size: min(clamp(3.5rem, 1.8286rem + 6.8571vw, 8rem), 18cqi);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    text-shadow: var(--shadow-heading);
+  }
+
+  .case-study--short h1 {
+    font-size: min(clamp(3.5rem, 1.8286rem + 6.8571vw, 7rem), 18cqi);
+  }
+
   .summary {
-    font-size: var(--text-body-lg);
+    max-width: 640px;
+    font-size: clamp(1.125rem, 0.9857rem + 0.5714vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  /* Body: facts panel, then the reading column. */
+  .body {
+    display: flow-root;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: 0 var(--pad-inline) 64px;
+  }
+
+  .facts-col {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 48px;
   }
 
   .facts {
-    padding: var(--gap-s);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
     border: var(--border);
+    background: var(--paper);
+    box-shadow: 6px 6px 0 var(--pink);
   }
 
-  .facts h2 {
-    margin-bottom: var(--gap-xs);
-    font-size: var(--text-label);
-    text-transform: uppercase;
+  .facts h2,
+  .toc h2 {
+    font-size: 13px;
+    line-height: 1.4;
   }
 
   dl {
-    display: grid;
-    gap: var(--gap-xs);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     margin: 0;
   }
 
-  dt {
-    font-family: var(--family-mono);
-    font-size: var(--text-label);
-    font-weight: 700;
-    letter-spacing: var(--tracking-label);
-    text-transform: uppercase;
+  dl > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  dl > div + div {
+    padding-top: 14px;
+    border-top: 1px dashed var(--ink-line);
   }
 
   dd {
     margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
-  .body {
+  .live {
+    font-weight: 600;
+  }
+
+  /* "On this page": long form, from 1100 px only. */
+  .toc {
+    display: none;
+  }
+
+  .toc ol {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
-    font-size: var(--text-body-lg);
-    line-height: var(--leading-body);
+    gap: 10px;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .body :global(h2) {
-    margin-top: var(--gap-m);
-    font-size: var(--text-card);
+  .toc a {
+    display: flex;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+  }
+
+  .toc a:hover {
+    text-decoration: underline;
+  }
+
+  .toc-number {
+    font-family: var(--family-mono);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.6;
+  }
+
+  /* Reading column: numbered sections, reading-size text. */
+  .prose {
+    counter-reset: section;
+  }
+
+  /* About 65 characters a line at reading size. */
+  .prose > :global(:not(.figure--wide)) {
+    max-width: 720px;
+  }
+
+  .prose > :global(* + *) {
+    margin-top: 20px;
+  }
+
+  .prose > :global(h2) {
+    counter-increment: section;
+    margin-top: 48px;
+    font-size: clamp(1.875rem, 1.55rem + 1.3333vw, 2.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    scroll-margin-top: 24px;
+  }
+
+  .prose > :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .prose > :global(h2)::before {
+    content: counter(section, decimal-leading-zero);
+    display: block;
+    width: fit-content;
+    margin-bottom: 12px;
+    padding: 3px 8px;
+    background: var(--yellow);
+    font-family: var(--family-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    line-height: 1.4;
+  }
+
+  .prose > :global(p),
+  .prose > :global(ul:not([role='list'])),
+  .prose > :global(ol) {
+    font-size: clamp(1.0625rem, 1.0161rem + 0.1905vw, 1.1875rem);
+    line-height: 1.65;
+  }
+
+  /* Wide figures run to the page edges. */
+  .prose > :global(.figure--wide) {
+    margin-block: 56px;
+    margin-inline: calc(-1 * var(--pad-inline));
+  }
+
+  .prose > :global(.figure--wide figcaption) {
+    padding-inline: var(--pad-inline);
+  }
+
+  .prose > :global(.figure--wide + *) {
+    margin-top: 56px;
+  }
+
+  @media (min-width: 720px) {
+    .page-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 40%;
+    }
+
+    .head-art {
+      order: 0;
+      border-bottom: 0;
+      border-left: var(--border);
+    }
+
+    .head-text {
+      justify-content: flex-end;
+      gap: 22px;
+      padding: 56px var(--pad-inline);
+    }
+
+    .back {
+      font-size: 16px;
+    }
+
+    .label {
+      font-size: 13px;
+    }
+
+    .body {
+      padding: 56px var(--pad-inline) 88px;
+    }
+
+    .facts {
+      padding: 24px;
+      box-shadow: 8px 8px 0 var(--pink);
+    }
+
+    .prose > :global(* + *) {
+      margin-top: 24px;
+    }
+
+    .prose > :global(h2) {
+      margin-top: 72px;
+    }
+
+    .prose > :global(.figure--wide) {
+      margin-block: 88px;
+    }
+
+    .prose > :global(.figure--wide + *) {
+      margin-top: 88px;
+    }
+  }
+
+  /* Desktop: facts column floats left; the reading column sits beside it,
+     and wide figures clear the facts column before spanning the page. */
+  @media (min-width: 1100px) {
+    .case-study--long .page-head {
+      grid-template-columns: minmax(0, 1fr) min(600px, 42%);
+    }
+
+    .case-study--short .page-head {
+      grid-template-columns: minmax(0, 1fr) min(520px, 38%);
+    }
+
+    .body {
+      padding: 88px var(--pad-inline) 112px;
+    }
+
+    .facts-col {
+      float: left;
+      width: 340px;
+      margin: 0;
+    }
+
+    .toc {
+      display: block;
+    }
+
+    .prose {
+      margin-left: calc(340px + 96px);
+    }
+
+    .prose > :global(.figure--wide) {
+      clear: left;
+      margin-left: calc(-340px - 96px - var(--pad-inline));
+    }
   }
 </style>
