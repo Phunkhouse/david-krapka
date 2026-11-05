@@ -370,7 +370,9 @@ const letters = ['T', 'M', 'R']
     --delay: 0.7s;
   }
 
-  /* Start state, only while armed or playing. The dot radius --r is a
+  /* Start state, only while armed or playing. The end state after play is
+     held by animation-fill-mode: both on the animations below: keep the fill.
+     The dot radius --r is a
      registered property (global.css); without support the letters appear. */
   :global(html.motion) .approach[data-develop] .letter:not(.letter--pink) {
     --r: 0px;
@@ -435,6 +437,23 @@ const letters = ['T', 'M', 'R']
     to {
       opacity: 1;
       filter: blur(0);
+    }
+  }
+
+  /* Printing before the section was ever scrolled to: show the final state. */
+  @media print {
+    :global(html.motion) .approach[data-develop] .letter:not(.letter--pink) {
+      --r: var(--dot);
+    }
+
+    :global(html.motion) .approach[data-develop] .letter--pink {
+      opacity: 0.45;
+      transform: none;
+    }
+
+    :global(html.motion) .approach[data-develop] :is(.counter, h3, .text) {
+      opacity: 1;
+      filter: none;
     }
   }
 
