@@ -5,7 +5,7 @@
 //   pnpm placeholders --fail   exit 1 when any remain (the milestone 6
 //                              production check will use this)
 //
-// It reads the visible text and link addresses of each HTML file in dist/.
+// It reads the visible text, attribute values and page titles of each HTML file in dist/.
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import process from 'node:process'
@@ -29,14 +29,19 @@ function found(html) {
   const text = html
     .replace(/<(script|style)[\s\S]*?<\/\1>/g, ' ')
     .replace(/<!--[\s\S]*?-->/g, ' ')
-  const hrefs = [...text.matchAll(/href="([^"]*)"/g)].map((m) => m[1])
+  // Attribute values (href, alt, aria-label, title, meta content) and the
+  // head count too, so a placeholder cannot hide outside the visible text.
+  const attrs = [...text.matchAll(/\s[\w:-]+="([^"]*)"/g)].map((m) => m[1])
+  const title = [...text.matchAll(/<title>([\s\S]*?)<\/title>/g)].map(
+    (m) => m[1],
+  )
   const visible = text
     .replace(/<[^>]*>/g, ' ')
     .replace(/&nbsp;/g, ' ')
     .replace(/&amp;/g, '&')
   return [
     ...visible.matchAll(pattern),
-    ...hrefs.join(' ').matchAll(pattern),
+    ...[...attrs, ...title].join(' ').matchAll(pattern),
   ].map((m) => m[0].replace(/\s+/g, ' '))
 }
 

@@ -140,10 +140,11 @@ for (const {
       page,
     }) => {
       await page.goto(path)
-      const text = await page.locator('main').innerText()
+      // textContent, so the hidden .long/.short copy variants are covered too.
+      const text = (await page.locator('main').textContent()) ?? ''
       const money = /[$€£]|\b(Kč|CZK|EUR|USD)\b/
       const words =
-        /(?<!\p{L})(price|prices|pricing|rate|rates|hourly|per hour|quote|availability|available|terms|cena|ceny|ceník|sazba|sazby|hodinová|za hodinu|nabídka|dostupnost|volný|volná|podmínky)(?!\p{L})/iu
+        /(?<!\p{L})(price|prices|pricing|fee|fees|budget|free|rate|rates|hourly|per hour|quote|availability|available|terms|honorář|rozpočet|zdarma|cena|ceny|ceník|sazba|sazby|hodinová|za hodinu|nabídka|dostupnost|volný|volná|podmínky)(?!\p{L})/iu
       expect(text).not.toMatch(money)
       expect(text).not.toMatch(words)
     })
