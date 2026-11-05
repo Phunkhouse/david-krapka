@@ -19,3 +19,4 @@ Copy `template.md` to `0001-short-title.md` and increment numbers without renumb
 | [0009](0009-self-hosted-font-files.md) | Commit the font files and load them with the local font provider | accepted |
 | [0010](0010-subset-fonts-to-site-characters.md) | Subset the fonts to the characters the site uses | accepted |
 | [0011](0011-case-studies-as-mdx-collection.md) | Case studies as an MDX content collection with draft handling | accepted |
+| [0012](0012-skip-permission-requests-for-case-studies.md) | Skip written permission requests for case study projects | accepted |

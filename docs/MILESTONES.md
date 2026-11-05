@@ -150,12 +150,12 @@ Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device ch
 
 - [ ] Each case study follows the [shared structure](content-and-case-studies.md#proposed-shared-case-study-structure) and states role, collaborators and AI share; verify by review against the project card.
 - [ ] Every claim and metric has a source in the project card; verify by David's review.
-- [ ] Each published case study has a Permissions entry in its project card (client OK for name, logo, screenshots and quotes; OK from every identifiable person shown or the image is cropped or blurred; collaborators asked) with date and form; verify by review ([LEG-006](SPEC.md#legal-requirements)).
+- [ ] Each published case study has a Permissions entry in its project card (client OK for name, logo, screenshots and quotes; OK from every identifiable person shown or the image is cropped or blurred; collaborators asked) with date and form; verify by review ([LEG-006](SPEC.md#legal-requirements)). **Met by [decision 0012](decisions/0012-skip-permission-requests-for-case-studies.md) for the four planned projects** (accepted risk, David, 5 November 2026): verify that the project is one of them and that nobody has objected.
 - [ ] Images have fixed dimensions (no layout shift) and meaningful alternative text; verify with Lighthouse CLS and axe.
 - [ ] Landing cards link to the right pages in both languages; verify with Playwright.
 - [ ] David signs off on each page.
 
-**Dependencies and risks:** The template (PR B) is **blocked** until the case study page is designed on the canvas, and the content PRs until the project cards are complete and permissions recorded. The pipeline and card links (PR A) need only the decisions in section 0 of the checklist: MDX format, draft handling, short pages or links out, Czech versions at launch, Systerna, and how cards become links. The repository is public, so drafts and screenshots are public once committed. Client permission for screenshots.
+**Dependencies and risks:** The template (PR B) is **blocked** until the case study page is designed on the canvas, and the content PRs until the project cards are complete. The pipeline and card links (PR A) need only the decisions in section 0 of the checklist: MDX format, draft handling, short pages or links out, Czech versions at launch, Systerna, and how cards become links. The repository is public, so drafts and screenshots are public once committed. Permissions for the four planned projects are skipped as an accepted risk ([0012](decisions/0012-skip-permission-requests-for-case-studies.md)); anything outside them needs the LEG-006 permissions.
 
 ## Milestone 6: Launch readiness and launch
 
@@ -205,10 +205,10 @@ These run in parallel with development and gate the milestones shown.
 | Freelance start year | Milestone 3 / 6 |
 | Short personal note for About; portrait photo | Milestone 3 / 6 |
 | Case study page design on the canvas | Milestone 5 |
-| Completed project cards for Kultomat, Eucal, Vladan Vaněk, UpVideo; screenshots and permissions | Milestone 5 |
+| Completed project cards for Kultomat, Eucal, Vladan Vaněk, UpVideo; screenshots | Milestone 5 |
 | Decision on Systerna's presentation | Milestone 5 |
 | Public email, LinkedIn, GitHub; CV PDF | Milestone 6 |
-| Written permissions for client names, screenshots and identifiable people ([LEG-006](SPEC.md#legal-requirements)) | Milestone 5 |
+| ~~Written permissions for client names, screenshots and identifiable people ([LEG-006](SPEC.md#legal-requirements))~~ skipped for the four planned projects, accepted risk ([0012](decisions/0012-skip-permission-requests-for-case-studies.md)) | Milestone 5 |
 | Portrait photo with documented rights ([LEG-007](SPEC.md#legal-requirements)) | Milestone 6 |
 
 ## After launch
