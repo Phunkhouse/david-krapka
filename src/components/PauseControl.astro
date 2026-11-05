@@ -72,6 +72,8 @@ const copy = t(locale)
     })
   })
 
+  // The system preference wins: if it changes during the visit, follow it,
+  // even over a press the visitor stopped by hand.
   reduced.addEventListener('change', () => {
     paused = reduced.matches
     root.classList.toggle('motion', !reduced.matches)

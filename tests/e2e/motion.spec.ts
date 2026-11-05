@@ -105,6 +105,49 @@ for (const { path, stop, start } of pages) {
         await expect.poll(() => running(page)).toBe(0)
       })
 
+      // The motion hero reserves one heading line and two subline lines.
+      // A longer copy or a narrow screen must not overflow that space.
+      for (const width of [320, 390, 1100]) {
+        test(`headline and sublines fit their reserved space at ${width} px`, async ({
+          page,
+        }) => {
+          await page.setViewportSize({ width, height: 800 })
+          await page.goto(path)
+          const fit = await page.evaluate(() => {
+            const box = (el: Element) => el.getBoundingClientRect()
+            const h1 = box(document.querySelector('#top h1')!)
+            const sub = box(document.querySelector('#top .sublines')!)
+            const lines = [...document.querySelectorAll('#top .line')]
+            const items = [...document.querySelectorAll('#top .sublines li')]
+            return {
+              // Compare layout boxes: transforms of the cross-fade are ignored
+              // by offset sizes, so read those.
+              lineHeights: lines.map((el) => (el as HTMLElement).offsetHeight),
+              lineRight: Math.max(
+                ...lines.map(
+                  (el) =>
+                    (el as HTMLElement).offsetLeft +
+                    (el as HTMLElement).offsetWidth,
+                ),
+              ),
+              itemHeights: items.map((el) => (el as HTMLElement).offsetHeight),
+              h1: { width: h1.width, height: h1.height },
+              subHeight: sub.height,
+              viewport: window.innerWidth,
+              scrollX: document.documentElement.scrollWidth,
+            }
+          })
+          for (const height of fit.lineHeights) {
+            expect(height).toBeLessThanOrEqual(fit.h1.height + 1)
+          }
+          expect(fit.lineRight).toBeLessThanOrEqual(fit.viewport)
+          for (const height of fit.itemHeights) {
+            expect(height).toBeLessThanOrEqual(fit.subHeight + 1)
+          }
+          expect(fit.scrollX).toBeLessThanOrEqual(fit.viewport)
+        })
+      }
+
       test('the claim is still whole text for assistive technology', async ({
         page,
       }) => {
