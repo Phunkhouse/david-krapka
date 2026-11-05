@@ -15,9 +15,11 @@ const letters = ['T', 'M', 'R']
 ---
 
 <!--
-  Static state of the A5 approach motion: letters fully developed, columns at
-  rest (also the reduced-motion look). Milestone 4 adds the develop-once
-  animation and the hover reactions (docs/design/motion.md).
+  A5 approach motion (docs/design/motion.md). The markup and base styles are
+  the static state: letters developed, columns at rest (the reduced-motion
+  and no-JavaScript look). Under html.motion the script below arms the section
+  (hides the start state) and plays the develop-once animation when the
+  columns first scroll into view. Hover reactions are CSS only.
 -->
 <section
   id="approach"
@@ -86,6 +88,32 @@ const letters = ['T', 'M', 'R']
     </div>
   </div>
 </section>
+
+<script>
+  // Develop once: arm the section (start state), then play when the columns
+  // first scroll into view. If this never runs, or the browser has no
+  // IntersectionObserver, nothing is armed and the static state shows.
+  const section = document.querySelector<HTMLElement>('#approach')
+  const columns = section?.querySelector('.columns')
+  if (
+    section &&
+    columns &&
+    document.documentElement.classList.contains('motion') &&
+    'IntersectionObserver' in window
+  ) {
+    section.dataset.develop = 'armed'
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          section.dataset.develop = 'play'
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 },
+    )
+    observer.observe(columns)
+  }
+</script>
 
 <style>
   .approach:focus {
@@ -323,6 +351,144 @@ const letters = ['T', 'M', 'R']
     .letter--pink {
       right: -4px;
       bottom: -74px;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Motion (milestone 4): A5. Not a loop, so the pause control leaves it
+     alone; under reduced motion nothing here applies.
+     --------------------------------------------------------------------- */
+  .col:nth-child(1) {
+    --delay: 0.2s;
+  }
+
+  .col:nth-child(2) {
+    --delay: 0.45s;
+  }
+
+  .col:nth-child(3) {
+    --delay: 0.7s;
+  }
+
+  /* Start state, only while armed or playing. The dot radius --r is a
+     registered property (global.css); without support the letters appear. */
+  :global(html.motion) .approach[data-develop] .letter:not(.letter--pink) {
+    --r: 0px;
+
+    background-image: radial-gradient(
+      var(--ink) var(--r),
+      transparent calc(var(--r) + 0.4px)
+    );
+  }
+
+  :global(html.motion) .approach[data-develop='armed'] .letter--pink {
+    opacity: 0;
+    transform: translate(18px, -14px);
+  }
+
+  :global(html.motion)
+    .approach[data-develop='armed']
+    :is(.counter, h3, .text) {
+    opacity: 0;
+    filter: blur(6px);
+  }
+
+  :global(html.motion)
+    .approach[data-develop='play']
+    .letter:not(.letter--pink) {
+    animation: develop 1.6s ease-out var(--delay) both;
+  }
+
+  :global(html.motion) .approach[data-develop='play'] .letter--pink {
+    animation: register 1.4s ease-out var(--delay) both;
+  }
+
+  :global(html.motion) .approach[data-develop='play'] :is(.counter, h3, .text) {
+    animation: fade-in 0.9s ease-out var(--delay) both;
+  }
+
+  @keyframes develop {
+    from {
+      --r: 0px;
+    }
+    to {
+      --r: var(--dot);
+    }
+  }
+
+  @keyframes register {
+    from {
+      opacity: 0;
+      transform: translate(18px, -14px);
+    }
+    to {
+      opacity: 0.45;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  /* Hover: the column under the pointer turns yellow and its letter lifts.
+     Hover-capable devices only; the lift and tilt only without a
+     reduced-motion preference. */
+  @media (hover: hover) {
+    .col {
+      transition: background-color 0.35s ease;
+    }
+
+    .col h3 {
+      transition: translate 0.35s ease;
+    }
+
+    .col h3 .highlight {
+      transition:
+        background-color 0.35s ease,
+        color 0.35s ease;
+    }
+
+    .letter {
+      transition:
+        translate 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+        rotate 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .col:hover {
+      background-color: var(--yellow);
+    }
+
+    .columns:hover .col:not(:hover) {
+      background-color: var(--paper);
+    }
+
+    .col:hover h3 .highlight {
+      background-color: var(--ink);
+      color: var(--yellow);
+    }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .col:hover .letter:not(.letter--pink) {
+      translate: 0 -36px;
+      rotate: -4deg;
+    }
+
+    .col:hover .letter--pink {
+      translate: 14px -26px;
+      rotate: -4deg;
+    }
+
+    .col:hover h3 {
+      translate: 8px 0;
     }
   }
 </style>

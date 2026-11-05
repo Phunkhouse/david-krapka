@@ -85,10 +85,15 @@ for (const { path, stop, start } of pages) {
         await page.goto(path)
         await expect.poll(() => running(page)).toBeGreaterThan(0)
         await page.evaluate(() =>
-          window.scrollTo(0, document.body.scrollHeight),
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'instant',
+          }),
         )
         await expect.poll(() => running(page)).toBe(0)
-        await page.evaluate(() => window.scrollTo(0, 0))
+        await page.evaluate(() =>
+          window.scrollTo({ top: 0, behavior: 'instant' }),
+        )
         await expect.poll(() => running(page)).toBeGreaterThan(0)
       })
 
@@ -98,9 +103,14 @@ for (const { path, stop, start } of pages) {
         await page.goto(path)
         await page.getByRole('button', { name: stop }).click()
         await page.evaluate(() =>
-          window.scrollTo(0, document.body.scrollHeight),
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'instant',
+          }),
         )
-        await page.evaluate(() => window.scrollTo(0, 0))
+        await page.evaluate(() =>
+          window.scrollTo({ top: 0, behavior: 'instant' }),
+        )
         await expect(page.getByRole('button', { name: start })).toBeVisible()
         await expect.poll(() => running(page)).toBe(0)
       })

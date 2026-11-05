@@ -142,7 +142,7 @@ Status as of 5 November 2026: milestones 0, 1, 2 and 3 done, the rest planned.
 
 **Goal:** Kultomat as the main case study and short client project pages, built on verified facts.
 
-**Scope:** Case study page template (calm, editorial), MDX pipeline, Kultomat long form, Eucal / Vladan Vaněk / UpVideo short format (or links out, per decision), pre-optimised screenshots, per-page metadata and Open Graph images, “Next project” navigation. Czech versions if decided.
+**Scope:** Project card hover and focus lift (`translate(-4px, -4px)` over 0.2 s, moved from milestone 4 because cards become links here), case study page template (calm, editorial), MDX pipeline, Kultomat long form, Eucal / Vladan Vaněk / UpVideo short format (or links out, per decision), pre-optimised screenshots, per-page metadata and Open Graph images, “Next project” navigation. Czech versions if decided.
 
 **Acceptance checks:**
 

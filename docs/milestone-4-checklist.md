@@ -89,24 +89,24 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 ### B1. Approach (`#approach`)
 
-- [ ] Develop once on scroll: when the section enters the viewport, `--r` grows from 0 to 2.2 px over 1.6 s (`@property --r`), the pink “M” slides into register from `translate(18px, -14px)` to 45 % opacity over 1.4 s, column text fades in from 6 px blur over 0.9 s, staggered 0.2 / 0.45 / 0.7 s ([Motion](design/motion.md#approach-section-a5-develops-on-scroll--reacts-on-hover)).
-- [ ] Plays once per page view; the observer disconnects afterwards. A visitor who lands below the section (or jumps to `#approach`) still sees it develop or sees the developed state, never an empty column.
-- [ ] Without `@property` support the letters simply appear developed.
-- [ ] Hover (only under `@media (hover: hover)`): hovered column turns yellow, others return to paper; its letter rises 36 px and rotates −4°; the pink copy moves `14px, -26px`; the title shifts 8 px; the “Re” highlight inverts. 0.35–0.45 s, `cubic-bezier(.2, .8, .2, 1)` for the letter.
-- [ ] Not a looping animation, so not tied to the pause control; check that it is off under reduced motion.
+- [x] Develop once on scroll: when the section enters the viewport, `--r` grows from 0 to 2.2 px over 1.6 s (`@property --r`), the pink “M” slides into register from `translate(18px, -14px)` to 45 % opacity over 1.4 s, column text fades in from 6 px blur over 0.9 s, staggered 0.2 / 0.45 / 0.7 s ([Motion](design/motion.md#approach-section-a5-develops-on-scroll--reacts-on-hover)).
+- [x] Plays once per page view; the observer disconnects afterwards. A visitor who lands below the section (or jumps to `#approach`) still sees it develop or sees the developed state, never an empty column.
+- [x] Without `@property` support the letters simply appear developed.
+- [x] Hover (only under `@media (hover: hover)`): hovered column turns yellow, others return to paper; its letter rises 36 px and rotates −4°; the pink copy moves `14px, -26px`; the title shifts 8 px; the “Re” highlight inverts. 0.35–0.45 s, `cubic-bezier(.2, .8, .2, 1)` for the letter.
+- [x] Not a looping animation, so not tied to the pause control; check that it is off under reduced motion.
 
 ### B2. Small interactions
 
-- [ ] Links: underline thickens to 3 px on hover (hover-capable devices).
-- [ ] Smooth anchor scrolling per section 0, off under reduced motion; anchor focus behaviour unchanged.
-- [ ] Project card hover per section 0 (recommended: none until milestone 5; note it in the milestone 5 scope).
+- [x] Links: underline thickens to 3 px on hover (hover-capable devices).
+- [x] Smooth anchor scrolling per section 0, off under reduced motion; anchor focus behaviour unchanged.
+- [x] Project card hover per section 0: none until milestone 5 (decided); added to the milestone 5 scope in MILESTONES.md.
 
 ### B3. Tests
 
-- [ ] Playwright: the approach letters are undeveloped before the section is scrolled into view and developed after (read the computed `--r` or the animation state); the animation runs once.
-- [ ] Playwright, reduced motion: approach shows the developed state with no running animations.
-- [ ] Playwright: the existing anchor and focus tests still pass with smooth scrolling (wait for focus, not for time; no fixed sleeps).
-- [ ] axe, 320 px scroll, request, storage and CSP checks pass.
+- [x] Playwright: the approach letters are undeveloped before the section is scrolled into view and developed after (read the computed `--r` or the animation state); the animation runs once.
+- [x] Playwright, reduced motion: approach shows the developed state with no running animations.
+- [x] Playwright: the existing anchor and focus tests still pass with smooth scrolling (wait for focus, not for time; no fixed sleeps).
+- [x] axe, 320 px scroll, request, storage and CSP checks pass.
 
 ## PR C: Portrait G4, checks and milestone wrap-up
 
@@ -153,7 +153,7 @@ Record evidence here and in the PR that completes each check.
 - [ ] Update MILESTONES.md: milestone 4 status `done`, completion evidence (PR links), status date, unplanned changes and items carried forward.
 - [ ] Update SPEC.md: motion status, resolved open questions.
 - [ ] Update [Motion](design/motion.md), [Shell components](design/shell-components.md) and the [design README](design/README.md) with decisions and any changes made during review (the canvas wins if they disagree).
-- [ ] If card hover moved to milestone 5, add it to the milestone 5 scope.
+- [x] If card hover moved to milestone 5, add it to the milestone 5 scope. (Done in PR B.)
 - [ ] `AGENTS.md` lists every new command.
 
 ## Risks and notes
