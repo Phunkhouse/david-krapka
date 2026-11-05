@@ -2,7 +2,7 @@
 
 Delivery plan for david-krapka.eu, aligned with [the specification](SPEC.md) and [the approved design](design/README.md). Milestones are delivered in order. A milestone may span several PRs; PRs go **one at a time** (the next PR starts only after the current one is merged or closed).
 
-Status as of 4 November 2026: milestones 0, 1 and 2 done, the rest planned.
+Status as of 5 November 2026: milestones 0, 1, 2 and 3 done, the rest planned.
 
 ## How every milestone is delivered
 
@@ -95,7 +95,7 @@ Status as of 4 November 2026: milestones 0, 1 and 2 done, the rest planned.
 
 ## Milestone 3: Landing page (static)
 
-**Status:** planning; work plan in the [milestone 3 checklist](milestone-3-checklist.md) (three PRs: hero and work; approach and experience; about, contact and wrap-up).
+**Status:** done
 
 **Goal:** The full landing page in both languages matching the mockups, with no motion yet.
 
@@ -103,15 +103,17 @@ Status as of 4 November 2026: milestones 0, 1 and 2 done, the rest planned.
 
 **Acceptance checks:**
 
-- [ ] Side-by-side review against the four mockup boards at 1440 px and 390 px shows matching layout, type and colours; verify with screenshots in the PR and David's sign-off.
-- [ ] Tablet widths (768 px and 1024 px) look intentional; verify with screenshots and sign-off.
-- [ ] Navigation anchors scroll to their sections and update focus; verify with Playwright.
-- [ ] axe reports no violations on both language versions; verify with Playwright + axe.
-- [ ] Lighthouse mobile scores meet the SPEC targets on the preview URL; verify with a recorded Lighthouse run.
-- [ ] A list of remaining placeholders is in the PR description.
-- [ ] Neither language version states prices, rates, terms or availability for paid services; verify by reading the rendered pages ([LEG-001](SPEC.md#legal-requirements)).
+- [x] Side-by-side review against the four mockup boards at 1440 px and 390 px shows matching layout, type and colours; verify with screenshots in the PR and David's sign-off.
+- [x] Tablet widths (768 px and 1024 px) look intentional; verify with screenshots and sign-off.
+- [x] Navigation anchors scroll to their sections and update focus; verify with Playwright.
+- [x] axe reports no violations on both language versions; verify with Playwright + axe.
+- [x] Lighthouse mobile scores meet the SPEC targets on the preview URL; verify with a recorded Lighthouse run.
+- [x] A list of remaining placeholders is in the PR description.
+- [x] Neither language version states prices, rates, terms or availability for paid services; verify by reading the rendered pages ([LEG-001](SPEC.md#legal-requirements)).
 
 **Dependencies and risks:** Answers to the hero and mobile-intro questions in the [design README](design/README.md#open-design-questions); tablet layout approval; whether the header is sticky (carried from the milestone 2 review); how project cards and contact links behave before case studies (milestone 5) and the email address (milestone 6) exist. Lighthouse SEO cannot reach 100 while the preview sends `noindex`; that one audit is recorded as expected until milestone 6.
+
+**Completion evidence:** delivered as three PRs: [#13](https://github.com/Phunkhouse/david-krapka/pull/13) hero and work; [#14](https://github.com/Phunkhouse/david-krapka/pull/14) approach and experience; [#15](https://github.com/Phunkhouse/david-krapka/pull/15) about, contact and tablet pass. Planning in [#12](https://github.com/Phunkhouse/david-krapka/pull/12). Per-check evidence is in the [milestone 3 checklist](milestone-3-checklist.md#acceptance-checks-from-milestonesmd). The mockup comparison, tablet widths and the reading of the rendered pages for LEG-001 were reviewed by David on the previews, and each PR was merged after that review. Lighthouse mobile on the preview: Performance 99, Accessibility 100, Best Practices 100, CLS 0, LCP 1.7 to 1.8 s, SEO 66 only from the expected `noindex` ([summary](audits/2026-11-05/lighthouse-landing.md)). 34 placeholders remain in 6 pages (`pnpm placeholders`); they are the content inputs below and milestone 6 turns `--fail` on. Unplanned changes: fonts subset to the characters the site uses, 56.6 KB on every page ([0010](decisions/0010-subset-fonts-to-site-characters.md)), with `pnpm check:fonts` failing the build and CI when new copy needs a missing character; stylesheets inlined to remove render-blocking CSS; `pnpm placeholders` report. Open items carried forward: replace placeholders (email, LinkedIn, GitHub, Emplifi role and dates, freelance start year, personal note, portrait) in milestone 6; project cards become links in milestone 5; the footer year is still the build year.
 
 ## Milestone 4: Motion
 

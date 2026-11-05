@@ -19,7 +19,7 @@ Success (qualitative, from the brief): a visitor can say in their own words what
 
 ### First release
 
-- **Landing page** in English and Czech, built to the [approved mockups](design/landing-page.md): hero, Selected work, How I think & build, Experience, About, Contact, footer.
+- **Landing page** in English and Czech, built to the [approved mockups](design/landing-page.md): hero, Selected work, How I think & build, Experience, About, Contact, footer. Static version built in milestone 3 (placeholders listed by `pnpm placeholders`); motion follows in milestone 4.
 - **Kultomat case study** (long form) and **short pages** for Eucal, Vladan Vaněk and UpVideo, once their facts are verified. **Proposal:** short client projects get their own pages only if there is enough verified material; otherwise their cards link to the live site.
 - **Systerna** as the labelled “In progress” card only, without a page.
 - **Emplifi** inside the Experience section, with confirmed role and dates.
@@ -157,7 +157,7 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 | Milestone 2 | Business identification in the footer ([LEG-002](#legal-requirements)): which place of business will be published when the IČO is active? Needed to size the footer slot. |
 | Milestone 2 | Mobile menu, language switcher and pause control: first proposal on the canvas and in [Shell components](design/shell-components.md); David to iterate. |
 | Milestone 3 | ~~Mobile hero intro, reduced-motion hero, Experience in the navigation~~ decided 4 November 2026 ([Landing page](design/landing-page.md#implementation-decisions-milestone-3)). |
-| Milestone 3 | Tablet layout (720–1100 px): accept the proposal in [Visual system](design/visual-system.md#breakpoints-proposal) or design it. |
+| Milestone 3 | ~~Tablet layout (720–1100 px)~~ built from the proposal in [Visual system](design/visual-system.md#breakpoints-proposal) and accepted by David on the previews, 5 November 2026. |
 | Milestone 5 | Case study page design; whether short client projects get their own pages; Czech translations of case studies at launch or later. |
 | Milestone 5 | How Systerna is presented (card only, teaser, or left out). |
 | Milestone 6 | Public email address (**also blocks the privacy notice, [LEG-003](#legal-requirements)**), LinkedIn and GitHub URLs, CV content and languages. |
