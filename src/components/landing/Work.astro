@@ -1,6 +1,8 @@
 ---
 import SectionHeading from '../SectionHeading.astro'
+import { getCaseStudies } from '../../content/load'
 import { t, type Locale } from '../../i18n'
+import { pathFor } from '../../i18n/routes'
 
 interface Props {
   locale: Locale
@@ -12,16 +14,24 @@ const { featured, inProgress } = work
 
 // Card art per client project: tint or yellow paper, plus one shape.
 const art = ['circle', 'paper', 'play'] as const
+// A card links only to a case study that is published (drafts are built on
+// preview branches only, src/content/load.ts); the others stay plain cards.
+const published = new Set((await getCaseStudies(locale)).map((s) => s.slug))
+const hrefFor = (slug: string) =>
+  published.has(slug) ? pathFor(locale, `work/${slug}`) : undefined
 const projects = work.projects.map((project, index) => ({
   ...project,
   initial: project.name[0],
   art: art[index],
+  href: hrefFor(project.slug),
 }))
+const featuredHref = hrefFor(featured.slug)
 ---
 
 <!--
-  Cards are not links yet: the case study pages come in milestone 5, which
-  adds the links and the "Read the case study" line.
+  A linked card: the project name is the link, stretched over the whole card
+  with ::after, so the link's name is just the project name and the text stays
+  ordinary text. The lift (hover and keyboard focus) is on the card.
 -->
 <section
   id="work"
@@ -35,30 +45,35 @@ const projects = work.projects.map((project, index) => ({
       <p class="intro">{work.intro}</p>
     </div>
 
-    <article class="featured">
+    <article class:list={['featured', { 'is-link': featuredHref }]}>
       <div class="featured-art paper-yellow" aria-hidden="true">
         <span class="k halftone misregister" data-text="K">
           K
         </span>
-        <span class="screenshot">
-          <span class="long">{featured.screenshot}</span>
-          <span class="short">{featured.screenshotShort}</span>
-        </span>
       </div>
       <div class="featured-body">
         <p class="label">{featured.label}</p>
-        <h3>{featured.name}</h3>
+        <h3>
+          {featuredHref ? (
+            <a class="card-link" href={featuredHref}>
+              {featured.name}
+            </a>
+          ) : (
+            featured.name
+          )}
+        </h3>
         <p class="featured-text">
           <span class="long">{featured.text}</span>
           <span class="short">{featured.textShort}</span>{' '}
           <span class="placeholder">{featured.summary}</span>
         </p>
+        {featuredHref && <p class="more label">{work.readMore}</p>}
       </div>
     </article>
 
     <ul class="cards" role="list" aria-label={work.listLabel}>
       {projects.map((project) => (
-        <li class="card">
+        <li class:list={['card', { 'is-link': project.href }]}>
           <div
             class:list={[
               'card-art',
@@ -72,11 +87,20 @@ const projects = work.projects.map((project, index) => ({
           </div>
           <div class="card-body">
             <p class="label">{project.label}</p>
-            <h3>{project.name}</h3>
+            <h3>
+              {project.href ? (
+                <a class="card-link" href={project.href}>
+                  {project.name}
+                </a>
+              ) : (
+                project.name
+              )}
+            </h3>
             <p>
               <span class="long">{project.text}</span>
               <span class="short">{project.textShort}</span>
             </p>
+            {project.href && <p class="more label">{work.readMore}</p>}
           </div>
         </li>
       ))}
@@ -173,16 +197,6 @@ const projects = work.projects.map((project, index) => ({
     --slip-y: 6px;
     --dot: 3.4px;
     --grid: 10px;
-  }
-
-  .screenshot {
-    position: absolute;
-    bottom: 14px;
-    left: 14px;
-    padding: 5px 8px;
-    background: var(--paper);
-    font-family: var(--family-mono);
-    font-size: 11px;
   }
 
   .featured-body {
@@ -302,6 +316,84 @@ const projects = work.projects.map((project, index) => ({
     line-height: 1;
   }
 
+  /* Linked cards: the name's link covers the card. Hover and keyboard focus
+     lift the card 4px up and left over 0.2s while its hard shadow grows by
+     the same 4px, so the shadow's far edge stays put. */
+  .featured,
+  .card {
+    position: relative;
+  }
+
+  .featured.is-link,
+  .card.is-link {
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+  }
+
+  .card.is-link {
+    box-shadow: 0 0 0 var(--pink);
+  }
+
+  .card-link {
+    text-decoration: none;
+  }
+
+  .card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .card-link:focus-visible {
+    outline: none;
+  }
+
+  .card-link:focus-visible::after {
+    outline: var(--focus-width) solid var(--focus-color);
+    outline-offset: var(--focus-offset);
+  }
+
+  .card-body p.more.label,
+  .featured-body .more {
+    font-size: var(--text-label);
+    line-height: 1.4;
+  }
+
+  .featured.is-link:has(.card-link:focus-visible) {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--pink);
+  }
+
+  .card.is-link:has(.card-link:focus-visible) {
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0 var(--pink);
+  }
+
+  @media (hover: hover) {
+    .featured.is-link:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0 var(--pink);
+    }
+
+    .card.is-link:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 4px 4px 0 var(--pink);
+    }
+
+    .is-link:hover .card-link {
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .featured.is-link,
+    .card.is-link {
+      transition: none;
+    }
+  }
+
   /* From 720 px: long copy, stacked cards in two columns */
   @media (min-width: 720px) {
     .work {
@@ -331,6 +423,16 @@ const projects = work.projects.map((project, index) => ({
       box-shadow: 12px 12px 0 var(--pink);
     }
 
+    .featured.is-link:has(.card-link:focus-visible) {
+      box-shadow: 16px 16px 0 var(--pink);
+    }
+
+    @media (hover: hover) {
+      .featured.is-link:hover {
+        box-shadow: 16px 16px 0 var(--pink);
+      }
+    }
+
     .featured-art {
       height: 320px;
     }
@@ -342,13 +444,6 @@ const projects = work.projects.map((project, index) => ({
       --slip-x: 14px;
       --slip-y: 10px;
       --grid: 11px;
-    }
-
-    .screenshot {
-      bottom: 20px;
-      left: 24px;
-      padding: 6px 10px;
-      font-size: 13px;
     }
 
     .featured-body {

@@ -53,18 +53,19 @@ export const en = {
       intro:
         'One product I own end to end, a few client projects, and one that is still being built.',
       listLabel: 'Projects',
+      readMore: 'Read the case study →',
       featured: {
         label: 'Main case study · Own product',
+        slug: 'kultomat',
         name: 'Kultomat',
         text: 'From the first question to a product that runs every day: the problem, the decisions, the build and what changed afterwards.',
         textShort: 'From the first question to a product that runs every day.',
         // Square brackets: the milestone 6 build check fails while these remain.
         summary: '[One-line summary to be confirmed]',
-        screenshot: '[Screenshot of Kultomat goes here]',
-        screenshotShort: '[Screenshot of Kultomat]',
       },
       projects: [
         {
+          slug: 'eucal',
           name: 'Eucal',
           label: 'Client · Business needs',
           text: 'Turning business needs into a website visitors can find their way through.',
@@ -72,12 +73,14 @@ export const en = {
             'Business needs turned into a website visitors can find their way through.',
         },
         {
+          slug: 'vladan-vanek',
           name: 'Vladan Vaněk',
           label: 'Client · Personal identity',
           text: "Content structure and personal presentation for an individual's website.",
           textShort: 'Content structure and personal presentation.',
         },
         {
+          slug: 'upvideo',
           name: 'UpVideo',
           label: 'Client · Visual & multimedia',
           text: 'Visual communication and video content delivered against a client brief.',
@@ -194,6 +197,19 @@ export const en = {
     title: 'Page not found',
     body: 'This page does not exist or has moved.',
     home: 'Go to the English home page',
+  },
+  caseStudy: {
+    back: '← Selected work',
+    factsTitle: 'Project facts',
+    status: 'Status',
+    dates: 'When',
+    role: 'My role',
+    collaborators: 'Worked with',
+    noCollaborators: 'Nobody else',
+    ai: 'AI and review',
+    stack: 'Built with',
+    liveSite: 'Live site',
+    draft: 'Draft, not published yet',
   },
   footer: {
     navLabel: 'Footer',

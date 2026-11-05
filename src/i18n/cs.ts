@@ -53,17 +53,18 @@ export const cs: Dictionary = {
       intro:
         'Jeden vlastní produkt od začátku do konce, několik projektů pro klienty a jeden, který ještě vzniká.',
       listLabel: 'Projekty',
+      readMore: 'Přečíst případovou studii →',
       featured: {
         label: 'Hlavní případová studie · Vlastní produkt',
+        slug: 'kultomat',
         name: 'Kultomat',
         text: 'Od první otázky k produktu, který běží každý den: problém, rozhodnutí, vývoj a co se změnilo potom.',
         textShort: 'Od první otázky k produktu, který běží každý den.',
         summary: '[Jednovětý souhrn k potvrzení]',
-        screenshot: '[Sem přijde snímek Kultomatu]',
-        screenshotShort: '[Snímek Kultomatu]',
       },
       projects: [
         {
+          slug: 'eucal',
           name: 'Eucal',
           label: 'Klient · Potřeby firmy',
           text: 'Potřeby firmy převedené do webu, ve kterém se návštěvníci vyznají.',
@@ -71,12 +72,14 @@ export const cs: Dictionary = {
             'Potřeby firmy převedené do webu, ve kterém se návštěvníci vyznají.',
         },
         {
+          slug: 'vladan-vanek',
           name: 'Vladan Vaněk',
           label: 'Klient · Osobní prezentace',
           text: 'Struktura obsahu a osobní prezentace na webu jednotlivce.',
           textShort: 'Struktura obsahu a osobní prezentace.',
         },
         {
+          slug: 'upvideo',
           name: 'UpVideo',
           label: 'Klient · Vizuál a multimédia',
           text: 'Vizuální komunikace a video obsah podle zadání klienta.',
@@ -182,6 +185,19 @@ export const cs: Dictionary = {
     title: 'Stránka nenalezena',
     body: 'Tato stránka neexistuje nebo se přesunula.',
     home: 'Přejít na českou úvodní stránku',
+  },
+  caseStudy: {
+    back: '← Vybraná práce',
+    factsTitle: 'Fakta o projektu',
+    status: 'Stav',
+    dates: 'Kdy',
+    role: 'Moje role',
+    collaborators: 'Spolupracovníci',
+    noCollaborators: 'Nikdo další',
+    ai: 'AI a kontrola',
+    stack: 'Použité technologie',
+    liveSite: 'Živý web',
+    draft: 'Koncept, zatím nezveřejněno',
   },
   footer: {
     navLabel: 'Patička',

@@ -24,6 +24,8 @@ export default defineConfig({
     url: `http://${host}:${port}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
-    env: { WRANGLER_SEND_METRICS: 'false' },
+    // Drafts are built so the case study pages can be tested; the build
+    // without drafts is checked by `pnpm check:drafts` (scripts/check-drafts.mjs).
+    env: { WRANGLER_SEND_METRICS: 'false', SHOW_DRAFTS: '1' },
   },
 })

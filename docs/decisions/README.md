@@ -18,3 +18,4 @@ Copy `template.md` to `0001-short-title.md` and increment numbers without renumb
 | [0008](0008-keep-project-invitation-while-trade-suspended.md) | Keep the project invitation while the trade is suspended | accepted |
 | [0009](0009-self-hosted-font-files.md) | Commit the font files and load them with the local font provider | accepted |
 | [0010](0010-subset-fonts-to-site-characters.md) | Subset the fonts to the characters the site uses | accepted |
+| [0011](0011-case-studies-as-mdx-collection.md) | Case studies as an MDX content collection with draft handling | accepted |

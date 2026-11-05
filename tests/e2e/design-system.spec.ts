@@ -42,7 +42,14 @@ test('font licences ship with the site (LEG-008)', async ({ request }) => {
   }
 })
 
-for (const path of ['/', '/cs/', '/specimen/', '/missing-page/']) {
+for (const path of [
+  '/',
+  '/cs/',
+  '/specimen/',
+  '/missing-page/',
+  '/work/kultomat/',
+  '/cs/work/kultomat/',
+]) {
   test(`no Content-Security-Policy violations on ${path}`, async ({ page }) => {
     const violations: string[] = []
     page.on('console', (message) => {

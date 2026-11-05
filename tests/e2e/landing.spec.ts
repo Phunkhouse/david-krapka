@@ -234,12 +234,18 @@ for (const {
       await expect(page.locator('#work')).toBeFocused()
     })
 
-    test('project cards are not links yet and Systerna says in progress', async ({
+    // The e2e build includes the draft Kultomat case study, so its card is
+    // the only link; case-study.spec.ts covers the links themselves.
+    test('only published case studies are linked and Systerna says in progress', async ({
       page,
     }) => {
       await page.goto(path)
       const work = page.locator('#work')
-      await expect(work.getByRole('link')).toHaveCount(0)
+      await expect(work.getByRole('link')).toHaveCount(1)
+      await expect(work.getByRole('link')).toHaveAttribute(
+        'href',
+        lang === 'en' ? '/work/kultomat/' : '/cs/work/kultomat/',
+      )
       await expect(work.getByRole('listitem')).toHaveCount(4)
       await expect(
         work.getByRole('listitem').filter({ hasText: 'Systerna' }),
