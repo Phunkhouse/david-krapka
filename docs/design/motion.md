@@ -60,6 +60,8 @@ The mockup's landing page plays these on load; on the live site they start when 
 - Its title shifts 8 px right; the “Re” highlight inverts to ink with yellow text.
 - Durations 0.35–0.45 s, `cubic-bezier(.2, .8, .2, 1)` for the letter.
 
+**Implementation (milestone 4, PR B).** Under `html.motion` a small script arms `#approach` (`data-develop="armed"`: letters at `--r: 0`, pink M offset and transparent, column text blurred) and sets `data-develop="play"` once, when the columns first reach 10 % visibility. If the script or `IntersectionObserver` is missing, nothing is armed and the static, developed state shows. `--r` is a registered property (`@property`, `global.css`); without support the letters appear. These one-time animations are not looped, so the pause control leaves them alone. Hover applies on `(hover: hover)`; the lift and tilt only without a reduced-motion preference, while the colour change stays. Anchor links scroll smoothly only under `prefers-reduced-motion: no-preference`.
+
 Keyboard users should get the same highlight with `:focus-within` if a column ever contains a link. Today the columns contain no interactive elements, so no focus state is needed.
 
 ## About portrait: G4 “ink slip + roller jam” (7 s loop)

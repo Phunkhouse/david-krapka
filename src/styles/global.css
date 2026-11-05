@@ -69,8 +69,10 @@ a {
   text-underline-offset: 0.2em;
 }
 
-a:hover {
-  text-decoration-thickness: 3px;
+@media (hover: hover) {
+  a:hover {
+    text-decoration-thickness: 3px;
+  }
 }
 
 /* Eyebrows, counters, tags and footer lines */
@@ -150,4 +152,19 @@ html.paused [data-loop] *::after,
 [data-loop].offscreen *::before,
 [data-loop].offscreen *::after {
   animation-play-state: paused !important;
+}
+
+/* Dot radius of the approach halftone letters, animated when the section
+   first scrolls into view (Approach.astro). Registered so it interpolates. */
+@property --r {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 2.2px;
+}
+
+/* Smooth anchor scrolling, only without a reduced-motion preference. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
