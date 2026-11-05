@@ -8,11 +8,13 @@ export type CaseStudy = CollectionEntry<'caseStudies'> & {
 }
 
 /**
- * Drafts are built when `SHOW_DRAFTS=1`, and on Cloudflare Workers Builds for
- * every branch except `main` (`WORKERS_CI_BRANCH`), so preview URLs can show
- * unfinished case studies while production never does.
+ * Drafts are shown by the dev server, built when `SHOW_DRAFTS=1`, and built on
+ * Cloudflare Workers Builds for every branch except `main`
+ * (`WORKERS_CI_BRANCH`), so previews can show unfinished case studies while
+ * production never does.
  */
 export function draftsVisible(env: NodeJS.ProcessEnv = process.env): boolean {
+  if (import.meta.env.DEV) return true
   if (env.SHOW_DRAFTS === '1') return true
   const branch = env.WORKERS_CI_BRANCH
   return Boolean(branch) && branch !== 'main'
