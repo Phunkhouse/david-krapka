@@ -8,7 +8,16 @@ const pages = [
     workButton: 'See selected work',
     navWork: 'Work',
     navApproach: 'Approach',
-    headings: ['Selected work', 'How I think & build', 'Big team. Small team.'],
+    navAbout: 'About',
+    navContact: 'Contact',
+    subjects: ['Role: ', 'Project: '],
+    headings: [
+      'Selected work',
+      'How I think & build',
+      'Big team. Small team.',
+      'Playful by design. Serious about the work.',
+      "Let's work together.",
+    ],
     contact: 'Get in touch',
   },
   {
@@ -17,10 +26,15 @@ const pages = [
     workButton: 'Prohlédnout práci',
     navWork: 'Práce',
     navApproach: 'Přístup',
+    navAbout: 'O mně',
+    navContact: 'Kontakt',
+    subjects: ['Pozice: ', 'Projekt: '],
     headings: [
       'Vybraná práce',
       'Jak přemýšlím a tvořím',
       'Velký tým. Malý tým.',
+      'Hravý v designu. Vážný v práci.',
+      'Pojďme na to.',
     ],
     contact: 'Napište mi',
   },
@@ -32,6 +46,9 @@ for (const {
   workButton,
   navWork,
   navApproach,
+  navAbout,
+  navContact,
+  subjects,
   headings,
   contact,
 } of pages) {
@@ -56,6 +73,8 @@ for (const {
         'Rethink',
         'Emplifi',
         'Freelance',
+        lang === 'en' ? 'Hiring?' : 'Hledáte do týmu?',
+        lang === 'en' ? 'Have a project?' : 'Máte projekt?',
       ])
     })
 
@@ -64,8 +83,8 @@ for (const {
     }) => {
       await page.goto(path)
       await page.getByRole('link', { name: contact }).first().click()
-      // #contact arrives in a later pull request; the hash still updates.
       await expect(page).toHaveURL(/#contact$/)
+      await expect(page.locator('#contact')).toBeFocused()
 
       await page.goto(path)
       await page.locator('#top').getByRole('link', { name: workButton }).click()
@@ -86,6 +105,49 @@ for (const {
       await expect(page.locator('#work')).toBeInViewport()
     })
 
+    test('header links About and Contact land in their sections', async ({
+      page,
+    }) => {
+      const nav = () =>
+        page.getByRole('navigation', {
+          name: lang === 'en' ? 'Main' : 'Hlavní',
+        })
+      for (const [name, id] of [
+        [navAbout, 'about'],
+        [navContact, 'contact'],
+      ]) {
+        await page.goto(path)
+        await nav().getByRole('link', { name }).click()
+        await expect(page).toHaveURL(new RegExp(`#${id}$`))
+        await expect(page.locator(`#${id}`)).toBeFocused()
+      }
+    })
+
+    test('both contact cards open an email with a prefilled subject', async ({
+      page,
+    }) => {
+      await page.goto(path)
+      const links = page.locator('#contact .cards').getByRole('link')
+      await expect(links).toHaveCount(2)
+      for (const [index, subject] of subjects.entries()) {
+        const href = (await links.nth(index).getAttribute('href')) ?? ''
+        expect(href).toMatch(/^mailto:/)
+        expect(href).toContain(`subject=${encodeURIComponent(subject)}`)
+      }
+    })
+
+    test('states no prices, rates, terms or availability (LEG-001)', async ({
+      page,
+    }) => {
+      await page.goto(path)
+      const text = await page.locator('main').innerText()
+      const money = /[$€£]|\b(Kč|CZK|EUR|USD)\b/
+      const words =
+        /(?<!\p{L})(price|prices|pricing|rate|rates|hourly|per hour|quote|availability|available|terms|cena|ceny|ceník|sazba|sazby|hodinová|za hodinu|nabídka|dostupnost|volný|volná|podmínky)(?!\p{L})/iu
+      expect(text).not.toMatch(money)
+      expect(text).not.toMatch(words)
+    })
+
     test('header link Approach lands in the approach section', async ({
       page,
     }) => {
@@ -97,6 +159,14 @@ for (const {
       await expect(page).toHaveURL(/#approach$/)
       await expect(page.locator('#approach')).toBeFocused()
       await expect(page.locator('#approach')).toBeInViewport()
+    })
+
+    test('the About portrait is decorative', async ({ page }) => {
+      await page.goto(path)
+      await expect(page.locator('#about .portrait')).toHaveAttribute(
+        'aria-hidden',
+        'true',
+      )
     })
 
     test('the English claim is marked as English on the Czech page', async ({

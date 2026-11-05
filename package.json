@@ -15,6 +15,7 @@
     "typecheck": "astro check",
     "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build",
     "preview:cloudflare": "wrangler dev",
+    "placeholders": "node scripts/placeholders.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {
