@@ -55,7 +55,7 @@ These are needed before the related milestone can finish (see [milestones](../MI
 5. **Tablet range** (roughly 720–1100 px). The mockups cover 390 px and 1440 px only.
 6. **404 page**, CV download treatment, and any legal or privacy page the legal planning requires.
 7. **Social preview image** (Open Graph) and favicon / monogram.
-8. **Real portrait photo** treatment. The glitch currently masks a silhouette placeholder.
+8. ~~**Real portrait photo** treatment~~ decided 5 November 2026: duotone ink on yellow with a pink halftone copy ([Landing page](landing-page.md)). The canvas still shows the silhouette.
 
 ## Open design questions
 

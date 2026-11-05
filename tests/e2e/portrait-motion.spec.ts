@@ -36,13 +36,13 @@ const scrollToPortrait = (page: Page) =>
 
 for (const { path, stop, start } of pages) {
   test.describe(`portrait motion ${path}`, () => {
-    test('the glitch layers loop and replace the static portrait', async ({
+    test('the glitch layers loop and replace the static layers', async ({
       page,
     }) => {
       await page.goto(path)
       await scrollToPortrait(page)
       expect(await display(page, '#about .glitch')).toBe('block')
-      expect(await display(page, '#about svg')).toBe('none')
+      expect(await display(page, '#about .still')).toBe('none')
       // 6 strips × (strip + 2 inks) + scan bar + dot circle drift = 20; at
       // least 19 so one layer more or less does not break the test.
       await expect.poll(() => running(page)).toBeGreaterThanOrEqual(19)
@@ -79,7 +79,7 @@ for (const { path, stop, start } of pages) {
       }) => {
         await page.goto(path)
         await scrollToPortrait(page)
-        expect(await display(page, '#about svg')).toBe('block')
+        expect(await display(page, '#about .still')).toBe('block')
         expect(await display(page, '#about .glitch')).toBe('none')
         expect(await running(page)).toBe(0)
       })
@@ -100,7 +100,7 @@ for (const { path, stop, start } of pages) {
 
       test('the portrait is the calm static one', async ({ page }) => {
         await page.goto(path)
-        expect(await display(page, '#about svg')).toBe('block')
+        expect(await display(page, '#about .still')).toBe('block')
         expect(await display(page, '#about .glitch')).toBe('none')
       })
     })

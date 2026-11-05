@@ -23,8 +23,10 @@ node scripts/flash-check.mjs http://127.0.0.1:8788/ "#top .drum" --width 1440 --
 
 | Element | Viewport | Largest changed area (brighter / darker) | Worst flashes per second at the area threshold (87,296 px) | at a quarter of it | Limit |
 | --- | --- | --- | --- | --- | --- |
-| Portrait glitch (G4) | 1440 px (400 px portrait) | 13,524 / 13,103 px | 0 | 0 | 3 |
-| Portrait glitch (G4) | 390 px (240 px portrait) | 6,972 / 7,549 px | 0 | 0 | 3 |
+| Portrait glitch, silhouette placeholder | 1440 px (400 px portrait) | 13,524 / 13,103 px | 0 | 0 | 3 |
+| Portrait glitch, silhouette placeholder | 390 px (240 px portrait) | 6,972 / 7,549 px | 0 | 0 | 3 |
+| Portrait glitch with David's photo (duotone) | 1440 px | 13,850 / 12,647 px | 0 | 0 | 3 |
+| Portrait glitch with David's photo (duotone) | 390 px | 4,941 / 4,492 px | 0 | 0 | 3 |
 | Hero drum | 1440 px | 86,882 / 81,001 px | 0 | 2 | 3 |
 
 ## Reading
@@ -41,4 +43,4 @@ node scripts/flash-check.mjs http://127.0.0.1:8788/ "#top .drum" --width 1440 --
 ## Open
 
 - Re-run with a certified tool (PEAT or IRIS) as part of the pre-launch review, if David wants a result that does not rest on this approximation. Not run here: neither tool is installed.
-- Re-run this script if the portrait or drum timings change, or when a real portrait photo replaces the silhouette.
+- Re-run this script if the portrait or drum timings change, or the photo changes. (Re-run with the photo on 5 November 2026: still 0.)

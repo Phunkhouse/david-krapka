@@ -166,7 +166,7 @@ Status as of 5 November 2026: milestones 0, 1, 2 and 3 done, the rest planned.
 - Contact links with the real address and prefilled subjects; LinkedIn and GitHub links; CV PDF.
 - Privacy notice text in English and Czech ([LEG-003](SPEC.md#legal-requirements)), drafted as a separate task once the public email address is decided.
 - Private record of the accepted Cloudflare agreement and Data Processing Addendum versions ([LEG-004](SPEC.md#legal-requirements)); Workers logs and observability off or covered by the notice.
-- Portrait and CV hygiene ([LEG-007](SPEC.md#legal-requirements)): rights to the portrait documented, CV free of unwanted personal data, EXIF removed from committed images.
+- Portrait and CV hygiene ([LEG-007](SPEC.md#legal-requirements)): rights to the portrait documented, CV free of unwanted personal data, EXIF removed from committed images. The portrait photo is on the site since milestone 4 as generated masks without metadata (`scripts/portrait.mjs`); the original is not committed. Still to record: who took the photo and the right to publish it.
 - `LICENSE` for the code and a content note for texts and images; one-page private record of processing ([LEG-009](SPEC.md#legal-requirements)).
 - If the IČO is active again by launch, or before any paid job: business identification in the footer ([LEG-002](SPEC.md#legal-requirements)) and a review of the project-invitation wording ([LEG-001](SPEC.md#legal-requirements)).
 - Favicon / monogram, Open Graph images, `sitemap.xml`, `robots.txt`, canonical URLs, JSON-LD `Person`.
