@@ -49,6 +49,8 @@ export default defineConfig({
   site: 'https://david-krapka.eu',
   output: 'static',
   trailingSlash: 'always',
+  // Inline the small stylesheets so first paint does not wait for them.
+  build: { inlineStylesheets: 'always' },
   // English at the root, Czech under /cs/ (decision 0005).
   i18n: {
     locales: ['en', 'cs'],
