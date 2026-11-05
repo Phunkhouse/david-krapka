@@ -234,15 +234,15 @@ for (const {
       await expect(page.locator('#work')).toBeFocused()
     })
 
-    // The e2e build includes the draft Kultomat and Eucal case studies, so
-    // their cards are the only links; case-study.spec.ts covers the links themselves.
+    // The e2e build includes the draft case studies of Kultomat, Eucal,
+    // Vladan Vaněk and UpVideo, so their cards are the links; case-study.spec.ts covers the links themselves.
     test('only published case studies are linked and Systerna says in progress', async ({
       page,
     }) => {
       await page.goto(path)
       const work = page.locator('#work')
       const prefix = lang === 'en' ? '/work/' : '/cs/work/'
-      await expect(work.getByRole('link')).toHaveCount(2)
+      await expect(work.getByRole('link')).toHaveCount(4)
       await expect(work.getByRole('link').first()).toHaveAttribute(
         'href',
         `${prefix}kultomat/`,
@@ -250,6 +250,14 @@ for (const {
       await expect(work.getByRole('link').nth(1)).toHaveAttribute(
         'href',
         `${prefix}eucal/`,
+      )
+      await expect(work.getByRole('link').nth(2)).toHaveAttribute(
+        'href',
+        `${prefix}vladan-vanek/`,
+      )
+      await expect(work.getByRole('link').nth(3)).toHaveAttribute(
+        'href',
+        `${prefix}upvideo/`,
       )
       await expect(work.getByRole('listitem')).toHaveCount(4)
       await expect(

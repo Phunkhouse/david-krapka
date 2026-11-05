@@ -136,10 +136,10 @@ These gate PRs C and D, not PR A. The [working project card](content-and-case-st
 
 ## PR D: Client projects and wrap-up
 
-- [ ] Per project (Eucal, Vladan Vaněk, UpVideo), according to decision 3: a short page following the shared structure, or a link-out card with David's role stated on it.
+- [ ] Per project (Eucal, Vladan Vaněk, UpVideo), according to decision 3: a short page following the shared structure, or a link-out card with David's role stated on it. **Partly:** draft short pages with placeholders exist for all three (David fills the cards before launch; decision 3 is then taken per project, and a project without enough content has its draft removed and its card links out).
 - [x] ~~Permissions entry in each project card~~ Not needed, decision 0012. Still prefer screenshots without strangers or third-party content.
-- [ ] Each card links to the right destination in both languages.
-- [ ] Lighthouse mobile on the preview for the Kultomat page and one short page, both languages, three runs each: Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05 (SEO `noindex` exception as before). Save a summary in `docs/audits/`.
+- [ ] Each card links to the right destination in both languages. **Draft links verified by Playwright (all four, both languages); final check when content lands.**
+- [x] Lighthouse mobile on the preview for the Kultomat page and one short page, both languages, three runs each: Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05 (SEO `noindex` exception as before). Save a summary in `docs/audits/`. **Done on the template** (local serve, placeholders, no screenshots): [lighthouse-case-study.md](audits/2026-11-05/lighthouse-case-study.md); repeat with real content.
 - [ ] David's review of the facts and sign-off on each page.
 
 ## Acceptance checks (from MILESTONES.md)
