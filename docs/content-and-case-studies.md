@@ -90,4 +90,4 @@ This card is a content outline only; no project's facts have been filled in yet.
 - **Decision → alternative → reason → validation:** To be completed.
 - **Outcome and evidence source:** To be completed.
 - **What I would rethink:** To be completed.
-- **Screenshots, links and publication permissions:** To be completed.
+- **Screenshots, links and publication permissions:** To be completed. Permissions for the four planned projects are skipped by [decision 0012](decisions/0012-skip-permission-requests-for-case-studies.md) (accepted risk); record them here for any other project.

@@ -4,7 +4,7 @@ Working plan for [Milestone 5](MILESTONES.md#milestone-5-case-studies). Scope an
 
 **Goal:** Kultomat as the main case study and short client project pages, built on verified facts.
 
-**Content is the critical path.** Code can be ready long before the facts are. This plan therefore splits the work into a pipeline that needs no design and no content (PR A), a template that needs the canvas design (PR B), and content PRs that need finished project cards and permissions (PRs C and D). A case study is published only when its facts are verified and its permissions are recorded; until then its landing card stays as it is today, not a link.
+**Content is the critical path.** Code can be ready long before the facts are. This plan therefore splits the work into a pipeline that needs no design and no content (PR A), a template that needs the canvas design (PR B), and content PRs that need finished project cards (PRs C and D). A case study is published only when its facts are verified (permissions are skipped for the four planned projects, [0012](decisions/0012-skip-permission-requests-for-case-studies.md)); until then its landing card stays as it is today, not a link.
 
 ## Delivery plan: four PRs, one at a time
 
@@ -14,8 +14,8 @@ Each PR is reviewable on the preview URL and starts only after the previous one 
 | --- | --- | --- | --- |
 | A | `feat/case-study-pipeline` | MDX and the case study content collection with its schema, `/work/<slug>/` routes in both languages, draft handling, metadata, switcher and `hreflang`, landing cards as links with the hover and focus lift | Decisions 1 to 6 in section 0 |
 | B | `feat/case-study-template` | The designed case study layout (long and short), figures and optimised screenshots, facts panel, “Next project”, Open Graph images | Case study design on the canvas (decision 7) |
-| C | `feat/case-study-kultomat` | Kultomat long form in the agreed languages, screenshots, permissions record; its card becomes a link | Kultomat project card complete and permissions recorded |
-| D | `feat/case-study-clients` | Eucal, Vladan Vaněk and UpVideo as short pages or links out; Lighthouse on case study pages; milestone wrap-up | Each project's card and permissions; may split into one PR per project |
+| C | `feat/case-study-kultomat` | Kultomat long form in the agreed languages, screenshots; its card becomes a link | Kultomat project card complete |
+| D | `feat/case-study-clients` | Eucal, Vladan Vaněk and UpVideo as short pages or links out; Lighthouse on case study pages; milestone wrap-up | Each project's card; may split into one PR per project |
 
 PR A comes first because it is the only part that is not waiting for anyone, and it lets PRs B to D show real pages on the preview. PR B goes before content so the copy is written into the final layout and its length can be judged there. If the design is ready before Kultomat's facts, the order stays; if Kultomat is ready first, PR C can use the PR A layout and PR B restyles it.
 
@@ -43,7 +43,7 @@ These gate PRs C and D, not PR A. The [working project card](content-and-case-st
 - [ ] Kultomat project card: status, audience and problem, dates, what David owned, what others and AI contributed, two or three decisions (alternative, reason, validation), outcome with its source, what he would rethink.
 - [ ] Kultomat screenshots: authentic, dated, captioned; no personal data of other people visible.
 - [ ] Eucal, Vladan Vaněk, UpVideo project cards, each with the distinct angle from [content and case studies](content-and-case-studies.md#client-projects-each-should-demonstrate-a-distinct-value), or confirmed facts for a link-out card.
-- [ ] Permissions ([LEG-006](SPEC.md#legal-requirements)) per project, recorded in its card as date and form only (not the content of private emails): client OK for name, logo, screenshots and quotes; OK from every identifiable person shown (for example Vladan Vaněk on his own site), or crop or blur them; collaborators asked before they are named. The OK must also cover the public repository, since committed images are public there.
+- [x] ~~Permissions ([LEG-006](SPEC.md#legal-requirements)) per project~~ **Decided 5 November 2026: skipped for all four projects, accepted risk ([0012](decisions/0012-skip-permission-requests-for-case-studies.md)).** The clients and people involved are David's relatives or friends. Nothing to collect; crop screenshots that show third-party content where easy.
 - [ ] One-line summary for the Kultomat card, replacing `[One-line summary to be confirmed]` on both landing pages.
 - [ ] Czech text for every published case study (if decision 4 is “both languages”).
 
@@ -129,7 +129,7 @@ These gate PRs C and D, not PR A. The [working project card](content-and-case-st
 - [ ] Kultomat `en.mdx` (and `cs.mdx`) from the finished project card, following the shared structure: summary, what I owned, problem and constraints, two or three decisions, the build, AI and collaboration, outcomes and validation, rethink.
 - [ ] Every claim and metric traceable to the project card; metrics with source, timeframe and method, or left out.
 - [ ] Screenshots with captions and alternative text; no identifiable person without a recorded OK.
-- [ ] Permissions entry in the Kultomat card (date and form). Kultomat is David's own product, so the entry covers collaborators and any third-party content in screenshots.
+- [x] ~~Permissions entry in the Kultomat card~~ Not needed, decision 0012.
 - [ ] `draft: false`; the card on both landing pages links to it; the card summary placeholder is replaced.
 - [ ] `pnpm placeholders` shows no placeholder on the Kultomat pages.
 - [ ] David's review of the facts and sign-off on the pages (both languages).
@@ -137,7 +137,7 @@ These gate PRs C and D, not PR A. The [working project card](content-and-case-st
 ## PR D: Client projects and wrap-up
 
 - [ ] Per project (Eucal, Vladan Vaněk, UpVideo), according to decision 3: a short page following the shared structure, or a link-out card with David's role stated on it.
-- [ ] Permissions entry in each project card before its page or screenshots are published; people cropped or blurred where no OK exists.
+- [x] ~~Permissions entry in each project card~~ Not needed, decision 0012. Still prefer screenshots without strangers or third-party content.
 - [ ] Each card links to the right destination in both languages.
 - [ ] Lighthouse mobile on the preview for the Kultomat page and one short page, both languages, three runs each: Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05 (SEO `noindex` exception as before). Save a summary in `docs/audits/`.
 - [ ] David's review of the facts and sign-off on each page.
@@ -148,7 +148,7 @@ Record evidence here and in the PR that completes each check.
 
 - [ ] Each case study follows the [shared structure](content-and-case-studies.md#proposed-shared-case-study-structure) and states role, collaborators and AI share; verify by review against the project card. (PRs C and D; the schema from PR A enforces the fields)
 - [ ] Every claim and metric has a source in the project card; verify by David's review. (PRs C and D)
-- [ ] Each published case study has a Permissions entry in its project card (client OK for name, logo, screenshots and quotes; OK from every identifiable person shown or the image is cropped or blurred; collaborators asked) with date and form; verify by review ([LEG-006](SPEC.md#legal-requirements)). (PRs C and D)
+- [ ] Each published case study has a Permissions entry in its project card, or falls under [decision 0012](decisions/0012-skip-permission-requests-for-case-studies.md) (accepted risk for the four planned projects); verify that the project is one of them and that nobody has objected ([LEG-006](SPEC.md#legal-requirements)). (PRs C and D)
 - [ ] Images have fixed dimensions (no layout shift) and meaningful alternative text; verify with Lighthouse CLS and axe. (PR B, measured in D)
 - [ ] Landing cards link to the right pages in both languages; verify with Playwright. (PR A, extended in C and D)
 - [ ] David signs off on each page. (PRs B, C and D)
@@ -157,15 +157,15 @@ Record evidence here and in the PR that completes each check.
 
 - [ ] Update MILESTONES.md: milestone 5 status `done`, completion evidence (PR links), status date, unplanned changes and items carried forward (for example short pages or Czech versions left for after launch).
 - [ ] Update SPEC.md: case study scope, content row (no longer a proposal), images row, resolved open questions.
-- [ ] Update [content and case studies](content-and-case-studies.md) with the filled project cards and permissions entries, and the [design README](design/README.md) (case study page designed, screenshot question resolved).
+- [ ] Update [content and case studies](content-and-case-studies.md) with the filled project cards, and the [design README](design/README.md) (case study page designed, screenshot question resolved).
 - [ ] `AGENTS.md` lists every new command or environment variable (`SHOW_DRAFTS`, if added).
 - [ ] Milestone 6 scope still lists the site-wide Open Graph image, sitemap (now including case study pages) and the placeholder `--fail` check.
 
 ## Risks and notes
 
-- **Content is late.** PRs C and D can wait a long time for project cards and permissions. PR A and B are useful on their own; if the milestone stalls on content, launch can go ahead with Kultomat only and the client cards as link-outs, decided by David.
+- **Content is late.** PRs C and D can wait a long time for project cards. PR A and B are useful on their own; if the milestone stalls on content, launch can go ahead with Kultomat only and the client cards as link-outs, decided by David.
 - **Public repository.** Anything committed, including drafts and screenshots on unmerged branches, is public. Permissions must cover the repository, and unverified facts never go into a commit.
-- **Permissions take time.** Ask clients and identifiable people early, by email, and record the date and form; plan to crop or blur if an answer does not come.
+- **Permissions skipped (accepted risk, [0012](decisions/0012-skip-permission-requests-for-case-studies.md)).** Nothing to wait for, but nothing on record either; remove a name, likeness or image promptly if anyone objects, and revisit before adding any project or person outside the four.
 - **Image weight and CLS.** Screenshots are the first large images on the site. Fixed dimensions, AVIF and `sizes` keep CLS 0 and LCP within target; check the first screen especially on mobile.
 - **Placeholders on drafts.** Draft pages on previews will show `[…]` placeholders; `pnpm placeholders` lists them, and the milestone 6 `--fail` check runs on the production build only, where drafts are excluded.
 - **Workers Builds variables.** The draft rule relies on knowing the branch at build time; if Workers Builds does not expose it, fall back to an explicit build variable set only for preview builds, or to local-only drafts.
