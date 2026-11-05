@@ -38,7 +38,7 @@ Design for `/work/<slug>/` and `/cs/work/<slug>/`, from the canvas page “Case 
 2. Add the project to `artFor` in `src/content/projects.ts` (card letter and kind).
 3. Give its landing card the same `slug` in `src/i18n/en.ts` and `cs.ts`; the build fails when a built case study has no card.
 4. Every `Figure` needs a screenshot (`src`) before `draft` is removed; a build without drafts fails otherwise.
-5. Export the Open Graph image once the summary is final and set `ogImage`.
+5. The Open Graph image defaults to the project preview (`src/assets/work/<slug>.jpg`); set `ogImage` only to override it.
 
 ## Breakpoints
 
@@ -47,6 +47,8 @@ Design for `/work/<slug>/` and `/cs/work/<slug>/`, from the canvas page “Case 
 - From 1100 px: desktop boards.
 
 ## Social preview image
+
+**Current implementation (5 November 2026):** case studies share their project preview image (1200 × 630 JPEG, see [landing page](landing-page.md)), so no `OG-Case` export is needed. The `OG-Case` template below is kept as the alternative if per-study text images are wanted later.
 
 `OG-Case`: 1200 × 630, 6 px ink frame, the card art left (520 px), the 44 px háček mark and mono “Case study · David Křapka”, the project name in Rubik 112 px with the pink shadow, the summary, and `david-krapka.eu`. One PNG per case study and language, exported from the canvas once the summary is final (milestone 5 decision 9).
 

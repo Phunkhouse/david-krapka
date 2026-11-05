@@ -208,3 +208,42 @@ test('the háček mark sits beside the name in the header and footer', async ({
   await page.setViewportSize({ width: 390, height: 844 })
   await expect(header).toHaveJSProperty('clientWidth', 40)
 })
+
+// Case studies use their project's preview image (src/assets/work/) as
+// og:image, in both languages.
+for (const slug of ['kultomat', 'eucal', 'vladan-vanek', 'upvideo']) {
+  for (const prefix of ['', '/cs']) {
+    test(`${prefix}/work/${slug}/ shares the project preview image`, async ({
+      page,
+      request,
+    }) => {
+      await page.goto(`${prefix}/work/${slug}/`)
+      const meta = (property: string) =>
+        page.locator(`meta[property="${property}"]`).getAttribute('content')
+      const image = (await meta('og:image'))!
+      expect(image).toMatch(
+        new RegExp(`^${site}/_astro/${slug}\\.[\\w-]+\\.jpg$`),
+      )
+      expect(await meta('og:image:width')).toBe('1200')
+      expect(await meta('og:image:height')).toBe('630')
+      expect(await meta('og:image:alt')).toBeTruthy()
+
+      const response = await request.get(image.slice(site.length))
+      expect(response.status()).toBe(200)
+      expect(response.headers()['content-type']).toContain('image/jpeg')
+      const jpeg = await response.body()
+      // Size from the start-of-frame marker: height, then width.
+      let offset = 2
+      while (
+        jpeg[offset] === 0xff &&
+        ![0xc0, 0xc1, 0xc2].includes(jpeg[offset + 1]!)
+      ) {
+        offset += 2 + jpeg.readUInt16BE(offset + 2)
+      }
+      expect([
+        jpeg.readUInt16BE(offset + 7),
+        jpeg.readUInt16BE(offset + 5),
+      ]).toEqual([1200, 630])
+    })
+  }
+}

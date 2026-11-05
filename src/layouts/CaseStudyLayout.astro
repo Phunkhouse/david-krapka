@@ -4,7 +4,7 @@ import BaseLayout from './BaseLayout.astro'
 import NextProject from '../components/case-study/NextProject.astro'
 import ProjectArt from '../components/case-study/ProjectArt.astro'
 import { nextCaseStudy, type CaseStudy } from '../content/load'
-import { cardFor } from '../content/projects'
+import { cardFor, previewFor } from '../content/projects'
 import { t } from '../i18n'
 import { pathFor } from '../i18n/routes'
 
@@ -26,6 +26,7 @@ const next = await nextCaseStudy(study)
 // While the summary is still a placeholder it gets the yellow placeholder mark.
 const summaryIsPlaceholder = /^\[.*\]$/.test(data.summary)
 const route = `work/${slug}` as const
+const ogImage = data.ogImage ?? previewFor(slug)
 ---
 
 <BaseLayout
@@ -36,10 +37,11 @@ const route = `work/${slug}` as const
   og={{
     type: 'article',
     title: data.title,
-    image: data.ogImage && {
-      src: data.ogImage.src,
-      width: data.ogImage.width,
-      height: data.ogImage.height,
+    // The project's preview, unless the entry names its own image.
+    image: {
+      src: ogImage.src,
+      width: ogImage.width,
+      height: ogImage.height,
       alt: `${labels.caseStudyLabel}: ${data.title}`,
     },
   }}

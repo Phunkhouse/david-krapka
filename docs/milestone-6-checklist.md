@@ -117,7 +117,7 @@ Not committed, because the repository is public and they are for David's own com
 
 - [x] Export the boards to `docs/design/mockups/`, describe them in the design docs, strike item 7 in the design README. Canvas version `1793902296-fc46`; described in [Mark and icons](design/visual-system.md#mark-and-icons).
 - [x] `favicon.svg`, `favicon.ico`, `apple-touch-icon.png` replace Astro's defaults; `<link>` tags in `BaseLayout`. Plus `icon-192.png`, `icon-512.png`, `site.webmanifest` and `theme-color`; all built by `scripts/brand-assets.mjs`. The header and footer show the mark (`Mark.astro`), as on the updated boards.
-- [x] `og:image` (with width, height and alt) on the landing and privacy pages, per language; files metadata-stripped. Case studies fall back to it until their `OG-Case` image exists. Generated in Chromium, no metadata (exiftool is not installed locally, so the check is by construction; PNG headers hold only image data).
+- [x] `og:image` (with width, height and alt) on the landing and privacy pages, per language; files metadata-stripped. Case studies use their project preview image as `og:image` (`scripts/work-previews.mjs`). Generated in Chromium, no metadata (exiftool is not installed locally, so the check is by construction; PNG headers hold only image data).
 - [x] Playwright: icons and Open Graph images return 200 with the right content type; dimensions match the tags. `tests/e2e/seo.spec.ts`.
 
 ## PR C: Contact, CV and landing facts
@@ -143,7 +143,7 @@ Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which 
 
 - [ ] Text in both languages from the finished project card, following the shared structure; every claim traceable to the card.
 - [ ] Screenshots through `Figure`, with captions and alternative text, metadata stripped, size budget recorded.
-- [ ] `OG-Case` image per language exported and `ogImage` set.
+- [x] Case study social image: the project preview (`src/assets/work/`), same in both languages; `OG-Case` per-study images dropped for now.
 - [ ] `draft: false`; the landing card links to it; or, per decision 10, the draft is removed and the card links out.
 - [ ] David's review of the facts and sign-off on the pages.
 - [ ] Lighthouse mobile on the real pages (Kultomat and one short page, both languages); update the [case study summary](audits/2026-11-05/lighthouse-case-study.md) or add a new one.

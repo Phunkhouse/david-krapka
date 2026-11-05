@@ -1,1 +1,282 @@
-{"v": 3, "attachments": {}, "boards": {"D-Case-Long-CS.dc.html": {"h": 6454, "page": "case-study", "title": "Případová studie · dlouhá forma · desktop · CZ", "w": 1440, "x": 1990, "y": 0}, "D-Case-Long.dc.html": {"h": 6500, "page": "case-study", "title": "Case study · long form (Kultomat) · desktop", "w": 1440, "x": 0, "y": 0}, "D-Case-Short.dc.html": {"h": 3499, "page": "case-study", "title": "Case study · short client format (Eucal) · desktop", "w": 1440, "x": 0, "y": 6716}, "D-Home-CS.dc.html": {"h": 5304, "page": "landing-cs", "title": "Úvodní stránka · desktop · CZ", "w": 1440, "x": 0, "y": 0}, "D-Home.dc.html": {"h": 5447, "page": "landing", "title": "Landing page · desktop", "w": 1440, "x": 0, "y": 0}, "M-Case-Long.dc.html": {"h": 6596, "page": "case-study", "title": "Case study · long form · mobile", "w": 390, "x": 1520, "y": 0}, "M-Case-Short-CS.dc.html": {"h": 3772, "page": "case-study", "title": "Případová studie · krátká forma · mobil · CZ", "w": 390, "x": 1990, "y": 6716}, "M-Case-Short.dc.html": {"h": 3867, "page": "case-study", "title": "Case study · short client format · mobile", "w": 390, "x": 1520, "y": 6716}, "M-Home-CS.dc.html": {"h": 6057, "page": "landing-cs", "title": "Úvodní stránka · mobil · CZ", "w": 390, "x": 1520, "y": 0}, "M-Home.dc.html": {"h": 6054, "page": "landing", "title": "Landing page · mobile", "w": 390, "x": 1520, "y": 0}, "OG-Case.dc.html": {"h": 630, "page": "case-study", "title": "Social preview image (Open Graph) · 1200 × 630 · template per case study", "w": 1200, "x": 2460, "y": 6716}, "Logo-H2.dc.html": {"x": 0, "y": 0, "w": 1280, "h": 760, "title": "Logo · H2 háček · mark, lockups, favicon", "page": "brand"}, "Favicon-Set.dc.html": {"x": 1360, "y": 0, "w": 1280, "h": 880, "title": "Favicon set · sizes, dark mode, export list", "page": "brand"}, "OG-Site.dc.html": {"x": 0, "y": 1300, "w": 1200, "h": 630, "title": "Social preview image · site-wide · English · 1200 × 630", "page": "brand"}, "OG-Site-CS.dc.html": {"x": 1280, "y": 1300, "w": 1200, "h": 630, "title": "Náhledový obrázek · celý web · CZ · 1200 × 630", "page": "brand"}}, "createdOnFiles": {"at": "2026-11-03T20:55:00Z", "v": 1}, "designSystems": [], "launch": {"page": "landing", "view": "canvas"}, "notes": {"t1": {"kind": "title1", "maxW": 1910, "page": "landing", "text": "Landing page · print drum hero · desktop and mobile side by side", "w": 240, "x": 0, "y": -300}, "t2": {"kind": "title1", "maxW": 1910, "page": "landing-cs", "text": "Úvodní stránka · česká verze · desktop a mobil · claim zůstává Think. Make. Rethink.", "w": 240, "x": 0, "y": -300}, "t7": {"kind": "title1", "maxW": 3430, "page": "case-study", "text": "Case study pages · calm editorial · long form (Kultomat) · EN, mobile, CZ", "w": 240, "x": 0, "y": -300}, "t8": {"kind": "title1", "maxW": 3660, "page": "case-study", "text": "Short client format (Eucal) · and the social preview image", "w": 240, "x": 0, "y": 6416}, "t9": {"x": 0, "y": -300, "text": "Logo & favicon · H2 háček", "kind": "title1", "maxW": 2640, "page": "brand"}, "t10": {"x": 0, "y": 1000, "text": "Social preview image · landing and privacy pages · EN and CZ", "kind": "title1", "maxW": 2480, "page": "brand"}}, "order": ["D-Home.dc.html", "M-Home.dc.html", "D-Home-CS.dc.html", "M-Home-CS.dc.html", "D-Case-Long.dc.html", "M-Case-Long.dc.html", "D-Case-Long-CS.dc.html", "D-Case-Short.dc.html", "M-Case-Short.dc.html", "M-Case-Short-CS.dc.html", "OG-Case.dc.html", "Logo-H2.dc.html", "Favicon-Set.dc.html", "OG-Site.dc.html", "OG-Site-CS.dc.html"], "pages": [{"id": "landing", "name": "Landing page"}, {"id": "landing-cs", "name": "Landing page · CZ"}, {"id": "case-study", "name": "Case study pages"}, {"id": "brand", "name": "Logo & favicon"}], "title": "Personal Portfolio mockups"}
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "D-Case-Long-CS.dc.html": {
+      "h": 6454,
+      "page": "case-study",
+      "title": "Případová studie · dlouhá forma · desktop · CZ",
+      "w": 1440,
+      "x": 1990,
+      "y": 0
+    },
+    "D-Case-Long.dc.html": {
+      "h": 6500,
+      "page": "case-study",
+      "title": "Case study · long form (Kultomat) · desktop",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "D-Case-Short.dc.html": {
+      "h": 3499,
+      "page": "case-study",
+      "title": "Case study · short client format (Eucal) · desktop",
+      "w": 1440,
+      "x": 0,
+      "y": 6716
+    },
+    "D-Home-CS.dc.html": {
+      "h": 5304,
+      "page": "landing-cs",
+      "title": "Úvodní stránka · desktop · CZ",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "D-Home.dc.html": {
+      "h": 5447,
+      "page": "landing",
+      "title": "Landing page · desktop",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "M-Case-Long.dc.html": {
+      "h": 6596,
+      "page": "case-study",
+      "title": "Case study · long form · mobile",
+      "w": 390,
+      "x": 1520,
+      "y": 0
+    },
+    "M-Case-Short-CS.dc.html": {
+      "h": 3772,
+      "page": "case-study",
+      "title": "Případová studie · krátká forma · mobil · CZ",
+      "w": 390,
+      "x": 1990,
+      "y": 6716
+    },
+    "M-Case-Short.dc.html": {
+      "h": 3867,
+      "page": "case-study",
+      "title": "Case study · short client format · mobile",
+      "w": 390,
+      "x": 1520,
+      "y": 6716
+    },
+    "M-Home-CS.dc.html": {
+      "h": 6057,
+      "page": "landing-cs",
+      "title": "Úvodní stránka · mobil · CZ",
+      "w": 390,
+      "x": 1520,
+      "y": 0
+    },
+    "M-Home.dc.html": {
+      "h": 6054,
+      "page": "landing",
+      "title": "Landing page · mobile",
+      "w": 390,
+      "x": 1520,
+      "y": 0
+    },
+    "OG-Case.dc.html": {
+      "h": 630,
+      "page": "case-study",
+      "title": "Social preview image (Open Graph) · 1200 × 630 · template per case study",
+      "w": 1200,
+      "x": 2460,
+      "y": 6716
+    },
+    "Logo-H2.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 760,
+      "title": "Logo · H2 háček · mark, lockups, favicon",
+      "page": "brand"
+    },
+    "Favicon-Set.dc.html": {
+      "x": 1360,
+      "y": 0,
+      "w": 1280,
+      "h": 880,
+      "title": "Favicon set · sizes, dark mode, export list",
+      "page": "brand"
+    },
+    "OG-Site.dc.html": {
+      "x": 0,
+      "y": 1300,
+      "w": 1200,
+      "h": 630,
+      "title": "Social preview image · site-wide · English · 1200 × 630",
+      "page": "brand"
+    },
+    "OG-Site-CS.dc.html": {
+      "x": 1280,
+      "y": 1300,
+      "w": 1200,
+      "h": 630,
+      "title": "Náhledový obrázek · celý web · CZ · 1200 × 630",
+      "page": "brand"
+    },
+    "Prev-Kultomat.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 630,
+      "title": "Kultomat · kultomat.cz · 1200 × 630",
+      "page": "work-previews"
+    },
+    "Prev-Eucal.dc.html": {
+      "x": 1280,
+      "y": 0,
+      "w": 1200,
+      "h": 630,
+      "title": "Eucal · eucal.cz/en · 1200 × 630",
+      "page": "work-previews"
+    },
+    "Prev-VladanVanek.dc.html": {
+      "x": 0,
+      "y": 830,
+      "w": 1200,
+      "h": 630,
+      "title": "Vladan Vaněk · vladanvanek.cz (Czech only) · 1200 × 630",
+      "page": "work-previews"
+    },
+    "Prev-UpVideo.dc.html": {
+      "x": 1280,
+      "y": 830,
+      "w": 1200,
+      "h": 630,
+      "title": "UpVideo · upvideo.cz (Czech only) · 1200 × 630",
+      "page": "work-previews"
+    },
+    "D-Work-Previews.dc.html": {
+      "x": 2640,
+      "y": 0,
+      "w": 1440,
+      "h": 1206,
+      "title": "Selected work · desktop · previews in place of the letter art",
+      "page": "work-previews"
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-03T20:55:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "page": "landing",
+    "view": "canvas"
+  },
+  "notes": {
+    "t1": {
+      "kind": "title1",
+      "maxW": 1910,
+      "page": "landing",
+      "text": "Landing page · print drum hero · desktop and mobile side by side",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "t2": {
+      "kind": "title1",
+      "maxW": 1910,
+      "page": "landing-cs",
+      "text": "Úvodní stránka · česká verze · desktop a mobil · claim zůstává Think. Make. Rethink.",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "t7": {
+      "kind": "title1",
+      "maxW": 3430,
+      "page": "case-study",
+      "text": "Case study pages · calm editorial · long form (Kultomat) · EN, mobile, CZ",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "t8": {
+      "kind": "title1",
+      "maxW": 3660,
+      "page": "case-study",
+      "text": "Short client format (Eucal) · and the social preview image",
+      "w": 240,
+      "x": 0,
+      "y": 6416
+    },
+    "t9": {
+      "x": 0,
+      "y": -300,
+      "text": "Logo & favicon · H2 háček",
+      "kind": "title1",
+      "maxW": 2640,
+      "page": "brand"
+    },
+    "t10": {
+      "x": 0,
+      "y": 1000,
+      "text": "Social preview image · landing and privacy pages · EN and CZ",
+      "kind": "title1",
+      "maxW": 2480,
+      "page": "brand"
+    },
+    "t11": {
+      "x": 0,
+      "y": -300,
+      "text": "Selected work previews · each project's real home page in a riso-printed browser",
+      "kind": "title1",
+      "maxW": 4080,
+      "page": "work-previews"
+    }
+  },
+  "order": [
+    "D-Home.dc.html",
+    "M-Home.dc.html",
+    "D-Home-CS.dc.html",
+    "M-Home-CS.dc.html",
+    "D-Case-Long.dc.html",
+    "M-Case-Long.dc.html",
+    "D-Case-Long-CS.dc.html",
+    "D-Case-Short.dc.html",
+    "M-Case-Short.dc.html",
+    "M-Case-Short-CS.dc.html",
+    "OG-Case.dc.html",
+    "Logo-H2.dc.html",
+    "Favicon-Set.dc.html",
+    "OG-Site.dc.html",
+    "OG-Site-CS.dc.html",
+    "Prev-Kultomat.dc.html",
+    "Prev-Eucal.dc.html",
+    "Prev-VladanVanek.dc.html",
+    "Prev-UpVideo.dc.html",
+    "D-Work-Previews.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "landing",
+      "name": "Landing page"
+    },
+    {
+      "id": "landing-cs",
+      "name": "Landing page · CZ"
+    },
+    {
+      "id": "case-study",
+      "name": "Case study pages"
+    },
+    {
+      "id": "brand",
+      "name": "Logo & favicon"
+    },
+    {
+      "id": "work-previews",
+      "name": "Selected work previews"
+    }
+  ],
+  "title": "Personal Portfolio mockups"
+}

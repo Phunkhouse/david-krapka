@@ -44,8 +44,8 @@ const caseStudies = defineCollection({
        */
       draft: z.boolean(),
       /**
-       * Social preview image (1200 × 630), exported from the canvas template
-       * `OG-Case`, next to the MDX file. Without it the page has no og:image.
+       * Own social preview image (1200 × 630). Without it the page uses the
+       * project's preview from src/assets/work/ (src/content/projects.ts).
        */
       ogImage: image().optional(),
     }),

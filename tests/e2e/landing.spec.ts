@@ -265,6 +265,41 @@ for (const {
       ).toContainText(lang === 'en' ? 'In progress' : 'Rozpracováno')
     })
 
+    test('project cards show their preview image, Systerna keeps its dots', async ({
+      page,
+    }) => {
+      await page.goto(path)
+      const work = page.locator('#work')
+      // One image per project: the featured card and the three client cards.
+      const images = work.locator('picture img')
+      await expect(images).toHaveCount(4)
+      for (const image of await images.all()) {
+        // Decorative (the link's name is the project name), sized so nothing
+        // shifts while it loads, and inside the hidden art box.
+        await expect(image).toHaveAttribute('alt', '')
+        expect(Number(await image.getAttribute('width'))).toBeGreaterThan(0)
+        expect(Number(await image.getAttribute('height'))).toBeGreaterThan(0)
+        await expect(
+          image.locator('xpath=ancestor::div[@aria-hidden]'),
+        ).toHaveCount(1)
+      }
+      await expect(
+        work
+          .getByRole('listitem')
+          .filter({ hasText: 'Systerna' })
+          .locator('img'),
+      ).toHaveCount(0)
+      // The files really load (they are lazy, so scroll to them first).
+      for (const image of await images.all()) {
+        await image.scrollIntoViewIfNeeded()
+        await expect
+          .poll(() =>
+            image.evaluate((img: HTMLImageElement) => img.naturalWidth),
+          )
+          .toBeGreaterThan(0)
+      }
+    })
+
     test('the drum and card art are hidden from assistive technology', async ({
       page,
     }) => {

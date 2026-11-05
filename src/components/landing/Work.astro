@@ -1,6 +1,8 @@
 ---
+import { Picture } from 'astro:assets'
 import SectionHeading from '../SectionHeading.astro'
 import { getCaseStudies } from '../../content/load'
+import { previewFor } from '../../content/projects'
 import { t, type Locale } from '../../i18n'
 import { pathFor } from '../../i18n/routes'
 
@@ -12,8 +14,6 @@ const { locale } = Astro.props
 const { work } = t(locale).home
 const { featured, inProgress } = work
 
-// Card art per client project: tint or yellow paper, plus one shape.
-const art = ['circle', 'paper', 'play'] as const
 // A card links only to a case study that is published (drafts are built on
 // preview branches only, src/content/load.ts); the others stay plain cards.
 const published = new Set((await getCaseStudies(locale)).map((s) => s.slug))
@@ -29,13 +29,18 @@ for (const slug of published) {
 }
 const hrefFor = (slug: string) =>
   published.has(slug) ? pathFor(locale, `work/${slug}`) : undefined
-const projects = work.projects.map((project, index) => ({
+// Card art is the project's preview image (canvas page "Selected work
+// previews"): a screenshot of its home page in a print-style browser window,
+// 1200 × 630, cropped to the card.
+const projects = work.projects.map((project) => ({
   ...project,
-  initial: project.name[0],
-  art: art[index],
+  preview: previewFor(project.slug),
   href: hrefFor(project.slug),
 }))
+const featuredPreview = previewFor(featured.slug)
 const featuredHref = hrefFor(featured.slug)
+const featuredSizes = '(min-width: 1100px) 560px, 100vw'
+const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
 ---
 
 <!--
@@ -56,10 +61,14 @@ const featuredHref = hrefFor(featured.slug)
     </div>
 
     <article class:list={['featured', { 'is-link': featuredHref }]}>
-      <div class="featured-art paper-yellow" aria-hidden="true">
-        <span class="k halftone misregister" data-text="K">
-          K
-        </span>
+      <div class="preview featured-art" aria-hidden="true">
+        <Picture
+          src={featuredPreview}
+          alt=""
+          formats={['avif', 'webp']}
+          widths={[560, 800, 1200]}
+          sizes={featuredSizes}
+        />
       </div>
       <div class="featured-body">
         <p class="label">{featured.label}</p>
@@ -84,16 +93,14 @@ const featuredHref = hrefFor(featured.slug)
     <ul class="cards" role="list" aria-label={work.listLabel}>
       {projects.map((project) => (
         <li class:list={['card', { 'is-link': project.href }]}>
-          <div
-            class:list={[
-              'card-art',
-              project.art === 'paper' ? 'paper-yellow' : 'tint',
-            ]}
-            aria-hidden="true"
-          >
-            <span class="initial halftone">{project.initial}</span>
-            {project.art === 'circle' && <span class="shape circle" />}
-            {project.art === 'play' && <span class="shape play" />}
+          <div class="preview card-preview" aria-hidden="true">
+            <Picture
+              src={project.preview}
+              alt=""
+              formats={['avif', 'webp']}
+              widths={[400, 800]}
+              sizes={cardSizes}
+            />
           </div>
           <div class="card-body">
             <p class="label">{project.label}</p>
@@ -188,25 +195,27 @@ const featuredHref = hrefFor(featured.slug)
     box-shadow: 8px 8px 0 var(--pink);
   }
 
-  .featured-art {
+  /* Preview images (1200 × 630): the picture fills the box and is cropped
+     around its centre, where the browser window sits. */
+  .preview {
     position: relative;
     overflow: hidden;
-    height: 230px;
-    border-bottom: var(--border);
+    background: var(--tint);
   }
 
-  .k {
+  .preview :global(img) {
     position: absolute;
-    top: -46px;
-    left: 24px;
-    font-family: var(--family-display);
-    font-weight: 900;
-    font-size: 300px;
-    line-height: 1;
-    --slip-x: 10px;
-    --slip-y: 6px;
-    --dot: 3.4px;
-    --grid: 10px;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .featured-art {
+    height: 230px;
+    border-bottom: var(--border);
   }
 
   .featured-body {
@@ -227,7 +236,8 @@ const featuredHref = hrefFor(featured.slug)
     font-size: var(--text-body-lg);
   }
 
-  /* Project cards: horizontal rows on mobile */
+  /* Project cards: stacked on mobile, as the "Next project" card is, so the
+     preview has room to show the window. Systerna stays a row. */
   .cards {
     display: flex;
     flex-direction: column;
@@ -237,36 +247,20 @@ const featuredHref = hrefFor(featured.slug)
   }
 
   .card {
-    display: grid;
-    grid-template-columns: 104px minmax(0, 1fr);
+    display: flex;
+    flex-direction: column;
     background: var(--paper);
     color: var(--ink);
+  }
+
+  .card-preview {
+    height: 150px;
+    border-bottom: var(--border);
   }
 
   .card-art {
     position: relative;
     overflow: hidden;
-    border-right: var(--border);
-  }
-
-  .tint {
-    background: var(--tint);
-  }
-
-  .initial {
-    position: absolute;
-    top: -10px;
-    left: 6px;
-    font-family: var(--family-display);
-    font-weight: 900;
-    font-size: 140px;
-    line-height: 1;
-    --dot: 2px;
-    --grid: 7px;
-  }
-
-  .shape {
-    display: none;
   }
 
   .card-body {
@@ -288,6 +282,7 @@ const featuredHref = hrefFor(featured.slug)
 
   /* In progress: dashed outline on the ink section, not a link */
   .card--progress {
+    display: grid;
     grid-template-columns: 98px minmax(0, 1fr);
     border: 3px dashed var(--ink-line);
     background: none;
@@ -443,17 +438,12 @@ const featuredHref = hrefFor(featured.slug)
       }
     }
 
+    /* Full width and short: follow the image's shape, up to 420 px, so the
+       window's address bar is not cropped away. */
     .featured-art {
-      height: 320px;
-    }
-
-    .k {
-      top: -80px;
-      left: 36px;
-      font-size: 520px;
-      --slip-x: 14px;
-      --slip-y: 10px;
-      --grid: 11px;
+      height: auto;
+      max-height: 420px;
+      aspect-ratio: 1200 / 630;
     }
 
     .featured-body {
@@ -468,56 +458,17 @@ const featuredHref = hrefFor(featured.slug)
       gap: var(--gap-l);
     }
 
-    .card {
-      display: flex;
-      flex-direction: column;
+    .card-preview {
+      height: 190px;
     }
 
     .card-art {
       height: 190px;
-      border-right: 0;
-      border-bottom: var(--border);
     }
 
     .card--progress {
+      display: flex;
       grid-template-columns: none;
-    }
-
-    .card--progress .card-art {
-      border-bottom: 0;
-    }
-
-    .initial {
-      top: -46px;
-      left: 18px;
-      font-size: 260px;
-      --dot: 3.4px;
-      --grid: 11px;
-    }
-
-    .shape {
-      display: block;
-      position: absolute;
-    }
-
-    .circle {
-      top: 22px;
-      right: 22px;
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      background: var(--yellow);
-      mix-blend-mode: multiply;
-    }
-
-    .play {
-      right: 22px;
-      bottom: 22px;
-      border-top: 42px solid transparent;
-      border-bottom: 42px solid transparent;
-      border-left: 70px solid var(--pink);
-      mix-blend-mode: multiply;
-      opacity: 0.8;
     }
 
     .card-body {
@@ -549,6 +500,8 @@ const featuredHref = hrefFor(featured.slug)
 
     .featured-art {
       height: 420px;
+      max-height: none;
+      aspect-ratio: auto;
       border-right: var(--border);
       border-bottom: 0;
     }
