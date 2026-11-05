@@ -2,7 +2,7 @@
 
 Delivery plan for david-krapka.eu, aligned with [the specification](SPEC.md) and [the approved design](design/README.md). Milestones are delivered in order. A milestone may span several PRs; PRs go **one at a time** (the next PR starts only after the current one is merged or closed).
 
-Status as of 5 November 2026: milestones 0, 1, 2 and 3 done, the rest planned.
+Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device checks carried to the pre-launch review), the rest planned.
 
 ## How every milestone is delivered
 
@@ -117,7 +117,7 @@ Status as of 5 November 2026: milestones 0, 1, 2 and 3 done, the rest planned.
 
 ## Milestone 4: Motion
 
-**Status:** planning; work plan in the [milestone 4 checklist](milestone-4-checklist.md) (three PRs: motion switch, hero drum and pause control; approach and small interactions; portrait, checks and wrap-up).
+**Status:** done; device checks and the feel sign-off carried to the milestone 6 pre-launch review (see completion evidence).
 
 **Goal:** The print-drum hero, approach A5, portrait G4 and card hovers, without hurting accessibility or performance.
 
@@ -125,16 +125,18 @@ Status as of 5 November 2026: milestones 0, 1, 2 and 3 done, the rest planned.
 
 **Acceptance checks:**
 
-- [ ] With `prefers-reduced-motion: reduce` emulated, no element has a running animation; verify with Playwright reading `getAnimations()`.
-- [ ] The pause control (`PauseControl`, built in milestone 2) is placed on every page before any looping motion (WCAG 2.2.2), stops all looping animations and is reachable by keyboard; verify with Playwright.
-- [ ] Using the pause toggle writes no cookie, `localStorage`, `sessionStorage` or IndexedDB entry; verify with Playwright.
-- [ ] Looping animations pause when scrolled off-screen; verify with Playwright.
-- [ ] The portrait glitch passes a flash analysis (≤ 3 flashes per second); verify with a flash-analysis tool and record the result.
-- [ ] Smooth on a real mid-range phone and on Safari iOS (drum text not blurry); verify manually with a screen recording.
-- [ ] Lighthouse performance and CLS targets still met; verify with Lighthouse.
-- [ ] David signs off on the feel of each animation compared with the canvas.
+- [x] With `prefers-reduced-motion: reduce` emulated, no element has a running animation; verify with Playwright reading `getAnimations()`.
+- [x] The pause control (`PauseControl`, built in milestone 2) is placed on every page before any looping motion (WCAG 2.2.2), stops all looping animations and is reachable by keyboard; verify with Playwright.
+- [x] Using the pause toggle writes no cookie, `localStorage`, `sessionStorage` or IndexedDB entry; verify with Playwright.
+- [x] Looping animations pause when scrolled off-screen; verify with Playwright.
+- [x] The portrait glitch passes a flash analysis (≤ 3 flashes per second); verify with a flash-analysis tool and record the result.
+- [ ] Smooth on a real mid-range phone and on Safari iOS (drum text not blurry); verify manually with a screen recording. **Partly:** David checked the hero drum on Safari macOS and iOS (sharp, good). The whole page on a mid-range Android phone and on iOS, and a scrolling performance trace, are carried to the milestone 6 pre-launch review.
+- [x] Lighthouse performance and CLS targets still met; verify with Lighthouse.
+- [ ] David signs off on the feel of each animation compared with the canvas. **Carried:** moved to one comprehensive review before launch (milestone 6), decided by David on 5 November 2026.
 
 **Dependencies and risks:** 3D text rendering on Safari; fallback to a 2D flip if needed. Decisions before PR A: whether motion needs JavaScript (so the pause control always works), one pause control or two, what pausing mid-turn looks like, and the pause control under reduced motion. Project cards are not links until milestone 5, so their hover may move there. The flash check needs a flash-analysis tool, and the device checks need David's phones.
+
+**Completion evidence:** delivered as three PRs: [#18](https://github.com/Phunkhouse/david-krapka/pull/18) motion switch, hero drum and pause control; [#19](https://github.com/Phunkhouse/david-krapka/pull/19) approach develop-on-scroll, hover and smooth anchors; [#20](https://github.com/Phunkhouse/david-krapka/pull/20) portrait glitch, dot drift, flash analysis and David's photo. Planning in [#17](https://github.com/Phunkhouse/david-krapka/pull/17). Per-check evidence is in the [milestone 4 checklist](milestone-4-checklist.md#acceptance-checks-from-milestonesmd). Playwright covers reduced motion, the pause control (keyboard, all loops, no storage), off-screen pausing and the no-JavaScript fallback (138 e2e tests). Flash analysis: 0 flashes per second for the portrait (silhouette and photo) and the drum ([report](audits/2026-11-05/flash-analysis.md), approximate tool of our own). Lighthouse mobile on the PR #20 preview: Performance 100, Best Practices 100, LCP 1.2 to 1.4 s, CLS 0, TBT 0; Accessibility 96 because Lighthouse samples the hero words mid cross-fade, accepted by David. Decisions: motion only with JavaScript, one pause control that freezes in place, opt-in under reduced motion ([Motion](design/motion.md#implementation-decisions-milestone-4)). Unplanned changes: David's photo is the portrait, as a duotone with a pink halftone copy (`scripts/portrait.mjs`; the original is not committed, LEG-007); approach letters faded to 12 % and column text semibold after David's review; `scripts/flash-check.mjs`; project card hover moved to milestone 5. Carried to milestone 6: device checks (Android, whole page on iOS), a scrolling performance trace, the feel sign-off, an optional certified flash check (PEAT or IRIS), and recording the photo's rights. The canvas still shows the silhouette, the stronger approach letters and regular column text.
 
 ## Milestone 5: Case studies
 
@@ -173,7 +175,7 @@ Status as of 5 November 2026: milestones 0, 1, 2 and 3 done, the rest planned.
 - Final security headers in `public/_headers`, including a Content-Security-Policy; HSTS.
 - Placeholder check that fails the production build if any `[…]` placeholder remains.
 - Remove the temporary `/specimen/` page and its tests in `tests/e2e/design-system.spec.ts` (move the focus and CSP checks to real pages first).
-- One comprehensive visual and motion review by David on the preview before launch: the feel of every animation against the canvas (deferred from milestone 4), tablet widths and the finished copy.
+- One comprehensive visual and motion review by David on the preview before launch: the feel of every animation against the canvas, the whole page on a mid-range Android phone and on Safari iOS, a scrolling performance trace (all deferred from milestone 4), tablet widths and the finished copy. Optionally a certified flash check (PEAT or IRIS).
 - Pre-launch reviews: `audit-legal-readiness` (Pre-launch mode, reconciling the [planning report](audits/2026-11-04/legal-planning.md)), `audit-web-quality` (accessibility, SEO, performance), and a light `audit-security` of headers and dependencies.
 - Remove `noindex` from `public/_headers` and update the `noindex` assertion in `tests/e2e/smoke.spec.ts`. Move DNS to Cloudflare: add the zone, compare every record with Websupport (especially Active24 MX, SPF, DKIM and DMARC), switch nameservers at Websupport, then attach `david-krapka.eu` as a Custom Domain and redirect `www` to the apex.
 

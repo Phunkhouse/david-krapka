@@ -125,8 +125,8 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 ### C3. Real devices and performance
 
-- [ ] Mid-range Android phone and Safari on iOS (David's devices): hero, approach and portrait run smoothly, drum text is sharp; a short screen recording of each in the PR.
-- [ ] Performance panel on a throttled profile: no long tasks while scrolling the landing page; record the trace summary.
+- [ ] Mid-range Android phone and Safari on iOS (David's devices): hero, approach and portrait run smoothly, drum text is sharp; a short screen recording of each in the PR. **Carried to the milestone 6 pre-launch review** (David checked the hero drum on Safari macOS and iOS in PR A).
+- [ ] Performance panel on a throttled profile: no long tasks while scrolling the landing page; record the trace summary. **Carried to the milestone 6 pre-launch review.**
 - [x] Lighthouse mobile on the preview for `/` and `/cs/`, three runs each, compared with the [milestone 3 baseline](audits/2026-11-05/lighthouse-landing.md): Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05 (SEO `noindex` exception as before). Save a summary in `docs/audits/`. Evidence (PR #20 preview, Lighthouse 12.6.1, three runs per page): Performance 100, Best Practices 100, LCP 1.2 to 1.4 s, CLS 0, TBT 0 ms on `/` and `/cs/` (milestone 3 baseline: 99, LCP 1.7 to 1.8 s). Accessibility **96 in all six runs**, not 100: axe samples the hero heading line and subline mid cross-fade (contrast 1.4 to 2.0 at partial opacity), the effect accepted on 5 November 2026; here it happens every run rather than occasionally. **Decided 5 November 2026: keep accepting it** (the SPEC Accessibility 100 target is met by the e2e axe checks, not by Lighthouse's mid-fade sample). SEO 66 from the expected `noindex`.
 - [x] Motion script size recorded (target under 2 KB compressed).
 
@@ -144,17 +144,17 @@ Record evidence here and in the PR that completes each check.
 - [x] Using the pause toggle writes no cookie, `localStorage`, `sessionStorage` or IndexedDB entry; verify with Playwright. (PR A) Evidence: `motion.spec.ts` (and the reduced-motion opt-in test).
 - [x] Looping animations pause when scrolled off-screen; verify with Playwright. (PR A for the drum, C for the portrait) Evidence: `motion.spec.ts` (hero) and `portrait-motion.spec.ts` (portrait).
 - [x] The portrait glitch passes a flash analysis (≤ 3 flashes per second); verify with a flash-analysis tool and record the result. (PR C) Evidence: [flash analysis](audits/2026-11-05/flash-analysis.md): 0 flashes per second at 1440 and 390 px (largest changed area 15 % of the threshold). Approximate tool of our own, not PEAT or IRIS; the hero drum also passes (0, and 2 at a quarter of the area).
-- [ ] Smooth on a real mid-range phone and on Safari iOS (drum text not blurry); verify manually with a screen recording. (PR A for the drum on Safari, C for the whole page; David's devices)
+- [ ] Smooth on a real mid-range phone and on Safari iOS (drum text not blurry); verify manually with a screen recording. (PR A for the drum on Safari, C for the whole page; David's devices) **Partly; rest carried to milestone 6.**
 - [x] Lighthouse performance and CLS targets still met; verify with Lighthouse. (PR C, spot check in A) Evidence (PR #20 preview, Lighthouse 12.6.1, three runs per page): Performance 100, Best Practices 100, LCP 1.2 to 1.4 s, CLS 0, TBT 0 ms on `/` and `/cs/` (milestone 3 baseline: 99, LCP 1.7 to 1.8 s). Accessibility **96 in all six runs**, not 100: axe samples the hero heading line and subline mid cross-fade (contrast 1.4 to 2.0 at partial opacity), the effect accepted on 5 November 2026; here it happens every run rather than occasionally. **Decided 5 November 2026: keep accepting it** (the SPEC Accessibility 100 target is met by the e2e axe checks, not by Lighthouse's mid-fade sample). SEO 66 from the expected `noindex`.
 - [ ] David signs off on the feel of each animation compared with the canvas. (Each PR) **Decided 5 November 2026: animations stay as built in PRs A and B; the sign-off moves to one comprehensive review before launch (milestone 6).** David checked the hero drum on Safari macOS and iOS and found it good.
 
 ## Wrap-up
 
-- [ ] Update MILESTONES.md: milestone 4 status `done`, completion evidence (PR links), status date, unplanned changes and items carried forward.
-- [ ] Update SPEC.md: motion status, resolved open questions.
-- [ ] Update [Motion](design/motion.md), [Shell components](design/shell-components.md) and the [design README](design/README.md) with decisions and any changes made during review (the canvas wins if they disagree).
+- [x] Update MILESTONES.md: milestone 4 status `done`, completion evidence (PR links), status date, unplanned changes and items carried forward.
+- [x] Update SPEC.md: motion status, resolved open questions.
+- [x] Update [Motion](design/motion.md), [Shell components](design/shell-components.md) and the [design README](design/README.md) with decisions and any changes made during review (the canvas wins if they disagree).
 - [x] If card hover moved to milestone 5, add it to the milestone 5 scope. (Done in PR B.)
-- [ ] `AGENTS.md` lists every new command.
+- [x] `AGENTS.md` lists every new command.
 
 ## Risks and notes
 
