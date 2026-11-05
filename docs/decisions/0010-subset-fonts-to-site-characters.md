@@ -27,6 +27,6 @@ Options 1 and 2 are the next levers if the font payload or LCP needs to shrink f
 ## Consequences
 
 - Fonts are about a third of the previous size, and the 150 KB budget has plenty of room (56.6 KB).
-- Text that needs a character outside the set (for example Polish letters, or a new symbol) renders it in the fallback font until the files are regenerated. Re-run the script after adding such copy; it rebuilds the set from `src/` and reports characters the font does not contain.
+- A new character in the copy (for example Polish letters, or a new symbol) cannot slip through: `scripts/check-fonts.mjs` (`pnpm check:fonts`, part of `pnpm verify` and the CI job `check`) fails the build when a built page shows a character missing from `src/assets/fonts/charset.json`, checking lower and upper case. The fix is to re-run `scripts/subset-fonts.py`, which rebuilds the set from `src/` and the manifest, and commit both. Checked on 5 November 2026 by adding “ő ł” to a heading: the check failed naming the four characters, regenerating fixed it.
 - Regenerating needs the original Fontsource files (see [src/assets/fonts/README.md](../../src/assets/fonts/README.md)) and a throwaway Python environment with `fonttools` and `brotli`.
 - Revisit when the design adds a language or a new typeface.

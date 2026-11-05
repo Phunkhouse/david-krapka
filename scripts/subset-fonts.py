@@ -4,7 +4,8 @@ the characters the site can show (decision 0009, docs/decisions/0010).
 
 Input: the unmodified Fontsource files (`<family>-latin-<weight>-normal.woff2`
 and `<family>-latin-ext-<weight>-normal.woff2`, see src/assets/fonts/README.md).
-Output: `<family>-site-<weight>-normal.woff2` in the output directory.
+Output: `<family>-site-<weight>-normal.woff2` and `charset.json` (the character
+set, checked against the built pages by scripts/check-fonts.mjs) in the output directory.
 
 Usage (needs fonttools and brotli, for example in a throwaway venv):
 
@@ -18,6 +19,7 @@ does not contain is reported and left out. When new copy needs a character
 that is not in the set, run this again: the set is rebuilt from src/.
 """
 
+import json
 import sys
 import tempfile
 from pathlib import Path
@@ -34,8 +36,9 @@ FAMILIES = {
 
 # Always included, even if not in the copy yet: the full Czech alphabet,
 # typographic punctuation and the arrows and symbols the design uses.
+NBSP = '\u00a0'
 CZECH = 'ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽáčďéěíňóřšťúůýž'
-EXTRAS = CZECH + ' ·–—‘’“”„…•©®×€→↑←↓'
+EXTRAS = CZECH + NBSP + '·–—‘’“”„…•©®×€→↑←↓'
 
 
 def site_characters(src_dir: Path) -> set[str]:
@@ -43,8 +46,11 @@ def site_characters(src_dir: Path) -> set[str]:
     for path in src_dir.rglob('*'):
         if path.suffix in {'.ts', '.astro', '.css', '.md', '.mdx'}:
             chars |= {c for c in path.read_text(encoding='utf8') if ord(c) > 0x7F}
+    # Headings are set in uppercase with CSS, so include both cases of every
+    # letter (the browser renders "é" as "É" under text-transform).
+    chars |= {v for c in chars for v in (c.upper(), c.lower()) if len(v) == 1}
     # Drop anything that is not a printable character.
-    return {c for c in chars if c.isprintable() or c == ' '}
+    return {c for c in chars if c.isprintable() or c == NBSP}
 
 
 def subset_font(path: Path, unicodes: list[int]) -> TTFont:
@@ -93,6 +99,15 @@ def main() -> int:
             note = f'  missing: {"".join(missing)}' if missing else ''
             print(f'{target.name}: {size} bytes{note}')
     print(f'total {total} bytes')
+
+    # The manifest scripts/check-fonts.mjs compares the built pages against.
+    manifest = {
+        'note': 'Written by scripts/subset-fonts.py. Characters the site fonts are built for.',
+        'characters': ''.join(sorted(chars, key=ord)),
+    }
+    (out / 'charset.json').write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf8'
+    )
     return 0
 
 

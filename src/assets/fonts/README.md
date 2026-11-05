@@ -10,9 +10,13 @@ Self-hosted fonts, loaded with the Astro Fonts API local provider ([decision 000
 
 All three are under the SIL Open Font License 1.1 ([LEG-008](../../../docs/SPEC.md#legal-requirements)), which allows these modified (subset) files. None declares a Reserved Font Name.
 
+## Guard: new copy cannot silently break the fonts
+
+`pnpm check:fonts` (part of `pnpm verify` and of the CI job `check`) reads the visible text of every built page and fails if any character, in its lower or upper case form (headings are uppercased by CSS), is not in `charset.json`. `charset.json` is written by the subset script and lists the characters the files were built for. A failure names the page and the characters, for example `ő (U+0151)`, and the fix is to regenerate (below), then commit the new `*-site-*` files and `charset.json` together. Characters that exist in the set but not in a particular font (the arrows) pass: they were already fallback glyphs and regenerating cannot change that.
+
 ## Regenerating
 
-Do this when new copy needs a character that is not in the files yet (the browser then shows it in a fallback font), or when updating a font version. The script rebuilds the character set from `src/`, merges each weight's Fontsource Latin and Latin Extended files and writes the `*-site-*` files. It reports characters a font does not contain (these fonts have no arrows `←` `→`, and `↑` `↓` only in Space Mono, so arrows already come from a fallback font).
+Do this when new copy needs a character that is not in the files yet (the browser then shows it in a fallback font), or when updating a font version. The script rebuilds the character set from `src/` (both cases of every letter), merges each weight's Fontsource Latin and Latin Extended files and writes the `*-site-*` files and `charset.json`. It reports characters a font does not contain (these fonts have no arrows `←` `→`, and `↑` `↓` only in Space Mono, so arrows already come from a fallback font).
 
 ```bash
 # 1. The original Fontsource files (Latin and Latin Extended; the packages hold all weights)
