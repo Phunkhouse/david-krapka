@@ -2,7 +2,7 @@
 
 Delivery plan for david-krapka.eu, aligned with [the specification](SPEC.md) and [the approved design](design/README.md). Milestones are delivered in order. A milestone may span several PRs; PRs go **one at a time** (the next PR starts only after the current one is merged or closed).
 
-Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device checks carried to the pre-launch review), the rest planned.
+Status as of 5 November 2026: milestones 0 to 5 done (milestone 4's device checks and feel sign-off, and milestone 5's case study content, carried to milestone 6); milestone 6 planned in the [milestone 6 checklist](milestone-6-checklist.md).
 
 ## How every milestone is delivered
 
@@ -161,7 +161,7 @@ Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device ch
 
 ## Milestone 6: Launch readiness and launch
 
-**Status:** planned
+**Status:** planned; work plan, decisions and evidence in the [milestone 6 checklist](milestone-6-checklist.md).
 
 **Goal:** Publish the site on david-krapka.eu.
 
@@ -194,6 +194,8 @@ Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device ch
 - [ ] The privacy notice exists in both languages, is linked from every footer, states the real contact address, retention and rights, and has no placeholders; verify by reading both pages.
 - [ ] The deployed site still stores nothing on the device (no cookies or browser storage) and sets no `Set-Cookie`; verify with a clean browser profile and `curl -I`.
 - [ ] The Pre-launch legal audit reports each LEG requirement as supported, or David has accepted the gap.
+- [ ] Carried from milestone 5: each case study follows the [shared structure](content-and-case-studies.md#proposed-shared-case-study-structure), every claim and metric has a source in its project card, and David signs off each page; verify by David's review.
+- [ ] Carried from milestone 4: the whole page is smooth on a mid-range Android phone and on Safari iOS, and David signs off the feel of each animation against the canvas; verify with screen recordings and David's sign-off.
 
 **Dependencies and risks:** Content inputs below; legal findings; the public email address (blocks the privacy notice); access to Websupport to change nameservers; DNS change risk for email ([0007](decisions/0007-cloudflare-workers-hosting.md)).
 
