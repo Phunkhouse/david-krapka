@@ -17,7 +17,7 @@ Snapshot taken on 4 November 2026 from canvas version `1793818431-5e1b` (landing
 
 ## Product and interaction principles
 
-- **The homepage shows personality; case studies show how I think.** The landing page is the experimental surface. Case study pages, which are not designed yet, should be calm and editorial (see [the brief](../portfolio-brief.md)).
+- **The homepage shows personality; case studies show how I think.** The landing page is the experimental surface. Case study pages ([designed](case-study.md)) are calm and editorial (see [the brief](../portfolio-brief.md)).
 - **Printed in three inks.** The whole identity is a risograph-like print run: dark blue ink, yellow paper and a little pink. Motion is mechanical (drums turning, inks slipping, halftone developing), never floaty.
 - **Think. Make. Rethink.** is the confirmed hero claim and the structure of the approach section. It stays in English in the Czech version.
 - **Content works without motion.** Every animation is decorative and `aria-hidden`; the same information is available as static text. Reduced-motion preferences turn animations off.

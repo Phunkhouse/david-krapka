@@ -140,7 +140,7 @@ Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device ch
 
 ## Milestone 5: Case studies
 
-**Status:** in progress; the pipeline, the designed template and draft placeholder pages for all four projects are merged or in review. Kultomat's real content, the client projects' content and screenshots are pending from David (his decision, 5 November 2026: the cards stay placeholders until he fills them before launch). Work plan in the [milestone 5 checklist](milestone-5-checklist.md).
+**Status:** done for everything that does not need David's content; the case study content, screenshots and its review are carried to the milestone 6 pre-release content pass (decided by David, 5 November 2026: the pages stay placeholders until then). Work plan and evidence in the [milestone 5 checklist](milestone-5-checklist.md).
 
 **Goal:** Kultomat as the main case study and short client project pages, built on verified facts.
 
@@ -148,14 +148,16 @@ Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device ch
 
 **Acceptance checks:**
 
-- [ ] Each case study follows the [shared structure](content-and-case-studies.md#proposed-shared-case-study-structure) and states role, collaborators and AI share; verify by review against the project card.
-- [ ] Every claim and metric has a source in the project card; verify by David's review.
-- [ ] Each published case study has a Permissions entry in its project card (client OK for name, logo, screenshots and quotes; OK from every identifiable person shown or the image is cropped or blurred; collaborators asked) with date and form; verify by review ([LEG-006](SPEC.md#legal-requirements)). **Met by [decision 0012](decisions/0012-skip-permission-requests-for-case-studies.md) for the four planned projects** (accepted risk, David, 5 November 2026): verify that the project is one of them and that nobody has objected.
-- [ ] Images have fixed dimensions (no layout shift) and meaningful alternative text; verify with Lighthouse CLS and axe.
-- [ ] Landing cards link to the right pages in both languages; verify with Playwright.
-- [ ] David signs off on each page.
+- [ ] Each case study follows the [shared structure](content-and-case-studies.md#proposed-shared-case-study-structure) and states role, collaborators and AI share; verify by review against the project card. **Carried to milestone 6:** the template and schema enforce the structure and the fields; the real text waits for David's cards.
+- [ ] Every claim and metric has a source in the project card; verify by David's review. **Carried to milestone 6** with the content.
+- [x] Each published case study has a Permissions entry in its project card (client OK for name, logo, screenshots and quotes; OK from every identifiable person shown or the image is cropped or blurred; collaborators asked) with date and form; verify by review ([LEG-006](SPEC.md#legal-requirements)). **Met by [decision 0012](decisions/0012-skip-permission-requests-for-case-studies.md) for the four planned projects** (accepted risk, David, 5 November 2026): verify that the project is one of them and that nobody has objected.
+- [x] Images have fixed dimensions (no layout shift) and meaningful alternative text; verify with Lighthouse CLS and axe. `Figure` requires `alt` and fixed sizes; Playwright and axe pass; Lighthouse CLS 0 on the template. Repeat with real screenshots in milestone 6.
+- [x] Landing cards link to the right pages in both languages; verify with Playwright. Verified for the four draft pages; the build fails when a built case study has no card.
+- [ ] David signs off on each page. **Carried to milestone 6** with the content (he signed off the template design on the canvas).
 
-**Dependencies and risks:** The template (PR B) is **blocked** until the case study page is designed on the canvas, and the content PRs until the project cards are complete. The pipeline and card links (PR A) need only the decisions in section 0 of the checklist: MDX format, draft handling, short pages or links out, Czech versions at launch, Systerna, and how cards become links. The repository is public, so drafts and screenshots are public once committed. Permissions for the four planned projects are skipped as an accepted risk ([0012](decisions/0012-skip-permission-requests-for-case-studies.md)); anything outside them needs the LEG-006 permissions.
+**Completion evidence:** delivered as PRs [#22](https://github.com/Phunkhouse/david-krapka/pull/22) plan, [#23](https://github.com/Phunkhouse/david-krapka/pull/23) pipeline and linked cards, [#24](https://github.com/Phunkhouse/david-krapka/pull/24) permissions decision, [#25](https://github.com/Phunkhouse/david-krapka/pull/25) designed template, [#26](https://github.com/Phunkhouse/david-krapka/pull/26) draft pages for all four projects. The checklist's PR C (Kultomat text) and the content part of PR D were not built: David decided on 5 November 2026 to fill the cards before release. Draft case studies (all `draft: true`, placeholders only) show in dev, with `SHOW_DRAFTS=1` and on Workers Builds preview branches, and never in `main` builds (`pnpm check:drafts`, decision [0011](decisions/0011-case-studies-as-mdx-collection.md)). 178 e2e tests pass locally. Lighthouse mobile on the template, both languages, long and short form: Performance 100, Accessibility 100, Best Practices 100, LCP ≤ 1.4 s, CLS 0 ([summary](audits/2026-11-05/lighthouse-case-study.md), local serve, no screenshots). Unplanned changes: card lift moved here from milestone 4; the font subset gained `↗`; drafts visible in the dev server; permissions skipped ([0012](decisions/0012-skip-permission-requests-for-case-studies.md)). **Carried to milestone 6:** write Kultomat and the client case studies in both languages from the project cards (a client project without enough material has its draft removed and its card links out), screenshots with a size budget, Open Graph images (`OG-Case`) and the `ogImage` field, David's review of the facts, Lighthouse on the real pages and on a Cloudflare preview, and the site-wide items already listed there.
+
+**Dependencies and risks (as planned):** The template (PR B) was **blocked** until the case study page is designed on the canvas, and the content PRs until the project cards are complete. The pipeline and card links (PR A) need only the decisions in section 0 of the checklist: MDX format, draft handling, short pages or links out, Czech versions at launch, Systerna, and how cards become links. The repository is public, so drafts and screenshots are public once committed. Permissions for the four planned projects are skipped as an accepted risk ([0012](decisions/0012-skip-permission-requests-for-case-studies.md)); anything outside them needs the LEG-006 permissions.
 
 ## Milestone 6: Launch readiness and launch
 
@@ -165,6 +167,7 @@ Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device ch
 
 **Scope:**
 
+- Case study content carried from milestone 5: Kultomat (long) and the client projects (short or link-out) in English and Czech from David's project cards; screenshots and their size budget; per-page Open Graph images; `draft: false`; Lighthouse on the real pages. Follows [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D.
 - Contact links with the real address and prefilled subjects; LinkedIn and GitHub links; CV PDF.
 - Privacy notice text in English and Czech ([LEG-003](SPEC.md#legal-requirements)), drafted as a separate task once the public email address is decided.
 - Private record of the accepted Cloudflare agreement and Data Processing Addendum versions ([LEG-004](SPEC.md#legal-requirements)); Workers logs and observability off or covered by the notice.
@@ -205,8 +208,8 @@ These run in parallel with development and gate the milestones shown.
 | Freelance start year | Milestone 3 / 6 |
 | Short personal note for About; portrait photo | Milestone 3 / 6 |
 | Case study page design on the canvas | Milestone 5 |
-| Completed project cards for Kultomat, Eucal, Vladan Vaněk, UpVideo; screenshots | Milestone 5 |
-| Decision on Systerna's presentation | Milestone 5 |
+| Completed project cards for Kultomat, Eucal, Vladan Vaněk, UpVideo; screenshots | Milestone 6 (pre-release; carried from 5) |
+| ~~Decision on Systerna's presentation~~ decided: card only, in progress | Milestone 5 |
 | Public email, LinkedIn, GitHub; CV PDF | Milestone 6 |
 | ~~Written permissions for client names, screenshots and identifiable people ([LEG-006](SPEC.md#legal-requirements))~~ skipped for the four planned projects, accepted risk ([0012](decisions/0012-skip-permission-requests-for-case-studies.md)) | Milestone 5 |
 | Portrait photo with documented rights ([LEG-007](SPEC.md#legal-requirements)) | Milestone 6 |
