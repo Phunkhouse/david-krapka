@@ -163,6 +163,9 @@ test('icons and the web manifest are served', async ({ page, request }) => {
     'content',
     '#1B2F7A',
   )
+  await expect(
+    page.locator('meta[name="apple-mobile-web-app-title"]'),
+  ).toHaveAttribute('content', 'David Křapka')
 
   for (const [path, type] of [
     ['/favicon.ico', 'image/'],
