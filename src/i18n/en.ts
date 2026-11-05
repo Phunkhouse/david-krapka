@@ -191,9 +191,7 @@ export const en = {
   privacy: {
     title: 'Privacy notice',
     description: 'How this site handles personal data.',
-    // Square brackets: the milestone 6 build check fails while this remains.
-    placeholder:
-      '[The privacy notice is being prepared and will be published before launch.]',
+    // The notice text is in src/content/privacy-notice.ts.
   },
   notFound: {
     title: 'Page not found',
