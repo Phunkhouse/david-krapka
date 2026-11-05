@@ -26,7 +26,7 @@ Success (qualitative, from the brief): a visitor can say in their own words what
 - **Contact** via email links (separate subjects for roles and projects; the project link is an invitation to talk, see [LEG-001](#legal-requirements)), LinkedIn and GitHub.
 - **Privacy notice** in both languages, linked from every footer ([LEG-003](#legal-requirements)).
 - **CV** as a downloadable PDF (**proposal:** English only at first).
-- Motion as designed, with reduced-motion support and a pause control.
+- Motion as designed, with reduced-motion support and a pause control. Built in milestone 4 ([Motion](design/motion.md#implementation-decisions-milestone-4)); device checks and the feel sign-off are part of the pre-launch review.
 - Search and sharing basics: titles, descriptions, Open Graph images, sitemap, `hreflang`, canonical URLs.
 
 ### Out of scope for the first release
