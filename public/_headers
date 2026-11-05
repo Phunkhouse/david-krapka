@@ -1,4 +1,7 @@
-# Remove X-Robots-Tag at launch (milestone 6).
+# Remove X-Robots-Tag at launch (milestone 6 PR G). workers.dev preview URLs
+# get their own noindex from Cloudflare.
+# HSTS without preload on purpose: preload is hard to undo (milestone 6
+# decision 9). includeSubDomains forces HTTPS on every subdomain.
 # The Content-Security-Policy header only carries what a <meta> CSP cannot
 # (frame-ancestors); inline styles and scripts are allowed by the hashed
 # <meta> CSP Astro emits (security.csp in astro.config.mjs).
@@ -7,6 +10,7 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=63072000; includeSubDomains
   Content-Security-Policy: frame-ancestors 'none'; object-src 'none'; base-uri 'self'

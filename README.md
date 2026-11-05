@@ -31,3 +31,7 @@ pnpm verify   # format check, lint, typecheck, build
 ```
 
 Other scripts: `pnpm build` (to `dist/`), `pnpm preview`, `pnpm preview:cloudflare` (serves `dist/` with the production headers), `pnpm format`, `pnpm lint`, `pnpm typecheck`. Commands and conventions for agents are in [AGENTS.md](AGENTS.md).
+
+## Licence
+
+The code is under the [MIT licence](LICENSE). The site's texts, case studies, images, portrait, CV and documentation are all rights reserved; see [CONTENT-LICENSE.md](CONTENT-LICENSE.md). The fonts keep their own SIL Open Font License.
