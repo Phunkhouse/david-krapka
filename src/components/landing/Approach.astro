@@ -185,9 +185,14 @@ const letters = ['T', 'M', 'R']
     position: relative;
   }
 
-  /* Halftone letters bleed off the bottom right and sit behind the text. */
+  /* Halftone letters bleed off the bottom right and sit behind the text.
+     Faded so the text stays readable over them, also when a letter lifts into
+     the copy on hover (David, 5 November 2026). */
   .letter {
+    --letter-fade: 0.3;
+
     position: absolute;
+    opacity: var(--letter-fade);
     right: -10px;
     bottom: -26px;
     font-family: var(--family-display);
@@ -213,7 +218,7 @@ const letters = ['T', 'M', 'R']
     bottom: -22px;
     z-index: -2;
     color: var(--pink);
-    opacity: 0.45;
+    opacity: var(--letter-fade);
     mix-blend-mode: multiply;
   }
 
@@ -424,7 +429,7 @@ const letters = ['T', 'M', 'R']
       transform: translate(18px, -14px);
     }
     to {
-      opacity: 0.45;
+      opacity: var(--letter-fade);
       transform: translate(0, 0);
     }
   }
@@ -447,7 +452,7 @@ const letters = ['T', 'M', 'R']
     }
 
     :global(html.motion) .approach[data-develop] .letter--pink {
-      opacity: 0.45;
+      opacity: var(--letter-fade);
       transform: none;
     }
 
