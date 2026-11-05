@@ -99,7 +99,7 @@ Not committed, because the repository is public and they are for David's own com
 ### A4. Headers and hosting
 
 - [x] `public/_headers` per decision 9; `noindex` stays until PR G. Update the header comment.
-- [ ] `wrangler.jsonc` has no `observability` block and Workers Logs are off in the dashboard (LEG-004); record it in the PR.
+- [x] `wrangler.jsonc` has no `observability` block and Workers Logs are off in the dashboard (LEG-004); record it in the PR. Checked by David on 5 November 2026: the Worker's Observability settings show no Workers Logs or Traces option, and say that Logpush and Tail Workers “cannot be added to a Worker that only has static assets”. Re-check if a Worker script is ever added.
 - [x] Find out whether Cloudflare preview URLs send `X-Robots-Tag: noindex` on their own (decision 8); record the answer. Yes, per Cloudflare's docs (decision 8).
 
 ### A5. Remove `/specimen/`
