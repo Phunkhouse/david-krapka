@@ -8,7 +8,7 @@ Anchors: `#top`, `#work`, `#approach`, `#experience`, `#about`, `#contact`.
 
 ## Implementation decisions (milestone 3)
 
-Agreed 4 November 2026, while building the static page:
+Agreed 4 and 5 November 2026, while building the static page (milestone 3 is done; the built page follows the canvas except where listed here):
 
 - **Static hero (reduced-motion look):** the H1 shows “Think. Make. Rethink.” as visible text on three lines (“Re” highlighted), all three sublines show as a list, and the drum is frozen on T with the counter at 1/3. Milestone 4 adds the turning drum and cycling words on top.
 - **Mobile intro sentence:** not shown, as in the mockup. Desktop and tablet show it.

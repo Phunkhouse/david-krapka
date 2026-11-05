@@ -141,20 +141,21 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 Record evidence here and in the PR that completes each check.
 
-- [ ] Side-by-side review against the four mockup boards at 1440 px and 390 px shows matching layout, type and colours; verify with screenshots in the PR and David's sign-off. (Each PR for its sections; final in PR C.)
-- [ ] Tablet widths (768 px and 1024 px) look intentional; verify with screenshots and sign-off. (PR C)
+- [x] Side-by-side review against the four mockup boards at 1440 px and 390 px shows matching layout, type and colours; verify with screenshots in the PR and David's sign-off. (Each PR for its sections; final in PR C.) Evidence: screenshots in PRs #13 to #15; David reviewed the previews and merged each PR.
+- [x] Tablet widths (768 px and 1024 px) look intentional; verify with screenshots and sign-off. (PR C) Evidence: 768 and 1024 px screenshots in PR #15; David merged it.
 - [x] Navigation anchors scroll to their sections and update focus; verify with Playwright. (PR A, extended in B and C) Evidence: `landing.spec.ts` covers header links (desktop and mobile menu), hero buttons, direct `#id` addresses and the Experience link, on both languages.
 - [x] axe reports no violations on both language versions; verify with Playwright + axe. (Every PR) Evidence: 82 e2e tests pass, including axe on the whole landing page at 1280, 768 and 320 px, both languages.
 - [x] Lighthouse mobile scores meet the SPEC targets on the preview URL; verify with a recorded Lighthouse run. (PR C; SEO `noindex` exception noted) Evidence: [report summary](audits/2026-11-05/lighthouse-landing.md): Performance 99, Accessibility 100, Best Practices 100, CLS 0, LCP 1.7 to 1.8 s, fonts 56.6 KB per page; SEO 66 only from the expected `noindex`.
 - [x] A list of remaining placeholders is in the PR description. (PR C, from the placeholder report) Evidence: `pnpm placeholders` lists 34 in 6 pages; summarised in [PR #15](https://github.com/Phunkhouse/david-krapka/pull/15).
-- [ ] Neither language version states prices, rates, terms or availability for paid services; verify by reading the rendered pages ([LEG-001](SPEC.md#legal-requirements)). (PR C, read by David; Playwright guard as support)
+- [x] Neither language version states prices, rates, terms or availability for paid services; verify by reading the rendered pages ([LEG-001](SPEC.md#legal-requirements)). (PR C, read by David; Playwright guard as support)
+  Evidence: the `landing.spec.ts` guard (currency symbols and price, fee, rate, terms and availability words in both languages, including hidden copy variants) passes; David read the rendered pages on the previews.
 
 ## Wrap-up
 
-- [ ] Update MILESTONES.md: milestone 3 status `done`, completion evidence (PR links), status date, and unplanned changes.
-- [ ] Update SPEC.md: resolved open questions, and the landing page status.
-- [ ] Update [Landing page](design/landing-page.md) and the [design README](design/README.md) with any design changes made during review (the canvas wins if they disagree).
-- [ ] `AGENTS.md` lists every new command.
+- [x] Update MILESTONES.md: milestone 3 status `done`, completion evidence (PR links), status date, and unplanned changes.
+- [x] Update SPEC.md: resolved open questions, and the landing page status.
+- [x] Update [Landing page](design/landing-page.md) and the [design README](design/README.md) with any design changes made during review (the canvas wins if they disagree).
+- [x] `AGENTS.md` lists every new command.
 
 ## Risks and notes
 
