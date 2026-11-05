@@ -54,6 +54,17 @@ async function loadAll(): Promise<CaseStudy[]> {
       )
     }
   }
+  for (const locale of locales) {
+    const orders = all
+      .filter((study) => study.locale === locale)
+      .map((study) => study.data.order)
+    const repeated = orders.find((order, i) => orders.indexOf(order) !== i)
+    if (repeated !== undefined) {
+      throw new Error(
+        `Two case studies share order ${repeated} (${locale}); "Next project" needs a unique order.`,
+      )
+    }
+  }
   return all
 }
 
@@ -65,4 +76,17 @@ export async function getCaseStudies(locale: Locale): Promise<CaseStudy[]> {
       (study) => study.locale === locale && (showDrafts || !study.data.draft),
     )
     .sort((a, b) => a.data.order - b.data.order)
+}
+
+/**
+ * The case study after this one in "Next project" order, wrapping around.
+ * Undefined when this is the only one built.
+ */
+export async function nextCaseStudy(
+  study: CaseStudy,
+): Promise<CaseStudy | undefined> {
+  const studies = await getCaseStudies(study.locale)
+  if (studies.length < 2) return undefined
+  const index = studies.findIndex((other) => other.slug === study.slug)
+  return studies[(index + 1) % studies.length]
 }

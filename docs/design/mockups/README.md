@@ -1,6 +1,6 @@
 # Mockup sources
 
-Copies of artboards from the [Personal Portfolio mockups](https://claude.ai/artifact/4ZHRJaJupE3YgvXMZrBdk5) canvas, taken on 4 November 2026: the approved landing pages (canvas version `1793790030-28cb`, unchanged since) and the site shell proposal (canvas version `1793818431-5e1b`). They are reference material for exact CSS values and keyframes, not code to ship.
+Copies of artboards from the [Personal Portfolio mockups](https://claude.ai/artifact/4ZHRJaJupE3YgvXMZrBdk5) canvas, taken on 4 November 2026: the approved landing pages (canvas version `1793790030-28cb`, unchanged since) and the site shell proposal (canvas version `1793818431-5e1b`); the case study pages were added on 5 November 2026 (canvas version `1793892356-9fd5`). They are reference material for exact CSS values and keyframes, not code to ship.
 
 | File | Board | Size |
 | --- | --- | --- |
@@ -12,6 +12,13 @@ Copies of artboards from the [Personal Portfolio mockups](https://claude.ai/arti
 | [M-Menu-Open.dc.html](M-Menu-Open.dc.html) | Site shell · mobile · menu open · English (proposal) | 390 × 844 |
 | [M-Menu-Open-CS.dc.html](M-Menu-Open-CS.dc.html) | Site shell · mobile · menu open · Czech (proposal) | 390 × 844 |
 | [D-Shell.dc.html](D-Shell.dc.html) | Site shell · desktop · header with switcher, pause control, footer, component states (proposal) | 1440 × 1040 |
+| [D-Case-Long.dc.html](D-Case-Long.dc.html) | Case study · long form (Kultomat) · desktop · English | 1440 × 6495 |
+| [M-Case-Long.dc.html](M-Case-Long.dc.html) | Case study · long form · mobile · English | 390 × 6596 |
+| [D-Case-Long-CS.dc.html](D-Case-Long-CS.dc.html) | Případová studie · dlouhá forma · desktop · Czech | 1440 × 6449 |
+| [D-Case-Short.dc.html](D-Case-Short.dc.html) | Case study · short client format (Eucal) · desktop · English | 1440 × 3494 |
+| [M-Case-Short.dc.html](M-Case-Short.dc.html) | Case study · short client format · mobile · English | 390 × 3867 |
+| [M-Case-Short-CS.dc.html](M-Case-Short-CS.dc.html) | Případová studie · krátká forma · mobil · Czech | 390 × 3772 |
+| [OG-Case.dc.html](OG-Case.dc.html) | Social preview image template · 1200 × 630 | 1200 × 630 |
 | [canvas.json](canvas.json) | Canvas index: all boards, pages and titles, including the explorations | — |
 
 The landing boards already contain the chosen section variants (E3 experience, A5 approach motion, G4 portrait glitch). The explored alternatives stay on the canvas only; they are listed in the [design README](../README.md#explored-and-not-chosen).

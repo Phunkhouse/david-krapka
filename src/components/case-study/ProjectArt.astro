@@ -1,0 +1,142 @@
+---
+import { artFor } from '../../content/projects'
+
+interface Props {
+  slug: string
+  /** Where the art sits: the page header or the "Next project" card. */
+  place: 'header' | 'card'
+  /** The page header of a long case study gets the larger letter. */
+  long?: boolean
+}
+
+// The project's landing card art, reused as the print motif
+// (docs/design/case-study.md). Kultomat keeps its pink misregistered copy;
+// client projects do not, as on their landing cards.
+const { slug, place, long = false } = Astro.props
+const { letter, kind } = artFor(slug)
+const paper = kind === 'k' || kind === 'paper'
+---
+
+<div
+  class:list={[
+    'art',
+    `art--${place}`,
+    { 'art--long': long, 'paper-yellow': paper, tint: !paper },
+  ]}
+  aria-hidden="true"
+>
+  <span
+    class:list={['letter', 'halftone', { misregister: kind === 'k' }]}
+    data-text={letter}
+  >
+    {letter}
+  </span>
+  {kind === 'circle' && <span class="shape circle" />}
+  {kind === 'play' && <span class="shape play" />}
+</div>
+
+<style>
+  .art {
+    --art-size: 320px;
+    --art-x: 24px;
+    --art-y: -56px;
+
+    position: relative;
+    overflow: hidden;
+    height: 240px;
+    font-size: var(--art-size);
+  }
+
+  .tint {
+    background: var(--tint);
+    isolation: isolate;
+  }
+
+  .letter {
+    position: absolute;
+    top: var(--art-y);
+    left: var(--art-x);
+    font-family: var(--family-display);
+    font-weight: 900;
+    line-height: 1;
+    --slip-x: 14px;
+    --slip-y: 10px;
+  }
+
+  .shape {
+    position: absolute;
+    mix-blend-mode: multiply;
+  }
+
+  .circle {
+    top: 0.1em;
+    right: 0.1em;
+    width: 0.33em;
+    height: 0.33em;
+    border-radius: 50%;
+    background: var(--yellow);
+  }
+
+  .play {
+    right: 0.08em;
+    bottom: 0.08em;
+    border-top: 0.16em solid transparent;
+    border-bottom: 0.16em solid transparent;
+    border-left: 0.27em solid var(--pink);
+    opacity: 0.8;
+  }
+
+  .art--card {
+    --art-size: 220px;
+    --art-x: 16px;
+    --art-y: -38px;
+
+    height: 160px;
+  }
+
+  @media (min-width: 720px) {
+    .art--header {
+      --art-size: 360px;
+      --art-x: 16px;
+      --art-y: -60px;
+
+      height: 100%;
+      min-height: 360px;
+    }
+
+    .art--card {
+      --art-size: 300px;
+      --art-y: -52px;
+
+      height: 100%;
+      min-height: 240px;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .art--header {
+      --art-size: 520px;
+      --art-x: 48px;
+      --art-y: -70px;
+
+      min-height: 440px;
+    }
+
+    /* Grows with the art column, 1100 → 1440 px. */
+    .art--header.art--long {
+      --art-size: clamp(480px, 44vw, 640px);
+      --art-x: 0.075em;
+      --art-y: -0.15em;
+
+      min-height: 520px;
+    }
+
+    .art--card {
+      --art-size: 360px;
+      --art-x: 24px;
+      --art-y: -62px;
+
+      min-height: 300px;
+    }
+  }
+</style>
