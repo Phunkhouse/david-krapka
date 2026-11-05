@@ -162,12 +162,16 @@ for (const {
       await expect(page.locator('#approach')).toBeInViewport()
     })
 
-    test('the About portrait is decorative', async ({ page }) => {
+    test('the About portrait is an image with a name', async ({ page }) => {
       await page.goto(path)
-      await expect(page.locator('#about .portrait')).toHaveAttribute(
-        'aria-hidden',
-        'true',
-      )
+      await expect(
+        page.locator('#about').getByRole('img', {
+          name:
+            lang === 'en'
+              ? 'Portrait of David Křapka'
+              : 'Portrét Davida Křapky',
+        }),
+      ).toBeVisible()
     })
 
     test('the English claim is marked as English on the Czech page', async ({

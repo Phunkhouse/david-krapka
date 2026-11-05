@@ -109,5 +109,5 @@ The mockups define a yellow outline only for project cards on blue. Agreed rule 
 ## Imagery
 
 - Project thumbnails are placeholders (halftone initial + geometric shape). Real screenshots replace or join them once approved for publication.
-- The portrait is a silhouette placeholder. The real photo should be printed through the same two-ink halftone so the glitch effect still works.
+- The portrait is David's photo as a duotone: ink on the yellow paper, with a pink halftone copy out of register (decided 5 November 2026, [Landing page](landing-page.md)). The glitch slices both inks.
 - No stock photos, emoji or icon fonts. Arrows (→, ↑) are text characters.

@@ -158,6 +158,7 @@ export const en = {
       text: 'The way I work has changed a lot. I used to work on parts of a product. Now I take on more of the whole thing, combining product thinking, UX and engineering.',
       // Square brackets: the milestone 6 build check fails while this remains.
       note: '[A short personal note goes here.]',
+      portrait: 'Portrait of David Křapka',
     },
     contact: {
       title: "Let's work together.",
