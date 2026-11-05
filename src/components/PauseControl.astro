@@ -3,23 +3,96 @@ import { t, type Locale } from '../i18n'
 
 interface Props {
   locale: Locale
+  /**
+   * Working control (landing page): hidden until JavaScript runs, because it
+   * would do nothing without it. Without this flag the component is a static
+   * specimen.
+   */
+  live?: boolean
 }
 
-// Static for now (milestone 2): rendered and labelled, no behaviour, and not
-// placed on any page until the looping motion exists (milestone 4). Then it
-// toggles all decorative loops, starts paused under prefers-reduced-motion
-// and keeps its state in page memory only (LEG-005).
-const { locale } = Astro.props
+const { locale, live = false } = Astro.props
 const copy = t(locale)
 ---
 
-<button class="pause" type="button" aria-pressed="false">
+<button
+  class="pause"
+  type="button"
+  data-pause={live ? '' : undefined}
+  data-label-stop={copy.pause.stop}
+  data-label-start={copy.pause.start}
+  data-state="playing"
+  hidden={live}
+>
   <span class="icon" aria-hidden="true">
     <span></span>
     <span></span>
   </span>
-  {copy.pause.stop}
+  <span data-pause-label>{copy.pause.stop}</span>
 </button>
+
+<script>
+  // Milestone 4: stops and starts every decorative loop on the page
+  // (WCAG 2.2.2). The state lives in this variable only: no cookie,
+  // localStorage, sessionStorage or IndexedDB (LEG-005).
+  //
+  // Classes on <html>:
+  //   motion  motion layout and animations are on. A <head> script in
+  //           BaseLayout sets it before first paint unless the visitor
+  //           prefers reduced motion; pressing "Start the press" sets it
+  //           for this page view.
+  //   paused  every loop inside [data-loop] holds its current frame.
+  // Loops also hold while their [data-loop] section is off-screen.
+  const root = document.documentElement
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)')
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-pause]')
+
+  let paused = reduced.matches
+
+  const render = () => {
+    root.classList.toggle('paused', paused)
+    buttons.forEach((button) => {
+      button.hidden = false
+      button.dataset.state = paused ? 'paused' : 'playing'
+      const label = button.querySelector('[data-pause-label]')
+      if (label) {
+        label.textContent =
+          (paused ? button.dataset.labelStart : button.dataset.labelStop) ?? ''
+      }
+    })
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      paused = !paused
+      // Under reduced motion the page starts static; starting the press
+      // switches to the motion layout for this page view.
+      if (!paused) root.classList.add('motion')
+      render()
+    })
+  })
+
+  // The system preference wins: if it changes during the visit, follow it,
+  // even over a press the visitor stopped by hand.
+  reduced.addEventListener('change', () => {
+    paused = reduced.matches
+    root.classList.toggle('motion', !reduced.matches)
+    render()
+  })
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle('offscreen', !entry.isIntersecting)
+      })
+    })
+    document
+      .querySelectorAll('[data-loop]')
+      .forEach((section) => observer.observe(section))
+  }
+
+  render()
+</script>
 
 <style>
   /* shell-components.md#pause-control */
@@ -42,6 +115,11 @@ const copy = t(locale)
     cursor: pointer;
   }
 
+  /* The hidden attribute must win over display: inline-flex. */
+  .pause[hidden] {
+    display: none;
+  }
+
   .icon {
     display: flex;
     align-items: center;
@@ -57,5 +135,17 @@ const copy = t(locale)
     width: 3px;
     height: 9px;
     background: var(--yellow);
+  }
+
+  /* Paused: the icon turns into a play triangle. */
+  .pause[data-state='paused'] .icon span {
+    display: none;
+  }
+
+  .pause[data-state='paused'] .icon::after {
+    content: '';
+    margin-left: 2px;
+    border-left: 8px solid var(--yellow);
+    border-block: 5px solid transparent;
   }
 </style>

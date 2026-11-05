@@ -127,14 +127,27 @@ a:hover {
   transform: none;
 }
 
-/* Motion is decorative; respect the visitor's preference everywhere. */
+/* Motion is decorative; respect the visitor's preference everywhere.
+   html.motion is set only when motion is wanted (before paint, or by the
+   visitor pressing "Start the press"), so an opt-in is not overridden. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  html:not(.motion) *,
+  html:not(.motion) *::before,
+  html:not(.motion) *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Pause control (WCAG 2.2.2): looping animation inside [data-loop] holds its
+   frame while the visitor has stopped the press or the section is off-screen. */
+html.paused [data-loop] *,
+html.paused [data-loop] *::before,
+html.paused [data-loop] *::after,
+[data-loop].offscreen *,
+[data-loop].offscreen *::before,
+[data-loop].offscreen *::after {
+  animation-play-state: paused !important;
 }

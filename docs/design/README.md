@@ -51,7 +51,7 @@ Kept on the canvas for reference; do not implement.
 These are needed before the related milestone can finish (see [milestones](../MILESTONES.md)):
 
 1. **Case study page** template (desktop and mobile), including the Kultomat long form and the shorter client format.
-2. **Mobile menu**, **language switcher** and **motion pause control**: first proposal in [Shell components](shell-components.md) and on the canvas; to iterate.
+2. **Mobile menu**, **language switcher** and **motion pause control**: first proposal in [Shell components](shell-components.md) and on the canvas; to iterate. The pause control is built and placed (milestone 4); one control for the whole page.
 5. **Tablet range** (roughly 720–1100 px). The mockups cover 390 px and 1440 px only.
 6. **404 page**, CV download treatment, and any legal or privacy page the legal planning requires.
 7. **Social preview image** (Open Graph) and favicon / monogram.

@@ -246,10 +246,14 @@ for (const {
       page,
     }) => {
       await page.goto(path)
-      // The drum panel and the cards' art carry no meaning of their own.
-      await expect(page.locator('#top [aria-hidden="true"].drum')).toHaveCount(
-        1,
-      )
+      // The drum art and the cards' art carry no meaning of their own; the
+      // pause control beside the drum stays outside the hidden part.
+      await expect(
+        page.locator('#top .drum > [aria-hidden="true"]'),
+      ).toHaveCount(1)
+      await expect(
+        page.locator('#top [aria-hidden="true"] [data-pause]'),
+      ).toHaveCount(0)
       await expect(
         page.locator('#work [aria-hidden="true"]').first(),
       ).toBeAttached()

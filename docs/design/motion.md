@@ -12,6 +12,18 @@ All motion is decorative, mechanical and print-themed. Exact keyframes are in th
 6. **Cheap properties.** Animate `transform`, `opacity`, `clip-path`, `background-color` and one registered custom property (`--r`). No layout-affecting properties.
 7. **Flashing.** The portrait glitch jumps in short bursts. Check it against WCAG 2.3.1 (no more than three flashes per second) with a flash-analysis tool before launch, and soften it if it fails.
 
+## Implementation decisions (milestone 4)
+
+Decided 5 November 2026 (as recommended in the [milestone 4 checklist](../milestone-4-checklist.md#0-before-starting-david)).
+
+- **Motion needs JavaScript.** A small inline script in `<head>` adds `motion` to `<html>` before first paint when `prefers-reduced-motion: no-preference` matches. Every animation and the motion layout of the hero hang off `html.motion`. Without JavaScript, or under reduced motion, the page is the static milestone 3 page. Reason: without JavaScript the pause control cannot work, and a loop without a pause fails WCAG 2.2.2.
+- **One pause control** on the hero drum band stops every looping animation on the page (the portrait in milestone 4 PR C included). It is hidden until JavaScript runs.
+- **“Stop the press” freezes in place** (`animation-play-state: paused` on everything inside `[data-loop]`) and resumes from the same frame.
+- **Off-screen pause is separate from the visitor's choice.** A `[data-loop]` section gets `offscreen` while outside the viewport; a press the visitor stopped stays stopped when they scroll back.
+- **Reduced motion:** the control is shown as “Start the press”. Pressing it adds `motion` for this page view only (state in page memory, LEG-005), so the hero changes from the static list to the cycling layout on the visitor's own action.
+- **Text stays real.** The cycling words and sublines are the same elements as the static list, stacked and cross-faded, so the H1 and sublines are always whole text for assistive technology. Only the drum art is `aria-hidden`; the control sits beside it, outside the hidden part, first in the DOM so it comes before the hero text in tab order.
+- **Card hover moves to milestone 5**, when the cards become links. **Smooth anchor scrolling** is on, off under reduced motion. **The mobile menu does not slide.**
+
 ## Hero print drum (9 s loop)
 
 The drum is a 3D prism with three faces, T, M and R, rotated around the X axis (`perspective` 1300 px desktop, 620 px mobile; faces at `translateZ(180px)` desktop, `88px` mobile).

@@ -155,7 +155,7 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 | Blocks | Question |
 | --- | --- |
 | Milestone 2 | Business identification in the footer ([LEG-002](#legal-requirements)): which place of business will be published when the IČO is active? Needed to size the footer slot. |
-| Milestone 2 | Mobile menu, language switcher and pause control: first proposal on the canvas and in [Shell components](design/shell-components.md); David to iterate. |
+| Milestone 2 | Mobile menu and language switcher: first proposal on the canvas and in [Shell components](design/shell-components.md); David to iterate. Pause control: ~~placement and behaviour~~ decided 5 November 2026 ([Motion](design/motion.md#implementation-decisions-milestone-4)). |
 | Milestone 3 | ~~Mobile hero intro, reduced-motion hero, Experience in the navigation~~ decided 4 November 2026 ([Landing page](design/landing-page.md#implementation-decisions-milestone-3)). |
 | Milestone 3 | ~~Tablet layout (720–1100 px)~~ built from the proposal in [Visual system](design/visual-system.md#breakpoints-proposal) and accepted by David on the previews, 5 November 2026. |
 | Milestone 5 | Case study page design; whether short client projects get their own pages; Czech translations of case studies at launch or later. |

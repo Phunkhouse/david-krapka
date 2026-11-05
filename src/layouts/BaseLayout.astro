@@ -44,6 +44,14 @@ const shellRoute: RouteKey = route ?? 'home'
     {route && (
       <link rel="alternate" hreflang="x-default" href={urlFor('en', route)} />
     )}
+    <!-- Motion is on only with JavaScript (the pause control needs it) and
+         without a reduced-motion preference. Set before first paint so the
+         motion layout never shifts. See docs/design/motion.md. -->
+    <script is:inline>
+      if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+        document.documentElement.classList.add('motion')
+      }
+    </script>
     <slot name="head" />
   </head>
   <body>
