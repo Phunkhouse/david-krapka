@@ -89,6 +89,10 @@ for (const { path, lang, ogLocale, alternate } of [
       url: `${site}${path}`,
     })
     expect(person.jobTitle).toBeTruthy()
+    expect(person.sameAs).toEqual([
+      'https://www.linkedin.com/in/david-krapka/',
+      'https://github.com/Phunkhouse',
+    ])
     await expect(page.locator('html')).toHaveAttribute('lang', lang)
   })
 }

@@ -1,5 +1,6 @@
 ---
 import { t, type Locale } from '../../i18n'
+import { contactEmail, profiles } from '../../content/profiles'
 
 interface Props {
   locale: Locale
@@ -9,9 +10,8 @@ const { locale } = Astro.props
 const { contact } = t(locale).home
 
 // Both cards open an email with a prefilled subject. No form, nothing stored.
-// The address is a placeholder until milestone 6 (public email decision).
 const mailto = (subject: string) =>
-  `mailto:${contact.email}?subject=${encodeURIComponent(subject)}`
+  `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}`
 ---
 
 <!--
@@ -51,11 +51,29 @@ const mailto = (subject: string) =>
     </div>
 
     <p class="links">
-      <span>{contact.email}</span>
-      <span class="sep sep--first"> · </span>
-      <span>{contact.linkedin}</span>
-      <span class="sep"> · </span>
-      <span>{contact.github}</span>
+      <span>
+        <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      </span>
+      <span class="sep sep--first" aria-hidden="true">
+        {' '}
+        ·{' '}
+      </span>
+      <span>
+        <a href={profiles.linkedin} rel="noopener">
+          {contact.linkedin}
+          <span aria-hidden="true"> ↗</span>
+        </a>
+      </span>
+      <span class="sep" aria-hidden="true">
+        {' '}
+        ·{' '}
+      </span>
+      <span>
+        <a href={profiles.github} rel="noopener">
+          {contact.github}
+          <span aria-hidden="true"> ↗</span>
+        </a>
+      </span>
     </p>
   </div>
 </section>
@@ -148,8 +166,15 @@ const mailto = (subject: string) =>
     line-height: 1.6;
   }
 
+  .links a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
   /* Mobile: email on its own line, the other two below. */
-  .links span:first-child {
+  .links > span:first-child {
     display: block;
   }
 
@@ -212,7 +237,7 @@ const mailto = (subject: string) =>
       font-size: 15px;
     }
 
-    .links span:first-child {
+    .links > span:first-child {
       display: inline;
     }
 
