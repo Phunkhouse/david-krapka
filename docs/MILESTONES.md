@@ -140,7 +140,7 @@ Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device ch
 
 ## Milestone 5: Case studies
 
-**Status:** planned
+**Status:** planning; work plan in the [milestone 5 checklist](milestone-5-checklist.md) (four PRs: case study pipeline and card links; designed template; Kultomat; client projects and wrap-up).
 
 **Goal:** Kultomat as the main case study and short client project pages, built on verified facts.
 
@@ -155,7 +155,7 @@ Status as of 5 November 2026: milestones 0 to 4 done (milestone 4 with device ch
 - [ ] Landing cards link to the right pages in both languages; verify with Playwright.
 - [ ] David signs off on each page.
 
-**Dependencies and risks:** **Blocked** until the case study template is designed on the canvas and the Kultomat project card is complete. Client permission for screenshots.
+**Dependencies and risks:** The template (PR B) is **blocked** until the case study page is designed on the canvas, and the content PRs until the project cards are complete and permissions recorded. The pipeline and card links (PR A) need only the decisions in section 0 of the checklist: MDX format, draft handling, short pages or links out, Czech versions at launch, Systerna, and how cards become links. The repository is public, so drafts and screenshots are public once committed. Client permission for screenshots.
 
 ## Milestone 6: Launch readiness and launch
 
