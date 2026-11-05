@@ -146,7 +146,7 @@ Record evidence here and in the PR that completes each check.
 - [ ] The portrait glitch passes a flash analysis (≤ 3 flashes per second); verify with a flash-analysis tool and record the result. (PR C)
 - [ ] Smooth on a real mid-range phone and on Safari iOS (drum text not blurry); verify manually with a screen recording. (PR A for the drum on Safari, C for the whole page; David's devices)
 - [ ] Lighthouse performance and CLS targets still met; verify with Lighthouse. (PR C, spot check in A)
-- [ ] David signs off on the feel of each animation compared with the canvas. (Each PR)
+- [ ] David signs off on the feel of each animation compared with the canvas. (Each PR) **Decided 5 November 2026: animations stay as built in PRs A and B; the sign-off moves to one comprehensive review before launch (milestone 6).** David checked the hero drum on Safari macOS and iOS and found it good.
 
 ## Wrap-up
 
