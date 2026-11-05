@@ -61,7 +61,7 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 - [x] Mobile: 410 px drum band, then headline, sublines and buttons (no intro, as decided); the secondary button becomes the 58 px round “Get in touch” icon button with an accessible name.
 - [x] H1 and sublines follow the static-hero decision; drum panel `aria-hidden`.
 - [x] Buttons: “See selected work” → `#work`, “Get in touch” → `#contact`.
-- [ ] The H1 or the hero text is the Largest Contentful Paint element, not decorative art; check in Lighthouse (PR C, on the preview URL).
+- [x] The Largest Contentful Paint element is text, not decorative art: Lighthouse on the preview shows only the time-to-first-byte (151 ms) and render-delay (190 ms) phases and no resource load.
 
 ### A4. Selected work (`#work`)
 
@@ -127,10 +127,10 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 ### C5. Performance and quality
 
-- [ ] Font payload for `/` and `/cs/` still ≤ 150 KB with every face the landing uses; record per-page totals.
-- [ ] Lighthouse mobile on the PR preview URL for `/` and `/cs/`, saved as JSON or HTML reports linked from the PR. Targets from [SPEC](SPEC.md#performance-targets-measured-on-a-mid-range-phone-profile): Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05. SEO: the preview sends `X-Robots-Tag: noindex` on purpose, so Lighthouse flags “Page is blocked from indexing”; record the SEO score with that one audit noted as expected, and every other SEO audit passing.
-- [ ] Without JavaScript every section, link and anchor works (only the menu falls back to the footer link); check with JavaScript disabled.
-- [ ] 200 % zoom at 1280 px: no horizontal scroll, nothing clipped.
+- [x] Font payload measured: `/` 110.9 KB, `/cs/` **156.4 KB** (4 % over the 150 KB target, Latin Extended files for Czech). Decision for David in the [Lighthouse report](audits/2026-11-05/lighthouse-landing.md#open-points-for-david).
+- [x] Lighthouse mobile on the PR preview URL for `/` and `/cs/`, three runs each: Performance 98, Accessibility 100, Best Practices 100, CLS ≈ 0, SEO 66 (only `is-crawlable`, expected). **LCP 2.0 to 2.1 s, borderline against the 2.0 s target.** Summary in [docs/audits/2026-11-05/lighthouse-landing.md](audits/2026-11-05/lighthouse-landing.md) (full reports are about 1 MB each and not committed). Targets from [SPEC](SPEC.md#performance-targets-measured-on-a-mid-range-phone-profile): Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05. SEO: the preview sends `X-Robots-Tag: noindex` on purpose, so Lighthouse flags “Page is blocked from indexing”; record the SEO score with that one audit noted as expected, and every other SEO audit passing.
+- [x] Without JavaScript every section, link and anchor works (only the menu falls back to the footer link); check with JavaScript disabled.
+- [x] 200 % zoom at 1280 px: no horizontal scroll, nothing clipped.
 
 ### C6. Tests
 
@@ -143,10 +143,10 @@ Record evidence here and in the PR that completes each check.
 
 - [ ] Side-by-side review against the four mockup boards at 1440 px and 390 px shows matching layout, type and colours; verify with screenshots in the PR and David's sign-off. (Each PR for its sections; final in PR C.)
 - [ ] Tablet widths (768 px and 1024 px) look intentional; verify with screenshots and sign-off. (PR C)
-- [ ] Navigation anchors scroll to their sections and update focus; verify with Playwright. (PR A, extended in B and C)
-- [ ] axe reports no violations on both language versions; verify with Playwright + axe. (Every PR)
-- [ ] Lighthouse mobile scores meet the SPEC targets on the preview URL; verify with a recorded Lighthouse run. (PR C; SEO `noindex` exception noted)
-- [ ] A list of remaining placeholders is in the PR description. (PR C, from the placeholder report)
+- [x] Navigation anchors scroll to their sections and update focus; verify with Playwright. (PR A, extended in B and C) Evidence: `landing.spec.ts` covers header links (desktop and mobile menu), hero buttons, direct `#id` addresses and the Experience link, on both languages.
+- [x] axe reports no violations on both language versions; verify with Playwright + axe. (Every PR) Evidence: 82 e2e tests pass, including axe on the whole landing page at 1280, 768 and 320 px, both languages.
+- [ ] Lighthouse mobile scores meet the SPEC targets on the preview URL; verify with a recorded Lighthouse run. (PR C; SEO `noindex` exception noted) Evidence: [report summary](audits/2026-11-05/lighthouse-landing.md): Performance 98, Accessibility 100, Best Practices 100, CLS ≈ 0; **open: LCP 2.0 to 2.1 s (target ≤ 2.0 s) and Czech font payload 156 KB (target ≤ 150 KB), David to accept or ask for a fix.**
+- [x] A list of remaining placeholders is in the PR description. (PR C, from the placeholder report) Evidence: `pnpm placeholders` lists 34 in 6 pages; summarised in [PR #15](https://github.com/Phunkhouse/david-krapka/pull/15).
 - [ ] Neither language version states prices, rates, terms or availability for paid services; verify by reading the rendered pages ([LEG-001](SPEC.md#legal-requirements)). (PR C, read by David; Playwright guard as support)
 
 ## Wrap-up
