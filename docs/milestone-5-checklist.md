@@ -64,37 +64,37 @@ These gate PRs C and D, not PR A. The [working project card](content-and-case-st
 
 ### A1. Branch and docs
 
-- [ ] Branch from up-to-date `main`; draft PR; `check` and `playwright` skipped on the draft (intended).
-- [ ] Record decisions 1 to 6 (and 10) in SPEC (case study content row, URLs, open questions), the [landing page](design/landing-page.md) design doc (card links and hover) and decision `0011` (MDX content collection and draft handling).
+- [x] Branch from up-to-date `main`; draft PR; `check` and `playwright` skipped on the draft (intended).
+- [x] Record decisions 1 to 6 (and 10) in SPEC (case study content row, URLs, open questions), the [landing page](design/landing-page.md) design doc (card links and hover) and decision `0011` (MDX content collection and draft handling).
 
 ### A2. Content collection
 
-- [ ] Add `@astrojs/mdx` (pinned, as the other dependencies) and a `caseStudies` collection in `src/content.config.ts` with the glob loader, one folder per project with `en.mdx` and `cs.mdx` (or the layout the Astro 7 docs recommend).
-- [ ] Schema: `title`, `summary` (meta description), `project` (slug), `locale`, `kind` (`long` | `short`), `status` text, `dates`, `role`, `collaborators` (list of name and role, may be empty but must be present), `ai` (what AI helped with and how it was reviewed), `stack` (optional), `liveUrl`, `draft`, `order`. A missing required field fails the build.
-- [ ] A check that every published project has both language entries (if decision 4 is “both languages”); a missing one fails the build, as missing dictionary keys do.
-- [ ] Draft handling per decision 2, in one helper used by the routes, the landing cards and later the sitemap.
-- [ ] A Kultomat draft entry with only placeholders (`[…]`), so the routes have something to render on previews. It must contain no unverified facts.
+- [x] Add `@astrojs/mdx` (pinned, as the other dependencies) and a `caseStudies` collection in `src/content.config.ts` with the glob loader, one folder per project with `en.mdx` and `cs.mdx` (or the layout the Astro 7 docs recommend).
+- [x] Schema: `title`, `summary` (meta description), `project` (slug), `locale`, `kind` (`long` | `short`), `status` text, `dates`, `role`, `collaborators` (list of name and role, may be empty but must be present), `ai` (what AI helped with and how it was reviewed), `stack` (optional), `liveUrl`, `draft`, `order`. A missing required field fails the build.
+- [x] A check that every published project has both language entries (if decision 4 is “both languages”); a missing one fails the build, as missing dictionary keys do.
+- [x] Draft handling per decision 2, in one helper used by the routes, the landing cards and later the sitemap.
+- [x] A Kultomat draft entry with only placeholders (`[…]`), so the routes have something to render on previews. It must contain no unverified facts.
 
 ### A3. Routes and metadata
 
-- [ ] `src/pages/work/[slug].astro` and `src/pages/cs/work/[slug].astro` with `getStaticPaths` from the collection (published entries, plus drafts where decision 2 allows).
-- [ ] A minimal `CaseStudyLayout` on the existing `BaseLayout`: one H1, the facts as a definition list, the MDX body, a link back to the landing work section. Semantic and on the design tokens, not styled to a design yet (PR B).
-- [ ] Per-page `<title>` and description from the entry; canonical URL, `hreflang` alternates and `x-default`; the language switcher goes to the same case study in the other language.
-- [ ] Unknown or unpublished slugs return the bilingual 404 (check through `wrangler dev`).
+- [x] `src/pages/work/[slug].astro` and `src/pages/cs/work/[slug].astro` with `getStaticPaths` from the collection (published entries, plus drafts where decision 2 allows).
+- [x] A minimal `CaseStudyLayout` on the existing `BaseLayout`: one H1, the facts as a definition list, the MDX body, a link back to the landing work section. Semantic and on the design tokens, not styled to a design yet (PR B).
+- [x] Per-page `<title>` and description from the entry; canonical URL, `hreflang` alternates and `x-default`; the language switcher goes to the same case study in the other language.
+- [x] Unknown or unpublished slugs return the bilingual 404 (check through `wrangler dev`).
 
 ### A4. Landing cards
 
-- [ ] Cards with a published page (or a link out, decision 3) become links per decision 6, with the “Read the case study →” line; others stay as today. Systerna stays a plain card (decision 5).
-- [ ] Hover (`@media (hover: hover)`) and `:focus-visible` lift: `translate(-4px, -4px)` over 0.2 s, shadow growing to match; no transition under reduced motion. Focus ring per the [focus rule](design/visual-system.md#focus) on ink.
-- [ ] Remove the “Cards are not links yet” comment in `Work.astro` and the screenshot label if decision 8 is as recommended.
+- [x] Cards with a published page (or a link out, decision 3) become links per decision 6, with the “Read the case study →” line; others stay as today. Systerna stays a plain card (decision 5).
+- [x] Hover (`@media (hover: hover)`) and `:focus-visible` lift: `translate(-4px, -4px)` over 0.2 s, shadow growing to match; no transition under reduced motion. Focus ring per the [focus rule](design/visual-system.md#focus) on ink.
+- [x] Remove the “Cards are not links yet” comment in `Work.astro` and the screenshot label if decision 8 is as recommended.
 
 ### A5. Tests
 
-- [ ] Playwright: with a published fixture (or the draft on a draft-enabled build), each linked card is a link named after the project and goes to `/work/<slug>/` from `/` and `/cs/work/<slug>/` from `/cs/`.
-- [ ] Playwright: the case study page has one H1, the right `lang`, canonical and `hreflang` links, and the switcher goes to the other language's page.
-- [ ] Playwright: a draft slug is a 404 in a build without drafts, and its card is not a link.
-- [ ] Playwright: the card lift appears on hover and on keyboard focus; no lift transition under reduced motion.
-- [ ] axe at 1280, 768 and 320 px, 320 px scroll, request, storage, CSP and no-JavaScript checks extended to the case study pages.
+- [x] Playwright: with a published fixture (or the draft on a draft-enabled build), each linked card is a link named after the project and goes to `/work/<slug>/` from `/` and `/cs/work/<slug>/` from `/cs/`.
+- [x] Playwright: the case study page has one H1, the right `lang`, canonical and `hreflang` links, and the switcher goes to the other language's page.
+- [x] A draft slug is absent, and its card is not a link, in a build without drafts. Done by `pnpm check:drafts` (part of `pnpm verify` and CI) rather than Playwright, because the Playwright build includes drafts; Playwright checks that unknown slugs are 404 and that only published cards are links.
+- [x] Playwright: the card lift appears on hover and on keyboard focus; no lift transition under reduced motion.
+- [x] axe at 1280, 768 and 320 px, 320 px scroll, request, storage, CSP and no-JavaScript checks extended to the case study pages.
 
 ## PR B: Case study template
 

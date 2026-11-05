@@ -17,13 +17,14 @@ Before changing code, inspect the relevant files and the documentation for the i
 - Hosting: Cloudflare Workers static assets (decision 0007), configured in `wrangler.jsonc` and `public/_headers`. Deploys run in Cloudflare Workers Builds, not from this repository's scripts.
 - `pnpm lint`: ESLint (`@eslint/js`, `typescript-eslint`, `eslint-plugin-astro`).
 - `pnpm typecheck`: `astro check` (runs `astro sync`, then type-checks `.astro` and `.ts` files). TypeScript is pinned to 6.0.x because `@astrojs/check` and `typescript-eslint` do not support 7 yet.
-- `pnpm verify`: format check, lint, typecheck, build and font coverage check in sequence. Run it before asking for review.
+- `pnpm verify`: format check, lint, typecheck, build, font coverage check and draft check in sequence. Run it before asking for review.
+- `pnpm check:drafts`: after `pnpm build`, fails if a build made without drafts contains a case study page or any mention of `/work/` in its HTML, XML or text files. Draft case studies (`draft: true`) are shown by `pnpm dev` and built only with `SHOW_DRAFTS=1` (set by the Playwright build) or on a Workers Builds branch other than `main`. Part of `pnpm verify` and CI job `check` ([0011](docs/decisions/0011-case-studies-as-mdx-collection.md)).
 - `pnpm check:fonts`: after `pnpm build`, fails if any built page shows a character the site fonts do not cover (it would render in a fallback font). Fix by regenerating the fonts with `scripts/subset-fonts.py` (see `src/assets/fonts/README.md`). Also run in CI job `check`.
 - `pnpm placeholders`: after `pnpm build`, lists every `[…]` placeholder left in `dist/` per page (report only; `--fail` exits 1 when any remain, for the milestone 6 production check).
 - `scripts/flash-check.mjs` (manual, not a pnpm script): approximate WCAG 2.3.1 flash check of a looping element on a served build (`node scripts/flash-check.mjs <url> <selector>`). Usage and limits are in its header and in `docs/audits/2026-11-05/flash-analysis.md`.
 - `scripts/portrait.mjs` (manual, not a pnpm script): rebuilds the About portrait masks in `src/assets/portrait/` from a source photo (`node scripts/portrait.mjs <photo.jpg>`). The source photo is not committed; the generated files carry no camera metadata (LEG-007).
 - `scripts/subset-fonts.py` (manual, not a pnpm script): rebuilds the site-subset font files in `src/assets/fonts/` when new copy needs a character they lack. Steps and requirements are in `src/assets/fonts/README.md`.
-- `pnpm test:e2e`: Playwright end-to-end tests in `tests/e2e/` (Chromium, with axe). It builds the site and serves it with `wrangler dev` on port 8788, so `public/_headers` and production 404 handling apply. First run: `pnpm exec playwright install chromium`. Not part of `pnpm verify`; CI runs it in its own job.
+- `pnpm test:e2e`: Playwright end-to-end tests in `tests/e2e/` (Chromium, with axe). It builds the site with `SHOW_DRAFTS=1` (so draft case studies are tested) and serves it with `wrangler dev` on port 8788, so `public/_headers` and production 404 handling apply. First run: `pnpm exec playwright install chromium`. Not part of `pnpm verify`; CI runs it in its own job.
 
 ## Validation strategy
 

@@ -20,7 +20,7 @@ Success (qualitative, from the brief): a visitor can say in their own words what
 ### First release
 
 - **Landing page** in English and Czech, built to the [approved mockups](design/landing-page.md): hero, Selected work, How I think & build, Experience, About, Contact, footer. Static version built in milestone 3 (placeholders listed by `pnpm placeholders`); motion follows in milestone 4.
-- **Kultomat case study** (long form) and **short pages** for Eucal, Vladan Vaněk and UpVideo, once their facts are verified. **Proposal:** short client projects get their own pages only if there is enough verified material; otherwise their cards link to the live site.
+- **Kultomat case study** (long form) and **short pages** for Eucal, Vladan Vaněk and UpVideo, once their facts are verified. Short client projects get their own pages only if there is enough verified material; otherwise their cards link to the live site (decided 5 November 2026).
 - **Systerna** as the labelled “In progress” card only, without a page.
 - **Emplifi** inside the Experience section, with confirmed role and dates.
 - **Contact** via email links (separate subjects for roles and projects; the project link is an invitation to talk, see [LEG-001](#legal-requirements)), LinkedIn and GitHub.
@@ -121,7 +121,7 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 | Styling | Astro component-scoped styles plus global design tokens as CSS custom properties; no Tailwind; Sass only if a real need appears | Confirmed ([0006](decisions/0006-astro-static-site.md)) |
 | Fonts | Rubik 900, Sora 400/600/700, Space Mono 400/700, committed as one site-subset `woff2` per weight ([0010](decisions/0010-subset-fonts-to-site-characters.md)) and loaded with the Astro Fonts API local provider; OFL licences served from `/fonts/licenses/` | Confirmed ([0009](decisions/0009-self-hosted-font-files.md)) |
 | Languages | English (default, `/`) and Czech (`/cs/`) with Astro i18n routing; typed dictionaries in `src/i18n/` so a missing key fails type checking | Confirmed ([0005](decisions/0005-bilingual-routing.md)) |
-| Case study content | MDX files in an Astro content collection, one per project and language; a schema enforces role, collaborators and AI share | Proposal |
+| Case study content | MDX files in an Astro content collection, one per project and language; a schema enforces role, collaborators and AI share; drafts are built on preview branches only | Confirmed ([0011](decisions/0011-case-studies-as-mdx-collection.md)) |
 | Images | Optimised at build time (Astro `<Image>`/`<Picture>`, AVIF/WebP with fixed dimensions) | Proposal |
 | Formatting and linting | Prettier (`semi: false`, `singleQuote: true`), ESLint flat config with `@eslint/js`, `typescript-eslint` and `eslint-plugin-astro` | From recipe |
 | Tests | Playwright for smoke, navigation, reduced-motion and accessibility checks (with axe), against the built site served by `wrangler dev`. Vitest only when there is logic worth unit testing. | Confirmed (milestone 2) |

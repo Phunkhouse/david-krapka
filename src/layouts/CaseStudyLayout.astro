@@ -1,0 +1,148 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import type { CaseStudy } from '../content/load'
+import { t } from '../i18n'
+import { pathFor } from '../i18n/routes'
+
+interface Props {
+  study: CaseStudy
+}
+
+// Basic structure only: the designed template comes with the case study
+// boards (milestone 5, PR B). The facts are the schema's required fields.
+const { study } = Astro.props
+const { data, locale, slug } = study
+const labels = t(locale).caseStudy
+const copy = t(locale)
+---
+
+<BaseLayout
+  title={`${data.title} · ${copy.site.name}`}
+  description={data.summary}
+  route={`work/${slug}`}
+>
+  <article class="case-study">
+    <p class="back">
+      <a href={`${pathFor(locale, 'home')}#work`}>{labels.back}</a>
+    </p>
+    {data.draft && <p class="label draft">{labels.draft}</p>}
+    <h1>{data.title}</h1>
+    <p class="summary">{data.summary}</p>
+
+    <section class="facts" aria-labelledby="facts-title">
+      <h2 id="facts-title" class="label">
+        {labels.factsTitle}
+      </h2>
+      <dl>
+        <div>
+          <dt>{labels.status}</dt>
+          <dd>{data.status}</dd>
+        </div>
+        <div>
+          <dt>{labels.dates}</dt>
+          <dd>{data.dates}</dd>
+        </div>
+        <div>
+          <dt>{labels.role}</dt>
+          <dd>{data.role}</dd>
+        </div>
+        <div>
+          <dt>{labels.collaborators}</dt>
+          <dd>
+            {data.collaborators.length === 0
+              ? labels.noCollaborators
+              : data.collaborators
+                  .map(({ name, role }) => `${name} (${role})`)
+                  .join(', ')}
+          </dd>
+        </div>
+        <div>
+          <dt>{labels.ai}</dt>
+          <dd>{data.ai}</dd>
+        </div>
+        {data.stack && (
+          <div>
+            <dt>{labels.stack}</dt>
+            <dd>{data.stack.join(', ')}</dd>
+          </div>
+        )}
+        {data.liveUrl && (
+          <div>
+            <dt>{labels.liveSite}</dt>
+            <dd>
+              <a href={data.liveUrl} rel="noopener">
+                {new URL(data.liveUrl).host}
+              </a>
+            </dd>
+          </div>
+        )}
+      </dl>
+    </section>
+
+    <div class="body">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-study {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+    max-width: 44rem;
+    padding-bottom: var(--pad-section);
+  }
+
+  .draft {
+    align-self: flex-start;
+    padding: 4px 8px;
+    background: var(--yellow);
+  }
+
+  .summary {
+    font-size: var(--text-body-lg);
+  }
+
+  .facts {
+    padding: var(--gap-s);
+    border: var(--border);
+  }
+
+  .facts h2 {
+    margin-bottom: var(--gap-xs);
+    font-size: var(--text-label);
+    text-transform: uppercase;
+  }
+
+  dl {
+    display: grid;
+    gap: var(--gap-xs);
+    margin: 0;
+  }
+
+  dt {
+    font-family: var(--family-mono);
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-body);
+  }
+
+  .body :global(h2) {
+    margin-top: var(--gap-m);
+    font-size: var(--text-card);
+  }
+</style>

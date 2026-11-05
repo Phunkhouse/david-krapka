@@ -1,4 +1,5 @@
 // @ts-check
+import mdx from '@astrojs/mdx'
 import { defineConfig, fontProviders } from 'astro/config'
 
 /**
@@ -38,6 +39,8 @@ export default defineConfig({
   trailingSlash: 'always',
   // Inline the small stylesheets so first paint does not wait for them.
   build: { inlineStylesheets: 'always' },
+  // Case studies are MDX files in a content collection (decision 0011).
+  integrations: [mdx()],
   // English at the root, Czech under /cs/ (decision 0005).
   i18n: {
     locales: ['en', 'cs'],

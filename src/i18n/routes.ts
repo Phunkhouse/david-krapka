@@ -11,14 +11,21 @@ export const routes = {
   privacy: 'privacy',
 } as const
 
-export type RouteKey = keyof typeof routes
+type StaticRoute = keyof typeof routes
+
+/** A static page, or a case study (`work/<slug>`, same path in both languages). */
+export type RouteKey = StaticRoute | `work/${string}`
+
+function pathOf(route: RouteKey): string {
+  return Object.hasOwn(routes, route) ? routes[route as StaticRoute] : route
+}
 
 export function pathFor(locale: Locale, route: RouteKey): string {
-  return getRelativeLocaleUrl(locale, routes[route])
+  return getRelativeLocaleUrl(locale, pathOf(route))
 }
 
 export function urlFor(locale: Locale, route: RouteKey): string {
-  return getAbsoluteLocaleUrl(locale, routes[route])
+  return getAbsoluteLocaleUrl(locale, pathOf(route))
 }
 
 export function alternatesFor(route: RouteKey) {

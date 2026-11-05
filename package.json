@@ -14,12 +14,14 @@
     "lint": "eslint .",
     "typecheck": "astro check",
     "check:fonts": "node scripts/check-fonts.mjs",
-    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build && pnpm check:fonts",
+    "check:drafts": "node scripts/check-drafts.mjs",
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build && pnpm check:fonts && pnpm check:drafts",
     "preview:cloudflare": "wrangler dev",
     "placeholders": "node scripts/placeholders.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@astrojs/mdx": "8.1.2",
     "astro": "^7.4.5"
   },
   "private": true,
