@@ -33,6 +33,11 @@ node scripts/flash-check.mjs http://127.0.0.1:8788/ "#top .drum" --width 1440 --
 - **Hero drum:** each 120° turn changes about the whole threshold area once (a yellow, dotted glyph turning into the next), over 0.6 s, with 2 to 3 s of calm between turns. It never alternates fast: 0 flashes at the area threshold and 2 per second at a quarter of it, under the limit of 3. Margin is smaller than for the portrait, so keep the drum's turn time (0.6 s) and the calm holds when tuning.
 - **Why it matters:** the pause control (WCAG 2.2.2) is the main mechanism for the looping motion. This check covers 2.3.1.
 
+## Limits of the method
+
+- Animations are stepped with `currentTime`, so the check measures the CSS timeline, not real compositing or dropped frames on a device.
+- Counting a flash as a pair of opposing changes (rounded up) is conservative.
+
 ## Open
 
 - Re-run with a certified tool (PEAT or IRIS) as part of the pre-launch review, if David wants a result that does not rest on this approximation. Not run here: neither tool is installed.

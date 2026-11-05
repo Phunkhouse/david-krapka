@@ -5,6 +5,7 @@
 // PEAT or IRIS: use it to find problems early and to record margins.
 //
 //   node scripts/flash-check.mjs <url> <selector> [--width 1440] [--seconds 14]
+//   (options may come before or after the url and selector)
 //
 // Example (serve the site first, for example `pnpm preview:cloudflare`):
 //   node scripts/flash-check.mjs http://127.0.0.1:8788/ "#about .portrait"
@@ -24,7 +25,13 @@
 import process from 'node:process'
 import { chromium } from '@playwright/test'
 
-const [url, selector] = process.argv.slice(2)
+// Positional arguments are the ones that are not options or option values.
+const positional = process.argv
+  .slice(2)
+  .filter(
+    (arg, i, all) => !arg.startsWith('--') && !all[i - 1]?.startsWith('--'),
+  )
+const [url, selector] = positional
 const option = (name, fallback) => {
   const index = process.argv.indexOf(`--${name}`)
   return index === -1 ? fallback : Number(process.argv[index + 1])
@@ -44,6 +51,10 @@ const page = await (
   await browser.newContext({ viewport: { width, height: 900 } })
 ).newPage()
 await page.goto(url)
+if ((await page.locator(selector).count()) === 0) {
+  console.error(`No element matches ${selector} on ${url}`)
+  process.exit(2)
+}
 await page.evaluate((sel) => {
   document
     .querySelector(sel)
