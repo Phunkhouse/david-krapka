@@ -61,7 +61,7 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 - [x] Mobile: 410 px drum band, then headline, sublines and buttons (no intro, as decided); the secondary button becomes the 58 px round “Get in touch” icon button with an accessible name.
 - [x] H1 and sublines follow the static-hero decision; drum panel `aria-hidden`.
 - [x] Buttons: “See selected work” → `#work`, “Get in touch” → `#contact`.
-- [ ] The H1 or the hero text is the Largest Contentful Paint element, not decorative art; check in Lighthouse (PR C, on the preview URL).
+- [x] The Largest Contentful Paint element is text, not decorative art: Lighthouse on the preview shows only the time-to-first-byte (151 ms) and render-delay (190 ms) phases and no resource load.
 
 ### A4. Selected work (`#work`)
 
@@ -103,39 +103,39 @@ Each item has a recommendation; answering “as recommended” is enough. Decisi
 
 ### C1. About (`#about`)
 
-- [ ] 400 px round portrait: yellow paper, ink border, pink dot circle offset behind it, silhouette placeholder in the static G4 state (calm, no scan bar), `aria-hidden` or with alternative text once a real photo exists. Portrait above the text on mobile.
-- [ ] Eyebrow, H2 “Playful by design. **Serious** about the work.” with the designed emphasis, text with the `[personal note]` placeholder.
+- [x] 400 px round portrait: yellow paper, ink border, pink dot circle offset behind it, silhouette placeholder in the static G4 state (calm, no scan bar), `aria-hidden` or with alternative text once a real photo exists. Portrait above the text on mobile.
+- [x] Eyebrow, H2 “Playful by design. **Serious** about the work.” with the designed emphasis, text with the `[personal note]` placeholder.
 
 ### C2. Contact (`#contact`)
 
-- [ ] Yellow paper with rollers and the huge halftone “?” with pink copy bleeding off the bottom right (`aria-hidden`).
-- [ ] H2, “Hiring?” card (paper) and “Have a project?” card (ink, pink shadow), stacked on mobile with the shorter Hiring text.
-- [ ] Card links per the section 0 decision, with prefilled subjects in both languages.
-- [ ] Mono link line: email · LinkedIn · GitHub (placeholders until milestone 6).
-- [ ] LEG-001: wording as designed, an invitation to talk; no prices, rates, terms or availability anywhere ([0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)).
+- [x] Yellow paper with rollers and the huge halftone “?” with pink copy bleeding off the bottom right (`aria-hidden`).
+- [x] H2, “Hiring?” card (paper) and “Have a project?” card (ink, pink shadow), stacked on mobile with the shorter Hiring text.
+- [x] Card links per the section 0 decision, with prefilled subjects in both languages.
+- [x] Mono link line: email · LinkedIn · GitHub (placeholders until milestone 6).
+- [x] LEG-001: wording as designed, an invitation to talk; no prices, rates, terms or availability anywhere ([0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)).
 
 ### C3. Tablet pass
 
-- [ ] Apply the breakpoint proposal across all sections: < 720 px mobile, 720–1099 px stacked hero with 2-column work cards and approach columns becoming a grid at ≥ 960 px, ≥ 1100 px desktop.
-- [ ] Check the header at 720 px fits four links and the switcher in both languages ([Shell components](design/shell-components.md)); raise the header breakpoint if not.
-- [ ] Screenshots at 768 and 1024 px in both languages for David.
+- [x] Apply the breakpoint proposal across all sections: < 720 px mobile, 720–1099 px stacked hero with 2-column work cards and approach columns becoming a grid at ≥ 960 px, ≥ 1100 px desktop.
+- [x] Check the header at 720 px fits four links and the switcher in both languages ([Shell components](design/shell-components.md)); raise the header breakpoint if not.
+- [x] Screenshots at 768 and 1024 px in both languages for David.
 
 ### C4. Placeholder report
 
-- [ ] A small script lists every `[…]` placeholder in the built HTML per page (for example `pnpm placeholders`, reading `dist/`). It reports only; milestone 6 turns it into a failing check for production. Add it to `AGENTS.md` Commands.
-- [ ] Paste its output in the PR description as the list of remaining placeholders.
+- [x] `pnpm placeholders` (`scripts/placeholders.mjs`) lists every `[…]` placeholder in the built HTML per page. It reports only; `--fail` is there for the milestone 6 production check. Added to `AGENTS.md` Commands.
+- [x] Paste its output in the PR description as the list of remaining placeholders.
 
 ### C5. Performance and quality
 
-- [ ] Font payload for `/` and `/cs/` still ≤ 150 KB with every face the landing uses; record per-page totals.
-- [ ] Lighthouse mobile on the PR preview URL for `/` and `/cs/`, saved as JSON or HTML reports linked from the PR. Targets from [SPEC](SPEC.md#performance-targets-measured-on-a-mid-range-phone-profile): Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05. SEO: the preview sends `X-Robots-Tag: noindex` on purpose, so Lighthouse flags “Page is blocked from indexing”; record the SEO score with that one audit noted as expected, and every other SEO audit passing.
-- [ ] Without JavaScript every section, link and anchor works (only the menu falls back to the footer link); check with JavaScript disabled.
-- [ ] 200 % zoom at 1280 px: no horizontal scroll, nothing clipped.
+- [x] Font payload: first measured `/` 110.9 KB and `/cs/` 156.4 KB (over the 150 KB target); fixed by subsetting the fonts ([0010](decisions/0010-subset-fonts-to-site-characters.md)): **56.6 KB on every page**.
+- [x] Lighthouse mobile on the PR preview URL for `/` and `/cs/`, three runs each: Performance 98 then 99, Accessibility 100, Best Practices 100, CLS ≈ 0, SEO 66 (only `is-crawlable`, expected). **LCP 2.0 to 2.1 s at first, 1.7 to 1.8 s after the font trim (target ≤ 2.0 s).** Summary in [docs/audits/2026-11-05/lighthouse-landing.md](audits/2026-11-05/lighthouse-landing.md) (full reports are about 1 MB each and not committed). Targets from [SPEC](SPEC.md#performance-targets-measured-on-a-mid-range-phone-profile): Performance ≥ 95, Accessibility 100, Best Practices 100, LCP ≤ 2.0 s, CLS ≤ 0.05. SEO: the preview sends `X-Robots-Tag: noindex` on purpose, so Lighthouse flags “Page is blocked from indexing”; record the SEO score with that one audit noted as expected, and every other SEO audit passing.
+- [x] Without JavaScript every section, link and anchor works (only the menu falls back to the footer link); check with JavaScript disabled.
+- [x] 200 % zoom at 1280 px: no horizontal scroll, nothing clipped.
 
 ### C6. Tests
 
-- [ ] Playwright: full landing on both languages: anchors, heading order, contact links (`mailto:` with the right subject, if decided), no price or rate wording (a simple text check for currency symbols and “per hour / za hodinu”) as a LEG-001 guard.
-- [ ] axe, 320 px scroll, request, storage and CSP checks pass on the finished page.
+- [x] Playwright: full landing on both languages: anchors, heading order, contact links (`mailto:` with the right subject, if decided), no price or rate wording (a simple text check for currency symbols and “per hour / za hodinu”) as a LEG-001 guard.
+- [x] axe, 320 px scroll, request, storage and CSP checks pass on the finished page.
 
 ## Acceptance checks (from MILESTONES.md)
 
@@ -143,10 +143,10 @@ Record evidence here and in the PR that completes each check.
 
 - [ ] Side-by-side review against the four mockup boards at 1440 px and 390 px shows matching layout, type and colours; verify with screenshots in the PR and David's sign-off. (Each PR for its sections; final in PR C.)
 - [ ] Tablet widths (768 px and 1024 px) look intentional; verify with screenshots and sign-off. (PR C)
-- [ ] Navigation anchors scroll to their sections and update focus; verify with Playwright. (PR A, extended in B and C)
-- [ ] axe reports no violations on both language versions; verify with Playwright + axe. (Every PR)
-- [ ] Lighthouse mobile scores meet the SPEC targets on the preview URL; verify with a recorded Lighthouse run. (PR C; SEO `noindex` exception noted)
-- [ ] A list of remaining placeholders is in the PR description. (PR C, from the placeholder report)
+- [x] Navigation anchors scroll to their sections and update focus; verify with Playwright. (PR A, extended in B and C) Evidence: `landing.spec.ts` covers header links (desktop and mobile menu), hero buttons, direct `#id` addresses and the Experience link, on both languages.
+- [x] axe reports no violations on both language versions; verify with Playwright + axe. (Every PR) Evidence: 82 e2e tests pass, including axe on the whole landing page at 1280, 768 and 320 px, both languages.
+- [x] Lighthouse mobile scores meet the SPEC targets on the preview URL; verify with a recorded Lighthouse run. (PR C; SEO `noindex` exception noted) Evidence: [report summary](audits/2026-11-05/lighthouse-landing.md): Performance 99, Accessibility 100, Best Practices 100, CLS 0, LCP 1.7 to 1.8 s, fonts 56.6 KB per page; SEO 66 only from the expected `noindex`.
+- [x] A list of remaining placeholders is in the PR description. (PR C, from the placeholder report) Evidence: `pnpm placeholders` lists 34 in 6 pages; summarised in [PR #15](https://github.com/Phunkhouse/david-krapka/pull/15).
 - [ ] Neither language version states prices, rates, terms or availability for paid services; verify by reading the rendered pages ([LEG-001](SPEC.md#legal-requirements)). (PR C, read by David; Playwright guard as support)
 
 ## Wrap-up

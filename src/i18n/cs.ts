@@ -145,6 +145,31 @@ export const cs: Dictionary = {
         link: 'Prohlédnout projekty ↑',
       },
     },
+    about: {
+      eyebrow: 'O mně · Pořád se vyvíjím',
+      title: ['Hravý v designu. ', 'Vážný', ' v práci.'],
+      text: 'Můj způsob práce se hodně změnil. Dřív jsem pracoval na částech produktu. Dnes beru víc celek a spojuji produktové myšlení, UX a vývoj.',
+      note: '[Sem přijde krátká osobní poznámka.]',
+    },
+    contact: {
+      title: 'Pojďme na\u00a0to.',
+      hire: {
+        title: 'Hledáte do týmu?',
+        text: 'Napište mi o týmu a roli. Životopis a LinkedIn jsou na jedno kliknutí.',
+        textShort: 'Napište mi o týmu a roli.',
+        link: 'Probrat pozici →',
+        subject: 'Pozice: ',
+      },
+      project: {
+        title: 'Máte projekt?',
+        text: 'Popište problém, nejen zadání. Nejdřív se vrátím s otázkami.',
+        link: 'Začít projekt →',
+        subject: 'Projekt: ',
+      },
+      email: '[e-mail]',
+      linkedin: '[LinkedIn]',
+      github: '[GitHub]',
+    },
   },
   privacy: {
     title: 'Ochrana osobních údajů',

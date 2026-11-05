@@ -151,6 +151,36 @@ export const en = {
         link: 'See the projects ↑',
       },
     },
+    about: {
+      eyebrow: 'About · Always evolving',
+      // Highlighted word in the middle.
+      title: ['Playful by design. ', 'Serious', ' about the work.'],
+      text: 'The way I work has changed a lot. I used to work on parts of a product. Now I take on more of the whole thing, combining product thinking, UX and engineering.',
+      // Square brackets: the milestone 6 build check fails while this remains.
+      note: '[A short personal note goes here.]',
+    },
+    contact: {
+      title: "Let's work together.",
+      hire: {
+        title: 'Hiring?',
+        text: 'Tell me about the team and the role. My CV and LinkedIn are one click away.',
+        textShort: 'Tell me about the team and the role.',
+        link: 'Talk about a role →',
+        subject: 'Role: ',
+      },
+      // An invitation to talk only: no prices, rates, terms or availability
+      // (LEG-001, decision 0008).
+      project: {
+        title: 'Have a project?',
+        text: "Share the problem, not just the spec. I'll come back with questions first.",
+        link: 'Start a project →',
+        subject: 'Project: ',
+      },
+      // Placeholders until milestone 6 (public email, LinkedIn, GitHub).
+      email: '[email address]',
+      linkedin: '[LinkedIn]',
+      github: '[GitHub]',
+    },
   },
   privacy: {
     title: 'Privacy notice',

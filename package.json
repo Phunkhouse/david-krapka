@@ -13,8 +13,10 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "typecheck": "astro check",
-    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build",
+    "check:fonts": "node scripts/check-fonts.mjs",
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build && pnpm check:fonts",
     "preview:cloudflare": "wrangler dev",
+    "placeholders": "node scripts/placeholders.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {

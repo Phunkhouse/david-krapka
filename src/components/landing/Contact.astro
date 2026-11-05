@@ -1,0 +1,256 @@
+---
+import { t, type Locale } from '../../i18n'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { contact } = t(locale).home
+
+// Both cards open an email with a prefilled subject. No form, nothing stored.
+// The address is a placeholder until milestone 6 (public email decision).
+const mailto = (subject: string) =>
+  `mailto:${contact.email}?subject=${encodeURIComponent(subject)}`
+---
+
+<!--
+  Invitation to talk only: no prices, rates, terms or availability claims
+  while the trade is suspended (LEG-001, decision 0008).
+-->
+<section
+  id="contact"
+  class="contact paper-yellow rollers"
+  tabindex="-1"
+  aria-labelledby="contact-title"
+>
+  <span class="question question--pink" aria-hidden="true">
+    ?
+  </span>
+  <span class="question halftone" aria-hidden="true">
+    ?
+  </span>
+
+  <div class="inner">
+    <h2 id="contact-title">{contact.title}</h2>
+
+    <div class="cards">
+      <div class="card card--paper">
+        <h3>{contact.hire.title}</h3>
+        <p>
+          <span class="long">{contact.hire.text}</span>
+          <span class="short">{contact.hire.textShort}</span>
+        </p>
+        <a href={mailto(contact.hire.subject)}>{contact.hire.link}</a>
+      </div>
+      <div class="card card--ink">
+        <h3>{contact.project.title}</h3>
+        <p>{contact.project.text}</p>
+        <a href={mailto(contact.project.subject)}>{contact.project.link}</a>
+      </div>
+    </div>
+
+    <p class="links">
+      <span>{contact.email}</span>
+      <span class="sep sep--first"> · </span>
+      <span>{contact.linkedin}</span>
+      <span class="sep"> · </span>
+      <span>{contact.github}</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .contact {
+    /* Rollers: 14 px on mobile, fluid 22 to 36 px from 720 px. */
+    --roller-width: 14px;
+
+    position: relative;
+    overflow: hidden;
+    border-top: var(--border);
+  }
+
+  .contact:focus {
+    outline: none;
+  }
+
+  .inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: var(--pad-section) 20px;
+  }
+
+  h2 {
+    max-width: 900px;
+    font-size: var(--text-contact);
+    line-height: 0.98;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 880px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 22px;
+    border: var(--border);
+  }
+
+  .card h3 {
+    font-family: var(--family-body);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.2;
+    text-transform: none;
+  }
+
+  .card p {
+    line-height: 1.55;
+  }
+
+  .card a {
+    font-weight: 700;
+  }
+
+  .card--paper {
+    background: var(--paper);
+  }
+
+  .card--ink {
+    --focus-color: var(--yellow);
+
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 6px 6px 0 var(--pink);
+  }
+
+  .card--ink a {
+    color: var(--yellow);
+  }
+
+  .long {
+    display: none;
+  }
+
+  .links {
+    font-family: var(--family-mono);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* Mobile: email on its own line, the other two below. */
+  .links span:first-child {
+    display: block;
+  }
+
+  .sep--first {
+    display: none;
+  }
+
+  /* Huge halftone "?" bleeding off the bottom right, behind the content. */
+  .question {
+    position: absolute;
+    right: 22px;
+    bottom: -40px;
+    font-family: var(--family-display);
+    font-weight: 900;
+    font-size: 200px;
+    line-height: 1;
+    opacity: 0.5;
+    --dot: 3.4px;
+    --grid: 10px;
+  }
+
+  .question--pink {
+    display: none;
+  }
+
+  @media (min-width: 720px) {
+    .contact {
+      --roller-width: var(--roller);
+    }
+
+    .inner {
+      gap: 40px;
+      padding-inline: 48px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gap-m);
+    }
+
+    .card {
+      gap: 14px;
+      padding: 30px;
+    }
+
+    .card--ink {
+      box-shadow: 8px 8px 0 var(--pink);
+    }
+
+    .long {
+      display: inline;
+    }
+
+    .short {
+      display: none;
+    }
+
+    .links {
+      font-size: 15px;
+    }
+
+    .links span:first-child {
+      display: inline;
+    }
+
+    .sep--first {
+      display: inline;
+    }
+
+    .question {
+      right: 90px;
+      bottom: -70px;
+      font-size: 400px;
+      opacity: 1;
+    }
+
+    .question--pink {
+      display: block;
+      right: 70px;
+      bottom: -55px;
+      color: var(--pink);
+      opacity: 0.5;
+      mix-blend-mode: multiply;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .inner {
+      padding-inline: 60px;
+    }
+
+    .question {
+      bottom: -165px;
+      font-size: 620px;
+      --dot: 6px;
+      --grid: 18px;
+    }
+
+    .question--pink {
+      bottom: -150px;
+    }
+  }
+</style>

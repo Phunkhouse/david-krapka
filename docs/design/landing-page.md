@@ -16,6 +16,7 @@ Agreed 4 November 2026, while building the static page:
 - **Cards and links:** project cards are not links until the case studies exist (milestone 5), so the “Read the case study →” line is left out. Contact links, LinkedIn, GitHub and the CV stay placeholders until milestone 6.
 - **Fluid desktop hero:** the drum column is 720 px at 1440 px and wider, and narrows (50 vw, at least 400 px) down to 1100 px so the headline fits.
 - **Approach and Experience:** the three approach columns sit side by side from 1100 px and stack below it (the tablet proposal's optional 960 px grid was not needed). On mobile and tablet the Experience cards stack with the halftone “+” between them and the CV line below; from 1100 px the CV line moves inside the Emplifi card. Static state only: letters are fully developed and columns at rest.
+- **About and Contact:** the portrait is an inline SVG silhouette in two halftone inks (pink copy slipped 8 × 6 px) in its resting state; the real photo replaces it later. Below 1100 px the portrait sits above the text (320 px from 720 px, 240 px below). Contact cards use `mailto:` links with prefilled subjects (“Role: ” / “Project: ”, Czech “Pozice: ” / “Projekt: ”) and the placeholder address; email, LinkedIn and GitHub stay placeholder text until milestone 6.
 - **Kultomat card:** art above text from 720 to 1099 px; side by side from 1100 px with an art column of 380–560 px.
 
 ## 1. Header and hero (`#top`)

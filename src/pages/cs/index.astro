@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import About from '../../components/landing/About.astro'
 import Approach from '../../components/landing/Approach.astro'
+import Contact from '../../components/landing/Contact.astro'
 import Experience from '../../components/landing/Experience.astro'
 import Hero from '../../components/landing/Hero.astro'
 import Work from '../../components/landing/Work.astro'
@@ -20,4 +22,6 @@ const copy = t(locale)
   <Work locale={locale} />
   <Approach locale={locale} />
   <Experience locale={locale} />
+  <About locale={locale} />
+  <Contact locale={locale} />
 </BaseLayout>

@@ -31,3 +31,4 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm run --if-present test
       - run: pnpm build
+      - run: pnpm check:fonts
