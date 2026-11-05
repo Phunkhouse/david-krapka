@@ -17,6 +17,16 @@ const art = ['circle', 'paper', 'play'] as const
 // A card links only to a case study that is published (drafts are built on
 // preview branches only, src/content/load.ts); the others stay plain cards.
 const published = new Set((await getCaseStudies(locale)).map((s) => s.slug))
+// A case study without a card here would never be linked; a mistyped slug in
+// the dictionaries would leave its card plain. Fail the build instead.
+const cardSlugs = [featured.slug, ...work.projects.map((p) => p.slug)]
+for (const slug of published) {
+  if (!cardSlugs.includes(slug)) {
+    throw new Error(
+      `Case study "${slug}" has no card on the landing page (${locale}). Check the slugs in src/i18n/${locale}.ts.`,
+    )
+  }
+}
 const hrefFor = (slug: string) =>
   published.has(slug) ? pathFor(locale, `work/${slug}`) : undefined
 const projects = work.projects.map((project, index) => ({

@@ -5,8 +5,9 @@
 // Draft case studies are built only with SHOW_DRAFTS=1 or on a Cloudflare
 // Workers Builds branch other than main (src/content/load.ts). A normal
 // build, as in `pnpm verify` and CI, must contain no case study page and no
-// link to one. With drafts switched on the check does nothing.
-import { existsSync, readFileSync } from 'node:fs'
+// mention of one anywhere in the built pages. With drafts switched on the check does nothing.
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
+import { join } from 'node:path'
 import process from 'node:process'
 
 const { SHOW_DRAFTS, WORKERS_CI_BRANCH } = process.env
@@ -24,12 +25,17 @@ const problems = []
 for (const dir of ['dist/work', 'dist/cs/work']) {
   if (existsSync(dir)) problems.push(`${dir}/ exists`)
 }
-for (const [file, prefix] of [
-  ['dist/index.html', '/work/'],
-  ['dist/cs/index.html', '/cs/work/'],
-]) {
-  if (readFileSync(file, 'utf8').includes(`href="${prefix}`)) {
-    problems.push(`${file} links to ${prefix}`)
+// Any page, sitemap or text file in the build that mentions a case study path.
+function files(dir) {
+  return readdirSync(dir).flatMap((name) => {
+    const path = join(dir, name)
+    return statSync(path).isDirectory() ? files(path) : [path]
+  })
+}
+for (const file of files('dist')) {
+  if (!/\.(html|xml|txt)$/.test(file)) continue
+  if (readFileSync(file, 'utf8').includes('/work/')) {
+    problems.push(`${file} mentions /work/`)
   }
 }
 
