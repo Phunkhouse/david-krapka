@@ -52,7 +52,7 @@ for (const path of paths) {
       expect(await style(page, '#approach .letter--0', '--r')).toBe('2.2px')
       expect(await style(page, '#approach .col h3', 'opacity')).toBe('1')
       expect(await style(page, '#approach .letter--pink', 'opacity')).toBe(
-        '0.3',
+        '0.2',
       )
     })
 
