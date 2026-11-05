@@ -23,7 +23,7 @@ Agreed 4 and 5 November 2026, while building the static page (milestone 3 is don
 
 **Desktop.** Full-height first screen (900 px in the mockup) split into a text column and a 720 px drum panel on the right.
 
-- Header: wordmark “DAVID KŘAPKA” (Rubik 24 px) with “Product-minded engineer” below it (Sora 13 px, 600). Navigation on the right: Work · Approach · About · Contact.
+- Header: the háček mark (48 px, see [Mark and icons](visual-system.md#mark-and-icons)), then the wordmark “DAVID KŘAPKA” (Rubik 24 px) with “Product-minded engineer” below it (Sora 13 px, 600). Navigation on the right: Work · Approach · About · Contact.
 - Text column, aligned to the bottom: mono eyebrow, the cycling H1, the cycling subline, an intro paragraph and two buttons.
 - Drum panel: yellow paper, ink rollers left and right, the turning drum (T, M, R in halftone with a pink misregistered copy) and a round counter (1/3 → 2/3 → 3/3) in the top-right corner.
 

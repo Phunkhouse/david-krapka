@@ -102,6 +102,16 @@ The mockups define the two ends; the middle needs design review (see [open quest
 
 Nothing may scroll horizontally at 320 px.
 
+## Mark and icons
+
+From the canvas page “Logo & favicon” (boards `Logo-H2`, `Favicon-Set`, `OG-Site`, `OG-Site-CS`), 5 November 2026.
+
+- **Mark (H2 háček):** the caron of the Ř in “Křapka”. A 100 × 100 drawing: yellow paper `#FFE800` with 22 corner radius, the háček as a polyline `M22 38 L50 66 L78 38` stroked 20 wide in ink, and the same line in pink 5 units right and down behind it (the misregistered pass). The large version on the `Logo-H2` board uses a halftone ink stroke and an 80 % pink pass; small sizes use solid ink. The same icon works on paper and on ink, so there is no dark-mode variant. One-colour version: the ink háček alone, stroke 22.
+- **Header:** the mark (40 px, 48 px from 720 px) left of the name and role, 12 px gap. The mark is decorative (`aria-hidden`); the link keeps its text name. Built as `src/components/Mark.astro`.
+- **Footer:** a 24 px mark before the colophon, 10 px gap.
+- **Favicons** (`public/`, built by `scripts/brand-assets.mjs`): `favicon.svg`, `favicon.ico` (16, 32 and 48 px inside), `apple-touch-icon.png` (180 px, square because iOS rounds it), `icon-192.png` and `icon-512.png` for `site.webmanifest`, `theme-color` `#1B2F7A`. The board's `safari-pinned-tab.svg` is not built: current Safari uses the regular favicon and ignores `mask-icon`.
+- **Site-wide social preview image** (`public/og/site-en.png`, `site-cs.png`, 1200 × 630): 6 px ink frame; left 520 px yellow paper with the large halftone háček and pink pass; right the role in Space Mono 16 px caps, “David Křapka” in Rubik 112 px on two lines with the pink shadow, “Think. Make. Rethink.” in Sora 30 px bold with “Re” on yellow (the claim stays English in Czech), and `david-krapka.eu`. Used by the landing and privacy pages, and by case studies until their own `OG-Case` image exists. The case study template (`OG-Case`) now has the 44 px mark before its label.
+
 ## Focus
 
 The mockups define a yellow outline only for project cards on blue. Agreed rule (David, 4 November 2026): a 3 px ink outline with 3 px offset on light backgrounds, and a 3 px yellow outline on ink backgrounds. Never use yellow on paper. Focus must be visible on every link, button and card.

@@ -48,7 +48,7 @@ Design for `/work/<slug>/` and `/cs/work/<slug>/`, from the canvas page “Case 
 
 ## Social preview image
 
-`OG-Case`: 1200 × 630, 6 px ink frame, the card art left (520 px), mono “Case study · David Křapka”, the project name in Rubik 112 px with the pink shadow, the summary, and `david-krapka.eu`. One PNG per case study and language, exported from the canvas once the summary is final (milestone 5 decision 9).
+`OG-Case`: 1200 × 630, 6 px ink frame, the card art left (520 px), the 44 px háček mark and mono “Case study · David Křapka”, the project name in Rubik 112 px with the pink shadow, the summary, and `david-krapka.eu`. One PNG per case study and language, exported from the canvas once the summary is final (milestone 5 decision 9).
 
 ## Copy (labels)
 

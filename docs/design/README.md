@@ -11,6 +11,7 @@ Snapshot taken on 4 November 2026 from canvas version `1793818431-5e1b` (landing
 | [Visual system](visual-system.md) | Colours, typefaces, type scale, print motifs (halftone, misregistration, rollers), borders, shadows, spacing and breakpoints. |
 | [Landing page](landing-page.md) | Section-by-section layout for desktop and mobile, with English and Czech copy and every placeholder that still needs content. |
 | [Motion](motion.md) | Hero print drum, approach section, portrait glitch and hover behaviour, with timings, reduced-motion rules and the pause requirement. |
+| [Visual system: mark and icons](visual-system.md#mark-and-icons) | The háček logo, favicon set and site-wide social preview image (canvas page “Logo & favicon”). |
 | [Case study](case-study.md) | Case study pages: long form and short client format, facts panel, decisions, figures, AI + me, next project, social preview image (canvas page “Case study pages”). |
 | [Shell components](shell-components.md) | First proposal for the mobile menu, language switcher and pause control (canvas page “Site shell”), to iterate. |
 | [Mockup sources](mockups/README.md) | Snapshot of the canvas index and the four landing-page artboards. |
@@ -38,6 +39,7 @@ Snapshot taken on 4 November 2026 from canvas version `1793818431-5e1b` (landing
 | About | Round portrait with **G4** print glitch (ink slip + roller jam, 7 s loop); “Playful by design. Serious about the work.” | About · portrait glitch (G4 chosen) |
 | Contact | Two doors: “Hiring?” and “Have a project?”, plus email · LinkedIn · GitHub | Landing page |
 | Languages | English and Czech versions of the full landing page | Landing page · CZ |
+| Logo and icons | **H2 háček**: the caron from “Křapka” as the mark, ink on yellow paper with a pink pass; in the header beside the name, in the footer and as the favicon | Logo & favicon |
 
 ### Explored and not chosen
 
@@ -55,7 +57,7 @@ These are needed before the related milestone can finish (see [milestones](../MI
 2. **Mobile menu**, **language switcher** and **motion pause control**: first proposal in [Shell components](shell-components.md) and on the canvas; to iterate. The pause control is built and placed (milestone 4); one control for the whole page.
 5. **Tablet range** (roughly 720–1100 px). The mockups cover 390 px and 1440 px only.
 6. **404 page**, CV download treatment, and any legal or privacy page the legal planning requires.
-7. **Social preview image** (Open Graph) and favicon / monogram.
+7. ~~**Social preview image** (Open Graph) and favicon / monogram~~ designed 5 November 2026 (canvas page “Logo & favicon”), see [Mark and icons](visual-system.md#mark-and-icons).
 8. ~~**Real portrait photo** treatment~~ decided 5 November 2026: duotone ink on yellow with a pink halftone copy ([Landing page](landing-page.md)). The canvas still shows the silhouette.
 
 ## Open design questions

@@ -1,5 +1,6 @@
 ---
 import LanguageSwitcher from './LanguageSwitcher.astro'
+import Mark from './Mark.astro'
 import { t, type Locale } from '../i18n'
 import { pathFor, type RouteKey } from '../i18n/routes'
 
@@ -25,8 +26,11 @@ const links = [
 
 <header class="site-header">
   <a class="wordmark" href={home}>
-    <span class="wordmark-name">{copy.site.name}</span>
-    <span class="wordmark-role">{copy.site.role}</span>
+    <Mark class="wordmark-mark" />
+    <span class="wordmark-text">
+      <span class="wordmark-name">{copy.site.name}</span>
+      <span class="wordmark-role">{copy.site.role}</span>
+    </span>
   </a>
 
   <nav class="desktop-nav" aria-label={copy.nav.label}>
@@ -159,11 +163,25 @@ const links = [
     padding: 14px var(--pad-inline);
   }
 
+  /* Mark 40 px beside the name and role (48 px from 720 px). */
   .wordmark {
     display: flex;
-    flex-direction: column;
-    line-height: 1.15;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
     text-decoration: none;
+  }
+
+  .wordmark :global(.wordmark-mark) {
+    width: 40px;
+    height: 40px;
+  }
+
+  .wordmark-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.15;
   }
 
   .wordmark-name {
@@ -209,6 +227,11 @@ const links = [
   @media (min-width: 720px) {
     .site-header {
       padding-block: 24px;
+    }
+
+    .wordmark :global(.wordmark-mark) {
+      width: 48px;
+      height: 48px;
     }
 
     .desktop-nav {
