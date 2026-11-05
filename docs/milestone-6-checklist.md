@@ -131,11 +131,11 @@ Not committed, because the repository is public and they are for David's own com
 
 ## PR D: Privacy notice
 
-- [ ] Research before drafting: Cloudflare's retention of request data for Workers static assets on this plan, and the controller/processor split ([legal planning, Not verified](audits/2026-11-04/legal-planning.md#not-verified)). Record sources in the PR.
-- [ ] Notice text in English and Czech per [LEG-003](SPEC.md#legal-requirements): controller and contact address, purposes and lawful basis (legitimate interests), Cloudflare as processor, transfers outside the EEA under the EU SCCs, retention, rights, right to complain to ÚOOU, and a line that the site stores nothing on the device. Plain language; a date of the last update.
+- [x] Research before drafting: Cloudflare's retention of request data for Workers static assets on this plan, and the controller/processor split ([legal planning, Not verified](audits/2026-11-04/legal-planning.md#not-verified)). Record sources in the PR. Done 5 November 2026; results in [privacy notice research](audits/2026-11-05/privacy-notice-research.md). Retention for this setup is **not published** by Cloudflare, so the notice says so instead of naming a period.
+- [x] Notice text in English and Czech per [LEG-003](SPEC.md#legal-requirements): controller and contact address, purposes and lawful basis (legitimate interests), Cloudflare as processor, transfers outside the EEA under the EU SCCs, retention, rights, right to complain to ÚOOU, and a line that the site stores nothing on the device. Plain language; a date of the last update.
 - [ ] David reviews and approves the text (it is his statement, not legal advice).
-- [ ] Draft of the private record of processing handed to David (not committed).
-- [ ] `pnpm placeholders` shows nothing on the privacy pages.
+- [x] Draft of the private record of processing handed to David (not committed): kept outside the repository.
+- [x] `pnpm placeholders` shows nothing on the privacy pages. Playwright checks both pages (sections, dated notice, working `mailto:`, regulator and Cloudflare named, no placeholder).
 
 ## PR E: Case studies
 

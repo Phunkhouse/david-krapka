@@ -68,13 +68,46 @@ test.describe('footer', () => {
     await expect(page.locator('.site-footer .business')).toHaveCount(0)
   })
 
-  test('privacy pages are placeholders the launch check will catch', async ({
+  test('privacy pages carry the notice: no placeholders, real contact', async ({
     page,
   }) => {
-    for (const path of ['/privacy/', '/cs/privacy/']) {
+    for (const [path, lang] of [
+      ['/privacy/', 'en'],
+      ['/cs/privacy/', 'cs'],
+    ] as const) {
       await page.goto(path)
       await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
-      await expect(page.getByRole('main')).toContainText('[')
+      const main = page.getByRole('main')
+      await expect(main).not.toContainText(/[[\]]/)
+      await expect(main).not.toContainText('{email}')
+      // The contact address is a working mailto link, repeated where needed.
+      const mail = main.locator('a[href="mailto:hello@david-krapka.eu"]')
+      expect(await mail.count()).toBeGreaterThan(0)
+      // Sections the notice must have (LEG-003), by their stable ids.
+      for (const id of [
+        'who',
+        'device',
+        'visits',
+        'messages',
+        'recipients',
+        'rights',
+        'exercise',
+        'changes',
+      ]) {
+        await expect(page.locator(`#notice-${id}`)).toHaveCount(1)
+      }
+      // A dated notice, the regulator and the processor named.
+      await expect(main.locator('time')).toHaveAttribute(
+        'datetime',
+        /^\d{4}-\d{2}-\d{2}$/,
+      )
+      await expect(main).toContainText(/Úřad\w* pro ochranu osobních údajů/)
+      await expect(main).toContainText('Cloudflare')
+      // External links do not leak the opener.
+      for (const link of await main.locator('a[href^="http"]').all()) {
+        await expect(link).toHaveAttribute('rel', /noopener/)
+      }
+      await expect(page.locator('html')).toHaveAttribute('lang', lang)
     }
   })
 })

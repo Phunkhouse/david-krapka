@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import PrivacyNotice from '../../components/PrivacyNotice.astro'
 import { t } from '../../i18n'
 
 const copy = t(Astro.currentLocale)
@@ -10,6 +11,5 @@ const copy = t(Astro.currentLocale)
   description={copy.privacy.description}
   route="privacy"
 >
-  <h1>{copy.privacy.title}</h1>
-  <p>{copy.privacy.placeholder}</p>
+  <PrivacyNotice title={copy.privacy.title} locale={Astro.currentLocale} />
 </BaseLayout>

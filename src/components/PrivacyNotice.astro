@@ -1,0 +1,115 @@
+---
+import { contactEmail } from '../content/profiles'
+import { notices } from '../content/privacy-notice'
+import { t } from '../i18n'
+
+interface Props {
+  title: string
+  locale: string | undefined
+}
+
+// The notice text is data (src/content/privacy-notice.ts). Paragraphs may hold
+// `[label](url)` links and `{email}`; they are turned into elements here, so
+// nothing is injected as HTML.
+const { title, locale } = Astro.props
+const lang = t(locale) === t('cs') ? 'cs' : 'en'
+const notice = notices[lang]
+
+type Part = { text: string; href?: string }
+const fill = (value: string) => value.replaceAll('{email}', contactEmail)
+function parts(value: string): Part[] {
+  const result: Part[] = []
+  let last = 0
+  for (const match of value.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
+    if (match.index > last)
+      result.push({ text: fill(value.slice(last, match.index)) })
+    result.push({ text: fill(match[1]!), href: fill(match[2]!) })
+    last = match.index + match[0].length
+  }
+  if (last < value.length) result.push({ text: fill(value.slice(last)) })
+  return result
+}
+---
+
+<article class="notice">
+  <h1>{title}</h1>
+  <p class="updated label">
+    {notice.updatedLabel}:{' '}
+    <time datetime={notice.updated}>{notice.updatedText}</time>
+  </p>
+  <p class="intro">{notice.intro}</p>
+
+  {notice.sections.map((section) => (
+    <section aria-labelledby={`notice-${section.id}`}>
+      <h2 id={`notice-${section.id}`}>{section.heading}</h2>
+      {section.paragraphs.map((paragraph) => (
+        <p>
+          {parts(paragraph).map((part) =>
+            part.href ? (
+              <a
+                href={part.href}
+                rel={part.href.startsWith('http') ? 'noopener' : undefined}
+              >
+                {part.text}
+              </a>
+            ) : (
+              part.text
+            ),
+          )}
+        </p>
+      ))}
+      {section.list && (
+        <ul>
+          {section.list.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      )}
+    </section>
+  ))}
+</article>
+
+<style>
+  .notice {
+    max-width: 46rem;
+    padding-bottom: var(--pad-section);
+    font-size: var(--text-body-lg);
+    line-height: 1.65;
+  }
+
+  h1 {
+    font-size: var(--text-about);
+    line-height: 1.04;
+  }
+
+  .updated {
+    margin-top: var(--gap-s);
+  }
+
+  .intro {
+    margin-top: var(--gap-m);
+    font-weight: 600;
+  }
+
+  section {
+    margin-top: var(--gap-xl);
+  }
+
+  h2 {
+    font-size: var(--text-card);
+    line-height: 1.1;
+  }
+
+  p,
+  ul {
+    margin-top: var(--gap-xs);
+  }
+
+  ul {
+    padding-left: 1.25em;
+  }
+
+  li + li {
+    margin-top: 0.4em;
+  }
+</style>

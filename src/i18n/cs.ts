@@ -179,8 +179,6 @@ export const cs: Dictionary = {
   privacy: {
     title: 'Ochrana osobních údajů',
     description: 'Jak tento web zachází s osobními údaji.',
-    placeholder:
-      '[Informace o zpracování osobních údajů se připravují a budou zveřejněny před spuštěním webu.]',
   },
   notFound: {
     title: 'Stránka nenalezena',
