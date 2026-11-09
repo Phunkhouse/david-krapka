@@ -168,7 +168,7 @@ Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which 
 - [x] `audit-web-quality` on the preview: accessibility, technical SEO, browser quality, Lighthouse for every page type. Done 9 November 2026 (Codex): [web quality](audits/2026-11-09/web-quality.md). No High or Critical finding; every measured page scores Performance 100; SEO is below 100 only because of `noindex`. WEB-001 (pausing mid-fade froze the hero text half transparent) and WEB-002 (skip link inert while the menu is open) fixed in this PR, with tests.
 - [x] `audit-security`, light: headers, CSP, dependencies (`pnpm audit`), repository secrets, Cloudflare settings that matter for a static site. Done 9 November 2026 (Codex): [security](audits/2026-11-09/security.md). No release blocker; the one Low finding, SEC-001 (the optional review workflow used the movable tag `claude-code-action@v1`), is fixed in this PR by pinning the commit behind v1.0.269, verified against the upstream tag. The `pnpm audit` advisory (minimatch, development tooling only) was assessed as not exploitable here. Not verified: Cloudflare account and production TLS and headers (post-launch checks), CI secret scopes.
 - [x] Reports saved under `docs/audits/<date>/`; every launch-blocking finding fixed (own PR if not trivial) or accepted by David in writing in the report. Reports are saved in `docs/audits/2026-11-09/`; no finding was rated launch-blocking. Follow-up recorded at the end of the legal report: LEG-003 fixed; the private record (LEG-009) made and dated and the public terms versions saved (LEG-004); David accepted the open question of where Active24 stores mail, and deletes mail promptly (12 months at most) without a separate reminder. The accepted risks LEG-001, LEG-002 and LEG-006 are as before.
-- [ ] Lighthouse SEO is expected below 100 until `noindex` goes; recheck after launch.
+- [x] Lighthouse SEO is expected below 100 until `noindex` goes; recheck after launch. SEO 100 on production in both languages, 9 November 2026 ([post-launch checks](audits/2026-11-09/production-launch.md)).
 
 ## PR G: Launch
 
@@ -181,21 +181,21 @@ Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which 
 
 ### G2. Domain (David, with the agent, right after the merge deploys)
 
-- [ ] Attach `david-krapka.eu` to the Worker as a Custom Domain.
-- [ ] Redirect `www.david-krapka.eu` to the apex permanently (301 or 308), keeping path and query; method per current Cloudflare docs (for example a Custom Domain for `www` plus a Redirect Rule).
-- [ ] Wait for the certificate; then run the post-launch checks below.
+- [x] Attach `david-krapka.eu` to the Worker as a Custom Domain. Done by David, 9 November 2026.
+- [x] Redirect `www.david-krapka.eu` to the apex permanently (301 or 308), keeping path and query; method per current Cloudflare docs (for example a Custom Domain for `www` plus a Redirect Rule). Done 9 November 2026: Single Redirect `https://www.*` to `https://${1}`, 301, query kept; `www` proxied; Always Use HTTPS on for plain HTTP.
+- [x] Wait for the certificate; then run the post-launch checks below. Certificate issued by Google Trust Services, valid until 7 February 2027.
 
 ### G3. Post-launch checks
 
-- [ ] `curl -I https://david-krapka.eu/` and `/cs/`: 200, HSTS, the agreed headers, no `X-Robots-Tag`, no `Set-Cookie`.
-- [ ] `curl -I https://www.david-krapka.eu/some/path/`: permanent redirect to the same path on the apex; `http://` redirects to `https://`.
-- [ ] External header scanner (for example securityheaders.com or Mozilla HTTP Observatory) result saved.
-- [ ] Clean browser profile: no cookies or storage after browsing, switching language and using the pause control.
-- [ ] Cloudflare features that set cookies or inject scripts are off: Bot Fight Mode, Web Analytics, Rocket Loader, Email Address Obfuscation, Zaraz (from Ops 1; LEG-005, CSP).
+- [x] `curl -I https://david-krapka.eu/` and `/cs/`: 200, HSTS, the agreed headers, no `X-Robots-Tag`, no `Set-Cookie`. 200 for both, every agreed header, no `X-Robots-Tag`, no `Set-Cookie` ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] `curl -I https://www.david-krapka.eu/some/path/`: permanent redirect to the same path on the apex; `http://` redirects to `https://`. 301 to the same path and query on the apex; `http://` redirects with 301 ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] External header scanner (for example securityheaders.com or Mozilla HTTP Observatory) result saved. Mozilla HTTP Observatory: A+, 135, 12 of 12 ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] Clean browser profile: no cookies or storage after browsing, switching language and using the pause control. No cookies, no storage, no `Set-Cookie`, no third-party request ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] Cloudflare features that set cookies or inject scripts are off: Bot Fight Mode, Web Analytics, Rocket Loader, Email Address Obfuscation, Zaraz (from Ops 1; LEG-005, CSP). From outside: no injected script and no Cloudflare cookie in the served pages ([post-launch checks](audits/2026-11-09/production-launch.md)); the dashboard toggles were not inspected.
 - [ ] Email links open the right address and subject on desktop and on a phone.
 - [ ] LinkedIn Post Inspector shows the right preview for the landing page (both languages) and one case study.
 - [ ] Test email to the domain still arrives after the domain change.
-- [ ] Lighthouse mobile on production, landing in both languages: SEO 100 now that `noindex` is gone; other targets still met.
+- [x] Lighthouse mobile on production, landing in both languages: SEO 100 now that `noindex` is gone; other targets still met. Performance 100, Accessibility 96 (the known mid-fade `color-contrast` sample), Best Practices 100, SEO 100 in both languages; LCP 1.3 s, CLS 0 ([post-launch checks](audits/2026-11-09/production-launch.md)).
 - [ ] Optional: submit the sitemap in Google Search Console (needs a DNS TXT verification record; ask David first).
 
 ## Acceptance checks (from MILESTONES.md)
@@ -203,14 +203,14 @@ Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which 
 Record evidence here and in the PR that completes each check.
 
 - [x] No placeholders remain; verify with the build check. (G1) `pnpm placeholders --fail` in `pnpm verify`: 0 placeholders in 13 pages.
-- [ ] `https://david-krapka.eu/` and `/cs/` serve the site with HTTPS, HSTS and the agreed security headers; verify with `curl -I` and an external header scanner. (A, G3)
-- [ ] `https://www.david-krapka.eu/` redirects permanently to the apex; verify with `curl -I`. (G2, G3)
+- [x] `https://david-krapka.eu/` and `/cs/` serve the site with HTTPS, HSTS and the agreed security headers; verify with `curl -I` and an external header scanner. (A, G3) Verified 9 November 2026 ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] `https://www.david-krapka.eu/` redirects permanently to the apex; verify with `curl -I`. (G2, G3) Verified 9 November 2026: 301 ([post-launch checks](audits/2026-11-09/production-launch.md)).
 - [ ] Email links open a message to the right address with the right subject; verify manually on desktop and phone. (C, G3)
 - [ ] Sharing a page on LinkedIn shows the correct preview; verify with LinkedIn's post inspector. (A, B, E, G3)
 - [ ] Audit reports are saved in `docs/audits/` and every launch-blocking finding is fixed or accepted by David. (F)
 - [ ] Email to the domain still arrives after the DNS change; verify by sending a test message. (Ops 1, G3) Ops 1 part done 9 November 2026 (test message arrived after the nameserver switch); repeat after the domain is attached at launch (post-launch checks).
 - [ ] The privacy notice exists in both languages, is linked from every footer, states the real contact address, retention and rights, and has no placeholders; verify by reading both pages. (D)
-- [ ] The deployed site still stores nothing on the device (no cookies or browser storage) and sets no `Set-Cookie`; verify with a clean browser profile and `curl -I`. (G3)
+- [x] The deployed site still stores nothing on the device (no cookies or browser storage) and sets no `Set-Cookie`; verify with a clean browser profile and `curl -I`. (G3) Verified 9 November 2026 ([post-launch checks](audits/2026-11-09/production-launch.md)).
 - [ ] The Pre-launch legal audit reports each LEG requirement as supported, or David has accepted the gap. (F)
 - [ ] Carried from milestone 5: each case study follows the shared structure, every claim has a source in its project card, and David signs off each page. (E)
 - [x] Carried from milestone 4: smooth on a mid-range Android phone and Safari iOS, and David signs off the feel of each animation. (F) Signed off by David, 9 November 2026.
