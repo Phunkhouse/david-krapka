@@ -11,12 +11,14 @@ const { locale } = Astro.props
 const { experience } = t(locale).home
 const { emplifi, freelance } = experience
 const home = pathFor(locale, 'home')
+// English only for now (SPEC, Content: CV), so both languages link the same file.
+const cvHref = '/cv/david-krapka-cv.pdf'
 ---
 
 <!--
-  E3 "Big team. Small team." The CV line stays plain text until the CV exists
-  (milestone 6): then keep only one of `cv--card` and `cv--after` focusable
-  at any width. Placeholders in square brackets are listed in the PR.
+  E3 "Big team. Small team." The CV link appears twice: `cv--card` inside the
+  Emplifi card on wide screens, `cv--after` below the cards on narrow ones.
+  Only one is displayed (and focusable) at any width.
 -->
 <section
   id="experience"
@@ -39,7 +41,9 @@ const home = pathFor(locale, 'home')
         <p class="label lesson-label">{experience.lessonLabel}</p>
         <p class="lesson">{emplifi.lesson}</p>
         <p class="detail">{emplifi.detail}</p>
-        <p class="cv cv--card">{experience.cv}</p>
+        <p class="cv cv--card">
+          <a href={cvHref}>{experience.cv}</a>
+        </p>
       </article>
 
       <div class="plus" aria-hidden="true">
@@ -60,7 +64,9 @@ const home = pathFor(locale, 'home')
       </article>
     </div>
 
-    <p class="cv cv--after">{experience.cv}</p>
+    <p class="cv cv--after">
+      <a href={cvHref}>{experience.cv}</a>
+    </p>
   </div>
 </section>
 
@@ -165,6 +171,10 @@ const home = pathFor(locale, 'home')
 
   .cv {
     font-weight: 700;
+  }
+
+  .cv a {
+    color: inherit;
   }
 
   .cv--card {

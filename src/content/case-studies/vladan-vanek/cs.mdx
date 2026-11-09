@@ -1,51 +1,54 @@
 ---
 title: Vladan Vaněk
-summary: '[Jednovětý souhrn k potvrzení]'
+summary: 'Osobní web pro komunikačního konzultanta, který jsem navrhl a postavil.'
 kind: short
-status: '[Aktuální stav]'
-dates: '[20XX – 20XX]'
-role: '[Role a rozsah]'
+status: 'V provozu od července 2025'
+dates: 'Červenec 2025'
+role: 'Design (včetně loga), vývoj a nastavení obsahu'
 collaborators:
-  - name: '[Jméno]'
-    role: '[role]'
-ai: '[S čím pomohla AI · jak jsem to ověřil]'
+  - name: Vladan Vaněk
+    role: 'vlastní blog, psaný v CMS'
+ai: 'Minimálně: AI udělala jen část rutinní práce · web je z většiny psaný ručně'
+stack:
+  - Next.js
+  - Sanity
+  - GSAP
+  - Embla Carousel
+liveUrl: https://vladanvanek.cz
 order: 3
-draft: true
+draft: false
 ---
+
+import home from './home.jpg'
 
 ## Shrnutí
 
-[Co web dělá pro Eucal a jeho návštěvníky, dvěma větami.]
+Vladan Vaněk je komunikační konzultant: strategie, tvorba obsahu a ghostwriting, vztahy s médii a školení. Web představuje jeho služby a zkušenosti, s kurzy, blogem a referencemi, a končí kontaktním formulářem. Spustil se v červenci 2025.
 
 ## Co jsem měl na starosti
 
-[Design, vývoj, obsah nebo koordinace: co z toho bylo moje a kdo udělal zbytek.]
+Design včetně loga a vývoj. Stejně jako Eucal běží na Next.js a obsah má v Sanity. Animace v GSAP a karusel Embla dodávají stránkám pohyb, aniž by překážely obsahu.
+
+Design se stal i základem jeho značky. Barvy, logo a písma z něj převzal do svých dalších příspěvků na sociálních sítích.
 
 ## Jedno rozhodnutí
 
 <Decision
   n={1}
-  name="[Krátký název rozhodnutí]"
-  chose="[Přístup, který jsem zvolil]"
-  insteadOf="[Alternativa, kterou jsem zvažoval]"
-  because="[Důvod a omezení za ním]"
-  checkedBy="[Jak jsem to ověřil a co z toho vyšlo]"
+  name="Obsah v CMS"
+  chose="Dát obsah včetně jeho blogu do Sanity"
+  insteadOf="Webový builder nebo CMS s hotovými šablonami"
+  because="Vladan si chtěl sám psát blog a sdílet články na LinkedInu, aby budoval svou značku. Potřeboval jsem CMS, které je ideálně zdarma, snadno se ovládá a dovolí mi postavit web od nuly bez zbytečností z hotových šablon. Sanity splnilo všechny tři podmínky."
+  checkedBy="Všechno, co potřebuje, si teď spravuje sám: blog je aktivní a články často sdílí na LinkedInu."
 />
 
 <Figure
   n={1}
-  alt="[Snímek: co ukazuje]"
-  caption="[Popisek: co snímek ukazuje a kdy vznikl]"
+  src={home}
+  alt="Domovská stránka Vladana Vaňka: jeho fotka přes nadpisy „Radím klientům s komunikací“ a „Jsem profesionál“, s logem V na fialové barvě webu"
+  caption="Úvod domovské stránky, listopad 2026."
 />
-
-## Výsledek
-
-[Co se změnilo pro klienta nebo návštěvníky a jak to víme.]
-
-<Outcomes>
-  <Outcome>[Ověřitelný kvalitativní výsledek, pokud číslo není]</Outcome>
-</Outcomes>
 
 ## Co bych <Re>pře</Re>hodnotil
 
-[Jedna věc, kterou bych udělal jinak.]
+Dnes bych zvolil Astro a Keystatic. Astro posílá jen málo JavaScriptu, takže by se stránky načítaly rychleji. Vladan zná GitHub, takže by Keystatic ukládal jeho články jako soubory v repozitáři webu, s jednoduchým editorem navrch: žádná externí služba ani účet navíc a každá změna verzovaná v gitu.

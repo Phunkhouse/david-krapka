@@ -1,51 +1,47 @@
 ---
 title: UpVideo
-summary: '[One-line summary to be confirmed]'
+summary: 'A video production company’s site, first released in 2016, where a content update in March 2025 became a full refresh on Next.js.'
 kind: short
-status: '[Current status]'
-dates: '[20XX – 20XX]'
-role: '[Role and scope]'
+status: 'Live · redesigned in March 2025'
+dates: 'Since 2016 · redesign March 2025'
+role: 'Design and development, every version since 2016'
 collaborators:
-  - name: '[Name]'
-    role: '[role]'
-ai: '[What AI helped with · how I checked it]'
+  - name: UpVideo
+    role: logo and brand
+ai: 'Minimal: AI did some routine grunt work · the site is mostly written by hand'
+liveUrl: https://upvideo.cz
 order: 4
-draft: true
+draft: false
 ---
+
+import home from './home.jpg'
 
 ## Summary
 
-[What the site does for Eucal and its visitors, in two sentences.]
+UpVideo's company site presents its corporate video production (conference videos, success stories, image videos and podcasts) for clients such as SAP and EY and leads visitors to a contact form. The first version went live in 2016. In March 2025 it got its third redesign and moved to Next.js.
 
 ## What I owned
 
-[Design, development, content or coordination: which of these were mine, and who did the rest.]
+The design and the build, from the first version on. The logo is UpVideo's own, from 2016. The earlier versions were mostly plain HTML, CSS and JavaScript; the March 2025 redesign moved the site to Next.js.
 
 ## One decision
 
 <Decision
   n={1}
-  name="[Short name of the decision]"
-  chose="[The approach I took]"
-  insteadOf="[The alternative I considered]"
-  because="[The reason and the constraint behind it]"
-  checkedBy="[How I validated it, and what it showed]"
+  name="A content update became a full refresh"
+  chose="Use the content update for a full refresh: a new design and a move to Next.js, keeping the familiar structure"
+  insteadOf="Only swapping the new team and client list into the old HTML site"
+  because="The client wanted to show new team members, and his clients had changed. With new content on most of the site anyway, it was the right moment to refresh the design and the stack too."
+  checkedBy="[How you know it worked]"
 />
 
 <Figure
   n={1}
-  alt="[Screenshot: what it shows]"
-  caption="[Caption: what the screenshot shows and when it was taken]"
+  src={home}
+  alt="UpVideo's home page: a still from a video of a business meeting under the headline “Děláme videa a jsme v tom dobří”, with the logo and the menu"
+  caption="The top of the home page in Czech, November 2026."
 />
-
-## Outcome
-
-[What changed for the client or the visitors, and how we know.]
-
-<Outcomes>
-  <Outcome>[A verifiable qualitative outcome, if there is no number]</Outcome>
-</Outcomes>
 
 ## What I would <Re>re</Re>think
 
-[One thing I would do differently.]
+If I built it today, I would choose Astro. A marketing site that ends in a contact form needs little JavaScript, and Astro would ship less of it, so the pages would load faster.

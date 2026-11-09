@@ -98,7 +98,6 @@ const links = [
         <span class="label">{copy.language.label}</span>
         <LanguageSwitcher locale={locale} route={route} size="lg" />
       </div>
-      <p class="menu-tail label">{copy.footer.printed}</p>
     </div>
   </nav>
 </header>
@@ -384,11 +383,6 @@ const links = [
     align-items: flex-start;
     gap: 8px;
     color: var(--ink-soft);
-  }
-
-  .menu-tail {
-    color: var(--ink-soft);
-    text-transform: none;
   }
 
   :global(html.menu-open) {

@@ -17,7 +17,8 @@ test('self-hosted fonts load from the site itself', async ({ page }) => {
       'Sora 400',
       'Sora 600',
       'Sora 700',
-      'Space Mono 400',
+      // Space Mono 400 is not used on the landing page since the hero eyebrow
+      // and the footer tagline were removed.
       'Space Mono 700',
     ]),
   )

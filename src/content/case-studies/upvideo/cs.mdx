@@ -1,51 +1,47 @@
 ---
 title: UpVideo
-summary: '[Jednovětý souhrn k potvrzení]'
+summary: 'Web videoprodukce spuštěný v roce 2016, kde se z aktualizace obsahu v březnu 2025 stal kompletní redesign na Next.js.'
 kind: short
-status: '[Aktuální stav]'
-dates: '[20XX – 20XX]'
-role: '[Role a rozsah]'
+status: 'V provozu · redesign v březnu 2025'
+dates: 'Od roku 2016 · redesign březen 2025'
+role: 'Design a vývoj, všechny verze od roku 2016'
 collaborators:
-  - name: '[Jméno]'
-    role: '[role]'
-ai: '[S čím pomohla AI · jak jsem to ověřil]'
+  - name: UpVideo
+    role: logo a značka
+ai: 'Minimálně: AI udělala jen část rutinní práce · web je z většiny psaný ručně'
+liveUrl: https://upvideo.cz
 order: 4
-draft: true
+draft: false
 ---
+
+import home from './home.jpg'
 
 ## Shrnutí
 
-[Co web dělá pro Eucal a jeho návštěvníky, dvěma větami.]
+Firemní web UpVideo představuje jeho firemní videoprodukci (konferenční videa, success stories, image videa a podcasty) pro klienty jako SAP nebo EY a vede návštěvníky ke kontaktnímu formuláři. První verze vyšla v roce 2016. V březnu 2025 prošel třetím redesignem a přešel na Next.js.
 
 ## Co jsem měl na starosti
 
-[Design, vývoj, obsah nebo koordinace: co z toho bylo moje a kdo udělal zbytek.]
+Design a vývoj, od první verze. Logo je vlastní UpVideo, z roku 2016. Dřívější verze byly většinou čisté HTML, CSS a JavaScript, redesign v březnu 2025 převedl web na Next.js.
 
 ## Jedno rozhodnutí
 
 <Decision
   n={1}
-  name="[Krátký název rozhodnutí]"
-  chose="[Přístup, který jsem zvolil]"
-  insteadOf="[Alternativa, kterou jsem zvažoval]"
-  because="[Důvod a omezení za ním]"
-  checkedBy="[Jak jsem to ověřil a co z toho vyšlo]"
+  name="Z aktualizace obsahu kompletní redesign"
+  chose="Využít aktualizaci obsahu ke kompletnímu redesignu: nový design a přechod na Next.js, se zachovanou známou strukturou"
+  insteadOf="Jen vyměnit tým a seznam klientů ve starém HTML webu"
+  because="Klient chtěl ukázat nové členy týmu a změnili se mu i klienti. Když se stejně měnil obsah na většině webu, byla to správná chvíle obnovit i design a technologie."
+  checkedBy="[Jak víš, že to fungovalo]"
 />
 
 <Figure
   n={1}
-  alt="[Snímek: co ukazuje]"
-  caption="[Popisek: co snímek ukazuje a kdy vznikl]"
+  src={home}
+  alt="Domovská stránka UpVideo: záběr z videa pracovní schůzky pod nadpisem „Děláme videa a jsme v tom dobří“, s logem a menu"
+  caption="Úvod domovské stránky, listopad 2026."
 />
-
-## Výsledek
-
-[Co se změnilo pro klienta nebo návštěvníky a jak to víme.]
-
-<Outcomes>
-  <Outcome>[Ověřitelný kvalitativní výsledek, pokud číslo není]</Outcome>
-</Outcomes>
 
 ## Co bych <Re>pře</Re>hodnotil
 
-[Jedna věc, kterou bych udělal jinak.]
+Kdybych ho stavěl dnes, zvolil bych Astro. Firemní web zakončený kontaktním formulářem potřebuje jen málo JavaScriptu, Astro by ho poslalo méně a stránky by se načítaly rychleji.

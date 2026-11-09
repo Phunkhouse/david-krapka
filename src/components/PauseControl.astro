@@ -17,13 +17,14 @@ const copy = t(locale)
   data-label-stop={copy.pause.stop}
   data-label-start={copy.pause.start}
   data-state="playing"
+  aria-label={copy.pause.stop}
+  title={copy.pause.stop}
   hidden
 >
   <span class="icon" aria-hidden="true">
     <span></span>
     <span></span>
   </span>
-  <span data-pause-label>{copy.pause.stop}</span>
 </button>
 
 <script>
@@ -49,11 +50,12 @@ const copy = t(locale)
     buttons.forEach((button) => {
       button.hidden = false
       button.dataset.state = paused ? 'paused' : 'playing'
-      const label = button.querySelector('[data-pause-label]')
-      if (label) {
-        label.textContent =
-          (paused ? button.dataset.labelStart : button.dataset.labelStop) ?? ''
-      }
+      // Icon only: the name lives in aria-label, with the same text as a
+      // tooltip.
+      const label =
+        (paused ? button.dataset.labelStart : button.dataset.labelStop) ?? ''
+      button.setAttribute('aria-label', label)
+      button.title = label
     })
   }
 
@@ -91,22 +93,20 @@ const copy = t(locale)
 
 <style>
   /* shell-components.md#pause-control */
+  /* Icon only, a round 44 px button (comfortable tap target); its name is
+     the aria-label set below. */
   .pause {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    min-height: 40px;
-    padding: 0 16px 0 10px;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
     border: var(--border);
-    border-radius: var(--radius-pill);
+    border-radius: 50%;
     background: var(--yellow);
     box-shadow: 4px 4px 0 rgb(255 72 176 / 0.6);
     color: var(--ink);
-    font-family: var(--family-mono);
-    font-size: var(--text-label);
-    font-weight: 700;
-    letter-spacing: var(--tracking-label);
-    text-transform: uppercase;
     cursor: pointer;
   }
 
@@ -120,15 +120,15 @@ const copy = t(locale)
     align-items: center;
     justify-content: center;
     gap: 3px;
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: var(--ink);
   }
 
   .icon span {
     width: 3px;
-    height: 9px;
+    height: 11px;
     background: var(--yellow);
   }
 
@@ -140,7 +140,7 @@ const copy = t(locale)
   .pause[data-state='paused'] .icon::after {
     content: '';
     margin-left: 2px;
-    border-left: 8px solid var(--yellow);
-    border-block: 5px solid transparent;
+    border-left: 10px solid var(--yellow);
+    border-block: 6px solid transparent;
   }
 </style>

@@ -1,52 +1,72 @@
 ---
 title: Eucal
-summary: '[One-line summary to be confirmed]'
+summary: 'A website in three languages for EUCAL, a Czech pipette calibration lab, that turns visits into enquiries and orders its staff can act on straight away.'
 kind: short
-status: '[Current status]'
-dates: '[20XX – 20XX]'
-role: '[Role and scope]'
+status: 'Live at eucal.cz · maintained'
+dates: 'Since September 2024'
+role: 'Design, development and maintenance (the logo is the client’s)'
 collaborators:
-  - name: '[Name]'
-    role: '[role]'
-ai: '[What AI helped with · how I checked it]'
+  - name: EUCAL staff
+    role: content, edited in the CMS
+ai: 'Since October 2026, AI coding agents carried out the rework of the forms, accessibility and tests from my specification · I reviewed each pull request and tested the site with VoiceOver'
 liveUrl: https://eucal.cz
 order: 2
-draft: true
+draft: false
 ---
+
+import home from './home.jpg'
 
 ## Summary
 
-[What the site does for Eucal and its visitors, in two sentences.]
+EUCAL calibrates, services and sells laboratory pipettes, with accredited calibration under ISO/IEC 17025. It began in 1998 repairing Eppendorf pipettes and is now an authorised Eppendorf service centre. Its customers are lab staff and purchasers, mostly in Czechia and Slovakia. The site presents its services in Czech, English and German and turns visits into enquiries, repair requests and orders that arrive in EUCAL's mailbox.
 
 ## What I owned
 
-[Design, development, content or coordination: which of these were mine, and who did the rest.]
+I built the site in Next.js in autumn 2024 and moved its content into Sanity, so EUCAL staff edit text, images and attachments in every language without a developer. In 2025 I added the English and German versions and a sales page. In October 2026 I reworked the forms, accessibility and tests. The design is mine too, apart from the logo, and nobody else worked on the code. The repository runs under the client's own GitHub account.
 
-## One decision
+## Two decisions
 
 <Decision
   n={1}
-  name="[Short name of the decision]"
-  chose="[The approach I took]"
-  insteadOf="[The alternative I considered]"
-  because="[The reason and the constraint behind it]"
-  checkedBy="[How I validated it, and what it showed]"
+  name="Emails to EUCAL are always in Czech"
+  chose="Every enquiry reaches the staff in Czech, with a first line naming the visitor's language and its code (EN or DE) in the subject"
+  insteadOf="Sending each email in the language the visitor used"
+  because="The staff read Czech, but the enquiry items came from the CMS in the visitor's language, so a German enquiry had to be translated before anyone could act on it."
+  checkedBy="Browser tests submit the forms and read the captured email. Items are matched to their Czech names by position, and if the lists differ the email keeps the visitor's names rather than naming the wrong item."
+/>
+
+<Decision
+  n={2}
+  name="Orders by email, no database"
+  chose="Keep ordering light: the order creator fills in an order PDF in the browser, and the signed order reaches EUCAL by email"
+  insteadOf="An e-shop with a database, customer accounts and order history"
+  because="The lab already runs everything from its mailbox. The order creator feels like an e-shop, but it is only a helper that makes ordering easier for customers and smooths the process for EUCAL. A database would add hosting, a back office and personal data to look after, for little gain."
+  checkedBy="The site stores nothing a visitor sends, so there is nothing to leak or back up apart from the mailbox. A failed send shows an error, never a false success, and browser tests cover the order PDF and the upload."
 />
 
 <Figure
   n={1}
-  alt="[Screenshot: what it shows]"
-  caption="[Caption: what the screenshot shows and when it was taken]"
+  src={home}
+  alt="EUCAL's home page in English: the header with the language switch, the promo bar with its pause button, the headline “Give your pipettes quality care” and the Services and Sale boxes"
+  caption="The home page in English, November 2026."
 />
 
 ## Outcome
 
-[What changed for the client or the visitors, and how we know.]
+The forms used to post straight to a third-party form service, which handled the order attachment badly and could not tell the page whether anything was sent. They now go through the site's own server, which checks every field and file and shows a clear error instead of a false success.
 
 <Outcomes>
-  <Outcome>[A verifiable qualitative outcome, if there is no number]</Outcome>
+  <Outcome>
+    Contact, enquiry, repair, order upload and the order PDF all passed the
+    browser tests in the production audit of 4 November 2026.
+  </Outcome>
+  <Outcome>
+    Automated accessibility, keyboard and zoom checks run on every change,
+    aiming at WCAG AA. One gap is known and recorded: some brand blues are below
+    the contrast target until the redesign.
+  </Outcome>
 </Outcomes>
 
 ## What I would <Re>re</Re>think
 
-[One thing I would do differently.]
+Today I would make ordering one step: the customer submits the form, the server builds the PDF and the customer gets a confirmation email. I would also offer saved details for returning labs. Back then I lacked the backend experience; with AI the extra work is small. I would still keep email as the place where orders arrive.

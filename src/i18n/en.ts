@@ -36,7 +36,6 @@ export const en = {
   },
   home: {
     hero: {
-      eyebrow: 'How every project goes',
       // The claim stays in English in the Czech version (design README).
       heading: ['Think.', 'Make.', 'Rethink.'],
       // Start of a heading word shown highlighted ("Re" in Rethink).
@@ -63,8 +62,6 @@ export const en = {
         name: 'Kultomat',
         text: 'From the first question to a product that runs every day: the problem, the decisions, the build and what changed afterwards.',
         textShort: 'From the first question to a product that runs every day.',
-        // Square brackets: the milestone 6 build check fails while these remain.
-        summary: '[One-line summary to be confirmed]',
       },
       projects: [
         {
@@ -139,14 +136,14 @@ export const en = {
       eyebrow: 'Experience · What each one taught me',
       title: 'Big team. Small team.',
       lessonLabel: 'What it taught me',
-      // Square brackets: the milestone 6 build check fails while these remain.
-      cv: '[Download CV] →',
+      cv: 'Download CV →',
       emplifi: {
         name: 'Emplifi',
         dates: 'Oct 2019 – Jun 2026',
-        meta: 'UI engineer, team lead · employed',
-        lesson: '[How to ship inside a big product without breaking it.]',
-        detail: '[Responsibilities and one concrete decision, to confirm.]',
+        meta: 'Frontend engineer, team lead · employed',
+        lesson: 'One shared source of truth beats many opinions.',
+        detail:
+          'Led a team of three UI engineers, then moved to the design system team. Most of my time went into unifying components across many teams and repositories.',
       },
       freelance: {
         name: 'Freelance',
@@ -162,8 +159,7 @@ export const en = {
       // Highlighted word in the middle.
       title: ['Playful by design. ', 'Serious', ' about the work.'],
       text: 'The way I work has changed a lot. I used to work on parts of a product. Now I take on more of the whole thing, combining product thinking, UX and engineering.',
-      // Square brackets: the milestone 6 build check fails while this remains.
-      note: '[A short personal note goes here.]',
+      note: "When something's missing, I build a website or an app for it.",
       portrait: 'Portrait of David Křapka',
     },
     contact: {
@@ -179,11 +175,12 @@ export const en = {
       // (LEG-001, decision 0008).
       project: {
         title: 'Have a project?',
-        text: "Share the problem, not just the spec. I'll come back with questions first.",
+        text: "Tell me what problem you're solving. We'll look at it together.",
         link: 'Start a project →',
         subject: 'Project: ',
       },
       // The address and profile URLs live in src/content/profiles.ts.
+      email: 'Email',
       linkedin: 'LinkedIn',
       github: 'GitHub',
     },
@@ -229,7 +226,6 @@ export const en = {
   footer: {
     navLabel: 'Footer',
     privacy: 'Privacy',
-    printed: 'Printed in three inks: blue, yellow and a little pink.',
   },
 }
 

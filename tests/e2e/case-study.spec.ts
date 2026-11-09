@@ -15,7 +15,6 @@ const versions = [
     other: '/cs/work/kultomat/',
     switchTo: /Česky/,
     back: '← Selected work',
-    more: 'Read the case study →',
   },
   {
     lang: 'cs',
@@ -24,7 +23,6 @@ const versions = [
     other: '/work/kultomat/',
     switchTo: /English/,
     back: '← Vybraná práce',
-    more: 'Přečíst případovou studii →',
   },
 ]
 
@@ -38,9 +36,11 @@ for (const v of versions) {
         .getByRole('region', { name: /Selected work|Vybraná práce/ })
         .getByRole('link', { name: 'Kultomat' })
       await expect(link).toHaveAttribute('href', v.path)
-      await expect(
-        page.locator('article.featured').getByText(v.more, { exact: true }),
-      ).toBeVisible()
+      // A linked card ends in a bare arrow, hidden from screen readers: the
+      // link already names the project.
+      const arrow = page.locator('article.featured .more')
+      await expect(arrow).toBeVisible()
+      await expect(arrow).toHaveAttribute('aria-hidden', 'true')
       await link.click()
       await expect(page).toHaveURL(v.path)
     })

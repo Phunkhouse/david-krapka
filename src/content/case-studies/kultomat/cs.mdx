@@ -1,96 +1,142 @@
 ---
 title: Kultomat
-summary: '[Jednovětý souhrn k potvrzení]'
+summary: 'Průvodce klasickými a staršími filmy, které tento týden opravdu běží v pražských kinech, navržený pro telefon. Mám ho na starosti od první otázky po každodenní provoz.'
 kind: long
-status: '[Aktuální stav]'
-dates: '[20XX – 20XX]'
-role: '[Role a rozsah]'
-collaborators:
-  - name: '[Jméno]'
-    role: '[role]'
-ai: '[S čím pomohla AI · jak jsem to ověřil]'
+status: 'V provozu od října 2026 · účty jen na pozvánku'
+dates: 'Od října 2026'
+role: 'Vlastník: produkt, design, vývoj a provoz'
+collaborators: []
+ai: 'Většinu kódu napsali AI agenti podle mé specifikace a záznamů rozhodnutí · každý pull request jsem proti nim zkontroloval a spustil testy'
 stack:
-  - '[Technologie, jen ty podstatné pro příběh]'
+  - Next.js
+  - TypeScript
+  - Postgres na Neonu
+  - Raspberry Pi 5
+  - TMDB a Wikidata
+  - Resend
 liveUrl: https://kultomat.cz
 order: 1
-draft: true
+draft: false
 ---
+
+import homeHero from './home-hero.jpg'
+import homeWeek from './home-week.jpg'
 
 ## Shrnutí
 
-[Co Kultomat řeší, pro koho a kde je dnes. Dvě tři věty z karty projektu.]
+Kultomat pomáhá lidem v Praze rychle najít film, který stojí za to a na který můžou opravdu jít, hlavně starší nebo kulturně významný. Na telefonu ukáže klasiky, které běží v příštích sedmi dnech, seskupené podle filmu, s krátkým důvodem, proč za to každý stojí, a s odkazem na stránku kina.
+
+Spustil se 26. října 2026 se sedmi kiny. K 7. listopadu pokrýval 17 kin ze 13 zdrojů. Prohlížet může kdokoli bez účtu, seznam filmů ke sledování s upozorněními e-mailem mají zatím pozvaní přátelé a rodina.
 
 ## Co jsem měl na starosti
 
-[Moje role, období a rozsah. Kdo další na projektu pracoval a kde moje část končila.]
+Všechno: otázku, pravidla produktu a dat, design, kód i provoz. Začalo to jako rešerše 24. října 2026 a první veřejná verze běžela o dva dny později.
+
+Napsal jsem specifikaci, milníky a záznam ke každému důležitému rozhodnutí. V produktu mám i průběžnou roli: každý týden projdu filmy, u kterých si párování nebylo jisté, a rozhoduji, které klasiky web doporučí redakčně.
 
 ## Problém a omezení
 
-[Potřeba uživatelů a byznysu. Omezení: čas, rozpočet, provoz na vlastní pěst.]
+Každé pražské kino zveřejňuje program na vlastním webu. Kdo chce tento týden vidět starší film, který stojí za to, musí jich otevřít spoustu a ještě vědět, které tituly jsou důležité. Byl to nejdřív můj vlastní problém: chci vidět klasiky na velkém plátně s přáteli.
+
+Omezení určila všechno ostatní:
+
+- **Jeden člověk, žádný rozpočet.** Jen bezplatné tarify: databáze, hosting webu, 100 e-mailů denně a nekomerční filmové API.
+- **Žádné datové kanály.** Žádné kino nenabízí zdokumentovaný feed ani licenci k dalšímu užití, takže každý zdroj je veřejná webová stránka, která se může bez varování změnit. Každý zdroj má vlastní rozhodnutí o přístupu a Kultomat respektuje robots.txt, nikdy nekopíruje anotace ani plakáty a vždy odkazuje zpět.
+- **Poctivost.** Žádná tvrzení o volných místech, žádná simulovaná data a rozbitý zdroj nikdy nesmí vypadat jako vlna zrušených projekcí.
 
 ## Klíčová rozhodnutí
 
-[Dvě tři skutečná rozhodnutí, u každého alternativa, důvod a jak jsem ho ověřil.]
-
 <Decision
   n={1}
-  name="[Krátký název rozhodnutí]"
-  chose="[Přístup, který jsem zvolil]"
-  insteadOf="[Alternativa, kterou jsem zvažoval]"
-  because="[Důvod a omezení za ním]"
-  checkedBy="[Jak jsem to ověřil a co z toho vyšlo]"
+  name="Uložit všechno, filtrovat potom"
+  chose="Ukládat každou projekci, kterou kino uvede, včetně nových filmů, neznámých roků, besed i oper, a pravidlo pro klasiky použít až potom"
+  insteadOf="Ponechat při stahování jen filmy, které projdou filtrem na klasiky"
+  because="Filtr, který jsem teprve ladil, by data zahodil natrvalo. Když se ukládá všechno, vyhledávání i seznam ke sledování najdou i film, který pravidlo odmítne, a lepší pravidlo funguje i na už nasbíraných datech."
+  checkedBy="Vyhledávání ukazuje zvlášť doporučené klasiky, další filmy v programu a filmy bez projekce. Testy pokrývají, že film ze seznamu ke sledování projde, i když ho pravidlo pro klasiky odmítne."
 />
 
 <Decision
   n={2}
-  name="[Krátký název rozhodnutí]"
-  chose="[Přístup, který jsem zvolil]"
-  insteadOf="[Alternativa, kterou jsem zvažoval]"
-  because="[Důvod a omezení za ním]"
-  checkedBy="[Jak jsem to ověřil a co z toho vyšlo]"
+  name="Pravidlo pro klasiky je hypotéza"
+  chose="Pravidlo postavené na důkazech (spárováno s TMDB, aspoň 10 let staré, hodnocení 7,5 z 500 hlasů nebo na kurátorském seznamu), brané jako výchozí bod k ladění na skutečných programech"
+  insteadOf="Vybírat každý film ručně, nebo věřit jen hodnocení"
+  because="Ruční výběr každý týden jeden člověk neutáhne a samotné hodnocení podceňuje české a méně známé klasiky, které mají na TMDB málo hlasů."
+  checkedBy="První kalibrace na skutečných pražských programech 25. října 2026 snížila hranici na 250 hlasů pro filmy staré aspoň 30 let. Klasiky, které čísla pořád minou, teď dostanou výslovné redakční doporučení, na webu označené „Doporučeno Kultomatem“."
+/>
+
+<Decision
+  n={3}
+  name="Zůstat na Pi, dokud to nezměříme"
+  chose="Provozovat stahování na Raspberry Pi 5, které už jsem měl, a web i databázi na bezplatných tarifech"
+  insteadOf="Malý server (asi 6 € měsíčně) nebo plánované úlohy na GitHub Actions (asi 4 až 11 $ měsíčně)"
+  because="Nic ještě nebylo změřené, takže platit za víc by byl odhad. Stahování zůstává přenositelné: rozhraním je příkazová řádka a všechno, co závisí na konkrétním stroji, je v jedné složce."
+  checkedBy="Kontrola typu dead-man si všimne, když Pi ztichne, a zdroj bez úspěšného běhu za 24 hodin se na veřejné stránce pokrytí označí jako neaktuální. Sepsané kapacitní spouštěče říkají, kdy se přesunout."
 />
 
 ## Jak to vzniklo
 
-[UX a vývoj, které jsou pro příběh podstatné. Technologie vysvětlené tím, co umožnily, ne výčtem.]
+Program pro stahování na Pi čte veřejný program každého kina zhruba čtyřikrát denně. Ukládá surovou odpověď a zaznamenává, kde a kdy každý údaj viděl. Položky programu páruje s filmy přes TMDB a Wikidata, slučuje kopie stejné projekce z různých zdrojů a rozdíly mezi běhy převádí na události: nový termín, přesun, zrušení nebo obnovení. Neúspěšný běh nic nezmění, takže rozbitý zdroj nikdy nic nezruší.
+
+Automatické párování dělá chyby, a tak pro ně existuje místo. Soukromá administrace přizpůsobená telefonu drží týdenní frontu, ve které párování potvrzuji nebo opravuji a vybírám klasiky, s auditním záznamem a možností vrátit krok zpět, bez nového nasazení.
+
+Web je v Next.js, primárně česky a s úplnou anglickou verzí. Veřejné stránky jsou v cache a obnovují se po každém stažení, takže návštěvníci databázi budí jen zřídka, a čtou přes databázovou roli, která osobní údaje nevidí ani kvůli chybě v kódu.
 
 <Figure
   n={1}
-  alt="[Snímek: co ukazuje]"
-  caption="[Popisek: co snímek ukazuje a kdy vznikl]"
+  src={homeHero}
+  alt="Domovská stránka Kultomatu na počítači: nadpis „Kultovky zpátky v kinech“, 30 filmů v 11 kinech tento týden a plakát filmu 451 stupňů Fahrenheita"
+  caption="Domovská stránka 5. listopadu 2026: výběr na tento týden na první pohled."
 />
 
 <Figure
   n={2}
   wide
-  alt="[Snímek: co ukazuje]"
-  caption="[Popisek: co snímek ukazuje a kdy vznikl]"
+  src={homeWeek}
+  alt="Přehled na tento týden: volba období od dneška po 30 dní a jedna karta na film s režisérem, délkou, pražskými časy a kinem"
+  caption="Každá karta je jeden film se všemi časy a kiny, 5. listopadu 2026."
 />
 
 ## AI a spolupráce
 
-[Skutečné rozdělení práce a jak jsem ho kontroloval.]
+Pracoval jsem s AI agenty pro programování. Specifikaci, milníky a záznamy rozhodnutí jsem psal do repozitáře a agenti je implementovali po jednom pull requestu, do 8. listopadu 2026 asi 250. Agenti připravili i datovanou rešerši zdrojů a audity, které jsem četl a podle kterých jsem rozhodoval.
+
+Kultomat sám žádný AI model nevolá. Krátké texty o filmech jsou moje nebo převzaté z Wikipedie s uvedením zdroje, a text, který vznikl s AI nástrojem mimo Kultomat, to na stránce říká.
 
 <AiAndMe
-  decided="[Co jsem určil, navrhl a vybral]"
-  helped="[Kde část práce udělaly nástroje AI]"
-  reviewed="[Kontrola, testy, co jsem změnil]"
+  decided="Problém, rozsah každého milníku, pravidla pro data, design a každý kompromis, sepsané jako specifikace a záznamy rozhodnutí"
+  helped="Většinu kódu a testů a rešerši zdrojů podle těchto dokumentů"
+  reviewed="Každý pull request proti specifikaci, s kontrolou formátu, lintem, typy, unit testy, integračními testy na skutečném Postgresu a testy v prohlížeči; týdenní frontu párování ručně"
 />
 
 ## Výsledky a ověření
 
-[Co je hotové a jak se to ověřilo. Každé číslo má zdroj.]
-
 <Outcomes>
   <Outcome
-    metric="[Metrika]"
-    source="[Odkud číslo je, za jaké období a jak se měřilo]"
+    metric="17 kin"
+    source="veřejná stránka pokrytí Kultomatu 7. listopadu 2026: 13 zdrojů, všechny aktuální"
   >
-    [Co znamená, jednou větou]
+    Pokrytí vzrostlo ze 7 kin při spuštění na 17 za necelé dva týdny, vždy po
+    jednom zdroji.
   </Outcome>
-  <Outcome>[Ověřitelný kvalitativní výsledek, pokud číslo není]</Outcome>
+  <Outcome>
+    V provozu od 26. října 2026. Administrace, redakční výběr a záloha mimo Pi
+    běží v produkci od 27. října.
+  </Outcome>
+  <Outcome>
+    Seznam ke sledování a upozornění e-mailem jsou hotové a postupně se
+    spouštějí: nejdřív týden jen pro mě, pak pro pozvané přátele.
+  </Outcome>
+  {/* Skryto, dokud nebude dost dat:
+  <Outcome metric="[Návštěvy]" source="[Cloudflare Web Analytics, období]">
+    [Co číslo říká o tom, kdo web používá]
+  </Outcome>
+  */}
 </Outcomes>
 
 ## Co bych <Re>pře</Re>hodnotil
 
-[Co se potom změnilo, co nefungovalo a co bych udělal jinak.]
+Pravidlo pro klasiky se změnilo hned při prvním setkání se skutečnými daty: staré filmy mají mnohem méně hlasů, takže potřebovaly nižší hranici, a některé klasiky potřebují člověka, který se za ně zaručí. Redakční vrstvu bych plánoval od začátku, místo abych doufal, že čísla budou stačit.
+
+Některé věci jsem zatím záměrně nepostavil. Push notifikace počkají, až se ukáže, že e-mail je pomalý, veřejná registrace čeká na potřebnou práci kolem ochrany osobních údajů a texty o filmech psané s AI čekají, až TMDB potvrdí, že je takové použití dovolené.
+
+Hosting jsem musel předělat. Bezplatný tarif Vercelu nemá jasně zdokumentovanou smlouvu o zpracování osobních údajů, což začne být důležité, jakmile web otevřu veřejnosti. Před veřejným spuštěním jsem proto web přesunul na bezplatný tarif Netlify, který smlouva pokrývá, a Vercel nechal jako zálohu v pohotovosti: návrat je jen změna DNS, případně s tarifem Pro, pokud bude smlouva potřeba.
