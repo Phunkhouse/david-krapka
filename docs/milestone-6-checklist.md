@@ -127,7 +127,7 @@ Not committed, because the repository is public and they are for David's own com
 - [x] Email address in the three contact links with the prefilled subjects (“Role: ” / “Project: ”, “Pozice: ” / “Projekt: ”); LinkedIn and GitHub links (external, marked ↗, `rel="noopener"`); JSON-LD `sameAs`. Details in `src/content/profiles.ts`. The alias `hello@david-krapka.eu` is not set up yet (see decision 1).
 - [x] CV PDF at `/cv/david-krapka-cv.pdf` per decision 2: done in PR #36 (public version David exported, metadata limited as above) and both “Download CV” links point to it. The file type and size hint on the links was declined by David (9 November 2026), so the links stay “Download CV →” and “Stáhnout životopis →”.
 - [x] Emplifi card, freelance start year, personal note, Kultomat card summary and role copy, in both languages (PR #34 and PR #36). The availability copy waits on decision 3 (none shipped).
-- [ ] Re-read both landing pages for LEG-001: no prices, rates, terms or availability for paid work. Checked by machine on 9 November 2026: the Playwright test for money terms passes and the built English page has no “available”, “hourly” or “for hire”. “Freelance · 2016 – now” kept by David on 9 November 2026: he accepts no new paid work until the licence is renewed (decision 0008). Still for David to read: the reworded “Have a project?” card.
+- [x] Re-read both landing pages for LEG-001: no prices, rates, terms or availability for paid work. Checked by machine on 9 November 2026: the Playwright test for money terms passes and the built English page has no “available”, “hourly” or “for hire”. “Freelance · 2016 – now” kept by David on 9 November 2026: he accepts no new paid work until the licence is renewed (decision 0008). David accepted the reworded “Have a project?” card on 9 November 2026.
 - [x] `pnpm placeholders` shows no placeholder on the landing pages: 0 in 13 pages (9 November 2026).
 - [ ] Playwright: the `mailto:` links carry the address and the encoded subjects (done, `tests/e2e/landing.spec.ts`); the CV link returns a PDF (`tests/e2e/landing.spec.ts`).
 
@@ -135,7 +135,7 @@ Not committed, because the repository is public and they are for David's own com
 
 - [x] Research before drafting: Cloudflare's retention of request data for Workers static assets on this plan, and the controller/processor split ([legal planning, Not verified](audits/2026-11-04/legal-planning.md#not-verified)). Record sources in the PR. Done 5 November 2026; results in [privacy notice research](audits/2026-11-05/privacy-notice-research.md). Retention for this setup is **not published** by Cloudflare, so the notice says so instead of naming a period.
 - [x] Notice text in English and Czech per [LEG-003](SPEC.md#legal-requirements): controller and contact address, purposes and lawful basis (legitimate interests), Cloudflare as processor, transfers outside the EEA under the EU SCCs, retention, rights, right to complain to ÚOOU, and a line that the site stores nothing on the device. Plain language; a date of the last update.
-- [ ] David reviews and approves the text (it is his statement, not legal advice). Merged in PR #35, so reviewed as a draft; his explicit approval of the open points (twelve-month email retention, unnamed email providers, legal bases) is not recorded yet.
+- [x] David reviews and approves the text (it is his statement, not legal advice). Approved by David on 9 November 2026, including the open points: twelve-month email retention, email providers left unnamed, legitimate interest as the legal basis for messages and for names in case studies.
 - [x] Draft of the private record of processing handed to David (not committed): kept outside the repository.
 - [x] `pnpm placeholders` shows nothing on the privacy pages. Playwright checks both pages (sections, dated notice, working `mailto:`, regulator and Cloudflare named, no placeholder).
 
@@ -143,11 +143,11 @@ Not committed, because the repository is public and they are for David's own com
 
 Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which keep their items and evidence. In short, per project:
 
-- [ ] Text in both languages from the finished project card, following the shared structure; every claim traceable to the card. Text is in both languages (PR #36); the claim-by-claim check belongs to David's sign-off below.
+- [ ] Text in both languages from the finished project card, following the shared structure; every claim traceable to the card. Text is in both languages (PR #36); David signed off the facts below.
 - [x] Screenshots through `Figure`, with captions and alternative text (every case study has at least one; Kultomat has two). Metadata stripped: no EXIF or XMP in the five files (checked by reading headers, 9 November 2026). Size budget: the five JPEGs are 98 to 377 KB, served as AVIF and WebP; not recorded elsewhere.
 - [x] Case study social image: the project preview (`src/assets/work/`), same in both languages; `OG-Case` per-study images dropped for now.
 - [x] `draft: false` for all four; the landing cards link to them (PR #36). Per decision 10 as shipped.
-- [ ] David's review of the facts and sign-off on the pages.
+- [x] David's review of the facts and sign-off on the pages. Signed off by David on 9 November 2026 for all four case studies, in both languages.
 - [x] Lighthouse mobile on the real pages (Kultomat and one short page, both languages); updated the [case study summary](audits/2026-11-05/lighthouse-case-study.md) on 9 November 2026: Performance, Accessibility and Best Practices 100 on all four, LCP 1.4 to 1.6 s, CLS 0, SEO 69 only because of `noindex`.
 
 ## Ops 1: DNS move (David, with the agent)
