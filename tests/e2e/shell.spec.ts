@@ -184,6 +184,20 @@ test.describe('mobile menu', () => {
     await storageIsEmpty(page)
   })
 
+  // Audit WEB-002: the skip link is reachable while the menu is open.
+  test('the skip link closes the open menu and reaches the content', async ({
+    page,
+  }) => {
+    await page.goto('/')
+    await page.getByRole('button', { name: 'Open menu' }).click()
+    await expect(page.locator('main')).toHaveJSProperty('inert', true)
+    await page.getByRole('link', { name: 'Skip to content' }).focus()
+    await page.keyboard.press('Enter')
+    await expect(page.locator('#mobile-menu')).toBeHidden()
+    await expect(page.locator('main')).toHaveJSProperty('inert', false)
+    await expect(page.locator('main')).toBeFocused()
+  })
+
   test('keeps focus out of the page behind the open menu', async ({ page }) => {
     await page.goto('/')
     await page.getByRole('button', { name: 'Open menu' }).click()

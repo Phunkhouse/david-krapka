@@ -30,7 +30,10 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 1
-      - uses: anthropics/claude-code-action@v1
+      # Pinned to the commit behind v1 / v1.0.269 (security audit SEC-001):
+      # a movable tag could change what runs with the OAuth secret. Update it
+      # deliberately, after reading the release notes.
+      - uses: anthropics/claude-code-action@61a9c274fa7110a66dfafc1bbbced03833eb25fe # v1.0.269
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           additional_permissions: |
