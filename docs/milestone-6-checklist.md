@@ -6,7 +6,7 @@ Working plan for [Milestone 6](MILESTONES.md#milestone-6-launch-readiness-and-la
 
 **Content and David's accounts are the critical path.** Almost all code is in place. What is left is mostly David's input (email address, CV, project cards, copy facts, portrait rights), records only David can make (Cloudflare agreement, record of processing), reviews only David can sign off (facts, feel, devices), and one risky operation (moving DNS without breaking email). The plan therefore starts with the work that needs nobody (PR A), keeps each content PR small enough to land as soon as its input arrives, and puts the irreversible steps (DNS and launch) last and in their own steps.
 
-**Status, 9 November 2026: launched** at https://david-krapka.eu. Everything below is done except the portrait rights note (LEG-007) and the optional Search Console step. Earlier status notes are kept in the sections below.
+**Status, 9 November 2026: launched** at https://david-krapka.eu. Everything below is done except the optional Search Console step. Earlier status notes are kept in the sections below.
 
 Starting point (5 November 2026, `main` at `7a39d6d`): 30 placeholders in 6 pages (`pnpm placeholders`: landing copy, contact links, CV, privacy text); four draft case studies with placeholders only; `X-Robots-Tag: noindex` on every response; `/specimen/` still built; no sitemap, `robots.txt`, `LICENSE`, landing Open Graph tags or JSON-LD; the favicon is Astro's default; DNS still at Websupport with the apex and `www` pointing at a deleted Vercel project.
 
@@ -58,7 +58,7 @@ These gate PRs C, D and E, not PR A.
 - [x] Freelance start year (2016).
 - [x] Short personal note for About. In PR #36.
 - [x] One-line summary for the Kultomat card: dropped instead (the card uses its two text variants).
-- [ ] Portrait: who took the photo and the right to publish and edit it (LEG-007). If David took it himself, a sentence saying so is enough.
+- [x] Portrait: who took the photo and the right to publish and edit it (LEG-007). If David took it himself, a sentence saying so is enough. David took the portrait photo himself and holds the rights to publish and edit it (stated 9 November 2026); the site shows only the generated duotone masks without metadata.
 - [x] Kultomat project card and screenshots; Eucal, Vladan Vaněk and UpVideo project cards (or confirmed facts for link-out cards). Written and published in PR #36; the facts still need David's sign-off (PR E). UpVideo's “checked by” line states what the live site shows (added 9 November 2026). Format: [working project card](content-and-case-studies.md#working-project-card).
 - [x] Czech text for every published case study (in PR #36).
 
@@ -68,7 +68,7 @@ Not committed, because the repository is public and they are for David's own com
 
 - [x] Cloudflare: the version and acceptance date of the Self-Serve Subscription Agreement and the Data Processing Addendum for this account, from the dashboard ([LEG-004](SPEC.md#legal-requirements)). Done 9 November 2026 as part of LEG-004: the public versions in force (Self-Serve Subscription Agreement last updated 12 September 2025, DPA v6.4 effective 3 April 2026) saved privately with PDFs; Free plan, David the only member ([legal readiness](audits/2026-11-09/legal-readiness.md#follow-up-and-decisions-by-david-9-november-2026)).
 - [x] One-page record of processing (reviewed and dated by David 9 November 2026, with the Active24 to Proton route and the saved terms versions; kept privately; closes the LEG-009 gap from the legal audit): purposes, data, recipients, retention ([LEG-009](SPEC.md#legal-requirements)). The agent can draft it from the privacy notice in PR D for David to keep.
-- [ ] Portrait rights note (above), if it should not be public.
+- [x] Portrait rights note (above), if it should not be public. David took the portrait photo himself and holds the rights to publish and edit it (stated 9 November 2026); the site shows only the generated duotone masks without metadata.
 
 ## Shared rules for every PR
 

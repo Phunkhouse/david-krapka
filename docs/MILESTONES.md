@@ -161,7 +161,7 @@ Status as of 5 November 2026: milestones 0 to 5 done (milestone 4's device check
 
 ## Milestone 6: Launch readiness and launch
 
-**Status:** done, launched 9 November 2026 at [david-krapka.eu](https://david-krapka.eu). One item left open: the portrait rights note (LEG-007). Work plan, decisions and evidence in the [milestone 6 checklist](milestone-6-checklist.md).
+**Status:** done, launched 9 November 2026 at [david-krapka.eu](https://david-krapka.eu). Work plan, decisions and evidence in the [milestone 6 checklist](milestone-6-checklist.md).
 
 **Completion evidence:** PRs #32 to #37 (project previews, Approach animation performance, contact links and JSON-LD, privacy notice, case study content, CV and contact section, UpVideo fix and checklist reconciliation), #38 and #39 (pre-launch [web quality](audits/2026-11-09/web-quality.md), [security](audits/2026-11-09/security.md) and [legal readiness](audits/2026-11-09/legal-readiness.md) audits and their fixes), #40 (DNS move to Cloudflare), #41 (launch code: indexable, placeholder check in `pnpm verify`, `workers.dev` off) and #42 ([post-launch checks](audits/2026-11-09/production-launch.md) and this wrap-up).
 
@@ -197,7 +197,7 @@ Status as of 5 November 2026: milestones 0 to 5 done (milestone 4's device check
 - [x] Email to the domain still arrives after the DNS change; verify by sending a test message. Verified by David after the nameserver switch and again after the domain was attached.
 - [x] The privacy notice exists in both languages, is linked from every footer, states the real contact address, retention and rights, and has no placeholders; verify by reading both pages. Built and tested (PR #35), updated for LEG-003 (PR #39); text approved by David on 9 November 2026.
 - [x] The deployed site still stores nothing on the device (no cookies or browser storage) and sets no `Set-Cookie`; verify with a clean browser profile and `curl -I`. Verified 9 November 2026 ([post-launch checks](audits/2026-11-09/production-launch.md)).
-- [x] The Pre-launch legal audit reports each LEG requirement as supported, or David has accepted the gap. See the follow-up section of the [legal readiness](audits/2026-11-09/legal-readiness.md) report; the portrait rights note (LEG-007) is the one item still open.
+- [x] The Pre-launch legal audit reports each LEG requirement as supported, or David has accepted the gap. See the follow-up section of the [legal readiness](audits/2026-11-09/legal-readiness.md) report; the portrait rights note (LEG-007) is recorded in the checklist: David took the photo himself.
 - [x] Carried from milestone 5: each case study follows the [shared structure](content-and-case-studies.md#proposed-shared-case-study-structure), every claim and metric has a source in its project card, and David signs off each page; verify by David's review.
 - [x] Carried from milestone 4: the whole page is smooth on a mid-range Android phone and on Safari iOS, and David signs off the feel of each animation against the canvas; verify with screen recordings and David's sign-off. Signed off by David on 9 November 2026 (no recordings kept).
 
@@ -218,7 +218,7 @@ These run in parallel with development and gate the milestones shown.
 | ~~Decision on Systerna's presentation~~ decided: card only, in progress | Milestone 5 |
 | Public email, LinkedIn, GitHub; CV PDF | Milestone 6 |
 | ~~Written permissions for client names, screenshots and identifiable people ([LEG-006](SPEC.md#legal-requirements))~~ skipped for the four planned projects, accepted risk ([0012](decisions/0012-skip-permission-requests-for-case-studies.md)) | Milestone 5 |
-| Portrait photo with documented rights ([LEG-007](SPEC.md#legal-requirements)) | Milestone 6 |
+| ~~Portrait photo with documented rights ([LEG-007](SPEC.md#legal-requirements))~~ David took it himself, 9 November 2026 | Milestone 6 |
 
 ## After launch
 
