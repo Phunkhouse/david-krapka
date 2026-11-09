@@ -54,9 +54,9 @@ Kept on the canvas for reference; do not implement.
 These are needed before the related milestone can finish (see [milestones](../MILESTONES.md)):
 
 1. ~~**Case study page** template~~ designed 5 November 2026 (canvas page “Case study pages”), see [Case study](case-study.md).
-2. **Mobile menu**, **language switcher** and **motion pause control**: first proposal in [Shell components](shell-components.md) and on the canvas; to iterate. The pause control is built and placed (milestone 4); one control for the whole page.
-5. **Tablet range** (roughly 720–1100 px). The mockups cover 390 px and 1440 px only.
-6. **404 page**, CV download treatment, and any legal or privacy page the legal planning requires.
+2. ~~**Mobile menu**, **language switcher** and **motion pause control**~~ built from the proposal in [Shell components](shell-components.md); the pause control is one control for the whole page (milestone 4).
+5. ~~**Tablet range** (roughly 720–1100 px)~~ built from the breakpoint proposal in [Visual system](visual-system.md) and accepted by David on the previews, 5 November 2026. The mockups cover 390 px and 1440 px only.
+6. ~~**404 page**, CV download treatment and the privacy page~~ built in milestones 2 and 6 in the existing visual system, without separate canvas boards.
 7. ~~**Social preview image** (Open Graph) and favicon / monogram~~ designed 5 November 2026 (canvas page “Logo & favicon”), see [Mark and icons](visual-system.md#mark-and-icons).
 8. ~~**Real portrait photo** treatment~~ decided 5 November 2026: duotone ink on yellow with a pink halftone copy ([Landing page](landing-page.md)). The canvas still shows the silhouette.
 

@@ -6,7 +6,7 @@ Working plan for [Milestone 6](MILESTONES.md#milestone-6-launch-readiness-and-la
 
 **Content and David's accounts are the critical path.** Almost all code is in place. What is left is mostly David's input (email address, CV, project cards, copy facts, portrait rights), records only David can make (Cloudflare agreement, record of processing), reviews only David can sign off (facts, feel, devices), and one risky operation (moving DNS without breaking email). The plan therefore starts with the work that needs nobody (PR A), keeps each content PR small enough to land as soon as its input arrives, and puts the irreversible steps (DNS and launch) last and in their own steps.
 
-**Status, 9 November 2026 (`main` after PR #36, branch `fix/upvideo-placeholder`):** PRs A to D and the content PR (#36) are merged; `pnpm placeholders` reports 0 placeholders in 13 pages; all four case studies are published in both languages; the CV is at `/cv/david-krapka-cv.pdf`. Open: Ops 1 (DNS and the `hello@` alias), PR F (review and audits), PR G (launch), David's sign-offs and the decisions marked below. Items ticked here carry their evidence; items left open say what is missing.
+**Status, 9 November 2026: launched** at https://david-krapka.eu. Everything below is done except the optional Search Console step. Earlier status notes are kept in the sections below.
 
 Starting point (5 November 2026, `main` at `7a39d6d`): 30 placeholders in 6 pages (`pnpm placeholders`: landing copy, contact links, CV, privacy text); four draft case studies with placeholders only; `X-Robots-Tag: noindex` on every response; `/specimen/` still built; no sitemap, `robots.txt`, `LICENSE`, landing Open Graph tags or JSON-LD; the favicon is Astro's default; DNS still at Websupport with the apex and `www` pointing at a deleted Vercel project.
 
@@ -58,7 +58,7 @@ These gate PRs C, D and E, not PR A.
 - [x] Freelance start year (2016).
 - [x] Short personal note for About. In PR #36.
 - [x] One-line summary for the Kultomat card: dropped instead (the card uses its two text variants).
-- [ ] Portrait: who took the photo and the right to publish and edit it (LEG-007). If David took it himself, a sentence saying so is enough.
+- [x] Portrait: who took the photo and the right to publish and edit it (LEG-007). If David took it himself, a sentence saying so is enough. David took the portrait photo himself and holds the rights to publish and edit it (stated 9 November 2026); the site shows only the generated duotone masks without metadata.
 - [x] Kultomat project card and screenshots; Eucal, Vladan Vaněk and UpVideo project cards (or confirmed facts for link-out cards). Written and published in PR #36; the facts still need David's sign-off (PR E). UpVideo's “checked by” line states what the live site shows (added 9 November 2026). Format: [working project card](content-and-case-studies.md#working-project-card).
 - [x] Czech text for every published case study (in PR #36).
 
@@ -66,9 +66,9 @@ These gate PRs C, D and E, not PR A.
 
 Not committed, because the repository is public and they are for David's own compliance file. The checklist only records that they exist.
 
-- [ ] Cloudflare: the version and acceptance date of the Self-Serve Subscription Agreement and the Data Processing Addendum for this account, from the dashboard ([LEG-004](SPEC.md#legal-requirements)).
+- [x] Cloudflare: the version and acceptance date of the Self-Serve Subscription Agreement and the Data Processing Addendum for this account, from the dashboard ([LEG-004](SPEC.md#legal-requirements)). Done 9 November 2026 as part of LEG-004: the public versions in force (Self-Serve Subscription Agreement last updated 12 September 2025, DPA v6.4 effective 3 April 2026) saved privately with PDFs; Free plan, David the only member ([legal readiness](audits/2026-11-09/legal-readiness.md#follow-up-and-decisions-by-david-9-november-2026)).
 - [x] One-page record of processing (reviewed and dated by David 9 November 2026, with the Active24 to Proton route and the saved terms versions; kept privately; closes the LEG-009 gap from the legal audit): purposes, data, recipients, retention ([LEG-009](SPEC.md#legal-requirements)). The agent can draft it from the privacy notice in PR D for David to keep.
-- [ ] Portrait rights note (above), if it should not be public.
+- [x] Portrait rights note (above), if it should not be public. David took the portrait photo himself and holds the rights to publish and edit it (stated 9 November 2026); the site shows only the generated duotone masks without metadata.
 
 ## Shared rules for every PR
 
@@ -129,7 +129,7 @@ Not committed, because the repository is public and they are for David's own com
 - [x] Emplifi card, freelance start year, personal note, Kultomat card summary and role copy, in both languages (PR #34 and PR #36). The availability copy waits on decision 3 (none shipped).
 - [x] Re-read both landing pages for LEG-001: no prices, rates, terms or availability for paid work. Checked by machine on 9 November 2026: the Playwright test for money terms passes and the built English page has no “available”, “hourly” or “for hire”. “Freelance · 2016 – now” kept by David on 9 November 2026: he accepts no new paid work until the licence is renewed (decision 0008). David accepted the reworded “Have a project?” card on 9 November 2026.
 - [x] `pnpm placeholders` shows no placeholder on the landing pages: 0 in 13 pages (9 November 2026).
-- [ ] Playwright: the `mailto:` links carry the address and the encoded subjects (done, `tests/e2e/landing.spec.ts`); the CV link returns a PDF (`tests/e2e/landing.spec.ts`).
+- [x] Playwright: the `mailto:` links carry the address and the encoded subjects (done, `tests/e2e/landing.spec.ts`); the CV link returns a PDF (`tests/e2e/landing.spec.ts`).
 
 ## PR D: Privacy notice
 
@@ -143,7 +143,7 @@ Not committed, because the repository is public and they are for David's own com
 
 Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which keep their items and evidence. In short, per project:
 
-- [ ] Text in both languages from the finished project card, following the shared structure; every claim traceable to the card. Text is in both languages (PR #36); David signed off the facts below.
+- [x] Text in both languages from the finished project card, following the shared structure; every claim traceable to the card. Text is in both languages (PR #36); David signed off the facts below.
 - [x] Screenshots through `Figure`, with captions and alternative text (every case study has at least one; Kultomat has two). Metadata stripped: no EXIF or XMP in the five files (checked by reading headers, 9 November 2026). Size budget: the five JPEGs are 98 to 377 KB, served as AVIF and WebP; not recorded elsewhere.
 - [x] Case study social image: the project preview (`src/assets/work/`), same in both languages; `OG-Case` per-study images dropped for now.
 - [x] `draft: false` for all four; the landing cards link to them (PR #36). Per decision 10 as shipped.
@@ -157,7 +157,7 @@ Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which 
 - [x] Note any subdomain served over plain HTTP (decision 9). Checked 9 November 2026: `admin`, `mail`, `webmail`, `smtp`, `imap` and `pop3` serve HTTPS and redirect HTTP to it. `autodiscover` and `autoconfig` answer only over HTTP (their HTTPS certificate does not match). Only mail clients use them, through the SRV record or plain HTTP, not browsers, so HSTS with `includeSubDomains` on the apex is not expected to affect them; recheck mail client setup after launch if a problem appears.
 - [x] Switch nameservers at Websupport; wait for Cloudflare to mark the zone active. Done 9 November 2026: `leonard.ns.cloudflare.com` and `rosalie.ns.cloudflare.com`, listed by the `.eu` registry at 11:57; zone active. DNSSEC was on with Websupport's key: its DS record was removed first (gone from the registry at 11:47), and DNSSEC was turned on again in Cloudflare after the switch, with the new key entered at Active24. The registry published DS key tag 2371 at 12:08, matching Cloudflare's key; Cloudflare, Google and Quad9 resolvers validate the zone (`ad` flag).
 - [x] `dig MX`, `dig TXT` (SPF, DMARC) and DKIM lookups match the export; send a test message to the domain from an outside account and reply from it. Lookups match (above). A test message from an outside account to `hello@david-krapka.eu` arrived in David's inbox on 9 November 2026. Replies go out from David's Proton address, not through this domain, so they do not depend on these records.
-- [ ] Cloudflare features that set cookies or inject scripts stay off (Bot Fight Mode, Web Analytics, Rocket Loader, email obfuscation, Zaraz) (LEG-005, CSP). Moved to the post-launch checks by David, 9 November 2026 (G3).
+- [x] Cloudflare features that set cookies or inject scripts stay off (Bot Fight Mode, Web Analytics, Rocket Loader, email obfuscation, Zaraz) (LEG-005, CSP). Moved to the post-launch checks by David, 9 November 2026 (G3). Checked from outside after launch: no injected script or Cloudflare cookie ([post-launch checks](audits/2026-11-09/production-launch.md)).
 
 ## PR F: Pre-launch review
 
@@ -168,7 +168,7 @@ Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which 
 - [x] `audit-web-quality` on the preview: accessibility, technical SEO, browser quality, Lighthouse for every page type. Done 9 November 2026 (Codex): [web quality](audits/2026-11-09/web-quality.md). No High or Critical finding; every measured page scores Performance 100; SEO is below 100 only because of `noindex`. WEB-001 (pausing mid-fade froze the hero text half transparent) and WEB-002 (skip link inert while the menu is open) fixed in this PR, with tests.
 - [x] `audit-security`, light: headers, CSP, dependencies (`pnpm audit`), repository secrets, Cloudflare settings that matter for a static site. Done 9 November 2026 (Codex): [security](audits/2026-11-09/security.md). No release blocker; the one Low finding, SEC-001 (the optional review workflow used the movable tag `claude-code-action@v1`), is fixed in this PR by pinning the commit behind v1.0.269, verified against the upstream tag. The `pnpm audit` advisory (minimatch, development tooling only) was assessed as not exploitable here. Not verified: Cloudflare account and production TLS and headers (post-launch checks), CI secret scopes.
 - [x] Reports saved under `docs/audits/<date>/`; every launch-blocking finding fixed (own PR if not trivial) or accepted by David in writing in the report. Reports are saved in `docs/audits/2026-11-09/`; no finding was rated launch-blocking. Follow-up recorded at the end of the legal report: LEG-003 fixed; the private record (LEG-009) made and dated and the public terms versions saved (LEG-004); David accepted the open question of where Active24 stores mail, and deletes mail promptly (12 months at most) without a separate reminder. The accepted risks LEG-001, LEG-002 and LEG-006 are as before.
-- [ ] Lighthouse SEO is expected below 100 until `noindex` goes; recheck after launch.
+- [x] Lighthouse SEO is expected below 100 until `noindex` goes; recheck after launch. SEO 100 on production in both languages, 9 November 2026 ([post-launch checks](audits/2026-11-09/production-launch.md)).
 
 ## PR G: Launch
 
@@ -177,50 +177,50 @@ Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which 
 - [x] Remove `X-Robots-Tag: noindex` from `public/_headers`; change the assertion in `tests/e2e/smoke.spec.ts` to “no `X-Robots-Tag`”. Done in the launch PR.
 - [x] Add `pnpm placeholders --fail` to `pnpm verify` (and so to CI job `check`); update AGENTS.md. Done in the launch PR: 0 placeholders in 13 pages.
 - [x] `workers_dev` per decision 8. Done in the launch PR: `workers_dev: false`, `preview_urls: true`. After the merge deploys, the production `workers.dev` address stops answering until the domain is attached (G2).
-- [ ] `pnpm verify` and `pnpm test:e2e` pass; full CI green on the ready PR.
+- [x] `pnpm verify` and `pnpm test:e2e` pass; full CI green on the ready PR. PR #41: `check`, `browser_tests`, `playwright` and Workers Builds passed.
 
 ### G2. Domain (David, with the agent, right after the merge deploys)
 
-- [ ] Attach `david-krapka.eu` to the Worker as a Custom Domain.
-- [ ] Redirect `www.david-krapka.eu` to the apex permanently (301 or 308), keeping path and query; method per current Cloudflare docs (for example a Custom Domain for `www` plus a Redirect Rule).
-- [ ] Wait for the certificate; then run the post-launch checks below.
+- [x] Attach `david-krapka.eu` to the Worker as a Custom Domain. Done by David, 9 November 2026.
+- [x] Redirect `www.david-krapka.eu` to the apex permanently (301 or 308), keeping path and query; method per current Cloudflare docs (for example a Custom Domain for `www` plus a Redirect Rule). Done 9 November 2026: Single Redirect `https://www.*` to `https://${1}`, 301, query kept; `www` proxied; Always Use HTTPS on for plain HTTP.
+- [x] Wait for the certificate; then run the post-launch checks below. Certificate issued by Google Trust Services, valid until 7 February 2027.
 
 ### G3. Post-launch checks
 
-- [ ] `curl -I https://david-krapka.eu/` and `/cs/`: 200, HSTS, the agreed headers, no `X-Robots-Tag`, no `Set-Cookie`.
-- [ ] `curl -I https://www.david-krapka.eu/some/path/`: permanent redirect to the same path on the apex; `http://` redirects to `https://`.
-- [ ] External header scanner (for example securityheaders.com or Mozilla HTTP Observatory) result saved.
-- [ ] Clean browser profile: no cookies or storage after browsing, switching language and using the pause control.
-- [ ] Cloudflare features that set cookies or inject scripts are off: Bot Fight Mode, Web Analytics, Rocket Loader, Email Address Obfuscation, Zaraz (from Ops 1; LEG-005, CSP).
-- [ ] Email links open the right address and subject on desktop and on a phone.
-- [ ] LinkedIn Post Inspector shows the right preview for the landing page (both languages) and one case study.
-- [ ] Test email to the domain still arrives after the domain change.
-- [ ] Lighthouse mobile on production, landing in both languages: SEO 100 now that `noindex` is gone; other targets still met.
-- [ ] Optional: submit the sitemap in Google Search Console (needs a DNS TXT verification record; ask David first).
+- [x] `curl -I https://david-krapka.eu/` and `/cs/`: 200, HSTS, the agreed headers, no `X-Robots-Tag`, no `Set-Cookie`. 200 for both, every agreed header, no `X-Robots-Tag`, no `Set-Cookie` ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] `curl -I https://www.david-krapka.eu/some/path/`: permanent redirect to the same path on the apex; `http://` redirects to `https://`. 301 to the same path and query on the apex; `http://` redirects with 301 ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] External header scanner (for example securityheaders.com or Mozilla HTTP Observatory) result saved. Mozilla HTTP Observatory: A+, 135, 12 of 12 ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] Clean browser profile: no cookies or storage after browsing, switching language and using the pause control. No cookies, no storage, no `Set-Cookie`, no third-party request ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] Cloudflare features that set cookies or inject scripts are off: Bot Fight Mode, Web Analytics, Rocket Loader, Email Address Obfuscation, Zaraz (from Ops 1; LEG-005, CSP). From outside: no injected script and no Cloudflare cookie in the served pages ([post-launch checks](audits/2026-11-09/production-launch.md)); the dashboard toggles were not inspected.
+- [x] Email links open the right address and subject on desktop and on a phone. Checked by David on desktop and phone, 9 November 2026.
+- [x] LinkedIn Post Inspector shows the right preview for the landing page (both languages) and one case study. Checked by David, 9 November 2026.
+- [x] Test email to the domain still arrives after the domain change. Checked by David after the domain was attached, 9 November 2026.
+- [x] Lighthouse mobile on production, landing in both languages: SEO 100 now that `noindex` is gone; other targets still met. Performance 100, Accessibility 96 (the known mid-fade `color-contrast` sample), Best Practices 100, SEO 100 in both languages; LCP 1.3 s, CLS 0 ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [ ] Optional: submit the sitemap in Google Search Console (needs a DNS TXT verification record; ask David first). Not done at launch; moved to the after-launch list.
 
 ## Acceptance checks (from MILESTONES.md)
 
 Record evidence here and in the PR that completes each check.
 
 - [x] No placeholders remain; verify with the build check. (G1) `pnpm placeholders --fail` in `pnpm verify`: 0 placeholders in 13 pages.
-- [ ] `https://david-krapka.eu/` and `/cs/` serve the site with HTTPS, HSTS and the agreed security headers; verify with `curl -I` and an external header scanner. (A, G3)
-- [ ] `https://www.david-krapka.eu/` redirects permanently to the apex; verify with `curl -I`. (G2, G3)
-- [ ] Email links open a message to the right address with the right subject; verify manually on desktop and phone. (C, G3)
-- [ ] Sharing a page on LinkedIn shows the correct preview; verify with LinkedIn's post inspector. (A, B, E, G3)
-- [ ] Audit reports are saved in `docs/audits/` and every launch-blocking finding is fixed or accepted by David. (F)
-- [ ] Email to the domain still arrives after the DNS change; verify by sending a test message. (Ops 1, G3) Ops 1 part done 9 November 2026 (test message arrived after the nameserver switch); repeat after the domain is attached at launch (post-launch checks).
-- [ ] The privacy notice exists in both languages, is linked from every footer, states the real contact address, retention and rights, and has no placeholders; verify by reading both pages. (D)
-- [ ] The deployed site still stores nothing on the device (no cookies or browser storage) and sets no `Set-Cookie`; verify with a clean browser profile and `curl -I`. (G3)
-- [ ] The Pre-launch legal audit reports each LEG requirement as supported, or David has accepted the gap. (F)
-- [ ] Carried from milestone 5: each case study follows the shared structure, every claim has a source in its project card, and David signs off each page. (E)
+- [x] `https://david-krapka.eu/` and `/cs/` serve the site with HTTPS, HSTS and the agreed security headers; verify with `curl -I` and an external header scanner. (A, G3) Verified 9 November 2026 ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] `https://www.david-krapka.eu/` redirects permanently to the apex; verify with `curl -I`. (G2, G3) Verified 9 November 2026: 301 ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] Email links open a message to the right address with the right subject; verify manually on desktop and phone. (C, G3) Verified by David, 9 November 2026.
+- [x] Sharing a page on LinkedIn shows the correct preview; verify with LinkedIn's post inspector. (A, B, E, G3) Verified by David, 9 November 2026.
+- [x] Audit reports are saved in `docs/audits/` and every launch-blocking finding is fixed or accepted by David. (F) Reports in `docs/audits/2026-11-09/`; no launch-blocking finding; fixes in PR #39; David's acceptances recorded in the legal report.
+- [x] Email to the domain still arrives after the DNS change; verify by sending a test message. (Ops 1, G3) Ops 1 part done 9 November 2026 (test message arrived after the nameserver switch); repeat after the domain is attached at launch (post-launch checks). Repeated by David after the domain was attached: arrived.
+- [x] The privacy notice exists in both languages, is linked from every footer, states the real contact address, retention and rights, and has no placeholders; verify by reading both pages. (D) Verified (PR #35, updated in PR #39 for LEG-003).
+- [x] The deployed site still stores nothing on the device (no cookies or browser storage) and sets no `Set-Cookie`; verify with a clean browser profile and `curl -I`. (G3) Verified 9 November 2026 ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] The Pre-launch legal audit reports each LEG requirement as supported, or David has accepted the gap. (F) No High or Critical finding; LEG-003 fixed, LEG-009 closed, LEG-004 public terms recorded; the Active24 mail location and LEG-001, LEG-002, LEG-006 accepted by David ([legal readiness](audits/2026-11-09/legal-readiness.md#follow-up-and-decisions-by-david-9-november-2026)).
+- [x] Carried from milestone 5: each case study follows the shared structure, every claim has a source in its project card, and David signs off each page. (E) Signed off by David on 9 November 2026 (PR #36).
 - [x] Carried from milestone 4: smooth on a mid-range Android phone and Safari iOS, and David signs off the feel of each animation. (F) Signed off by David, 9 November 2026.
 
 ## Wrap-up
 
-- [ ] Update MILESTONES.md: milestone 6 status, completion evidence (PR links, audit reports, launch date), unplanned changes, and the post-launch list.
-- [ ] Update SPEC.md: status line (launched), resolved open questions, URLs (no longer a proposal), limitations.
-- [ ] Update README (live URL), AGENTS.md (commands, `noindex` notes removed) and the design README.
-- [ ] Remove or update every “until milestone 6” comment in the code (`grep -rn "milestone 6" src tests public`).
+- [x] Update MILESTONES.md: milestone 6 status, completion evidence (PR links, audit reports, launch date), unplanned changes, and the post-launch list.
+- [x] Update SPEC.md: status line (launched), resolved open questions, URLs (no longer a proposal), limitations.
+- [x] Update README (live URL), AGENTS.md (commands, `noindex` notes removed) and the design README. AGENTS.md was updated in PR #41 (placeholder check); it had no `noindex` notes.
+- [x] Remove or update every “until milestone 6” comment in the code (`grep -rn "milestone 6" src tests public`). The `noindex` comments changed in PR #41; the remaining mentions name where a decision was made, not future work.
 
 ## Risks and notes
 

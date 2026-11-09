@@ -2,7 +2,7 @@
 
 The current description of the portfolio site at **david-krapka.eu**. This file is the single source of truth for scope, requirements and technical approach. Background and reasoning from the brainstorming are in the [product and design brief](portfolio-brief.md); project facts are tracked in [content and case studies](content-and-case-studies.md); the approved design is in [docs/design/](design/README.md); delivery stages are in [milestones](MILESTONES.md).
 
-Status: planning, 4 November 2026. A placeholder Astro site exists (milestone 1). Statements marked **proposal** need confirmation; everything else is confirmed by the user or by the approved mockups.
+Status: launched 9 November 2026 at [david-krapka.eu](https://david-krapka.eu) (milestone 6). Statements marked **proposal** need confirmation; everything else is confirmed by the user or by the approved mockups.
 
 ## Purpose and users
 
@@ -25,7 +25,7 @@ Success (qualitative, from the brief): a visitor can say in their own words what
 - **Emplifi** inside the Experience section, with confirmed role and dates.
 - **Contact** via email links (separate subjects for roles and projects; the project link is an invitation to talk, see [LEG-001](#legal-requirements)), LinkedIn and GitHub.
 - **Privacy notice** in both languages, linked from every footer ([LEG-003](#legal-requirements)).
-- **CV** as a downloadable PDF (**proposal:** English only at first).
+- **CV** as a downloadable PDF, English only (both languages link to the same file; decided in milestone 6).
 - Motion as designed, with reduced-motion support and a pause control. Built in milestone 4 ([Motion](design/motion.md#implementation-decisions-milestone-4)); device checks and the feel sign-off are part of the pre-launch review.
 - Search and sharing basics: titles, descriptions, Open Graph images, sitemap, `hreflang`, canonical URLs.
 
@@ -41,7 +41,7 @@ Blog, Playground, services catalogue, prices, rates, terms or availability claim
 - Every project card is a real link (except Systerna). Every section offers a path to work, CV or contact.
 - A language switcher on every page links to the same page in the other language. Its position still needs design.
 
-### URLs (proposal)
+### URLs
 
 | Page | English | Czech |
 | --- | --- | --- |
@@ -84,10 +84,10 @@ Slugs: `kultomat`, `eucal`, `vladan-vanek`, `upvideo`. Canonical host is `https:
 ## Data and trust boundaries
 
 - The site is fully static. It has no server code, database, forms, accounts or user input.
-- It sets no cookies, stores nothing on visitors' devices and loads no third-party scripts, fonts or embeds in the first release ([LEG-005](#legal-requirements)). **Proposal:** no analytics at launch; if wanted later, choose a cookieless, EU-hosted option and run legal planning again.
+- It sets no cookies, stores nothing on visitors' devices and loads no third-party scripts, fonts or embeds in the first release ([LEG-005](#legal-requirements)). No analytics at launch (decided 9 November 2026, milestone 6 decision 4); if wanted later, choose a cookieless, EU-hosted option and run legal planning again.
 - The only personal data processed on the site itself is what Cloudflare handles for each request (IP address, user agent), plus emails people send and collaborators named in case studies. The privacy notice covers it ([LEG-003](#legal-requirements)); Cloudflare is the processor ([LEG-004](#legal-requirements)).
 - Email links expose a public address; spam is an accepted risk. The address must be one David is happy to publish.
-- Security headers are set by the host through `public/_headers`: HSTS (two years, `includeSubDomains`, deliberately without `preload` at launch because preload is hard to undo), `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy: same-origin` and frame protection. Because `includeSubDomains` forces HTTPS on every subdomain, no subdomain may be served over plain HTTP (checked during the DNS move). The Content-Security-Policy is split: Astro's `security.csp` emits a `<meta>` policy with hashes for every inline style and script (`default-src 'self'`, no third parties), and the header adds `frame-ancestors 'none'`, which a `<meta>` policy cannot carry.
+- Security headers are set by the host through `public/_headers`: HSTS (two years, `includeSubDomains`, deliberately without `preload` at launch because preload is hard to undo), `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy: same-origin` and frame protection. Because `includeSubDomains` forces HTTPS on every subdomain, no subdomain may be served over plain HTTP. Checked during the DNS move: the mail web hosts serve HTTPS; `autodiscover` and `autoconfig` answer only over HTTP, which mail clients use and browsers do not. The Content-Security-Policy is split: Astro's `security.csp` emits a `<meta>` policy with hashes for every inline style and script (`default-src 'self'`, no third parties), and the header adds `frame-ancestors 'none'`, which a `<meta>` policy cannot carry.
 
 ## Legal requirements
 
@@ -126,10 +126,10 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 | Formatting and linting | Prettier (`semi: false`, `singleQuote: true`), ESLint flat config with `@eslint/js`, `typescript-eslint` and `eslint-plugin-astro` | From recipe |
 | Tests | Playwright for smoke, navigation, reduced-motion and accessibility checks (with axe), against the built site served by `wrangler dev`. Vitest only when there is logic worth unit testing. | Confirmed (milestone 2) |
 | CI | GitHub Actions, **Budget-conscious**: draft PRs defer cloud jobs; ready PRs run the full suite | Confirmed ([0002](decisions/0002-budget-conscious-ci.md)) |
-| Hosting | Cloudflare Workers static assets (no Worker script), deployed by Workers Builds: production from `main`, preview URLs for branches; `wrangler.jsonc` and `public/_headers`. At launch `workers_dev` is turned off so production answers only on the domain; `workers.dev` preview URLs stay and Cloudflare sends `X-Robots-Tag: noindex` on them by itself | Confirmed ([0007](decisions/0007-cloudflare-workers-hosting.md); launch details decided 5 November 2026) |
+| Hosting | Cloudflare Workers static assets (no Worker script), deployed by Workers Builds: production from `main`, preview URLs for branches; `wrangler.jsonc` and `public/_headers`. Since launch `workers_dev` is off, so production answers only on the domain; `workers.dev` preview URLs stay and Cloudflare sends `X-Robots-Tag: noindex` on them by itself | Confirmed ([0007](decisions/0007-cloudflare-workers-hosting.md); launch details decided 5 November 2026) |
 | Search basics | Canonical and `hreflang` links from `src/i18n/routes.ts`; `sitemap.xml` from a static endpoint (`src/pages/sitemap.xml.ts`) using the same routes and published-case-study helper, so drafts never appear in production; `robots.txt` allows all; Open Graph tags from `BaseLayout`, with a site-wide preview image per language (`public/og/`) wherever a page has no image of its own; favicons, app icons and `site.webmanifest`; JSON-LD `Person` on the landing pages. No sitemap dependency | Confirmed (milestone 6) |
 | Licence | Code under MIT (`LICENSE`); texts, images, portrait, CV and docs all rights reserved (`CONTENT-LICENSE.md`); fonts under OFL | Confirmed ([0013](decisions/0013-mit-code-and-reserved-content.md)) |
-| Domain and DNS | `david-krapka.eu`, registered at Websupport, which also hosts its DNS today. Apex and `www` still point to Vercel from a deleted project. At launch DNS moves to Cloudflare (needed for the apex), with the Active24 mail records (MX, SPF, DKIM, DMARC) copied exactly. Mail must keep working. | Confirmed ([0007](decisions/0007-cloudflare-workers-hosting.md)) |
+| Domain and DNS | `david-krapka.eu`, registered at Websupport. DNS moved to Cloudflare on 9 November 2026 (needed for the apex), with the Active24 mail records (MX, SPF, DKIM, DMARC) copied exactly and DNSSEC re-enabled with Cloudflare's key. The apex is a Custom Domain of the Worker; `www` redirects to it with a Cloudflare redirect rule (301); Always Use HTTPS is on. Mail must keep working. | Confirmed ([0007](decisions/0007-cloudflare-workers-hosting.md)) |
 | Repository | `git@github.com:Phunkhouse/david-krapka.git`, public, default branch `main` | Confirmed |
 
 ### Commands
@@ -142,10 +142,9 @@ macOS locally versus Ubuntu in CI; Playwright browser version tied to the instal
 
 ## Known limitations and risks
 
-- **Content is the critical path.** Most project facts, Emplifi details, the portrait photo, the CV and the public email address are still missing. Design and code can progress, but launch cannot.
-- **Case study content is still placeholder.** The template, pipeline and four draft pages are built (milestone 5); the real text and screenshots are written from David's project cards in the milestone 6 pre-release pass. Drafts are never built on `main`.
-- **DNS move at launch.** Moving the zone to Cloudflare can break email if a mail record is missed; compare records one by one before switching nameservers and send a test email afterwards.
-- **Looping motion** carries accessibility risk; the pause control and flash check are launch requirements.
+- **Mail depends on the Cloudflare zone.** The mail records were copied record by record during the DNS move and tested; any later DNS change must keep them DNS only (not proxied) and unchanged.
+- **Draft case studies** are never built on `main` (`pnpm check:drafts`); new projects start as drafts.
+- **Looping motion** carries accessibility risk; the pause control is built, and the flash analysis measured no flashes (a certified check was skipped, milestone 6 decision 12).
 - **Trade suspension (accepted risk, [LEG-001](#legal-requirements)).** The “Have a project?” invitation sits in a grey area while the trade licence is suspended; the legal classification and the conditions of David's social-security support are unresolved and outside the audit's scope. David accepted the risk on 4 November 2026 on the basis that it is only an invitation to talk ([0008](decisions/0008-keep-project-invitation-while-trade-suspended.md)).
 - **Static output** rules out middleware-based language detection; visitors choose the language themselves.
 - **Branch protection** is technically enforceable because the repository is public. If it becomes private, rulesets need a paid GitHub plan.
@@ -161,9 +160,7 @@ Delivery order and acceptance checks are in [MILESTONES.md](MILESTONES.md). Open
 | Milestone 3 | ~~Mobile hero intro, reduced-motion hero, Experience in the navigation~~ decided 4 November 2026 ([Landing page](design/landing-page.md#implementation-decisions-milestone-3)). |
 | Milestone 3 | ~~Tablet layout (720–1100 px)~~ built from the proposal in [Visual system](design/visual-system.md#breakpoints-proposal) and accepted by David on the previews, 5 November 2026. |
 | Milestone 5 | ~~Case study page design; Czech translations; Systerna~~ decided 5 November 2026: designed on the canvas, both languages ship together, Systerna stays a card in progress. Whether each client project keeps a short page or links out is decided when David fills its card (milestone 6). |
-| Milestone 6 | Public email address (**also blocks the privacy notice, [LEG-003](#legal-requirements)**), LinkedIn and GitHub URLs, CV content and languages. |
-| Milestone 6 | Final role title, availability statement and which audience comes first. |
-| Milestone 6 | Analytics at launch: none (proposal) or a cookieless tool. |
+| Milestone 6 | ~~Public email address, LinkedIn and GitHub URLs, CV content and languages; final role title, availability statement and audience order; analytics at launch~~ decided in milestone 6: `hello@david-krapka.eu`, English CV, “product-minded engineer” with hiring first and no availability line, no analytics ([checklist](milestone-6-checklist.md)). |
 
 ## Design
 
