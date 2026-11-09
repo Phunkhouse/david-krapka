@@ -356,3 +356,13 @@ test('an unknown case study is a 404', async ({ page }) => {
     expect(response?.status()).toBe(404)
   }
 })
+
+test('UpVideo shows its decision with a validation row', async ({ page }) => {
+  for (const path of ['/work/upvideo/', '/cs/work/upvideo/']) {
+    await page.goto(path)
+    const decision = page.locator('section.decision')
+    await expect(decision).toHaveCount(1)
+    await expect(decision.locator('dt')).toHaveCount(4)
+    await expect(page.getByRole('main')).not.toContainText('[')
+  }
+})

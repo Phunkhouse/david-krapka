@@ -140,7 +140,7 @@ export const en = {
       emplifi: {
         name: 'Emplifi',
         dates: 'Oct 2019 – Jun 2026',
-        meta: 'Frontend engineer, team lead · employed',
+        meta: 'Frontend engineer, team lead · employee',
         lesson: 'One shared source of truth beats many opinions.',
         detail:
           'Led a team of three UI engineers, then moved to the design system team. Most of my time went into unifying components across many teams and repositories.',

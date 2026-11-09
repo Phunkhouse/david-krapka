@@ -99,11 +99,11 @@ Chosen direction **E3 “Big team. Small team.”**
 | --- | --- | --- |
 | Eyebrow | Experience · What each one taught me | Zkušenosti · Co mi která dala |
 | H2 | Big team. Small team. | Velký tým. Malý tým. |
-| Emplifi meta | [Role] · employed · [20XX – 20XX] | [Role] · zaměstnání · [20XX – 20XX] |
+| Emplifi meta | Frontend engineer, team lead · employee (revised 9 November 2026: “employed” read as current while the dates end in June 2026) | Frontend vývojář, vedoucí týmu · zaměstnanec |
 | Label | What it taught me | Co mě to naučilo |
 | Emplifi lesson | [How to ship inside a big product without breaking it.] | [Jak dodávat ve velkém produktu, aniž by se rozbil.] |
 | Emplifi detail | [Responsibilities and one concrete decision, to confirm.] | [Odpovědnosti a jedno konkrétní rozhodnutí, k potvrzení.] |
-| CV link | [Download CV] → | [Stáhnout životopis] → |
+| CV link | Download CV → | Stáhnout životopis (v angličtině) → (the CV is English only; no file type or size hint, David's decision) |
 | Freelance meta | Independent · for clients · [20XX – now] | Nezávisle · pro klienty · [20XX – dnes] |
 | Freelance lesson | Owning the whole thing, from the first question to launch. | Vlastnit celou věc, od první otázky po spuštění. |
 | Freelance detail | Eucal, Vladan Vaněk, UpVideo. See the projects ↑ | Eucal, Vladan Vaněk, UpVideo. Prohlédnout projekty ↑ |

@@ -131,11 +131,11 @@ export const cs: Dictionary = {
       eyebrow: 'Zkušenosti · Co mi která dala',
       title: 'Velký tým. Malý tým.',
       lessonLabel: 'Co mě to naučilo',
-      cv: 'Stáhnout životopis →',
+      cv: 'Stáhnout životopis (v angličtině) →',
       emplifi: {
         name: 'Emplifi',
         dates: '10/2019 – 6/2026',
-        meta: 'Frontend vývojář, vedoucí týmu · zaměstnání',
+        meta: 'Frontend vývojář, vedoucí týmu · zaměstnanec',
         lesson: 'Jeden společný zdroj pravdy je víc než spousta názorů.',
         detail:
           'Vedl jsem tým tří UI vývojářů, pak jsem přešel do týmu design systému. Většinu času jsem sjednocoval komponenty napříč mnoha týmy a repozitáři.',

@@ -161,6 +161,23 @@ for (const {
       }
     })
 
+    test('both CV links point to a PDF that downloads', async ({
+      page,
+      request,
+    }) => {
+      await page.goto(path)
+      // One link in the Emplifi card (wide screens) and one below the cards.
+      const links = page.locator('#experience a[href$=".pdf"]')
+      await expect(links).toHaveCount(2)
+      for (const link of await links.all()) {
+        await expect(link).toHaveAttribute('href', '/cv/david-krapka-cv.pdf')
+      }
+      const response = await request.get('/cv/david-krapka-cv.pdf')
+      expect(response.status()).toBe(200)
+      expect(response.headers()['content-type']).toContain('application/pdf')
+      expect((await response.body()).subarray(0, 5).toString()).toBe('%PDF-')
+    })
+
     test('states no prices, rates, terms or availability (LEG-001)', async ({
       page,
     }) => {
