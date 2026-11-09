@@ -8,7 +8,8 @@ interface Props {
   chose: string
   insteadOf: string
   because: string
-  checkedBy: string
+  /** How it was validated. Left out until it is known; the row is then not shown. */
+  checkedBy?: string
 }
 
 const { n, name, chose, insteadOf, because, checkedBy } = Astro.props
@@ -17,7 +18,7 @@ const rows = [
   [labels.chose, chose],
   [labels.insteadOf, insteadOf],
   [labels.because, because],
-  [labels.checkedBy, checkedBy],
+  ...(checkedBy ? [[labels.checkedBy, checkedBy]] : []),
 ]
 ---
 
