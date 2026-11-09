@@ -67,7 +67,7 @@ These gate PRs C, D and E, not PR A.
 Not committed, because the repository is public and they are for David's own compliance file. The checklist only records that they exist.
 
 - [ ] Cloudflare: the version and acceptance date of the Self-Serve Subscription Agreement and the Data Processing Addendum for this account, from the dashboard ([LEG-004](SPEC.md#legal-requirements)).
-- [ ] One-page record of processing: purposes, data, recipients, retention ([LEG-009](SPEC.md#legal-requirements)). The agent can draft it from the privacy notice in PR D for David to keep.
+- [x] One-page record of processing (reviewed and dated by David 9 November 2026, with the Active24 to Proton route and the saved terms versions; kept privately; closes the LEG-009 gap from the legal audit): purposes, data, recipients, retention ([LEG-009](SPEC.md#legal-requirements)). The agent can draft it from the privacy notice in PR D for David to keep.
 - [ ] Portrait rights note (above), if it should not be public.
 
 ## Shared rules for every PR
@@ -162,12 +162,12 @@ Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which 
 ## PR F: Pre-launch review
 
 - [ ] **David's comprehensive review on the preview** (carried from milestone 4): the feel of every animation against the canvas; the whole landing page on a mid-range Android phone and on Safari iOS (smooth, drum sharp), with a short screen recording of each; tablet widths (768 and 1024 px); the finished copy and case studies in both languages.
-- [ ] Scrolling performance trace on a throttled profile: no long tasks while scrolling the landing page; summary recorded (carried from milestone 4).
+- [ ] Scrolling performance trace on a throttled profile: no long tasks while scrolling the landing page; summary recorded (carried from milestone 4). Partial evidence only: the [web quality audit](audits/2026-11-09/web-quality.md) recorded no long task over 50 ms in two 8 s scroll samples of the landing page at 4× CPU slowdown; a full trace and a real-device check are still David's (below).
 - [ ] Certified flash check per decision 12, if chosen.
-- [ ] `audit-legal-readiness` in Pre-launch mode, reconciling the [planning report](audits/2026-11-04/legal-planning.md) LEG by LEG; top-tier model and high reasoning effort announced in the report.
-- [ ] `audit-web-quality` on the preview: accessibility, technical SEO, browser quality, Lighthouse for every page type.
-- [ ] `audit-security`, light: headers, CSP, dependencies (`pnpm audit`), repository secrets, Cloudflare settings that matter for a static site.
-- [ ] Reports saved under `docs/audits/<date>/`; every launch-blocking finding fixed (own PR if not trivial) or accepted by David in writing in the report.
+- [x] `audit-legal-readiness` in Pre-launch mode, reconciling the [planning report](audits/2026-11-04/legal-planning.md) LEG by LEG; top-tier model and high reasoning effort announced in the report. Done 9 November 2026 by David in Codex (“6.1 Sol / High”, as reported by David; the report says it could not verify the setting): [legal readiness](audits/2026-11-09/legal-readiness.md). No High or Critical finding; LEG-003 (Swiss mail transfer missing from the notice) fixed in this PR; LEG-009 (private record) open; LEG-001, LEG-002 and LEG-006 stay accepted risks or interpretation questions.
+- [x] `audit-web-quality` on the preview: accessibility, technical SEO, browser quality, Lighthouse for every page type. Done 9 November 2026 (Codex): [web quality](audits/2026-11-09/web-quality.md). No High or Critical finding; every measured page scores Performance 100; SEO is below 100 only because of `noindex`. WEB-001 (pausing mid-fade froze the hero text half transparent) and WEB-002 (skip link inert while the menu is open) fixed in this PR, with tests.
+- [x] `audit-security`, light: headers, CSP, dependencies (`pnpm audit`), repository secrets, Cloudflare settings that matter for a static site. Done 9 November 2026 (Codex): [security](audits/2026-11-09/security.md). No release blocker; the one Low finding, SEC-001 (the optional review workflow used the movable tag `claude-code-action@v1`), is fixed in this PR by pinning the commit behind v1.0.269, verified against the upstream tag. The `pnpm audit` advisory (minimatch, development tooling only) was assessed as not exploitable here. Not verified: Cloudflare account and production TLS and headers (post-launch checks), CI secret scopes.
+- [x] Reports saved under `docs/audits/<date>/`; every launch-blocking finding fixed (own PR if not trivial) or accepted by David in writing in the report. Reports are saved in `docs/audits/2026-11-09/`; no finding was rated launch-blocking. Follow-up recorded at the end of the legal report: LEG-003 fixed; the private record (LEG-009) made and dated and the public terms versions saved (LEG-004); David accepted the open question of where Active24 stores mail, and deletes mail promptly (12 months at most) without a separate reminder. The accepted risks LEG-001, LEG-002 and LEG-006 are as before.
 - [ ] Lighthouse SEO is expected below 100 until `noindex` goes; recheck after launch.
 
 ## PR G: Launch

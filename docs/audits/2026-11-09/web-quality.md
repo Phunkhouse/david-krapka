@@ -164,3 +164,11 @@ No application tests or CI definitions were changed. The existing Playwright sui
 ## Repository preservation
 
 Before execution, `git status --porcelain=v1 --untracked-files=all` was empty. It was still empty immediately before writing this report. After writing, status comparison confirmed that the only difference is the new `docs/audits/2026-11-09/web-quality.md`; both unstaged and staged tracked-file diffs are empty, and HEAD is unchanged. No application code, configuration, infrastructure, project data, existing report or milestone checklist was edited. Builds, server state, raw reports and browser artifacts remain in the disposable workspace. The temporary local server was stopped after verification.
+
+## Follow-up, 9 November 2026
+
+Added after the audit; the findings above are unchanged.
+
+- **WEB-001: fixed** in PR 39. Pressing stop now moves the looping hero animations to the nearest point where the text is fully readable (the end of the current fade-in, or the end of the cycle) before pausing, instead of freezing mid-fade. Three end-to-end tests pause at 27 %, 60 % and 95 % of the 9 s cycle and check that one heading line and one subline are fully opaque and the rest fully transparent; the 60 % and 95 % tests fail without the fix. The "Stop the press" note in `docs/design/motion.md` was updated.
+- **WEB-002: fixed** in PR 39. Activating the skip link closes the open mobile menu, so `main` is no longer inert and receives focus. An end-to-end test covers it.
+- `noindex` stays until the launch step. The reconciliation of the Lighthouse scores is unchanged: re-run Lighthouse after launch.

@@ -59,9 +59,37 @@ const copy = t(locale)
     })
   }
 
+  // Pausing mid-fade would freeze the heading and subline half transparent
+  // (about 1.6:1 contrast). So pressing "Stop the press" first lets the hero's
+  // 9 s cycle finish its current transition: heading, subline, drum and sheet
+  // jump to the end of it (at most about a second ahead) and then hold. The
+  // windows are the transitions in Hero.astro: 24 to 35 %, 57 to 68 % and
+  // 90 to 100 % of the cycle (the last one ends on the first frame again).
+  const CYCLE = 9000
+  const settledAt = (share: number) =>
+    share >= 0.24 && share < 0.35
+      ? 0.35
+      : share >= 0.57 && share < 0.68
+        ? 0.68
+        : share >= 0.9
+          ? 1
+          : share
+  const settle = () => {
+    document.getAnimations().forEach((animation) => {
+      const effect = animation.effect as KeyframeEffect | null
+      const target = effect?.target
+      if (!effect || !target?.closest('[data-loop]')) return
+      if (Number(effect.getTiming().duration) !== CYCLE) return
+      const time = Number(animation.currentTime)
+      const start = Math.floor(time / CYCLE) * CYCLE
+      animation.currentTime = start + settledAt((time - start) / CYCLE) * CYCLE
+    })
+  }
+
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
       paused = !paused
+      if (paused) settle()
       // Under reduced motion the page starts static; starting the press
       // switches to the motion layout for this page view.
       if (!paused) root.classList.add('motion')

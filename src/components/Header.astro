@@ -141,6 +141,13 @@ const links = [
       link.addEventListener('click', () => setOpen(false))
     })
 
+    // The skip link sits before the header, so keyboard users can reach it
+    // while the menu is open. Close the menu first: its inert main would
+    // otherwise swallow the jump to #main.
+    document.querySelector('a[href="#main"]')?.addEventListener('click', () => {
+      if (!panel.hidden) setOpen(false)
+    })
+
     // The panel only exists below 720 px; close it if the window grows.
     // Keep this in step with the `min-width: 720px` media query below.
     matchMedia('(min-width: 720px)').addEventListener('change', (event) => {

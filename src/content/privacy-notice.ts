@@ -25,10 +25,12 @@ export interface Notice {
 const cloudflarePolicy = 'https://www.cloudflare.com/privacypolicy/'
 const cloudflareDpa = 'https://www.cloudflare.com/cloudflare-customer-dpa/'
 const authority = 'https://uoou.gov.cz/'
+const adequacy =
+  'https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_en'
 
 const en: Notice = {
-  updated: '2026-11-05',
-  updatedText: '5 November 2026',
+  updated: '2026-11-09',
+  updatedText: '9 November 2026',
   updatedLabel: 'Last updated',
   intro:
     'This site is a personal portfolio, built to collect as little as possible. It has no forms, accounts, analytics, advertising or cookies, and it loads no third-party scripts, fonts or embeds.',
@@ -67,14 +69,14 @@ const en: Notice = {
       heading: 'When you write to me',
       paragraphs: [
         'If you email {email}, I receive your email address, your name if you give it, and what you write. I use it to read and answer your message and to keep a record of the conversation. The legal basis is my legitimate interest in answering people who contact me; if you write about a job or a project, it is also taking steps at your request before a possible agreement.',
-        'Your message passes through my email hosting provider and the provider of the inbox I read, since {email} forwards to that inbox. I keep a conversation for as long as it is useful and delete it twelve months after the last message, unless the law or a dispute requires me to keep it longer. I send no newsletters or marketing and I do not put you on any list.',
+        'Your message passes through my email hosting provider, which forwards {email} to a mailbox with Proton in Switzerland, where I read it. I keep a conversation for as long as it is useful and delete it twelve months after the last message, unless the law or a dispute requires me to keep it longer. I send no newsletters or marketing and I do not put you on any list.',
       ],
     },
     {
       id: 'people',
       heading: 'People named in my work',
       paragraphs: [
-        'Case studies may name clients and collaborators and show people in screenshots of projects I worked on. I publish this to present my work honestly, which is my legitimate interest. If you are named or shown and want it changed or removed, write to [{email}](mailto:{email}) and I will act on it promptly.',
+        'Case studies may name clients and collaborators and show people in screenshots of projects I worked on. I publish this to present my work honestly, which is my legitimate interest, and I keep it for as long as the case study is published. If you are named or shown and want it changed or removed, write to [{email}](mailto:{email}) and I will act on it promptly.',
       ],
     },
     {
@@ -83,6 +85,9 @@ const en: Notice = {
       paragraphs: [
         'Recipients are Cloudflare (hosting) and my email providers (messages). I do not sell data, and I use none of it for automated decisions or profiling.',
         'Cloudflare is a US company and may process data outside the European Economic Area. It transfers data under the EU–US Data Privacy Framework or, where that does not apply, under the EU standard contractual clauses, which its data processing addendum includes.',
+        'Email sent to the published address ends up with Proton in Switzerland. Switzerland is outside the European Economic Area, but the European Commission recognises it as providing an adequate level of data protection ([adequacy decisions](' +
+          adequacy +
+          ')), so that transfer needs no further safeguard.',
       ],
     },
     {
@@ -121,8 +126,8 @@ const en: Notice = {
 }
 
 const cs: Notice = {
-  updated: '2026-11-05',
-  updatedText: '5. listopadu 2026',
+  updated: '2026-11-09',
+  updatedText: '9. listopadu 2026',
   updatedLabel: 'Poslední aktualizace',
   intro:
     'Tento web je osobní portfolio a shromažďuje co nejméně údajů. Nemá formuláře, účty, analytiku, reklamu ani cookies a nenačítá skripty, písma ani vložený obsah třetích stran.',
@@ -161,14 +166,14 @@ const cs: Notice = {
       heading: 'Když mi napíšete',
       paragraphs: [
         'Napíšete-li na {email}, dostanu vaši e-mailovou adresu, jméno, pokud ho uvedete, a obsah zprávy. Použiji je k přečtení a zodpovězení zprávy a k uchování záznamu o konverzaci. Právním základem je můj oprávněný zájem odpovídat lidem, kteří mě kontaktují; pokud píšete kvůli práci nebo projektu, jde zároveň o kroky učiněné na vaši žádost před případnou smlouvou.',
-        'Vaše zpráva projde přes poskytovatele e-mailového hostingu mé domény a poskytovatele schránky, kterou čtu, protože {email} se do ní přeposílá. Konverzaci uchovávám, dokud je užitečná, a dvanáct měsíců po poslední zprávě ji smažu, pokud mi zákon nebo spor neukládá ji uchovat déle. Nerozesílám newslettery ani marketing a nezařazuji vás do žádného seznamu.',
+        'Vaše zpráva projde přes poskytovatele e-mailového hostingu mé domény, který adresu {email} přeposílá do schránky u společnosti Proton ve Švýcarsku, kde ji čtu. Konverzaci uchovávám, dokud je užitečná, a dvanáct měsíců po poslední zprávě ji smažu, pokud mi zákon nebo spor neukládá ji uchovat déle. Nerozesílám newslettery ani marketing a nezařazuji vás do žádného seznamu.',
       ],
     },
     {
       id: 'people',
       heading: 'Lidé zmínění v mé práci',
       paragraphs: [
-        'Případové studie mohou uvádět jména klientů a spolupracovníků a ukazovat lidi na snímcích obrazovky projektů, na kterých jsem pracoval. Zveřejňuji to, abych svou práci představil pravdivě, což je můj oprávněný zájem. Pokud jste uvedeni nebo zobrazeni a chcete to změnit nebo odstranit, napište na [{email}](mailto:{email}) a vyřídím to bez zbytečného odkladu.',
+        'Případové studie mohou uvádět jména klientů a spolupracovníků a ukazovat lidi na snímcích obrazovky projektů, na kterých jsem pracoval. Zveřejňuji to, abych svou práci představil pravdivě, což je můj oprávněný zájem, a uchovávám to, dokud je případová studie zveřejněná. Pokud jste uvedeni nebo zobrazeni a chcete to změnit nebo odstranit, napište na [{email}](mailto:{email}) a vyřídím to bez zbytečného odkladu.',
       ],
     },
     {
@@ -177,6 +182,9 @@ const cs: Notice = {
       paragraphs: [
         'Příjemci jsou Cloudflare (hosting) a poskytovatelé mého e-mailu (zprávy). Údaje neprodávám a nepoužívám je k automatizovanému rozhodování ani profilování.',
         'Cloudflare je americká společnost a může údaje zpracovávat mimo Evropský hospodářský prostor. Předává je na základě rámce EU–USA pro ochranu údajů (Data Privacy Framework), a pokud se nepoužije, na základě standardních smluvních doložek EU, které jeho dodatek o zpracování osobních údajů obsahuje.',
+        'E-mail poslaný na zveřejněnou adresu skončí u společnosti Proton ve Švýcarsku. Švýcarsko leží mimo Evropský hospodářský prostor, ale Evropská komise uznává, že zajišťuje odpovídající úroveň ochrany osobních údajů ([rozhodnutí o odpovídající ochraně](' +
+          adequacy +
+          ')), takže pro toto předání nejsou potřeba další záruky.',
       ],
     },
     {

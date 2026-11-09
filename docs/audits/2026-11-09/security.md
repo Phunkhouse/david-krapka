@@ -121,3 +121,9 @@ There is no previous security report or `SEC-` finding to reconcile. WEB-001 and
 ## Repository preservation
 
 Git status was empty before the audit and immediately before writing this report. The final status comparison confirmed that the only repository addition is `docs/audits/2026-11-09/security.md`, with empty staged/unstaged tracked-file diffs and unchanged HEAD; application code, configuration, data, the committed web-quality report and milestone checklists were preserved. All generated checks and browser/server artifacts stayed in disposable directories. No commit, push or PR was created for this audit.
+
+## Follow-up, 9 November 2026
+
+Added after the audit; the findings above are unchanged.
+
+- **SEC-001: fixed** in PR 39. `.github/workflows/claude.yml` now pins `anthropics/claude-code-action` to commit `61a9c274fa7110a66dfafc1bbbced03833eb25fe` with a comment naming v1.0.269. The commit was checked against the upstream tag with `gh api` (tag `v1` and `v1.0.269` point to it). The other workflow actions are unchanged; pinning them is a possible later hardening step.

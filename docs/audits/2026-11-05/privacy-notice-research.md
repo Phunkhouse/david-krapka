@@ -23,6 +23,10 @@ Date: 5 November 2026. Purpose: close the “Not verified” rows of the [legal 
 - **Case study names and screenshots:** legitimate interest, with a promise to change or remove on request. This matches the accepted risk in [0012](../../decisions/0012-skip-permission-requests-for-case-studies.md) but does not replace it.
 - **Controller identity:** name, country and email only. A postal address is not given; add it with the business identification (LEG-002) when the IČO is reactivated.
 
+## Update, 9 November 2026
+
+The pre-launch legal audit ([legal readiness](../2026-11-09/legal-readiness.md), LEG-003) found that the notice did not say where email goes: David confirmed that Active24 forwards `hello@david-krapka.eu` to a Proton mailbox in Switzerland. The notice now says so and gives Switzerland's EU adequacy basis ([Commission adequacy decisions](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_en)), and it states a retention criterion for people named in case studies (kept while the case study is published). David approved the wording on 9 November 2026. The date of the notice is 9 November 2026.
+
 ## Still not verified
 
 - The Self-Serve agreement and DPA versions this account accepted (private record, LEG-004).

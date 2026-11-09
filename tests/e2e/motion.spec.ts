@@ -52,6 +52,41 @@ for (const { path, stop, start } of pages) {
         await expect.poll(() => running(page)).toBeGreaterThanOrEqual(11)
       })
 
+      // Audit WEB-001: pausing in the middle of a fade must not freeze the
+      // heading half transparent. The test puts the 9 s cycle into each
+      // transition window, then presses the control.
+      for (const share of [0.27, 0.6, 0.95]) {
+        test(`pausing during a transition (${share * 100} % of the cycle) leaves readable text`, async ({
+          page,
+        }) => {
+          await page.goto(path)
+          await expect.poll(() => running(page)).toBeGreaterThanOrEqual(11)
+          await page.evaluate((s) => {
+            document.getAnimations().forEach((a) => {
+              const effect = a.effect as KeyframeEffect | null
+              if (Number(effect?.getTiming().duration) === 9000) {
+                a.currentTime = s * 9000
+              }
+            })
+          }, share)
+          await page.getByRole('button', { name: stop }).click()
+          await expect(page.locator('html')).toHaveClass(/paused/)
+          expect(await running(page)).toBe(0)
+          const opacities = await page.evaluate(() =>
+            ['h1 .line', '.sublines li'].map((selector) =>
+              [...document.querySelectorAll(selector)].map((el) =>
+                Number(getComputedStyle(el).opacity),
+              ),
+            ),
+          )
+          // Exactly one heading line and one subline show, fully opaque.
+          for (const group of opacities) {
+            expect(group.filter((o) => o === 1)).toHaveLength(1)
+            expect(group.filter((o) => o === 0)).toHaveLength(group.length - 1)
+          }
+        })
+      }
+
       test('the pause control stops and restarts every loop, by keyboard', async ({
         page,
       }) => {

@@ -174,3 +174,13 @@ Raw verification artifacts remain outside the repository in `/private/tmp/portfo
 | Cookie-law currency/deployed edge behavior | Read §89(3) with the outstanding amendment reconciled in official text; inspect actual deployed storage/edge features before adding any such technology. This source gap does not establish a need for a banner on the storage-free build. |
 
 The audit made no application, notice, account or checklist changes. Final repository comparison permits only this report as a new file; no commit or PR was created for this legal review.
+
+## Follow-up and decisions by David, 9 November 2026
+
+Added after the audit; the findings above are unchanged.
+
+- **LEG-003: fixed** in PR 39. The notice now names the Proton mailbox in Switzerland, the EU adequacy basis, and the retention criterion for people named in case studies. David approved the wording.
+- **LEG-009: record made.** A one-page private record covering the three activities and the actual providers (Active24 forwards and keeps a copy; Proton personal account) is kept outside the repository, reviewed and dated 9 November 2026 by David. Correspondence is deleted 12 months after the last message at the latest, in both the Proton mailbox and the Active24 copy; in practice David deletes messages soon after a conversation ends, so no separate reminder is kept. Cloudflare's request-data retention is left unresolved, as the audit advises.
+- **LEG-004: public terms recorded.** The versions in force on 9 November 2026 were read and saved as PDFs with the record: Cloudflare Self-Serve Subscription Agreement (last updated 12 September 2025), DPA v6.4 (effective 3 April 2026), Privacy Policy (effective 4 November 2025); Active24 general terms, with processing terms in §10 (effective 1 December 2021), privacy statement (dated 18 May 2018); Proton Terms of Service (last modified 5 November 2026), Privacy Policy (last modified 12 May 2026). The Cloudflare account is on the Free plan with David as its only member. No new agreement was accepted to create this record.
+- **Accepted by David:** the Active24 clarification is not pursued. Active24 does not state where it stores mail, and its privacy statement allows subprocessors outside the EU under safeguards. David accepts the remaining uncertainty about any non-EEA processing of mail by Active24 as a low risk for a personal portfolio address, and will revisit it if mail handling changes (for example when DNS moves to Cloudflare) or if Active24 publishes the location.
+
