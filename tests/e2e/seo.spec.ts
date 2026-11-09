@@ -118,7 +118,7 @@ test('the 404 page has no Open Graph or canonical tags', async ({ page }) => {
 
 for (const { path, file, alt } of [
   { path: '/', file: 'site-en.png', alt: 'product-minded engineer' },
-  { path: '/cs/', file: 'site-cs.png', alt: 'inženýr s produktovým myšlením' },
+  { path: '/cs/', file: 'site-cs.png', alt: 'vývojář s produktovým myšlením' },
   { path: '/privacy/', file: 'site-en.png', alt: 'product-minded engineer' },
 ]) {
   test(`${path} shares the site preview image for its language`, async ({

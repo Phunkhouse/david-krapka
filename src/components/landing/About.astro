@@ -102,6 +102,12 @@ const [before, highlighted, after] = about.title
     overflow: hidden;
     border: var(--border);
     border-radius: 50%;
+    /* Safari does not clip transformed, masked or blended children to a
+       rounded overflow box: the photo spilled out as a square at the
+       bottom. A circular clip-path and its own stacking context make
+       WebKit clip them like other browsers do. */
+    clip-path: circle(50%);
+    isolation: isolate;
   }
 
   .text {

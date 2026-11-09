@@ -1,51 +1,54 @@
 ---
 title: Vladan Vaněk
-summary: '[One-line summary to be confirmed]'
+summary: 'A personal brand site for a communication consultant, designed and built by me.'
 kind: short
-status: '[Current status]'
-dates: '[20XX – 20XX]'
-role: '[Role and scope]'
+status: 'Live since July 2025'
+dates: 'July 2025'
+role: 'Design (logo included), development and content setup'
 collaborators:
-  - name: '[Name]'
-    role: '[role]'
-ai: '[What AI helped with · how I checked it]'
+  - name: Vladan Vaněk
+    role: 'his blog, written in the CMS'
+ai: 'Minimal: AI did some routine grunt work · the site is mostly written by hand'
+stack:
+  - Next.js
+  - Sanity
+  - GSAP
+  - Embla Carousel
+liveUrl: https://vladanvanek.cz
 order: 3
-draft: true
+draft: false
 ---
+
+import home from './home.jpg'
 
 ## Summary
 
-[What the site does for Eucal and its visitors, in two sentences.]
+Vladan Vaněk is a communication consultant: strategy, content and ghostwriting, media relations and training. His site presents those services and his experience, with courses, a blog and references, and ends in a contact form. It went live in July 2025.
 
 ## What I owned
 
-[Design, development, content or coordination: which of these were mine, and who did the rest.]
+The design, including the logo, and the build. Like Eucal it runs on Next.js with its content in Sanity. GSAP animations and an Embla carousel give the pages some movement without getting in the way of the content.
+
+The design also became the basis of his brand. He took its colours, logo and fonts into his own posts on social media.
 
 ## One decision
 
 <Decision
   n={1}
-  name="[Short name of the decision]"
-  chose="[The approach I took]"
-  insteadOf="[The alternative I considered]"
-  because="[The reason and the constraint behind it]"
-  checkedBy="[How I validated it, and what it showed]"
+  name="Content in a CMS"
+  chose="Put the content, including his blog, in Sanity"
+  insteadOf="A website builder or a CMS with ready-made themes"
+  because="Vladan wanted to run his own blog and share the posts on LinkedIn to build his brand. I needed a CMS that is ideally free, easy for him to use, and lets me build the site from scratch without prebuilt bloat. Sanity met all three."
+  checkedBy="He now manages everything he needs on his own: the blog is active and he shares it on LinkedIn often."
 />
 
 <Figure
   n={1}
-  alt="[Screenshot: what it shows]"
-  caption="[Caption: what the screenshot shows and when it was taken]"
+  src={home}
+  alt="Vladan Vaněk's home page: his photo over the headlines “Radím klientům s komunikací” and “Jsem profesionál”, with the V logo, on the site's violet"
+  caption="The top of the home page, November 2026."
 />
-
-## Outcome
-
-[What changed for the client or the visitors, and how we know.]
-
-<Outcomes>
-  <Outcome>[A verifiable qualitative outcome, if there is no number]</Outcome>
-</Outcomes>
 
 ## What I would <Re>re</Re>think
 
-[One thing I would do differently.]
+Today I would pick Astro and Keystatic. Astro ships little JavaScript, so the pages would load faster. Vladan knows GitHub, so Keystatic would keep his posts as files in the site's repository, with a simple editor on top: no external service or account to maintain, and every change versioned in git.

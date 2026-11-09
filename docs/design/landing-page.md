@@ -24,21 +24,21 @@ Agreed 4 and 5 November 2026, while building the static page (milestone 3 is don
 **Desktop.** Full-height first screen (900 px in the mockup) split into a text column and a 720 px drum panel on the right.
 
 - Header: the háček mark (48 px, see [Mark and icons](visual-system.md#mark-and-icons)), then the wordmark “DAVID KŘAPKA” (Rubik 24 px) with “Product-minded engineer” below it (Sora 13 px, 600). Navigation on the right: Work · Approach · About · Contact.
-- Text column, aligned to the bottom: mono eyebrow, the cycling H1, the cycling subline, an intro paragraph and two buttons.
+- Text column, aligned to the bottom: the cycling H1, the cycling subline, an intro paragraph and two buttons.
 - Drum panel: yellow paper, ink rollers left and right, the turning drum (T, M, R in halftone with a pink misregistered copy) and a round counter (1/3 → 2/3 → 3/3) in the top-right corner.
 
 **Mobile.** Header with wordmark and a 48 px round menu button. Then a 410 px drum band, then the headline, subline and buttons. The intro paragraph is not shown on mobile (open question in the [design README](README.md#open-design-questions)). The secondary button becomes a 58 px round icon button labelled “Get in touch”.
 
 | Element | English | Czech |
 | --- | --- | --- |
-| Role under name | Product-minded engineer | Inženýr s produktovým myšlením |
+| Role under name | Product-minded engineer | Vývojář s produktovým myšlením |
 | Nav | Work · Approach · About · Contact | Práce · Přístup · O mně · Kontakt |
 | Eyebrow (desktop) | HOW EVERY PROJECT GOES | TAK PROBÍHÁ KAŽDÝ PROJEKT |
 | H1 (accessible text) | Think. Make. Rethink. | Think. Make. Rethink. (kept in English) |
 | Subline 1 | Understand the problem and ask the questions. | Pochopit problém a položit otázky. |
 | Subline 2 | Turn it into a working product. | Proměnit to ve fungující produkt. |
 | Subline 3 | Learn from it and change direction when it helps. (mobile: …and change direction.) | Poučit se a změnit směr, když to pomůže. (mobile: …a změnit směr.) |
-| Intro (desktop) | I'm David Křapka, a product-minded engineer. I find the real problem, build the product and keep improving it after it ships. | Jsem David Křapka, inženýr s produktovým myšlením. Najdu skutečný problém, postavím produkt a zlepšuji ho i po spuštění. |
+| Intro (desktop) | I'm David Křapka, a product-minded engineer. I find the real problem, build the product and keep improving it after it ships. | Jsem David Křapka, vývojář s produktovým myšlením. Najdu skutečný problém, postavím produkt a zlepšuji ho i po spuštění. |
 | Primary button | See selected work | Prohlédnout práci |
 | Secondary button | Get in touch | Napište mi |
 
@@ -118,7 +118,7 @@ Chosen direction **E3 “Big team. Small team.”**
 | --- | --- | --- |
 | Eyebrow | About · Always evolving | O mně · Pořád se vyvíjím |
 | H2 | Playful by design. **Serious** about the work. | Hravý v designu. Vážný v práci. |
-| Text | The way I work has changed a lot. I used to work on parts of a product. Now I take on more of the whole thing, combining product thinking, UX and engineering. [A short personal note goes here.] | Můj způsob práce se hodně změnil. Dřív jsem pracoval na částech produktu. Dnes beru víc celek a spojuji produktové myšlení, UX a vývoj. [Sem přijde krátká osobní poznámka.] |
+| Text | The way I work has changed a lot. I used to work on parts of a product. Now I take on more of the whole thing, combining product thinking, UX and engineering. When something's missing, I build a website or an app for it. | Můj způsob práce se hodně změnil. Dřív jsem pracoval na částech produktu. Dnes beru víc celek a spojuji produktové myšlení, UX a vývoj. Když mi něco chybí, postavím si na to web nebo aplikaci. |
 
 ## 6. Contact (`#contact`)
 
@@ -133,7 +133,7 @@ Chosen direction **E3 “Big team. Small team.”**
 | Card 1 text | Tell me about the team and the role. My CV and LinkedIn are one click away. (mobile: first sentence) | Napište mi o týmu a roli. Životopis a LinkedIn jsou na jedno kliknutí. (mobile: first sentence) |
 | Card 1 link | Talk about a role → | Probrat pozici → |
 | Card 2 title | Have a project? | Máte projekt? |
-| Card 2 text | Share the problem, not just the spec. I'll come back with questions first. | Popište problém, nejen zadání. Nejdřív se vrátím s otázkami. |
+| Card 2 text | Tell me what problem you're solving. We'll look at it together. | Napište mi, jaký problém řešíte. Společně se na to podíváme. |
 | Card 2 link | Start a project → | Začít projekt → |
 | Links | [email address] · [LinkedIn] · [GitHub] | [e-mail] · [LinkedIn] · [GitHub] |
 
@@ -148,6 +148,5 @@ Ink background, small text.
 | English | Czech |
 | --- | --- |
 | © 2026 David Křapka | © 2026 David Křapka |
-| Printed in three inks: blue, yellow and a little pink. | Tištěno třemi barvami: modrou, žlutou a trochou růžové. |
 
 The year should come from the build date. Proposed sizing for the business identification block is in the [milestone 2 checklist](../milestone-2-checklist.md). The language switcher and any legal links will probably live here or in the header (not designed yet). The footer needs a link to the privacy notice (LEG-003) and a reserved slot for business identification (name, place of business, IČO and registration note) that appears once the IČO is active (LEG-002).

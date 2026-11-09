@@ -1,52 +1,73 @@
 ---
 title: Eucal
-summary: '[Jednovětý souhrn k potvrzení]'
+summary: 'Třijazyčný web pro EUCAL, českou kalibrační laboratoř pipet, který mění návštěvy v poptávky a objednávky, se kterými může personál hned pracovat.'
 kind: short
-status: '[Aktuální stav]'
-dates: '[20XX – 20XX]'
-role: '[Role a rozsah]'
+status: 'V provozu na eucal.cz · udržovaný'
+dates: 'Od září 2024'
+role: 'Design, vývoj a údržba (logo je klientovo)'
 collaborators:
-  - name: '[Jméno]'
-    role: '[role]'
-ai: '[S čím pomohla AI · jak jsem to ověřil]'
+  - name: Personál EUCAL
+    role: obsah, upravovaný v CMS
+ai: 'Od října 2026 přepracovali formuláře, přístupnost a testy AI agenti podle mé specifikace · každý pull request jsem zkontroloval a web jsem prošel s VoiceOverem'
 liveUrl: https://eucal.cz
 order: 2
-draft: true
+draft: false
 ---
+
+import home from './home.jpg'
 
 ## Shrnutí
 
-[Co web dělá pro Eucal a jeho návštěvníky, dvěma větami.]
+EUCAL kalibruje, servisuje a prodává laboratorní pipety, kalibrace má akreditovanou podle ISO/IEC 17025. Začínala v roce 1998 opravami pipet Eppendorf a dnes je autorizovaným servisním centrem Eppendorf. Zákazníky jsou pracovníci a nákupčí laboratoří, hlavně v Česku a na Slovensku. Web představuje služby česky, anglicky a německy a mění návštěvy v poptávky, žádosti o opravu a objednávky, které přijdou do schránky EUCALu.
 
 ## Co jsem měl na starosti
 
-[Design, vývoj, obsah nebo koordinace: co z toho bylo moje a kdo udělal zbytek.]
+Web jsem postavil v Next.js na podzim 2024 a obsah přesunul do Sanity, takže personál EUCALu upravuje texty, obrázky a přílohy ve všech jazycích bez vývojáře. V roce 2025 jsem přidal anglickou a německou verzi a stránku prodeje. V říjnu 2026 jsem přepracoval formuláře, přístupnost a testy. Design je také můj, kromě loga, a na kódu nikdo další nepracoval. Repozitář běží pod klientovým vlastním účtem na GitHubu.
 
-## Jedno rozhodnutí
+## Dvě rozhodnutí
 
 <Decision
   n={1}
-  name="[Krátký název rozhodnutí]"
-  chose="[Přístup, který jsem zvolil]"
-  insteadOf="[Alternativa, kterou jsem zvažoval]"
-  because="[Důvod a omezení za ním]"
-  checkedBy="[Jak jsem to ověřil a co z toho vyšlo]"
+  name="E-maily do EUCALu jsou vždy česky"
+  chose="Každá poptávka přijde personálu česky, v prvním řádku je jazyk návštěvníka a v předmětu jeho kód (EN nebo DE)"
+  insteadOf="Posílat každý e-mail v jazyce, který použil návštěvník"
+  because="Personál čte česky, ale položky poptávky přicházely z CMS v jazyce návštěvníka, takže německou poptávku musel někdo nejdřív přeložit, než s ní šlo pracovat."
+  checkedBy="Testy v prohlížeči odesílají formuláře a čtou zachycený e-mail. Položky se k českým názvům přiřazují podle pořadí, a když se seznamy liší, e-mail ponechá názvy návštěvníka, místo aby uvedl špatnou položku."
+/>
+
+<Decision
+  n={2}
+  name="Objednávky e-mailem, bez databáze"
+  chose="Nechat objednávání jednoduché: tvůrce objednávek v prohlížeči vyplní PDF objednávky a podepsaná objednávka přijde do EUCALu e-mailem"
+  insteadOf="E-shop s databází, zákaznickými účty a historií objednávek"
+  because="Laboratoř už všechno řeší přes e-mail. Tvůrce objednávek působí jako e-shop, ale je to jen pomocník, který zákazníkům usnadní objednání a EUCALu zjednoduší celý proces. Databáze by přidala hosting, administraci a osobní údaje, o které je třeba se starat, a přínos by byl malý."
+  checkedBy="Web neukládá nic, co návštěvník odešle, takže kromě schránky není co uniknout ani zálohovat. Neúspěšné odeslání ukáže chybu, nikdy falešný úspěch, a testy v prohlížeči pokrývají PDF objednávky i jeho nahrání."
 />
 
 <Figure
   n={1}
-  alt="[Snímek: co ukazuje]"
-  caption="[Popisek: co snímek ukazuje a kdy vznikl]"
+  src={home}
+  alt="Domovská stránka EUCALu v angličtině: hlavička s přepínačem jazyka, promo lišta s tlačítkem pauzy, nadpis „Give your pipettes quality care“ a boxy Services a Sale"
+  caption="Domovská stránka v angličtině, listopad 2026."
 />
 
 ## Výsledek
 
-[Co se změnilo pro klienta nebo návštěvníky a jak to víme.]
+Formuláře dřív odesílaly data přímo externí službě, která špatně zvládala přílohu objednávky a stránce neuměla říct, jestli se něco odeslalo. Teď jdou přes vlastní server webu, který zkontroluje každé pole i soubor a místo falešného úspěchu ukáže srozumitelnou chybu.
 
 <Outcomes>
-  <Outcome>[Ověřitelný kvalitativní výsledek, pokud číslo není]</Outcome>
+  <Outcome>
+    Kontaktní formulář, poptávka, oprava, nahrání objednávky i PDF objednávky
+    prošly testy v prohlížeči při auditu provozní připravenosti 4. listopadu
+    2026.
+  </Outcome>
+  <Outcome>
+    Automatické kontroly přístupnosti, ovládání klávesnicí a přiblížení běží u
+    každé změny s cílem WCAG AA. Jedna mezera je známá a zapsaná: některé modré
+    barvy značky mají do redesignu nižší kontrast, než je cíl.
+  </Outcome>
 </Outcomes>
 
 ## Co bych <Re>pře</Re>hodnotil
 
-[Jedna věc, kterou bych udělal jinak.]
+Dnes bych objednávku zjednodušil na jeden krok: zákazník odešle formulář, server vytvoří PDF a zákazník dostane potvrzovací e-mail. Laboratořím, které se vracejí, bych nabídl i uložené údaje. Tehdy mi chyběly zkušenosti s backendem, s AI je ta práce navíc malá. E-mail bych ale nechal jako místo, kam objednávky přicházejí.

@@ -83,10 +83,13 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
         </h3>
         <p class="featured-text">
           <span class="long">{featured.text}</span>
-          <span class="short">{featured.textShort}</span>{' '}
-          <span class="placeholder">{featured.summary}</span>
+          <span class="short">{featured.textShort}</span>
         </p>
-        {featuredHref && <p class="more label">{work.readMore}</p>}
+        {featuredHref && (
+          <span class="more" aria-hidden="true">
+            →
+          </span>
+        )}
       </div>
     </article>
 
@@ -117,7 +120,11 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
               <span class="long">{project.text}</span>
               <span class="short">{project.textShort}</span>
             </p>
-            {project.href && <p class="more label">{work.readMore}</p>}
+            {project.href && (
+              <span class="more" aria-hidden="true">
+                →
+              </span>
+            )}
           </div>
         </li>
       ))}
@@ -179,11 +186,6 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
 
   .long {
     display: none;
-  }
-
-  .placeholder {
-    background: var(--yellow);
-    color: var(--ink);
   }
 
   /* Featured card */
@@ -359,10 +361,32 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
     outline-offset: var(--focus-offset);
   }
 
-  .card-body p.more.label,
-  .featured-body .more {
-    font-size: var(--text-label);
-    line-height: 1.4;
+  /* A linked card ends in a bare arrow: the card's link already names the
+     project, so the arrow is decoration and hidden from screen readers. It
+     sits bottom right and nudges right with the card's lift. */
+  .more {
+    align-self: flex-end;
+    margin-top: auto;
+    color: var(--ink);
+    font-family: var(--family-body);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1;
+    transition: transform 0.2s;
+    /* Its nudge (a transform) lifts it above the card's link overlay, so let
+       clicks pass through to the link. */
+    pointer-events: none;
+  }
+
+  /* The arrow sits at the bottom of every linked card, whatever its text
+     length. */
+  .is-link .card-body,
+  .is-link .featured-body {
+    flex: 1;
+  }
+
+  .is-link:has(.card-link:focus-visible) .more {
+    transform: translateX(4px);
   }
 
   .featured.is-link:has(.card-link:focus-visible) {
@@ -390,11 +414,16 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
       text-decoration: underline;
       text-decoration-thickness: 3px;
     }
+
+    .is-link:hover .more {
+      transform: translateX(4px);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .featured.is-link,
-    .card.is-link {
+    .card.is-link,
+    .more {
       transition: none;
     }
   }

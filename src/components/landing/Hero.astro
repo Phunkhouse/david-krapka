@@ -51,7 +51,6 @@ const home = pathFor(locale, 'home')
   </div>
 
   <div class="text">
-    <p class="label eyebrow">{hero.eyebrow}</p>
     <!-- The claim stays in English on the Czech page: mark its language. -->
     <h1 lang={locale === 'en' ? undefined : 'en'}>
       {hero.heading.map((word) => (
@@ -242,7 +241,6 @@ const home = pathFor(locale, 'home')
     padding: 22px var(--pad-inline) 24px;
   }
 
-  .eyebrow,
   .intro {
     display: none;
   }
@@ -304,7 +302,6 @@ const home = pathFor(locale, 'home')
   }
 
   @media (min-width: 720px) {
-    .eyebrow,
     .intro {
       display: block;
     }

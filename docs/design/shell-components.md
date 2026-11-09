@@ -28,7 +28,7 @@ A two-item segmented pill, `EN | CS`, in Space Mono 700, 12 px, uppercase, `0.08
 ## Pause control
 
 Required by [Motion](motion.md#pause-requirement) (WCAG 2.2.2). It pauses all looping decorative animation (hero drum, portrait glitch).
-- A pill button: yellow fill, 3 px ink border, pink hard offset shadow (`4px 4px 0`, 60 %), Space Mono 700 uppercase. A 20 px ink circle holds the icon: two yellow bars (pause) or a yellow triangle (play).
+- A round 44 px icon button: yellow fill, 3 px ink border, pink hard offset shadow (`4px 4px 0`, 60 %). A 26 px ink circle holds the icon: two yellow bars (pause) or a yellow triangle (play). No visible text (David, 9 November 2026): the name (“Stop the press” / “Start the press”) is the `aria-label`, also shown as a tooltip.
 - Labels: “Stop the press” / “Start the press”; Czech “Zastavit tisk” / “Spustit tisk”. The label states the action; use `aria-pressed` or swap the label, not both.
 - Placement: on the hero drum band, bottom-left (16–20 px from the edges), 40 px high on desktop and 36 px on mobile. It sits early in the tab order, before the animation it controls. Yellow on the yellow band is separated by the ink border and the shadow; focus ring is ink.
 - Default state: playing, except under `prefers-reduced-motion`, where it starts paused. State lives in page memory only: no cookie, `localStorage` or `sessionStorage`.

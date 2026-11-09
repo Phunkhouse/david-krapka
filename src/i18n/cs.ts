@@ -5,11 +5,11 @@ import type { Dictionary } from './en'
 export const cs: Dictionary = {
   site: {
     name: 'David Křapka',
-    role: 'Inženýr s produktovým myšlením',
+    role: 'Vývojář s produktovým myšlením',
     description:
-      'Jsem David Křapka, inženýr s produktovým myšlením. Najdu skutečný problém, postavím produkt a zlepšuji ho i po spuštění.',
+      'Jsem David Křapka, vývojář s produktovým myšlením. Najdu skutečný problém, postavím produkt a zlepšuji ho i po spuštění.',
     ogImageAlt:
-      'David Křapka, inženýr s produktovým myšlením. Think. Make. Rethink. Háček vytištěný modře na žlutém papíře.',
+      'David Křapka, vývojář s produktovým myšlením. Think. Make. Rethink. Háček vytištěný modře na žlutém papíře.',
   },
   nav: {
     label: 'Hlavní',
@@ -36,7 +36,6 @@ export const cs: Dictionary = {
   },
   home: {
     hero: {
-      eyebrow: 'Tak probíhá každý projekt',
       heading: ['Think.', 'Make.', 'Rethink.'],
       // Start of a heading word shown highlighted ("Re" in Rethink).
       highlight: 'Re',
@@ -46,7 +45,7 @@ export const cs: Dictionary = {
         'Poučit se a změnit směr, když to pomůže.',
       ],
       intro:
-        'Jsem David Křapka, inženýr s produktovým myšlením. Najdu skutečný problém, postavím produkt a zlepšuji ho i po spuštění.',
+        'Jsem David Křapka, vývojář s produktovým myšlením. Najdu skutečný problém, postavím produkt a zlepšuji ho i po spuštění.',
       work: 'Prohlédnout práci',
       contact: 'Napište mi',
     },
@@ -62,7 +61,6 @@ export const cs: Dictionary = {
         name: 'Kultomat',
         text: 'Od první otázky k produktu, který běží každý den: problém, rozhodnutí, vývoj a co se změnilo potom.',
         textShort: 'Od první otázky k produktu, který běží každý den.',
-        summary: '[Jednovětý souhrn k potvrzení]',
       },
       projects: [
         {
@@ -133,13 +131,14 @@ export const cs: Dictionary = {
       eyebrow: 'Zkušenosti · Co mi která dala',
       title: 'Velký tým. Malý tým.',
       lessonLabel: 'Co mě to naučilo',
-      cv: '[Stáhnout životopis] →',
+      cv: 'Stáhnout životopis →',
       emplifi: {
         name: 'Emplifi',
         dates: '10/2019 – 6/2026',
-        meta: 'UI inženýr, vedoucí týmu · zaměstnání',
-        lesson: '[Jak dodávat ve velkém produktu, aniž by se rozbil.]',
-        detail: '[Odpovědnosti a jedno konkrétní rozhodnutí, k potvrzení.]',
+        meta: 'Frontend vývojář, vedoucí týmu · zaměstnání',
+        lesson: 'Jeden společný zdroj pravdy je víc než spousta názorů.',
+        detail:
+          'Vedl jsem tým tří UI vývojářů, pak jsem přešel do týmu design systému. Většinu času jsem sjednocoval komponenty napříč mnoha týmy a repozitáři.',
       },
       freelance: {
         name: 'Freelance',
@@ -154,7 +153,7 @@ export const cs: Dictionary = {
       eyebrow: 'O mně · Pořád se vyvíjím',
       title: ['Hravý v designu. ', 'Vážný', ' v práci.'],
       text: 'Můj způsob práce se hodně změnil. Dřív jsem pracoval na částech produktu. Dnes beru víc celek a spojuji produktové myšlení, UX a vývoj.',
-      note: '[Sem přijde krátká osobní poznámka.]',
+      note: 'Když mi něco chybí, postavím si na to web nebo aplikaci.',
       portrait: 'Portrét Davida Křapky',
     },
     contact: {
@@ -168,10 +167,11 @@ export const cs: Dictionary = {
       },
       project: {
         title: 'Máte projekt?',
-        text: 'Popište problém, nejen zadání. Nejdřív se vrátím s otázkami.',
+        text: 'Napište mi, jaký problém řešíte. Společně se na to podíváme.',
         link: 'Začít projekt →',
         subject: 'Projekt: ',
       },
+      email: 'E-mail',
       linkedin: 'LinkedIn',
       github: 'GitHub',
     },
@@ -216,6 +216,5 @@ export const cs: Dictionary = {
   footer: {
     navLabel: 'Patička',
     privacy: 'Soukromí',
-    printed: 'Tištěno třemi barvami: modrou, žlutou a trochou růžové.',
   },
 }
