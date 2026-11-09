@@ -161,7 +161,11 @@ Status as of 5 November 2026: milestones 0 to 5 done (milestone 4's device check
 
 ## Milestone 6: Launch readiness and launch
 
-**Status:** in progress (9 November 2026): launch foundation, icons and preview images, contact links, privacy notice, case study content and the CV are merged; 0 placeholders in the build. Open: the DNS move and the `hello@` alias, the pre-launch review and audits, the launch PR, and David's sign-offs. Work plan, decisions and evidence in the [milestone 6 checklist](milestone-6-checklist.md).
+**Status:** done, launched 9 November 2026 at [david-krapka.eu](https://david-krapka.eu). One item left open: the portrait rights note (LEG-007). Work plan, decisions and evidence in the [milestone 6 checklist](milestone-6-checklist.md).
+
+**Completion evidence:** PRs #32 to #37 (project previews, Approach animation performance, contact links and JSON-LD, privacy notice, case study content, CV and contact section, UpVideo fix and checklist reconciliation), #38 and #39 (pre-launch [web quality](audits/2026-11-09/web-quality.md), [security](audits/2026-11-09/security.md) and [legal readiness](audits/2026-11-09/legal-readiness.md) audits and their fixes), #40 (DNS move to Cloudflare), #41 (launch code: indexable, placeholder check in `pnpm verify`, `workers.dev` off) and #42 ([post-launch checks](audits/2026-11-09/production-launch.md) and this wrap-up).
+
+**Unplanned changes:** the UpVideo placeholder was dropped (PR #37); the case study criterion was amended so a validation line appears only when there is a real one (decision 10); DNSSEC was on at Websupport and had to be removed before the nameserver switch and re-enabled on Cloudflare; unused Resend mail records were dropped in the move; the Cloudflare feature check moved after launch; the private record of processing and the provider terms (LEG-004, LEG-009) were completed during the legal follow-up, with the Active24 mail location accepted as an open question.
 
 **Goal:** Publish the site on david-krapka.eu.
 
@@ -184,18 +188,18 @@ Status as of 5 November 2026: milestones 0 to 5 done (milestone 4's device check
 
 **Acceptance checks:**
 
-- [ ] No placeholders remain; verify with the build check. `pnpm placeholders` reports 0 in 13 pages (9 November 2026); the failing check in `pnpm verify` arrives with PR G.
-- [ ] `https://david-krapka.eu/` and `/cs/` serve the site with HTTPS, HSTS and the agreed security headers; verify with `curl -I` and an external header scanner.
-- [ ] `https://www.david-krapka.eu/` redirects permanently to the apex; verify with `curl -I`.
-- [ ] Email links open a message to the right address with the right subject; verify manually on desktop and phone.
-- [ ] Sharing a page on LinkedIn shows the correct preview; verify with LinkedIn's post inspector.
-- [ ] Audit reports are saved in `docs/audits/` and every launch-blocking finding is fixed or accepted by David.
-- [ ] Email to the domain still arrives after the DNS change; verify by sending a test message.
-- [ ] The privacy notice exists in both languages, is linked from every footer, states the real contact address, retention and rights, and has no placeholders; verify by reading both pages. Built and tested (PR #35); text approved by David on 9 November 2026.
-- [ ] The deployed site still stores nothing on the device (no cookies or browser storage) and sets no `Set-Cookie`; verify with a clean browser profile and `curl -I`.
-- [ ] The Pre-launch legal audit reports each LEG requirement as supported, or David has accepted the gap.
+- [x] No placeholders remain; verify with the build check. `pnpm placeholders --fail` is part of `pnpm verify` since PR #41: 0 in 13 pages.
+- [x] `https://david-krapka.eu/` and `/cs/` serve the site with HTTPS, HSTS and the agreed security headers; verify with `curl -I` and an external header scanner. Mozilla HTTP Observatory A+ ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] `https://www.david-krapka.eu/` redirects permanently to the apex; verify with `curl -I`. 301 keeping path and query ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] Email links open a message to the right address with the right subject; verify manually on desktop and phone. Verified by David, 9 November 2026.
+- [x] Sharing a page on LinkedIn shows the correct preview; verify with LinkedIn's post inspector. Verified by David, 9 November 2026.
+- [x] Audit reports are saved in `docs/audits/` and every launch-blocking finding is fixed or accepted by David. No launch-blocking finding; fixes in PR #39; acceptances in the legal report.
+- [x] Email to the domain still arrives after the DNS change; verify by sending a test message. Verified by David after the nameserver switch and again after the domain was attached.
+- [x] The privacy notice exists in both languages, is linked from every footer, states the real contact address, retention and rights, and has no placeholders; verify by reading both pages. Built and tested (PR #35), updated for LEG-003 (PR #39); text approved by David on 9 November 2026.
+- [x] The deployed site still stores nothing on the device (no cookies or browser storage) and sets no `Set-Cookie`; verify with a clean browser profile and `curl -I`. Verified 9 November 2026 ([post-launch checks](audits/2026-11-09/production-launch.md)).
+- [x] The Pre-launch legal audit reports each LEG requirement as supported, or David has accepted the gap. See the follow-up section of the [legal readiness](audits/2026-11-09/legal-readiness.md) report; the portrait rights note (LEG-007) is the one item still open.
 - [x] Carried from milestone 5: each case study follows the [shared structure](content-and-case-studies.md#proposed-shared-case-study-structure), every claim and metric has a source in its project card, and David signs off each page; verify by David's review.
-- [ ] Carried from milestone 4: the whole page is smooth on a mid-range Android phone and on Safari iOS, and David signs off the feel of each animation against the canvas; verify with screen recordings and David's sign-off.
+- [x] Carried from milestone 4: the whole page is smooth on a mid-range Android phone and on Safari iOS, and David signs off the feel of each animation against the canvas; verify with screen recordings and David's sign-off. Signed off by David on 9 November 2026 (no recordings kept).
 
 **Dependencies and risks:** Content inputs below; legal findings; the public email address (blocks the privacy notice); access to Websupport to change nameservers; DNS change risk for email ([0007](decisions/0007-cloudflare-workers-hosting.md)).
 
@@ -218,4 +222,6 @@ These run in parallel with development and gate the milestones shown.
 
 ## After launch
 
-Possible next steps, each to be planned separately: Czech case studies (if not at launch), Playground of small experiments, a cookieless analytics tool, visitor interviews with both audiences, and a Systerna case study when it is ready.
+Possible next steps, each to be planned separately: Playground of small experiments, a cookieless analytics tool, visitor interviews with both audiences, a Systerna case study when it is ready, and Google Search Console with the sitemap (needs a DNS TXT record).
+
+Standing follow-ups: business identification in the footer and a review of the project invitation once the IČO is active ([LEG-001](SPEC.md#legal-requirements), [LEG-002](SPEC.md#legal-requirements)); replace UpVideo's validation line with a real outcome when there is one; revisit the Active24 mail location if mail handling changes; keep the Cloudflare features that inject scripts or set cookies off; a new dated copy of the private record of processing whenever processing changes.
