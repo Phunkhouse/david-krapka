@@ -15,7 +15,7 @@
     "typecheck": "astro check",
     "check:fonts": "node scripts/check-fonts.mjs",
     "check:drafts": "node scripts/check-drafts.mjs",
-    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build && pnpm check:fonts && pnpm check:drafts",
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build && pnpm check:fonts && pnpm check:drafts && pnpm placeholders --fail",
     "preview:cloudflare": "wrangler dev",
     "placeholders": "node scripts/placeholders.mjs",
     "test:e2e": "playwright test"

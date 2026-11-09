@@ -100,8 +100,8 @@ test('unknown path shows the bilingual 404 page', async ({ page }) => {
 test('sends the security headers from public/_headers', async ({ page }) => {
   const response = await page.goto('/')
   const headers = response!.headers()
-  // noindex is removed at launch (milestone 6); change this assertion then.
-  expect(headers['x-robots-tag']).toBe('noindex')
+  // The site is indexable since launch: no noindex header.
+  expect(headers['x-robots-tag']).toBeUndefined()
   expect(headers['x-content-type-options']).toBe('nosniff')
   expect(headers['cross-origin-opener-policy']).toBe('same-origin')
   expect(headers['strict-transport-security']).toBe(
