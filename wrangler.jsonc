@@ -8,7 +8,9 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
   },
-  "workers_dev": true,
+  // Production answers only on david-krapka.eu (milestone 6 decision 8);
+  // preview URLs stay on for PR review and carry noindex from Cloudflare.
+  "workers_dev": false,
   "preview_urls": true,
   // Required by `wrangler preview` (non-production branch builds), even if empty.
   "previews": {},

@@ -174,9 +174,9 @@ Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which 
 
 ### G1. Code (merged first, while the domain is not yet attached)
 
-- [ ] Remove `X-Robots-Tag: noindex` from `public/_headers`; change the assertion in `tests/e2e/smoke.spec.ts` to “no `X-Robots-Tag`”.
-- [ ] Add `pnpm placeholders --fail` to `pnpm verify` (and so to CI job `check`); update AGENTS.md.
-- [ ] `workers_dev` per decision 8.
+- [x] Remove `X-Robots-Tag: noindex` from `public/_headers`; change the assertion in `tests/e2e/smoke.spec.ts` to “no `X-Robots-Tag`”. Done in the launch PR.
+- [x] Add `pnpm placeholders --fail` to `pnpm verify` (and so to CI job `check`); update AGENTS.md. Done in the launch PR: 0 placeholders in 13 pages.
+- [x] `workers_dev` per decision 8. Done in the launch PR: `workers_dev: false`, `preview_urls: true`. After the merge deploys, the production `workers.dev` address stops answering until the domain is attached (G2).
 - [ ] `pnpm verify` and `pnpm test:e2e` pass; full CI green on the ready PR.
 
 ### G2. Domain (David, with the agent, right after the merge deploys)
@@ -201,7 +201,7 @@ Follow [the milestone 5 checklist](milestone-5-checklist.md) PRs C and D, which 
 
 Record evidence here and in the PR that completes each check.
 
-- [ ] No placeholders remain; verify with the build check. (G1)
+- [x] No placeholders remain; verify with the build check. (G1) `pnpm placeholders --fail` in `pnpm verify`: 0 placeholders in 13 pages.
 - [ ] `https://david-krapka.eu/` and `/cs/` serve the site with HTTPS, HSTS and the agreed security headers; verify with `curl -I` and an external header scanner. (A, G3)
 - [ ] `https://www.david-krapka.eu/` redirects permanently to the apex; verify with `curl -I`. (G2, G3)
 - [ ] Email links open a message to the right address with the right subject; verify manually on desktop and phone. (C, G3)

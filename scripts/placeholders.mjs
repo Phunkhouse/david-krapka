@@ -2,8 +2,8 @@
 // built pages, per page. Run after `pnpm build`:
 //
 //   pnpm placeholders          report only, exit 0
-//   pnpm placeholders --fail   exit 1 when any remain (the milestone 6
-//                              production check will use this)
+//   pnpm placeholders --fail   exit 1 when any remain (part of pnpm verify
+//                              since launch)
 //
 // It reads the visible text, attribute values and page titles of each HTML file in dist/.
 import { readdirSync, readFileSync, statSync } from 'node:fs'
