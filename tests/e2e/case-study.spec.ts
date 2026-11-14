@@ -253,7 +253,8 @@ test.describe('case study template', () => {
       'S čím pomohla AI',
     )
     await expect(page.locator('figcaption').first()).toContainText('Obr. 1 ·')
-    await expect(page.getByText(/^Zdroj:/)).toHaveCount(1)
+    // Every outcome with a metric has a source line; how many is content.
+    await expect(page.getByText(/^Zdroj:/).first()).toBeVisible()
   })
 
   const order = [
