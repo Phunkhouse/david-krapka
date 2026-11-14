@@ -3,11 +3,12 @@
 // work previews": boards Prev-Kultomat, Prev-Eucal, Prev-VladanVanek and
 // Prev-UpVideo). Manual tool, not a pnpm script.
 //
-//   node scripts/work-previews.mjs <screenshot-dir>
+//   node scripts/work-previews.mjs <screenshot-dir> [slug ...]
 //
 // <screenshot-dir> holds one screenshot of each project's home page, named
 // kultomat.jpg, eucal.jpg, vladan-vanek.jpg and upvideo.jpg (the canvas has
-// them as uploaded assets). The screenshots are not committed; only the
+// them as uploaded assets). With slugs, only those projects are rebuilt and
+// only their screenshots are needed. The screenshots are not committed; only the
 // composed images are.
 //
 // Writes src/assets/work/<slug>.jpg, 1200 × 630: the project's letter art,
@@ -21,9 +22,11 @@ import { join } from 'node:path'
 import process from 'node:process'
 import { chromium } from '@playwright/test'
 
-const dir = process.argv[2]
+const [dir, ...only] = process.argv.slice(2)
 if (!dir) {
-  console.error('Usage: node scripts/work-previews.mjs <screenshot-dir>')
+  console.error(
+    'Usage: node scripts/work-previews.mjs <screenshot-dir> [slug ...]',
+  )
   process.exit(2)
 }
 
@@ -114,7 +117,15 @@ const page = await browser.newPage({
   viewport: { width: 1200, height: 630 },
   deviceScaleFactor: 1,
 })
-for (const project of projects) {
+const selected = only.length
+  ? projects.filter((project) => only.includes(project.slug))
+  : projects
+const unknown = only.filter((slug) => !projects.some((p) => p.slug === slug))
+if (unknown.length) {
+  console.error(`Unknown project: ${unknown.join(', ')}`)
+  process.exit(2)
+}
+for (const project of selected) {
   const file = join(dir, `${project.slug}.jpg`)
   const screenshot = `data:image/jpeg;base64,${readFileSync(file).toString('base64')}`
   await page.setContent(html(project, screenshot))

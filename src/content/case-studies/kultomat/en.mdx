@@ -2,7 +2,7 @@
 title: Kultomat
 summary: 'A phone-first guide to classic and older films really screening in Prague this week, which I own from the first question to running it every day.'
 kind: long
-status: 'Live since October 2026 · accounts invite-only'
+status: 'Live since October 2026 · open to everyone'
 dates: 'Since October 2026'
 role: 'Owner: product, design, development and operations'
 collaborators: []
@@ -11,6 +11,7 @@ stack:
   - Next.js
   - TypeScript
   - Postgres on Neon
+  - Netlify
   - Raspberry Pi 5
   - TMDB and Wikidata
   - Resend
@@ -26,13 +27,13 @@ import homeWeek from './home-week.jpg'
 
 Kultomat helps people in Prague quickly find a worthwhile film they can actually go and see, especially an older or culturally significant one. Open it on a phone and it lists classics really screening in the next seven days, grouped by film, with a short reason each one is worth seeing and a link to the cinema's own page.
 
-It went live on 26 October 2026 with seven cinemas. On 7 November it covered 17 cinemas from 13 sources. Anyone can browse without an account; a watchlist with email alerts is open to invited friends and family.
+It went live on 26 October 2026 with seven cinemas and covered 17 cinemas from 13 sources by 7 November. Anyone can browse without an account. Since mid-November anyone can also create one, for a watchlist with email alerts, personal discovery profiles and a weekly digest. In the first weeks these were for invited friends and family only.
 
 ## What I owned
 
 All of it: the question, the product and data rules, the design, the code and running it. It started as a research project on 24 October 2026 and the first public release was live two days later.
 
-I wrote the specification, the milestones and a decision record for every significant choice. I also have an ongoing role inside the product: each week I review the films the matcher was unsure about, and I decide which classics the site recommends editorially.
+I wrote the specification, the milestones and a decision record for every significant choice, 52 by 13 November. I also have an ongoing role inside the product: each week I review the films the matcher was unsure about, decide which classics the site recommends editorially, and approve every social post before it goes out.
 
 ## Problem and constraints
 
@@ -40,9 +41,9 @@ Prague's cinemas each publish their programme on their own website. Finding an o
 
 The constraints shaped everything:
 
-- **One person, no budget.** Free tiers only: the database, the web hosting, 100 emails a day and a non-commercial film API.
+- **One person, no budget.** Free tiers only: the database, the web hosting, 100 emails a day and a non-commercial film API. A free tier is a hard limit: at 100 % of any of its limits, the web host pauses the whole site.
 - **No feeds.** No cinema offers a documented feed or a reuse licence, so every source is a public web page that can change without notice. Each source gets its own access decision, and Kultomat respects robots.txt, never copies synopses or posters and always links back.
-- **Honesty.** No claims about free seats, no simulated data, and a broken source must never look like a wave of cancellations.
+- **Honesty.** No claims about free seats, no simulated data, and a broken source must never look like a wave of cancellations. The one exception to the seats rule is a cinema's own “sold out” mark, repeated as it is.
 
 ## Key decisions
 
@@ -79,32 +80,36 @@ A worker on the Pi reads each cinema's public programme about four times a day. 
 
 Automatic matching makes mistakes, so they have a place to go. A private, phone-friendly admin page holds a weekly queue where I confirm or correct matches and pick classics, with an audit log and undo, and without a deploy.
 
-The web app is Next.js, Czech first with a complete English version. Public pages are cached and refreshed after each ingest, so visitors rarely wake the database, and they read through a database role that cannot see personal data even through a bug.
+The web app is Next.js on Netlify, Czech first with a complete English version. Public pages read through a database role that cannot see personal data even through a bug. Accounts add a watchlist with alerts, at most one email a day; up to five discovery profiles (say, “Japanese films before 1980”), each film with the reason it matches; a signed-in “For you” view; and an opt-in Monday digest. Sign-up needs only an email address, creates no account until the link is confirmed, and one command closes it again without a deploy.
+
+Opening to the public made the free tiers' limits real. A performance audit on 13 November found that one ordinary visit cost 46 serverless function calls, 40 of them prefetches of links the visitor never opened. At that rate the monthly allowance would have run out at about 2,700 visits. Public pages are now stored and rebuilt only when an ingest run changes the programme, links prefetch only when the visitor points at or touches them, and the database sleeps between the Pi's runs. The same visit now costs 4 to 6 calls.
 
 <Figure
   n={1}
   src={homeHero}
-  alt="Kultomat's home page on a desktop: the headline “Kultovky zpátky v kinech”, 30 films in 11 cinemas this week and the Fahrenheit 451 poster"
-  caption="The home page in Czech on 5 November 2026: the week's selection at a glance."
+  alt="Kultomat's home page on a desktop: the headline “Kultovky zpátky v kinech”, 20 films in 11 cinemas in the next 7 days, and the Angel's Egg poster with tomorrow's showtime at Edison Filmhub"
+  caption="The home page in Czech on 14 November 2026: the week's selection and the next screening at a glance."
 />
 
 <Figure
   n={2}
   wide
   src={homeWeek}
-  alt="The week's list: period chips from today to 30 days, and one card per film with the director, running time, Prague showtimes and cinema"
-  caption="Each card is one film with all its showtimes and cinemas, 5 November 2026."
+  alt="The week's list: period chips from today to 30 days, a heading for each day, and one card per film with the year, director, running time, Prague showtimes and cinema"
+  caption="Each card is one film with all its showtimes and cinemas, grouped by day, 14 November 2026."
 />
 
 ## AI and collaboration
 
-I worked with AI coding agents. I wrote the specification, the milestones and the decision records in the repository, and agents implemented them one pull request at a time, about 250 by 8 November 2026. Agents also prepared the dated source research and the audits, which I read and decided on.
+I worked with AI coding agents. I wrote the specification, the milestones and the decision records in the repository, and agents implemented them one pull request at a time, about 340 by 14 November 2026. Agents also prepared the dated source research and the audits (security, production readiness, performance, tests and CI, web quality), which I read and decided on.
+
+Social posts follow the same split. A playbook in the repository sets the voice, the sources and the checks. An agent drafts posts from Kultomat's programme export and dated research, never from TMDB data, and saves them only as drafts; I review, schedule and publish each one.
 
 Kultomat itself calls no AI model. The short texts about each film are mine or adapted from Wikipedia with attribution, and a text drafted with an AI tool outside Kultomat says so on the page.
 
 <AiAndMe
   decided="The problem, the scope of each milestone, the data rules, the design and every trade-off, written down as a specification and decision records"
-  helped="Writing most of the code and tests, and the source research, from those documents"
+  helped="Writing most of the code and tests, the source research, the audits and the social post drafts, from those documents"
   reviewed="Every pull request against the spec, with formatting, lint, types, unit tests, integration tests on real Postgres and browser tests; the weekly matching queue by hand"
 />
 
@@ -118,13 +123,23 @@ Kultomat itself calls no AI model. The short texts about each film are mine or a
     Coverage grew from 7 cinemas at launch to 17 in under two weeks, one source
     at a time.
   </Outcome>
-  <Outcome>
-    Live since 26 October 2026. The owner admin, editorial picks and the offsite
-    backup have run in production since 27 October.
+  <Outcome
+    metric="46 → 6"
+    source="Kultomat's performance audit of 13 November 2026 and its fix, measured on the staging deploy"
+  >
+    Function calls for one ordinary visit, after the fixes that keep the site
+    inside its free hosting plan.
   </Outcome>
   <Outcome>
-    The watchlist and email alerts are built and being rolled out: first to me
-    alone for a week, then to invited friends.
+    Live since 26 October 2026. Accounts went from invite-only to open sign-up
+    in under three weeks, with the watchlist, alerts, profiles and the weekly
+    digest.
+  </Outcome>
+  <Outcome>
+    The freshness rule held when a source broke. On 14 November Ponrepo's
+    programme had failed to load for four days: the coverage page marked it
+    stale and the site stopped recommending its screenings, and none of them was
+    reported as cancelled.
   </Outcome>
   {/* Hidden until there is enough data:
   <Outcome
@@ -140,6 +155,8 @@ Kultomat itself calls no AI model. The short texts about each film are mine or a
 
 The classic rule changed on first contact with real data: old films get far fewer votes, so they needed a lower bar, and some classics need a person to vouch for them. I would plan for an editorial layer from the start instead of hoping the numbers are enough.
 
-Some things I chose not to build yet. Push notifications wait until email turns out too slow, public sign-up waits for the privacy work it needs, and AI-drafted film texts wait for TMDB to confirm the use is allowed.
+I would also measure the free tiers' limits before launch, not after. A free plan that pauses the whole site at its limit needs a budget per visit from the first page, and prefetching every link on screen was a framework default nobody had counted.
+
+Some things I chose not to build yet. Push notifications wait until email turns out too slow, and AI-drafted film texts wait for TMDB to confirm the use is allowed. Public sign-up waited too, until the privacy work it needed was done: a source-rights check for every cinema, sign-up caps and a switch to close it again.
 
 Hosting is the one I had to redo. Vercel's free plan has no clearly documented data processing agreement, which matters once the public is invited. Before the public launch I moved the web app to Netlify's free plan, whose agreement covers it, and kept Vercel as a warm standby: switching back is a DNS change, plus the Pro plan if the agreement is needed.
