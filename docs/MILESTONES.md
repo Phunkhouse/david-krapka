@@ -222,6 +222,6 @@ These run in parallel with development and gate the milestones shown.
 
 ## After launch
 
-Possible next steps, each to be planned separately: Playground of small experiments, a cookieless analytics tool, visitor interviews with both audiences, a Systerna case study when it is ready, and Google Search Console with the sitemap (needs a DNS TXT record).
+Possible next steps, each to be planned separately: Playground of small experiments, a cookieless analytics tool (server-side page request counts chosen on 15 November 2026, [0014](decisions/0014-server-side-page-request-counts.md)), visitor interviews with both audiences, a Systerna case study when it is ready, and Google Search Console with the sitemap (needs a DNS TXT record).
 
 Standing follow-ups: business identification in the footer and a review of the project invitation once the IČO is active ([LEG-001](SPEC.md#legal-requirements), [LEG-002](SPEC.md#legal-requirements)); replace UpVideo's validation line with a real outcome when there is one; revisit the Active24 mail location if mail handling changes; keep the Cloudflare features that inject scripts or set cookies off; a new dated copy of the private record of processing whenever processing changes.

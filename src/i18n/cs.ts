@@ -179,7 +179,7 @@ export const cs: Dictionary = {
   privacy: {
     title: 'Ochrana osobních údajů',
     description:
-      'Žádné cookies ani analytika. Co zpracovává Cloudflare při návštěvě, jak nakládám s vašimi e-maily, jak dlouho je uchovávám a jaká máte práva.',
+      'Žádné cookies ani sledovací skripty. Co Cloudflare při návštěvě zpracovává a počítá, jak nakládám s vašimi e-maily, jak dlouho je uchovávám a jaká máte práva.',
   },
   notFound: {
     title: 'Stránka nenalezena',

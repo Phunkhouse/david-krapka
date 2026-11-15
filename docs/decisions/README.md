@@ -21,3 +21,4 @@ Copy `template.md` to `0001-short-title.md` and increment numbers without renumb
 | [0011](0011-case-studies-as-mdx-collection.md) | Case studies as an MDX content collection with draft handling | accepted |
 | [0012](0012-skip-permission-requests-for-case-studies.md) | Skip written permission requests for case study projects | accepted |
 | [0013](0013-mit-code-and-reserved-content.md) | MIT for the code, all rights reserved for the content | accepted |
+| [0014](0014-server-side-page-request-counts.md) | Count page requests server-side, without a script or unique visitors | accepted |

@@ -188,7 +188,7 @@ export const en = {
   privacy: {
     title: 'Privacy notice',
     description:
-      'No cookies or analytics. What Cloudflare processes when you visit, how I handle your emails, how long I keep them and your rights.',
+      'No cookies or tracking scripts. What Cloudflare processes and counts when you visit, how I handle your emails, how long I keep them and your rights.',
     // The notice text is in src/content/privacy-notice.ts.
   },
   notFound: {
