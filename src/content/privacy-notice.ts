@@ -29,11 +29,11 @@ const adequacy =
   'https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_en'
 
 const en: Notice = {
-  updated: '2026-11-09',
-  updatedText: '9 November 2026',
+  updated: '2026-11-15',
+  updatedText: '15 November 2026',
   updatedLabel: 'Last updated',
   intro:
-    'This site is a personal portfolio, built to collect as little as possible. It has no forms, accounts, analytics, advertising or cookies, and it loads no third-party scripts, fonts or embeds.',
+    'This site is a personal portfolio, built to collect as little as possible. It has no forms, accounts, advertising or cookies, it loads no third-party scripts, fonts or embeds, and it counts visits only from its host’s records.',
   sections: [
     {
       id: 'who',
@@ -55,7 +55,8 @@ const en: Notice = {
       heading: 'When you visit the site',
       paragraphs: [
         'The site is hosted by Cloudflare. When your browser loads a page, Cloudflare receives the technical data every browser sends: your IP address, the page you asked for, the date and time, and details of your browser and device (the user agent). Cloudflare needs this to deliver the page and to protect its network and this site from abuse.',
-        'I do not receive, store or analyse these records, and I cannot identify individual visitors from them. The site has no logging or analytics of its own.',
+        'I do not receive or store these records themselves, and I cannot identify individual visitors from them. The site has no logging or analytics of its own.',
+        'To know whether the site is read, I see one number a day: how many pages Cloudflare delivered, which Cloudflare counts from these records. I never receive your IP address or any other detail of your visit, I do not count unique visitors, and I keep the daily totals in my own monitoring tool. Nothing is stored on your device for this and no tracking script runs. The legal basis is my legitimate interest in knowing whether my portfolio is read (Article 6(1)(f) GDPR).',
         'Purpose and legal basis: running a working and secure website, which is my legitimate interest (Article 6(1)(f) GDPR). Cloudflare acts as my processor under the data processing addendum that forms part of my agreement with it ([data processing addendum](' +
           cloudflareDpa +
           ')). Its [privacy policy](' +
@@ -119,18 +120,18 @@ const en: Notice = {
       id: 'changes',
       heading: 'Changes',
       paragraphs: [
-        'If this changes, for example because analytics or a form is added, I will update this page and its date before the change takes effect.',
+        'If this changes, for example because a form or another kind of measurement is added, I will update this page and its date before the change takes effect.',
       ],
     },
   ],
 }
 
 const cs: Notice = {
-  updated: '2026-11-09',
-  updatedText: '9. listopadu 2026',
+  updated: '2026-11-15',
+  updatedText: '15. listopadu 2026',
   updatedLabel: 'Poslední aktualizace',
   intro:
-    'Tento web je osobní portfolio a shromažďuje co nejméně údajů. Nemá formuláře, účty, analytiku, reklamu ani cookies a nenačítá skripty, písma ani vložený obsah třetích stran.',
+    'Tento web je osobní portfolio a shromažďuje co nejméně údajů. Nemá formuláře, účty, reklamu ani cookies, nenačítá skripty, písma ani vložený obsah třetích stran a návštěvy počítá jen ze záznamů svého hostingu.',
   sections: [
     {
       id: 'who',
@@ -152,7 +153,8 @@ const cs: Notice = {
       heading: 'Když web navštívíte',
       paragraphs: [
         'Web hostuje Cloudflare. Když váš prohlížeč načte stránku, Cloudflare obdrží technické údaje, které posílá každý prohlížeč: vaši IP adresu, požadovanou stránku, datum a čas a informace o prohlížeči a zařízení (user agent). Cloudflare je potřebuje, aby stránku doručil a ochránil svou síť i tento web před zneužitím.',
-        'Tyto záznamy nedostávám, neukládám ani nevyhodnocuji a z jejich obsahu nedokážu poznat jednotlivé návštěvníky. Web sám nemá žádné logování ani analytiku.',
+        'Samotné záznamy nedostávám ani neukládám a z jejich obsahu nedokážu poznat jednotlivé návštěvníky. Web sám nemá žádné logování ani analytiku.',
+        'Abych věděl, zda web někdo čte, vidím jedno číslo denně: kolik stránek Cloudflare doručil, což Cloudflare z těchto záznamů spočítá. Vaši IP adresu ani jiné podrobnosti o vaší návštěvě nikdy nedostávám, jedinečné návštěvníky nepočítám a denní součty uchovávám ve vlastním nástroji pro sledování provozu. Do vašeho zařízení se kvůli tomu nic neukládá a neběží žádný sledovací skript. Právním základem je můj oprávněný zájem vědět, zda moje portfolio někdo čte (čl. 6 odst. 1 písm. f) GDPR).',
         'Účel a právní základ: provoz fungujícího a zabezpečeného webu, tedy můj oprávněný zájem (čl. 6 odst. 1 písm. f) GDPR). Cloudflare je můj zpracovatel na základě dodatku o zpracování osobních údajů, který je součástí mé smlouvy s ním ([dodatek o zpracování osobních údajů](' +
           cloudflareDpa +
           ')). Jeho [zásady ochrany osobních údajů](' +
@@ -216,7 +218,7 @@ const cs: Notice = {
       id: 'changes',
       heading: 'Změny',
       paragraphs: [
-        'Pokud se to změní, například přidáním analytiky nebo formuláře, upravím tuto stránku a její datum dříve, než změna začne platit.',
+        'Pokud se to změní, například přidáním formuláře nebo jiného způsobu měření, upravím tuto stránku a její datum dříve, než změna začne platit.',
       ],
     },
   ],
