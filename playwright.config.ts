@@ -13,6 +13,9 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
+  // The public-repo runner has 4 vCPU; Playwright's default (half the cores)
+  // ran only 2 workers there (docs/audits/2026-11-19/test-ci.md, TCI-001).
+  workers: process.env.CI ? 4 : undefined,
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: {
     baseURL: `http://${host}:${port}`,
