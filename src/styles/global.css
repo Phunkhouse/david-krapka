@@ -99,6 +99,22 @@ a {
   isolation: isolate;
 }
 
+/* Responsive copy: each `*Short` dictionary text is the mobile version of the
+   text before it (src/i18n/en.ts). Render both; one shows per layout. */
+.text-long {
+  display: none;
+}
+
+@media (min-width: 720px) {
+  .text-long {
+    display: inline;
+  }
+
+  .text-short {
+    display: none;
+  }
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

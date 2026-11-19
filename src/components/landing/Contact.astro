@@ -38,8 +38,8 @@ const mailto = (subject: string) =>
       <div class="card card--paper">
         <h3>{contact.hire.title}</h3>
         <p>
-          <span class="long">{contact.hire.text}</span>
-          <span class="short">{contact.hire.textShort}</span>
+          <span class="text-long">{contact.hire.text}</span>
+          <span class="text-short">{contact.hire.textShort}</span>
         </p>
         <a href={mailto(contact.hire.subject)}>{contact.hire.link}</a>
       </div>
@@ -171,10 +171,6 @@ const mailto = (subject: string) =>
     color: var(--yellow);
   }
 
-  .long {
-    display: none;
-  }
-
   /* Email, LinkedIn and GitHub as square icon buttons: paper tile, ink
      border and a hard ink shadow; they lift like the work cards. 48 px is
      a comfortable tap target. Each link is named by its aria-label. */
@@ -271,14 +267,6 @@ const mailto = (subject: string) =>
 
     .card--ink {
       box-shadow: 8px 8px 0 var(--pink);
-    }
-
-    .long {
-      display: inline;
-    }
-
-    .short {
-      display: none;
     }
 
     .question {
