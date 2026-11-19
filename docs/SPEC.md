@@ -113,7 +113,7 @@ Out of scope by the audit's reasoning, to be re-checked if the facts change: con
 
 ## Technical approach
 
-Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack): core templates, the tooling conventions of its Next.js recipe adapted to Astro, and the Budget-conscious CI strategy. Reasons are in [decision records](decisions/README.md).
+Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack): core templates, the tooling conventions of its Next.js recipe adapted to Astro, and its CI strategy (Budget-conscious at first, Standard since 19 November 2026). Reasons are in [decision records](decisions/README.md).
 
 | Area | Choice | Status |
 | --- | --- | --- |
@@ -127,7 +127,7 @@ Built with the [AI starter pack](https://github.com/Phunkhouse/ai-starter-pack):
 | Images | Optimised at build time: case study screenshots through the `Figure` MDX component (Astro `<Picture>`, AVIF and WebP, fixed dimensions, `sizes`, required `alt`) | Confirmed (milestone 5) |
 | Formatting and linting | Prettier (`semi: false`, `singleQuote: true`), ESLint flat config with `@eslint/js`, `typescript-eslint` and `eslint-plugin-astro` | From recipe |
 | Tests | Playwright for smoke, navigation, reduced-motion and accessibility checks (with axe), against the built site served by `wrangler dev`. Vitest only when there is logic worth unit testing. | Confirmed (milestone 2) |
-| CI | GitHub Actions, **Budget-conscious**: draft PRs defer cloud jobs; ready PRs run the full suite | Confirmed ([0002](decisions/0002-budget-conscious-ci.md)) |
+| CI | GitHub Actions, **Standard**: every PR update runs the full suite, drafts included | Confirmed ([0015](decisions/0015-standard-ci.md), superseding [0002](decisions/0002-budget-conscious-ci.md)) |
 | Hosting | Cloudflare Workers static assets (no Worker script), deployed by Workers Builds: production from `main`, preview URLs for branches; `wrangler.jsonc` and `public/_headers`. Since launch `workers_dev` is off, so production answers only on the domain; `workers.dev` preview URLs stay and Cloudflare sends `X-Robots-Tag: noindex` on them by itself | Confirmed ([0007](decisions/0007-cloudflare-workers-hosting.md); launch details decided 5 November 2026) |
 | Search basics | Canonical and `hreflang` links from `src/i18n/routes.ts`; `sitemap.xml` from a static endpoint (`src/pages/sitemap.xml.ts`) using the same routes and published-case-study helper, so drafts never appear in production; `robots.txt` allows all; Open Graph tags from `BaseLayout`, with a site-wide preview image per language (`public/og/`) wherever a page has no image of its own; favicons, app icons and `site.webmanifest`; JSON-LD `Person` on the landing pages. No sitemap dependency | Confirmed (milestone 6) |
 | Licence | Code under MIT (`LICENSE`); texts, images, portrait, CV and docs all rights reserved (`CONTENT-LICENSE.md`); fonts under OFL | Confirmed ([0013](decisions/0013-mit-code-and-reserved-content.md)) |
