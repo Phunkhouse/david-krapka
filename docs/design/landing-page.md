@@ -46,14 +46,13 @@ Accessibility: the H1 contains a visually hidden “Think. Make. Rethink.”; th
 
 ## 2. Selected work (`#work`)
 
-**Desktop.** Ink background. Yellow H2 with a pink offset shadow, short intro on the right. A large Kultomat feature card (560 px yellow art panel + text) with a 12 px pink offset shadow. Below it a 4-column grid: Eucal, Vladan Vaněk, UpVideo and the Systerna “In progress” card (dashed, not a link).
+**Desktop.** Ink background. Yellow H2 with a pink offset shadow (the short intro of the mockups was removed on 19 November 2026, because it would date as projects change). A large Kultomat feature card (560 px yellow art panel + text) with a 12 px pink offset shadow. Below it a 4-column grid: Eucal, Vladan Vaněk, UpVideo and the Systerna “In progress” card (dashed, not a link).
 
 **Mobile.** The feature card stacks art above text. The other cards become horizontal rows with a 104 px thumbnail on the left.
 
 | Element | English | Czech |
 | --- | --- | --- |
 | H2 | Selected work | Vybraná práce |
-| Intro | One product I own end to end, a few client projects, and one that is still being built. | Jeden vlastní produkt od začátku do konce, několik projektů pro klienty a jeden, který ještě vzniká. |
 | Kultomat label | Main case study · Own product | Hlavní případová studie · Vlastní produkt |
 | Kultomat text | From the first question to a product that runs every day: the problem, the decisions, the build and what changed afterwards. [One-line summary to be confirmed] | Od první otázky k produktu, který běží každý den: problém, rozhodnutí, vývoj a co se změnilo potom. [Jednovětý souhrn k potvrzení] |
 | Kultomat link | Read the case study → | Přečíst případovou studii → |
