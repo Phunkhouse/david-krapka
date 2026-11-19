@@ -1,7 +1,7 @@
 # 0002. Budget-conscious CI
 
 Date: 2026-11-04  
-Status: accepted
+Status: superseded by 0015
 
 ## Context
 

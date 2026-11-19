@@ -1,8 +1,8 @@
 name: CI
 
+# Standard CI (decision 0015): every PR update runs the full suite, drafts included.
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
 
 permissions:
   contents: read
@@ -13,9 +13,6 @@ concurrency:
 
 jobs:
   check:
-    # Draft PRs skip cloud validation. A draft cannot be merged, and marking
-    # it ready for review triggers this job, so a skipped run never gates a merge.
-    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:

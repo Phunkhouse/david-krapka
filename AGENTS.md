@@ -30,11 +30,10 @@ Before changing code, inspect the relevant files and the documentation for the i
 
 ## Validation strategy
 
-- CI strategy: Budget-conscious (decision 0002). `.github/workflows/ci.yml` job `check` is skipped for draft PRs and runs the full suite for ready PRs. `.github/workflows/e2e.yml` does the same for Playwright: `browser_tests` runs in the Playwright container (its image tag must match `@playwright/test` exactly), and `playwright` is the required status that fails unless `browser_tests` succeeded.
+- CI strategy: Standard (decision 0015, superseding 0002). `.github/workflows/ci.yml` job `check` runs the full suite on every PR update, drafts included. `.github/workflows/e2e.yml` does the same for Playwright: `browser_tests` runs in the Playwright container (its image tag must match `@playwright/test` exactly), and `playwright` is the required status that fails unless `browser_tests` succeeded.
 - Optional Claude feedback: commenting `@claude review` on a PR runs `.github/workflows/claude.yml` (starter pack recipe `claude-pr-review`). It replies in a comment, is not a required check or an approval, and uses the `CLAUDE_CODE_OAUTH_TOKEN` secret and David's Claude plan. Ask before triggering it.
 - During development and before handing off work, run the relevant local formatting, lint, type, test and build checks using existing project commands. Use a unified verification command when useful; report results and local/cloud environment differences, including checks that could not run.
-- Standard runs cloud validation on relevant PR updates. Budget-conscious uses draft PRs while developing and defers expensive cloud jobs until ready for review; every subsequent commit to a ready PR still needs full cloud validation.
-- In Budget-conscious mode, create draft PRs and obtain explicit user permission before marking them ready. Permission to request review is not permission to merge. Do not bypass checks or change the strategy to avoid a failure.
+- Standard runs cloud validation on every PR update. Open PRs as ready for review, not as drafts, unless David asks for a draft. Opening a PR for review is not permission to merge. Do not bypass checks or change the strategy to avoid a failure.
 - Before any authorized merge, confirm successful independent CI for the current revision, including every required suite. Local results and earlier commits' CI do not replace it. Respect existing security, migration, deployment and branch rules.
 
 ## Architecture

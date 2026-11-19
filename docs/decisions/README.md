@@ -9,7 +9,7 @@ Copy `template.md` to `0001-short-title.md` and increment numbers without renumb
 | No. | Decision | Status |
 | --- | --- | --- |
 | [0001](0001-starter-pack-and-nextjs.md) | Use the AI starter pack with its Next.js recipe | superseded by 0006 |
-| [0002](0002-budget-conscious-ci.md) | Budget-conscious CI | accepted |
+| [0002](0002-budget-conscious-ci.md) | Budget-conscious CI | superseded by 0015 |
 | [0003](0003-vercel-static-hosting.md) | Static export hosted on Vercel | superseded by 0007 |
 | [0004](0004-design-source-of-truth.md) | Personal Portfolio mockups canvas is the design source of truth | accepted |
 | [0005](0005-bilingual-routing.md) | English at the root, Czech under /cs/ | proposed |
@@ -22,3 +22,4 @@ Copy `template.md` to `0001-short-title.md` and increment numbers without renumb
 | [0012](0012-skip-permission-requests-for-case-studies.md) | Skip written permission requests for case study projects | accepted |
 | [0013](0013-mit-code-and-reserved-content.md) | MIT for the code, all rights reserved for the content | accepted |
 | [0014](0014-server-side-page-request-counts.md) | Count page requests server-side, without a script or unique visitors | accepted |
+| [0015](0015-standard-ci.md) | Standard CI | accepted |

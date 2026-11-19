@@ -6,9 +6,8 @@ Status as of 5 November 2026: milestones 0 to 5 done (milestone 4's device check
 
 ## How every milestone is delivered
 
-- Work on a branch, open the PR as a **draft**. Run `pnpm verify` (and `pnpm test:e2e` once it exists) locally and record results in the PR.
-- Draft PRs do not run cloud validation (Budget-conscious CI): the `check` job is skipped. When the work is ready, the agent asks David for permission to mark the PR **ready for review**; that triggers the full suite.
-- Every new commit to a ready PR re-runs the full suite. Merge only with green required checks for the current revision. Merging is David's call.
+- Work on a branch and open the PR ready for review. Run `pnpm verify` (and `pnpm test:e2e` once it exists) locally and record results in the PR.
+- Every commit to a PR runs the full suite (Standard CI, [0015](decisions/0015-standard-ci.md); milestones 0 to 6 were delivered under Budget-conscious CI with draft PRs, [0002](decisions/0002-budget-conscious-ci.md)). Merge only with green required checks for the current revision. Merging is David's call.
 - Cloudflare Workers Builds deploys a preview for every branch, so each PR has a link for visual review.
 - Visual and product judgements (does it match the mockups, does the motion feel right) need David's sign-off; green CI is not enough.
 
