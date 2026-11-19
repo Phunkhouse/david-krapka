@@ -2,7 +2,7 @@
 import { Picture } from 'astro:assets'
 import SectionHeading from '../SectionHeading.astro'
 import { getCaseStudies } from '../../content/load'
-import { previewFor } from '../../content/projects'
+import { landingCards, previewFor } from '../../content/projects'
 import { t, type Locale } from '../../i18n'
 import { pathFor } from '../../i18n/routes'
 
@@ -12,7 +12,7 @@ interface Props {
 
 const { locale } = Astro.props
 const { work } = t(locale).home
-const { featured, inProgress } = work
+const { featured, cards } = landingCards(locale)
 
 // A card links only to a case study that is published (drafts are built on
 // preview branches only, src/content/load.ts); the others stay plain cards.
@@ -20,11 +20,7 @@ const published = new Set((await getCaseStudies(locale)).map((s) => s.slug))
 // A case study without a card here would never be linked; a mistyped slug in
 // the dictionaries would leave its card plain. Fail the build instead.
 // Systerna keeps its in-progress card even though its case study is published.
-const cardSlugs = [
-  featured.slug,
-  ...work.projects.map((p) => p.slug),
-  inProgress.slug,
-]
+const cardSlugs = [featured.slug, ...cards.map((card) => card.slug)]
 for (const slug of published) {
   if (!cardSlugs.includes(slug)) {
     throw new Error(
@@ -37,15 +33,13 @@ const hrefFor = (slug: string) =>
 // Card art is the project's preview image (canvas page "Selected work
 // previews"): a screenshot of its home page in a print-style browser window,
 // 1200 × 630, cropped to the card.
-const projects = work.projects.map((project) => ({
-  ...project,
-  preview: previewFor(project.slug),
-  href: hrefFor(project.slug),
+const projects = cards.map((card) => ({
+  ...card,
+  preview: previewFor(card.slug),
+  href: hrefFor(card.slug),
 }))
 const featuredPreview = previewFor(featured.slug)
 const featuredHref = hrefFor(featured.slug)
-const inProgressHref = hrefFor(inProgress.slug)
-const inProgressPreview = previewFor(inProgress.slug)
 const featuredSizes = '(min-width: 1100px) 560px, 100vw'
 const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
 ---
@@ -89,8 +83,8 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
           )}
         </h3>
         <p class="featured-text">
-          <span class="long">{featured.text}</span>
-          <span class="short">{featured.textShort}</span>
+          <span class="text-long">{featured.text}</span>
+          <span class="text-short">{featured.textShort}</span>
         </p>
         {featuredHref && (
           <span class="more" aria-hidden="true">
@@ -102,7 +96,12 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
 
     <ul class="cards" role="list" aria-label={work.listLabel}>
       {projects.map((project) => (
-        <li class:list={['card', { 'is-link': project.href }]}>
+        <li
+          class:list={[
+            'card',
+            { 'card--progress': project.progress, 'is-link': project.href },
+          ]}
+        >
           <div class="preview card-preview" aria-hidden="true">
             <Picture
               src={project.preview}
@@ -124,8 +123,8 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
               )}
             </h3>
             <p>
-              <span class="long">{project.text}</span>
-              <span class="short">{project.textShort}</span>
+              <span class="text-long">{project.text}</span>
+              <span class="text-short">{project.textShort}</span>
             </p>
             {project.href && (
               <span class="more" aria-hidden="true">
@@ -135,40 +134,6 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
           </div>
         </li>
       ))}
-      <li
-        class:list={['card', 'card--progress', { 'is-link': inProgressHref }]}
-      >
-        <div class="preview card-preview" aria-hidden="true">
-          <Picture
-            src={inProgressPreview}
-            alt=""
-            formats={['avif', 'webp']}
-            widths={[400, 800]}
-            sizes={cardSizes}
-          />
-        </div>
-        <div class="card-body">
-          <p class="label">{inProgress.label}</p>
-          <h3>
-            {inProgressHref ? (
-              <a class="card-link" href={inProgressHref}>
-                {inProgress.name}
-              </a>
-            ) : (
-              inProgress.name
-            )}
-          </h3>
-          <p>
-            <span class="long">{inProgress.text}</span>
-            <span class="short">{inProgress.textShort}</span>
-          </p>
-          {inProgressHref && (
-            <span class="more" aria-hidden="true">
-              →
-            </span>
-          )}
-        </div>
-      </li>
     </ul>
   </div>
 </section>
@@ -209,10 +174,6 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
     max-width: 440px;
     color: var(--ink-soft);
     font-size: var(--text-body-lg);
-  }
-
-  .long {
-    display: none;
   }
 
   /* Featured card */
@@ -446,14 +407,6 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
 
     .inner {
       gap: var(--gap-xl);
-    }
-
-    .long {
-      display: inline;
-    }
-
-    .short {
-      display: none;
     }
 
     .featured {

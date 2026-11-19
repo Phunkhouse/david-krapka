@@ -41,12 +41,25 @@ export function artFor(slug: string) {
   return found
 }
 
+/**
+ * The landing cards from the dictionary: the featured case study, then the
+ * smaller cards (client projects, and the in-progress project last).
+ */
+export function landingCards(locale: Locale) {
+  const { featured, projects, inProgress } = t(locale).home.work
+  return {
+    featured,
+    cards: [
+      ...projects.map((project) => ({ ...project, progress: false })),
+      { ...inProgress, progress: true },
+    ],
+  }
+}
+
 /** The landing card's label, name and text for a project. */
 export function cardFor(locale: Locale, slug: string) {
-  const { featured, projects, inProgress } = t(locale).home.work
-  const card = [featured, ...projects, inProgress].find(
-    (project) => project.slug === slug,
-  )
+  const { featured, cards } = landingCards(locale)
+  const card = [featured, ...cards].find((project) => project.slug === slug)
   if (!card) {
     throw new Error(`No landing card for project "${slug}" (${locale}).`)
   }

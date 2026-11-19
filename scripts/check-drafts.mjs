@@ -7,7 +7,7 @@
 // normal build, as in `pnpm verify` and CI, must contain no page of a draft and
 // no mention of one anywhere in the built pages. Published case studies are
 // expected in the build. With drafts switched on the check does nothing.
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import process from 'node:process'
 
@@ -23,10 +23,9 @@ if (
 }
 
 function files(dir) {
-  return readdirSync(dir).flatMap((name) => {
-    const path = join(dir, name)
-    return statSync(path).isDirectory() ? files(path) : [path]
-  })
+  return readdirSync(dir, { recursive: true, withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .map((entry) => join(entry.parentPath, entry.name))
 }
 
 // A project is a draft when any of its language files says so; load.ts fails

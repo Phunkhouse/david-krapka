@@ -7,7 +7,7 @@
 // The allowed set is src/assets/fonts/charset.json, written by
 // scripts/subset-fonts.py. To fix a failure, run that script again (steps in
 // src/assets/fonts/README.md), commit the new font files and charset.json.
-import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import process from 'node:process'
 
@@ -31,14 +31,9 @@ function decode(text) {
 }
 
 function htmlFiles(dir) {
-  return readdirSync(dir).flatMap((name) => {
-    const path = join(dir, name)
-    return statSync(path).isDirectory()
-      ? htmlFiles(path)
-      : name.endsWith('.html')
-        ? [path]
-        : []
-  })
+  return readdirSync(dir, { recursive: true })
+    .filter((name) => name.endsWith('.html'))
+    .map((name) => join(dir, name))
 }
 
 // Text a visitor can see, plus data-text (drawn with CSS content).

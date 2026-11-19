@@ -6,7 +6,7 @@
 //                              and CI job `check`)
 //
 // It reads the visible text, attribute values and page titles of each HTML file in dist/.
-import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import process from 'node:process'
 
@@ -15,14 +15,9 @@ const fail = process.argv.includes('--fail')
 const pattern = /\[[^\][]{2,}\]/g
 
 function htmlFiles(dir) {
-  return readdirSync(dir).flatMap((name) => {
-    const path = join(dir, name)
-    return statSync(path).isDirectory()
-      ? htmlFiles(path)
-      : name.endsWith('.html')
-        ? [path]
-        : []
-  })
+  return readdirSync(dir, { recursive: true })
+    .filter((name) => name.endsWith('.html'))
+    .map((name) => join(dir, name))
 }
 
 function found(html) {
