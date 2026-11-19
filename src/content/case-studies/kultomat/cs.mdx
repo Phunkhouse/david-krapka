@@ -1,12 +1,12 @@
 ---
 title: Kultomat
-summary: 'Průvodce klasickými a staršími filmy, které tento týden opravdu běží v pražských kinech, navržený pro telefon. Mám ho na starosti od první otázky po každodenní provoz.'
+summary: 'Průvodce klasickými a staršími filmy, které tento týden opravdu hrají pražská kina, dělaný hlavně pro telefon. Mám ho na starosti celý, od první otázky po každodenní provoz.'
 kind: long
 status: 'V provozu od října 2026 · otevřený všem'
 dates: 'Od října 2026'
 role: 'Vlastník: produkt, design, vývoj a provoz'
 collaborators: []
-ai: 'Většinu kódu napsali AI agenti podle mé specifikace a záznamů rozhodnutí · každý pull request jsem proti nim zkontroloval a spustil testy'
+ai: 'Většinu kódu napsali AI agenti podle mé specifikace a záznamů rozhodnutí · každý pull request jsem s nimi porovnal a pustil na něj testy'
 stack:
   - Next.js
   - TypeScript
@@ -25,64 +25,64 @@ import homeWeek from './home-week.jpg'
 
 ## Shrnutí
 
-Kultomat pomáhá lidem v Praze rychle najít film, který stojí za to a na který můžou opravdu jít, hlavně starší nebo kulturně významný. Na telefonu ukáže klasiky, které běží v příštích sedmi dnech, seskupené podle filmu, s krátkým důvodem, proč za to každý stojí, a s odkazem na stránku kina.
+Kultomat pomáhá lidem v Praze rychle najít film, který stojí za to a na který se dá opravdu zajít, hlavně starší nebo kulturně významný. Na telefonu ukáže klasiky, které hrají kina v příštích sedmi dnech. Každý film je jen jednou, se všemi projekcemi, s krátkou větou, proč ho vidět, a s odkazem na stránku kina.
 
-Spustil se 26. října 2026 se sedmi kiny a k 7. listopadu pokrýval 17 kin ze 13 zdrojů. Prohlížet může kdokoli bez účtu. Od poloviny listopadu si ho může kdokoli i založit a získat seznam filmů ke sledování s upozorněními e-mailem, vlastní profily a týdenní přehled. První týdny to měli jen pozvaní přátelé a rodina.
+Spustil jsem ho 26. října 2026 se sedmi kiny a k 7. listopadu pokrýval 17 kin ze 13 zdrojů. Procházet ho může kdokoli i bez účtu. Od poloviny listopadu si účet může založit každý a dostane seznam filmů ke zhlédnutí s upozorněním e-mailem, vlastní profily a týdenní přehled. První týdny měli účty jen pozvaní přátelé a rodina.
 
 ## Co jsem měl na starosti
 
-Všechno: otázku, pravidla produktu a dat, design, kód i provoz. Začalo to jako rešerše 24. října 2026 a první veřejná verze běžela o dva dny později.
+Všechno: otázku, pravidla pro produkt a data, design, kód i provoz. Začalo to 24. října 2026 jako průzkum a první veřejná verze běžela o dva dny později.
 
-Napsal jsem specifikaci, milníky a záznam ke každému důležitému rozhodnutí, do 13. listopadu jich bylo 52. V produktu mám i průběžnou roli: každý týden projdu filmy, u kterých si párování nebylo jisté, rozhoduji, které klasiky web doporučí redakčně, a schvaluji každý příspěvek na sociální sítě, než vyjde.
+Napsal jsem specifikaci, milníky a ke každému důležitému rozhodnutí záznam; do 13. listopadu jich bylo 52. V produktu mám i stálou roli: každý týden projdu filmy, u kterých si párování nebylo jisté, rozhoduji, které klasiky web doporučí redakčně, a schvaluji každý příspěvek na sociální sítě, než vyjde.
 
 ## Problém a omezení
 
-Každé pražské kino zveřejňuje program na vlastním webu. Kdo chce tento týden vidět starší film, který stojí za to, musí jich otevřít spoustu a ještě vědět, které tituly jsou důležité. Byl to nejdřív můj vlastní problém: chci vidět klasiky na velkém plátně s přáteli.
+Každé pražské kino má program na vlastním webu. Kdo chce tento týden vidět starší film, který stojí za to, musí jich proklikat spoustu a ještě vědět, které tituly za něco stojí. Nejdřív to byl můj vlastní problém: chci chodit s přáteli na klasiky na velké plátno.
 
-Omezení určila všechno ostatní:
+Omezení, která rozhodla o všem ostatním:
 
-- **Jeden člověk, žádný rozpočet.** Jen bezplatné tarify: databáze, hosting webu, 100 e-mailů denně a nekomerční filmové API. Bezplatný tarif je tvrdá hranice: když web vyčerpá kterýkoli limit, hosting ho celý pozastaví.
-- **Žádné datové kanály.** Žádné kino nenabízí zdokumentovaný feed ani licenci k dalšímu užití, takže každý zdroj je veřejná webová stránka, která se může bez varování změnit. Každý zdroj má vlastní rozhodnutí o přístupu a Kultomat respektuje robots.txt, nikdy nekopíruje anotace ani plakáty a vždy odkazuje zpět.
-- **Poctivost.** Žádná tvrzení o volných místech, žádná simulovaná data a rozbitý zdroj nikdy nesmí vypadat jako vlna zrušených projekcí. Jedinou výjimkou z pravidla o místech je značka „vyprodáno“ přímo od kina, kterou web přebírá beze změny.
+- **Jeden člověk, žádný rozpočet.** Jen bezplatné tarify: databáze, hosting, 100 e-mailů denně a filmové API pro nekomerční použití. Limit bezplatného tarifu je tvrdá hranice: jakmile web vyčerpá kterýkoli z nich, hosting ho celý pozastaví.
+- **Žádné feedy.** Žádné kino nenabízí zdokumentovaný feed ani licenci na další použití dat, takže každý zdroj je veřejná webová stránka, která se může kdykoli bez varování změnit. O přístupu ke každému zdroji jsem rozhodoval zvlášť. Kultomat respektuje robots.txt, nikdy nepřebírá anotace ani plakáty a vždycky odkazuje zpátky na kino.
+- **Poctivost.** Žádné údaje o volných místech, žádná vymyšlená data a rozbitý zdroj nesmí nikdy vypadat jako vlna zrušených projekcí. Jedinou výjimkou u míst je „vyprodáno“ přímo od kina, které web přebírá beze změny.
 
 ## Klíčová rozhodnutí
 
 <Decision
   n={1}
-  name="Uložit všechno, filtrovat potom"
-  chose="Ukládat každou projekci, kterou kino uvede, včetně nových filmů, neznámých roků, besed i oper, a pravidlo pro klasiky použít až potom"
-  insteadOf="Ponechat při stahování jen filmy, které projdou filtrem na klasiky"
-  because="Filtr, který jsem teprve ladil, by data zahodil natrvalo. Když se ukládá všechno, vyhledávání i seznam ke sledování najdou i film, který pravidlo odmítne, a lepší pravidlo funguje i na už nasbíraných datech."
-  checkedBy="Vyhledávání ukazuje zvlášť doporučené klasiky, další filmy v programu a filmy bez projekce. Testy pokrývají, že film ze seznamu ke sledování projde, i když ho pravidlo pro klasiky odmítne."
+  name="Uložit všechno, filtrovat až potom"
+  chose="Ukládat každou projekci, kterou kino vypíše, včetně nových filmů, neznámých let, besed i oper, a pravidlo pro klasiky použít až nad uloženými daty"
+  insteadOf="Při stahování ponechat jen filmy, které projdou filtrem na klasiky"
+  because="Filtr, který jsem teprve ladil, by data zahodil napořád. Když se ukládá všechno, vyhledávání i seznam ke zhlédnutí najdou i film, který pravidlo odmítne, a vylepšené pravidlo funguje i na datech, která už jsou nasbíraná."
+  checkedBy="Vyhledávání ukazuje zvlášť doporučené klasiky, ostatní filmy v programu a filmy bez projekce. Testy hlídají, že film ze seznamu ke zhlédnutí se najde, i když ho pravidlo pro klasiky odmítne."
 />
 
 <Decision
   n={2}
-  name="Pravidlo pro klasiky je hypotéza"
-  chose="Pravidlo postavené na důkazech (spárováno s TMDB, aspoň 10 let staré, hodnocení 7,5 z 500 hlasů nebo na kurátorském seznamu), brané jako výchozí bod k ladění na skutečných programech"
-  insteadOf="Vybírat každý film ručně, nebo věřit jen hodnocení"
+  name="Pravidlo pro klasiky je jen hypotéza"
+  chose="Pravidlo postavené na datech (film spárovaný s TMDB, aspoň 10 let starý, s hodnocením 7,5 z 500 hlasů nebo na kurátorském seznamu), brané jako výchozí bod, který doladím na skutečných programech"
+  insteadOf="Vybírat každý film ručně, nebo spoléhat jen na hodnocení"
   because="Ruční výběr každý týden jeden člověk neutáhne a samotné hodnocení podceňuje české a méně známé klasiky, které mají na TMDB málo hlasů."
-  checkedBy="První kalibrace na skutečných pražských programech 25. října 2026 snížila hranici na 250 hlasů pro filmy staré aspoň 30 let. Klasiky, které čísla pořád minou, teď dostanou výslovné redakční doporučení, na webu označené „Doporučeno Kultomatem“."
+  checkedBy="První kalibrace na skutečných pražských programech 25. října 2026 snížila hranici na 250 hlasů u filmů starších 30 let. Klasiky, které čísla pořád minou, teď dostanou výslovné redakční doporučení, na webu označené „Doporučeno Kultomatem“."
 />
 
 <Decision
   n={3}
-  name="Zůstat na Pi, dokud to nezměříme"
-  chose="Provozovat stahování na Raspberry Pi 5, které už jsem měl, a web i databázi na bezplatných tarifech"
-  insteadOf="Malý server (asi 6 € měsíčně) nebo plánované úlohy na GitHub Actions (asi 4 až 11 $ měsíčně)"
-  because="Nic ještě nebylo změřené, takže platit za víc by byl odhad. Stahování zůstává přenositelné: rozhraním je příkazová řádka a všechno, co závisí na konkrétním stroji, je v jedné složce."
-  checkedBy="Kontrola typu dead-man si všimne, když Pi ztichne, a zdroj bez úspěšného běhu za 24 hodin se na veřejné stránce pokrytí označí jako neaktuální. Sepsané kapacitní spouštěče říkají, kdy se přesunout."
+  name="Zůstat na Pi, dokud to nezměřím"
+  chose="Stahování nechat běžet na Raspberry Pi 5, které už jsem doma měl, a web i databázi na bezplatných tarifech"
+  insteadOf="Malý server (asi 6 € měsíčně) nebo naplánované úlohy na GitHub Actions (asi 4 až 11 $ měsíčně)"
+  because="Nic jsem ještě neměl změřené, takže platit za víc by bylo střílení naslepo. Stahování jde kdykoli přestěhovat: rozhraním je příkazová řádka a všechno, co závisí na konkrétním stroji, je v jedné složce."
+  checkedBy="Dead-man kontrola si všimne, když Pi ztichne, a zdroj, který se 24 hodin nepodařilo stáhnout, se na veřejné stránce pokrytí označí jako neaktuální. Předem sepsané kapacitní hranice říkají, kdy je čas se přesunout."
 />
 
 ## Jak to vzniklo
 
-Program pro stahování na Pi čte veřejný program každého kina zhruba čtyřikrát denně. Ukládá surovou odpověď a zaznamenává, kde a kdy každý údaj viděl. Položky programu páruje s filmy přes TMDB a Wikidata, slučuje kopie stejné projekce z různých zdrojů a rozdíly mezi běhy převádí na události: nový termín, přesun, zrušení nebo obnovení. Neúspěšný běh nic nezmění, takže rozbitý zdroj nikdy nic nezruší.
+Skript na Pi čte veřejný program každého kina zhruba čtyřikrát denně. Ukládá si surovou odpověď a zaznamenává, kde a kdy který údaj viděl. Položky programu páruje s filmy přes TMDB a Wikidata, slučuje stejnou projekci z různých zdrojů a rozdíly mezi běhy převádí na události: nový termín, přesun, zrušení nebo obnovení. Když běh selže, nic se nezmění, takže rozbitý zdroj nikdy nic nezruší.
 
-Automatické párování dělá chyby, a tak pro ně existuje místo. Soukromá administrace přizpůsobená telefonu drží týdenní frontu, ve které párování potvrzuji nebo opravuji a vybírám klasiky, s auditním záznamem a možností vrátit krok zpět, bez nového nasazení.
+Automatické párování se plete, a tak mají chyby kam jít. V soukromé administraci, kterou zvládnu i z telefonu, mám týdenní frontu: párování v ní potvrzuji nebo opravuji a vybírám klasiky. Všechno se zapisuje do auditního záznamu, jde to vrátit a nepotřebuje to nové nasazení.
 
-Web je v Next.js na Netlify, primárně česky a s úplnou anglickou verzí. Veřejné stránky čtou přes databázovou roli, která osobní údaje nevidí ani kvůli chybě v kódu. Účet přidává seznam ke sledování s upozorněními (nejvýš jeden e-mail denně), až pět profilů (třeba „japonské filmy před rokem 1980“), u každého filmu s důvodem, proč do profilu patří, přehled „Pro vás“ po přihlášení a pondělní přehled, který si uživatel musí sám zapnout. Registrace chce jen e-mailovou adresu, účet vznikne až po potvrzení odkazu a jeden příkaz ji zase zavře bez nového nasazení.
+Web je v Next.js na Netlify, primárně česky a s kompletní anglickou verzí. Veřejné stránky čtou data přes databázovou roli, která osobní údaje nevidí, ani kdyby byla v kódu chyba. S účtem získáte seznam ke zhlédnutí s upozorněními (nejvýš jeden e-mail denně), až pět profilů (třeba „japonské filmy před rokem 1980“), u každého filmu s důvodem, proč do profilu patří, přehled „Pro vás“ po přihlášení a pondělní přehled, který si musíte sami zapnout. Registrace chce jen e-mail, účet vznikne až po potvrzení odkazu a jedním příkazem jde registrace zase zavřít, bez nového nasazení.
 
-S otevřením pro veřejnost začaly limity bezplatných tarifů platit doopravdy. Audit výkonu 13. listopadu zjistil, že jedna běžná návštěva stála 46 volání serverových funkcí a 40 z nich bylo přednačítání odkazů, které návštěvník nikdy neotevřel. Při tomhle tempu by měsíční limit došel zhruba po 2 700 návštěvách. Veřejné stránky jsou teď uložené a přestaví se, jen když stažení program opravdu změní, odkazy se přednačítají, až na ně návštěvník najede nebo sáhne, a databáze mezi běhy na Pi spí. Stejná návštěva teď stojí 4 až 6 volání.
+Jakmile se web otevřel veřejnosti, začaly limity bezplatných tarifů platit doopravdy. Audit výkonu 13. listopadu zjistil, že jedna běžná návštěva stála 46 volání serverových funkcí a 40 z nich bylo přednačítání odkazů, na které návštěvník nikdy neklikl. Při tomhle tempu by měsíční limit došel zhruba po 2 700 návštěvách. Veřejné stránky se teď ukládají a přegenerují se, jen když stažení program opravdu změní. Odkazy se přednačítají, až na ně návštěvník najede myší nebo na ně sáhne, a databáze mezi běhy na Pi spí. Stejná návštěva teď stojí 4 až 6 volání.
 
 <Figure
   n={1}
@@ -95,22 +95,22 @@ S otevřením pro veřejnost začaly limity bezplatných tarifů platit doopravd
   n={2}
   wide
   src={homeWeek}
-  alt="Přehled na tento týden: volba období od dneška po 30 dní, nadpis pro každý den a jedna karta na film s rokem, režisérem, délkou, pražskými časy a kinem"
+  alt="Program na tento týden: výběr období od dneška do 30 dní, nadpis pro každý den a jedna karta na film s rokem, režisérem, délkou, pražskými časy a kinem"
   caption="Každá karta je jeden film se všemi časy a kiny, seřazené po dnech, 14. listopadu 2026."
 />
 
 ## AI a spolupráce
 
-Pracoval jsem s AI agenty pro programování. Specifikaci, milníky a záznamy rozhodnutí jsem psal do repozitáře a agenti je implementovali po jednom pull requestu, do 14. listopadu 2026 asi 340. Agenti připravili i datovanou rešerši zdrojů a audity (bezpečnost, připravenost na provoz, výkon, testy a CI, kvalita webu), které jsem četl a podle kterých jsem rozhodoval.
+Pracoval jsem s AI agenty na programování. Specifikaci, milníky a záznamy rozhodnutí jsem psal do repozitáře a agenti podle nich stavěli, jeden pull request po druhém; do 14. listopadu 2026 jich bylo asi 340. Agenti připravili i datovaný průzkum zdrojů a audity (bezpečnost, připravenost na provoz, výkon, testy a CI, kvalita webu). Ty jsem četl a rozhodoval podle nich.
 
-Stejně je rozdělená práce na příspěvcích na sociální sítě. Příručka v repozitáři určuje tón, zdroje a kontroly. Agent píše návrhy z exportu programu Kultomatu a datované rešerše, nikdy z dat TMDB, a ukládá je jen jako koncepty. Každý pak projdu, naplánuji a zveřejním sám.
+Stejně je rozdělená i práce na příspěvcích na sociální sítě. Příručka v repozitáři určuje tón, zdroje a kontroly. Agent píše návrhy z exportu programu Kultomatu a z datovaného průzkumu, nikdy z dat TMDB, a ukládá je jen jako koncepty. Každý pak projdu, naplánuji a zveřejním sám.
 
-Kultomat sám žádný AI model nevolá. Krátké texty o filmech jsou moje nebo převzaté z Wikipedie s uvedením zdroje, a text, který vznikl s AI nástrojem mimo Kultomat, to na stránce říká.
+Kultomat sám žádný AI model nevolá. Krátké texty o filmech jsou moje nebo převzaté z Wikipedie s uvedením zdroje. Když text vznikl s pomocí AI nástroje mimo Kultomat, stránka to přizná.
 
 <AiAndMe
-  decided="Problém, rozsah každého milníku, pravidla pro data, design a každý kompromis, sepsané jako specifikace a záznamy rozhodnutí"
-  helped="Většinu kódu a testů, rešerši zdrojů, audity a návrhy příspěvků na sociální sítě podle těchto dokumentů"
-  reviewed="Každý pull request proti specifikaci, s kontrolou formátu, lintem, typy, unit testy, integračními testy na skutečném Postgresu a testy v prohlížeči; týdenní frontu párování ručně"
+  decided="Problém, rozsah každého milníku, pravidla pro data, design a všechny kompromisy, sepsané ve specifikaci a záznamech rozhodnutí"
+  helped="S většinou kódu a testů, s průzkumem zdrojů, s audity a s návrhy příspěvků na sociální sítě, vždy podle těchto dokumentů"
+  reviewed="Každý pull request proti specifikaci: formátování, lint, typy, unit testy, integrační testy na skutečném Postgresu a testy v prohlížeči; týdenní frontu párování ručně"
 />
 
 ## Výsledky a ověření
@@ -120,24 +120,24 @@ Kultomat sám žádný AI model nevolá. Krátké texty o filmech jsou moje nebo
     metric="17 kin"
     source="veřejná stránka pokrytí Kultomatu 7. listopadu 2026: 13 zdrojů, všechny aktuální"
   >
-    Pokrytí vzrostlo ze 7 kin při spuštění na 17 za necelé dva týdny, vždy po
-    jednom zdroji.
+    Za necelé dva týdny se pokrytí rozrostlo ze 7 kin při spuštění na 17, vždy o
+    jeden zdroj.
   </Outcome>
   <Outcome
     metric="46 → 6"
     source="audit výkonu Kultomatu z 13. listopadu 2026 a jeho oprava, měřeno na testovacím nasazení"
   >
-    Volání funkcí na jednu běžnou návštěvu po opravách, které drží web v
-    bezplatném tarifu hostingu.
+    Tolik volání funkcí stojí jedna běžná návštěva po opravách, díky kterým se
+    web vejde do bezplatného tarifu hostingu.
   </Outcome>
   <Outcome>
     V provozu od 26. října 2026. Účty se za necelé tři týdny dostaly od pozvánek
-    k otevřené registraci, se seznamem ke sledování, upozorněními, profily a
-    týdenním přehledem.
+    k otevřené registraci, včetně seznamu ke zhlédnutí, upozornění, profilů a
+    týdenního přehledu.
   </Outcome>
   <Outcome>
-    Pravidlo o čerstvosti dat vydrželo, když se zdroj rozbil. Ke 14. listopadu
-    se program Ponrepa čtyři dny nedařilo načíst: stránka pokrytí ho označila
+    Pravidlo o čerstvosti dat obstálo, když se zdroj rozbil. Ke 14. listopadu se
+    program Ponrepa už čtyři dny nedařilo načíst: stránka pokrytí ho označila
     jako neaktuální, web jeho projekce přestal doporučovat a žádnou z nich
     neoznačil jako zrušenou.
   </Outcome>
@@ -150,10 +150,10 @@ Kultomat sám žádný AI model nevolá. Krátké texty o filmech jsou moje nebo
 
 ## Co bych <Re>pře</Re>hodnotil
 
-Pravidlo pro klasiky se změnilo hned při prvním setkání se skutečnými daty: staré filmy mají mnohem méně hlasů, takže potřebovaly nižší hranici, a některé klasiky potřebují člověka, který se za ně zaručí. Redakční vrstvu bych plánoval od začátku, místo abych doufal, že čísla budou stačit.
+Pravidlo pro klasiky se změnilo hned při prvním setkání se skutečnými daty. Staré filmy mají mnohem míň hlasů, takže potřebovaly nižší hranici, a za některé klasiky se musí zaručit člověk. Redakční vrstvu bych příště plánoval od začátku, místo abych doufal, že čísla budou stačit.
 
-Limity bezplatných tarifů bych taky změřil před spuštěním, ne až po něm. Bezplatný tarif, který při vyčerpání limitu pozastaví celý web, potřebuje rozpočet na jednu návštěvu od první stránky, a přednačítání každého odkazu na obrazovce bylo výchozí chování frameworku, se kterým nikdo nepočítal.
+Limity bezplatných tarifů bych taky změřil před spuštěním, ne až po něm. Když tarif při vyčerpání limitu pozastaví celý web, potřebujete od první stránky vědět, kolik stojí jedna návštěva. A přednačítání všech odkazů na obrazovce bylo výchozí chování frameworku, se kterým nikdo nepočítal.
 
-Některé věci jsem zatím záměrně nepostavil. Push notifikace počkají, až se ukáže, že e-mail je pomalý, a texty o filmech psané s AI čekají, až TMDB potvrdí, že je takové použití dovolené. Veřejná registrace také čekala, dokud nebyla hotová potřebná práce kolem ochrany osobních údajů: prověření práv ke každému zdroji, limity registrací a vypínač, který ji zase zavře.
+Některé věci jsem zatím záměrně nepostavil. Push notifikace počkají, až se ukáže, že e-mail je pomalý, a texty o filmech psané s pomocí AI počkají, až TMDB potvrdí, že je takové použití povolené. Veřejná registrace taky čekala, dokud nebyla hotová potřebná práce kolem osobních údajů: prověření práv ke každému zdroji, limity registrací a vypínač, kterým jde registrace zase zavřít.
 
-Hosting jsem musel předělat. Bezplatný tarif Vercelu nemá jasně zdokumentovanou smlouvu o zpracování osobních údajů, což začne být důležité, jakmile web otevřu veřejnosti. Před veřejným spuštěním jsem proto web přesunul na bezplatný tarif Netlify, který smlouva pokrývá, a Vercel nechal jako zálohu v pohotovosti: návrat je jen změna DNS, případně s tarifem Pro, pokud bude smlouva potřeba.
+Hosting jsem musel předělat. Bezplatný tarif Vercelu nemá jasně zdokumentovanou smlouvu o zpracování osobních údajů, a ta začne být důležitá, jakmile web otevřete veřejnosti. Před veřejným spuštěním jsem proto web přesunul na bezplatný tarif Netlify, na který se smlouva vztahuje, a Vercel nechal jako zálohu připravenou k přepnutí. Návrat je jen změna DNS, případně s tarifem Pro, pokud bude smlouva potřeba.

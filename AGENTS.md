@@ -49,6 +49,7 @@ Before changing code, inspect the relevant files and the documentation for the i
 - Prefer semantic HTML, keyboard access, visible focus and useful alternative text.
 - Follow the approved design in `docs/design/`; keep repeated visual values consistent.
 - Put user-facing copy in the project's chosen content or localization system when one exists.
+- Czech copy follows the tone and word list in `docs/czech-copy.md`: natural, first-person Czech with the same facts as the English, not a translation of its sentences.
 
 ## Testing and changes
 
