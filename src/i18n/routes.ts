@@ -1,5 +1,5 @@
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from 'astro:i18n'
-import { locales, type Locale } from './index'
+import { locales, t, type Locale } from './index'
 
 /**
  * Every page that exists in both languages, by key. Paths are the same in
@@ -32,5 +32,19 @@ export function alternatesFor(route: RouteKey) {
   return locales.map((locale) => ({
     locale,
     href: urlFor(locale, route),
+  }))
+}
+
+/**
+ * The landing page sections, in page order, for the header and footer
+ * navigation. Each id must match the section's `id` on the landing page.
+ */
+export function sectionLinks(locale: Locale) {
+  const { nav } = t(locale)
+  const home = pathFor(locale, 'home')
+  return (['work', 'approach', 'about', 'contact'] as const).map((id) => ({
+    id,
+    href: `${home}#${id}`,
+    label: nav[id],
   }))
 }

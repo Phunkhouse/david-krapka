@@ -2,7 +2,7 @@
 import { Font } from 'astro:assets'
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
-import { isLocale, t, type Locale } from '../i18n'
+import { localeOf, t, type Locale } from '../i18n'
 import { alternatesFor, urlFor, type RouteKey } from '../i18n/routes'
 import '../styles/global.css'
 
@@ -31,15 +31,14 @@ const {
   bleed,
   og = {},
 } = Astro.props
-const locale: Locale =
-  localeProp ?? (isLocale(Astro.currentLocale) ? Astro.currentLocale : 'en')
+const locale: Locale = localeProp ?? localeOf(Astro.currentLocale)
 const copy = t(locale)
 const alternates = route ? alternatesFor(route) : []
 // Pages without a route (404) switch to the home pages.
 const shellRoute: RouteKey = route ?? 'home'
 const ogLocales: Record<Locale, string> = { en: 'en_GB', cs: 'cs_CZ' }
-// Pages without their own image (landing, privacy, case studies until their
-// OG-Case image exists) share the site-wide one for their language.
+// Pages without their own image (landing, privacy) share the site-wide one for
+// their language; case studies pass their project preview or own ogImage.
 const image = og.image ?? {
   src: `/og/site-${locale}.png`,
   width: 1200,
@@ -123,7 +122,14 @@ const ogImage = new URL(image.src, Astro.site)
 </html>
 
 <style>
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
   main {
+    flex: 1 0 auto;
+    width: 100%;
     max-width: var(--content-max);
     margin-inline: auto;
     padding: var(--gap-xl) var(--pad-inline) 0;
@@ -141,15 +147,5 @@ const ogImage = new URL(image.src, Astro.site)
 
   main:focus {
     outline: none;
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-  }
-
-  main {
-    flex: 1 0 auto;
-    width: 100%;
   }
 </style>

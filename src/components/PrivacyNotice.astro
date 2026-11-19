@@ -1,19 +1,18 @@
 ---
 import { contactEmail } from '../content/profiles'
 import { notices } from '../content/privacy-notice'
-import { t } from '../i18n'
+import type { Locale } from '../i18n'
 
 interface Props {
   title: string
-  locale: string | undefined
+  locale: Locale
 }
 
 // The notice text is data (src/content/privacy-notice.ts). Paragraphs may hold
 // `[label](url)` links and `{email}`; they are turned into elements here, so
 // nothing is injected as HTML.
 const { title, locale } = Astro.props
-const lang = t(locale) === t('cs') ? 'cs' : 'en'
-const notice = notices[lang]
+const notice = notices[locale]
 
 type Part = { text: string; href?: string }
 const fill = (value: string) => value.replaceAll('{email}', contactEmail)

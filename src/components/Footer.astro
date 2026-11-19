@@ -2,7 +2,7 @@
 import LanguageSwitcher from './LanguageSwitcher.astro'
 import Mark from './Mark.astro'
 import { t, type Locale } from '../i18n'
-import { pathFor, type RouteKey } from '../i18n/routes'
+import { pathFor, sectionLinks, type RouteKey } from '../i18n/routes'
 
 interface Props {
   locale: Locale
@@ -18,13 +18,9 @@ const businessIdentification = null as readonly string[] | null
 
 const { locale, route } = Astro.props
 const copy = t(locale)
-const home = pathFor(locale, 'home')
 const year = new Date().getFullYear()
 const links = [
-  { href: `${home}#work`, label: copy.nav.work },
-  { href: `${home}#approach`, label: copy.nav.approach },
-  { href: `${home}#about`, label: copy.nav.about },
-  { href: `${home}#contact`, label: copy.nav.contact },
+  ...sectionLinks(locale),
   { href: pathFor(locale, 'privacy'), label: copy.footer.privacy },
 ]
 ---
