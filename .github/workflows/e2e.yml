@@ -31,6 +31,17 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # Optimised images from earlier builds (Astro's cache dir). Entries are
+      # named by a hash of the source image and transform, so a reused entry
+      # is always the right image; the lockfile is in the key because the
+      # hash leaves out the sharp and Astro versions. Warmed on main by
+      # cache-warm.yml, because PR caches are not shared between PRs.
+      - uses: actions/cache@v6
+        with:
+          path: node_modules/.astro/assets
+          key: astro-images-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('astro.config.mjs', 'src/**/*.png', 'src/**/*.jpg', 'src/**/*.jpeg', 'src/**/*.webp', 'src/**/*.avif') }}
+          restore-keys: |
+            astro-images-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
       - run: pnpm test:e2e
       - uses: actions/upload-artifact@v7
         if: failure()
