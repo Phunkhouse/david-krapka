@@ -215,7 +215,13 @@ test('the háček mark sits beside the name in the header and footer', async ({
 
 // Case studies use their project's preview image (src/assets/work/) as
 // og:image, in both languages.
-for (const slug of ['kultomat', 'eucal', 'vladan-vanek', 'upvideo']) {
+for (const slug of [
+  'kultomat',
+  'eucal',
+  'vladan-vanek',
+  'upvideo',
+  'systerna',
+]) {
   for (const prefix of ['', '/cs']) {
     test(`${prefix}/work/${slug}/ shares the project preview image`, async ({
       page,

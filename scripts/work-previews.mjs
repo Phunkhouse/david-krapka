@@ -1,12 +1,12 @@
 /* global console, document */
 // Builds the project preview images from the canvas design (page "Selected
 // work previews": boards Prev-Kultomat, Prev-Eucal, Prev-VladanVanek and
-// Prev-UpVideo). Manual tool, not a pnpm script.
+// Prev-UpVideo; Systerna follows the same pattern). Manual tool, not a pnpm script.
 //
 //   node scripts/work-previews.mjs <screenshot-dir> [slug ...]
 //
 // <screenshot-dir> holds one screenshot of each project's home page, named
-// kultomat.jpg, eucal.jpg, vladan-vanek.jpg and upvideo.jpg (the canvas has
+// kultomat.jpg, eucal.jpg, vladan-vanek.jpg, upvideo.jpg and systerna.jpg (the canvas has
 // them as uploaded assets). With slugs, only those projects are rebuilt and
 // only their screenshots are needed. The screenshots are not committed; only the
 // composed images are.
@@ -75,6 +75,19 @@ const projects = [
     shape: `<span style="position:absolute;right:40px;bottom:34px;width:0;height:0;border-left:150px solid ${pink};border-top:90px solid transparent;border-bottom:90px solid transparent;mix-blend-mode:multiply;opacity:.8"></span>`,
     front: { left: 30, top: -130 },
   },
+  {
+    slug: 'systerna',
+    letter: 'S',
+    url: 'systerna.cz',
+    // On ink, like its in-progress card: a pink dot screen behind a solid
+    // yellow letter, and a light window frame so it shows on the dark ground.
+    background: 'ink',
+    windowBackground: ink,
+    windowBorder: paper,
+    back: `<span style="position:absolute;left:-60px;top:-40px;width:560px;height:560px;border-radius:50%;background-image:radial-gradient(${pink} 4px,transparent 4.6px);background-size:18px 18px;opacity:.85"></span>`,
+    solidLetter: yellow,
+    front: { left: 30, top: -130 },
+  },
 ]
 
 const font = (file) =>
@@ -89,11 +102,11 @@ body{margin:0}
 .scene{position:relative;width:1200px;height:630px;overflow:hidden;color:${ink};${
   project.background === 'paper'
     ? `background-color:${yellow};background-image:radial-gradient(rgba(27,47,122,.10) 2px,transparent 2.4px);background-size:12px 12px`
-    : `background:${tint}`
+    : `background:${project.background === 'ink' ? ink : tint}`
 }}
 .letter{position:absolute;font-family:Rubik;font-weight:900;text-transform:uppercase;font-size:780px;line-height:1}
 .halftone{color:transparent;-webkit-background-clip:text;background-clip:text;background-image:radial-gradient(${ink} 3.4px,transparent 3.8px);background-size:11px 11px}
-.window{position:absolute;left:190px;top:82px;width:820px;height:466px;border:3px solid ${ink};background:${project.windowBackground};box-shadow:14px 14px 0 ${pink};display:flex;flex-direction:column;overflow:hidden}
+.window{position:absolute;left:190px;top:82px;width:820px;height:466px;border:3px solid ${project.windowBorder ?? ink};background:${project.windowBackground};box-shadow:14px 14px 0 ${pink};display:flex;flex-direction:column;overflow:hidden}
 .bar{flex:0 0 auto;height:44px;border-bottom:3px solid ${ink};background:${paper};display:flex;align-items:center;gap:8px;padding:0 16px}
 .dot{width:12px;height:12px;border-radius:50%;border:2.5px solid ${ink}}
 .dot.on{background:${pink};border:0}
@@ -103,7 +116,7 @@ body{margin:0}
 </style></head><body>
 <div class="scene">
 ${project.back ?? ''}
-<span class="letter halftone" style="left:${project.front.left}px;top:${project.front.top}px">${project.letter}</span>
+<span class="letter${project.solidLetter ? '' : ' halftone'}" style="left:${project.front.left}px;top:${project.front.top}px${project.solidLetter ? `;color:${project.solidLetter}` : ''}">${project.letter}</span>
 ${project.shape ?? ''}
 <div class="window">
   <div class="bar"><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="address">${project.url}</span></div>

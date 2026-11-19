@@ -88,10 +88,11 @@ export const en = {
         },
       ],
       inProgress: {
+        slug: 'systerna',
         name: 'Systerna',
-        label: 'In progress',
-        text: "Being built now. The case study comes when it's ready.",
-        textShort: "Being built now. Case study when it's ready.",
+        label: 'Own product · In progress',
+        text: 'A private dashboard that tells me what in my infrastructure will run out before it does.',
+        textShort: 'Tells me what will run out before it does.',
       },
     },
     // Each `*Short` text is the mobile version of the one above it: keep them

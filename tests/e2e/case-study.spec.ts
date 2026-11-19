@@ -188,21 +188,20 @@ for (const v of versions) {
   })
 }
 
-test('only Systerna has no case study link', async ({ page }) => {
+test('every project card links to its case study', async ({ page }) => {
   await page.goto('/')
   const work = page.getByRole('region', { name: 'Selected work' })
   for (const [name, slug] of [
     ['Eucal', 'eucal'],
     ['Vladan Vaněk', 'vladan-vanek'],
     ['UpVideo', 'upvideo'],
+    ['Systerna', 'systerna'],
   ]) {
     await expect(work.getByRole('link', { name })).toHaveAttribute(
       'href',
       `/work/${slug}/`,
     )
   }
-  await expect(work.getByRole('link', { name: 'Systerna' })).toHaveCount(0)
-  await expect(work.getByRole('heading', { name: 'Systerna' })).toBeVisible()
 })
 
 test.describe('case study template', () => {
@@ -261,7 +260,8 @@ test.describe('case study template', () => {
     ['/work/kultomat/', '/work/eucal/', 'Eucal'],
     ['/work/eucal/', '/work/vladan-vanek/', 'Vladan Vaněk'],
     ['/work/vladan-vanek/', '/work/upvideo/', 'UpVideo'],
-    ['/work/upvideo/', '/work/kultomat/', 'Kultomat'],
+    ['/work/upvideo/', '/work/systerna/', 'Systerna'],
+    ['/work/systerna/', '/work/kultomat/', 'Kultomat'],
     ['/cs/work/kultomat/', '/cs/work/eucal/', 'Eucal'],
   ] as const
   for (const [from, to, name] of order) {
@@ -283,6 +283,7 @@ test.describe('case study template', () => {
       '/work/eucal/',
       '/work/vladan-vanek/',
       '/work/upvideo/',
+      '/work/systerna/',
     ]) {
       await page.goto(path)
       for (const img of await page.locator('main img').all()) {

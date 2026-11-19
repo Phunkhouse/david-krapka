@@ -21,7 +21,7 @@ Success (qualitative, from the brief): a visitor can say in their own words what
 
 - **Landing page** in English and Czech, built to the [approved mockups](design/landing-page.md): hero, Selected work, How I think & build, Experience, About, Contact, footer. Static version built in milestone 3 (placeholders listed by `pnpm placeholders`); motion follows in milestone 4.
 - **Kultomat case study** (long form) and **short pages** for Eucal, Vladan Vaněk and UpVideo, once their facts are verified. Short client projects get their own pages only if there is enough verified material; otherwise their cards link to the live site (decided 5 November 2026).
-- **Systerna** as the labelled “In progress” card only, without a page.
+- **Systerna** as the labelled “In progress” card, linking to its long-form case study (published 19 November 2026 at David's request; until then a card only, without a page).
 - **Emplifi** inside the Experience section, with confirmed role and dates.
 - **Contact** via email links (separate subjects for roles and projects; the project link is an invitation to talk, see [LEG-001](#legal-requirements)), LinkedIn and GitHub.
 - **Privacy notice** in both languages, linked from every footer ([LEG-003](#legal-requirements)).
@@ -38,7 +38,7 @@ Blog, Playground, services catalogue, prices, rates, terms or availability claim
 ### Navigation and structure
 
 - One landing page with anchor navigation: Work · Approach · About · Contact (desktop) and a menu button (mobile). The mobile menu panel has a first proposal in [Shell components](design/shell-components.md).
-- Every project card is a real link (except Systerna). Every section offers a path to work, CV or contact.
+- Every project card is a real link. Every section offers a path to work, CV or contact.
 - A language switcher on every page links to the same page in the other language. Its position still needs design.
 
 ### URLs

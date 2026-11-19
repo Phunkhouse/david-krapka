@@ -1,14 +1,14 @@
 ---
 title: Vladan Vaněk
-summary: 'Osobní web pro komunikačního konzultanta, který jsem navrhl a postavil.'
+summary: 'Osobní web komunikačního konzultanta, který jsem navrhl a postavil.'
 kind: short
 status: 'V provozu od července 2025'
 dates: 'Červenec 2025'
 role: 'Design (včetně loga), vývoj a nastavení obsahu'
 collaborators:
   - name: Vladan Vaněk
-    role: 'vlastní blog, psaný v CMS'
-ai: 'Minimálně: AI udělala jen část rutinní práce · web je z většiny psaný ručně'
+    role: 'vlastní blog, který píše v CMS'
+ai: 'Minimálně: AI pomohla jen s částí rutinní práce · web je z velké části psaný ručně'
 stack:
   - Next.js
   - Sanity
@@ -23,23 +23,23 @@ import home from './home.jpg'
 
 ## Shrnutí
 
-Vladan Vaněk je komunikační konzultant: strategie, tvorba obsahu a ghostwriting, vztahy s médii a školení. Web představuje jeho služby a zkušenosti, s kurzy, blogem a referencemi, a končí kontaktním formulářem. Spustil se v červenci 2025.
+Vladan Vaněk je komunikační konzultant: dělá strategii, tvorbu obsahu a ghostwriting, vztahy s médii a školení. Web představuje jeho služby a zkušenosti, kurzy, blog a reference a končí kontaktním formulářem. Spustil se v červenci 2025.
 
 ## Co jsem měl na starosti
 
-Design včetně loga a vývoj. Stejně jako Eucal běží na Next.js a obsah má v Sanity. Animace v GSAP a karusel Embla dodávají stránkám pohyb, aniž by překážely obsahu.
+Design včetně loga a vývoj. Stejně jako Eucal běží web na Next.js a obsah má v Sanity. Animace v GSAP a karusel Embla přidávají stránkám pohyb, ale obsahu nepřekážejí.
 
-Design se stal i základem jeho značky. Barvy, logo a písma z něj převzal do svých dalších příspěvků na sociálních sítích.
+Design se nakonec stal základem celé jeho značky. Barvy, logo a písma z webu převzal i do dalších příspěvků na sociálních sítích.
 
 ## Jedno rozhodnutí
 
 <Decision
   n={1}
   name="Obsah v CMS"
-  chose="Dát obsah včetně jeho blogu do Sanity"
+  chose="Dát veškerý obsah včetně blogu do Sanity"
   insteadOf="Webový builder nebo CMS s hotovými šablonami"
-  because="Vladan si chtěl sám psát blog a sdílet články na LinkedInu, aby budoval svou značku. Potřeboval jsem CMS, které je ideálně zdarma, snadno se ovládá a dovolí mi postavit web od nuly bez zbytečností z hotových šablon. Sanity splnilo všechny tři podmínky."
-  checkedBy="Všechno, co potřebuje, si teď spravuje sám: blog je aktivní a články často sdílí na LinkedInu."
+  because="Vladan chtěl sám psát blog a sdílet články na LinkedInu, aby budoval svou značku. Potřeboval jsem CMS, které je ideálně zdarma, snadno se ovládá a dovolí mi postavit web od nuly, bez zbytečností z hotových šablon. Sanity splnilo všechny tři podmínky."
+  checkedBy="Všechno, co potřebuje, si dnes spravuje sám: blog žije a články často sdílí na LinkedInu."
 />
 
 <Figure
@@ -51,4 +51,4 @@ Design se stal i základem jeho značky. Barvy, logo a písma z něj převzal do
 
 ## Co bych <Re>pře</Re>hodnotil
 
-Dnes bych zvolil Astro a Keystatic. Astro posílá jen málo JavaScriptu, takže by se stránky načítaly rychleji. Vladan zná GitHub, takže by Keystatic ukládal jeho články jako soubory v repozitáři webu, s jednoduchým editorem navrch: žádná externí služba ani účet navíc a každá změna verzovaná v gitu.
+Dnes bych sáhl po Astru a Keystaticu. Astro posílá do prohlížeče jen málo JavaScriptu, takže by se stránky načítaly rychleji. Vladan GitHub zná, takže by mu Keystatic ukládal články jako soubory přímo v repozitáři webu, s jednoduchým editorem navrch. Žádná externí služba, žádný účet navíc a každá změna by byla verzovaná v gitu.

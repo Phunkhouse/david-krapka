@@ -28,6 +28,7 @@ const art: Record<string, { letter: string; kind: ArtKind }> = {
   eucal: { letter: 'E', kind: 'circle' },
   'vladan-vanek': { letter: 'V', kind: 'paper' },
   upvideo: { letter: 'U', kind: 'play' },
+  systerna: { letter: 'S', kind: 'circle' },
 }
 
 export function artFor(slug: string) {
@@ -42,11 +43,10 @@ export function artFor(slug: string) {
 
 /** The landing card's label, name and text for a project. */
 export function cardFor(locale: Locale, slug: string) {
-  const { featured, projects } = t(locale).home.work
-  const card =
-    featured.slug === slug
-      ? featured
-      : projects.find((project) => project.slug === slug)
+  const { featured, projects, inProgress } = t(locale).home.work
+  const card = [featured, ...projects, inProgress].find(
+    (project) => project.slug === slug,
+  )
   if (!card) {
     throw new Error(`No landing card for project "${slug}" (${locale}).`)
   }

@@ -1,0 +1,156 @@
+---
+title: Systerna
+summary: 'Soukromý dashboard, který hlídá limity a náklady infrastruktury a řekne mi, co dojde, ještě než to dojde. Mám ho na starosti celý, od první otázky po každodenní provoz.'
+kind: long
+status: 'Soukromá · používám ji denně · verzi k provozu na vlastním serveru chystám po prvním měsíčním resetu'
+dates: 'Od října 2026'
+role: 'Vlastník: produkt, design, vývoj a provoz'
+collaborators: []
+ai: 'Většinu kódu napsali AI agenti podle mé specifikace a záznamů rozhodnutí · každý pull request jsem s nimi porovnal, dotazy na poskytovatele jsem spouštěl sám a žádný klíč se k agentům nedostal'
+stack:
+  - Next.js
+  - TypeScript
+  - SCSS Modules
+  - Postgres na Neonu
+  - Vercel
+  - Cloudflare Workers
+  - Raspberry Pi 5
+  - Resend
+order: 5
+draft: false
+---
+
+import overviewAttention from './overview-attention.jpg'
+import overviewMetrics from './overview-metrics.jpg'
+import metricForecast from './metric-forecast.jpg'
+
+## Shrnutí
+
+Systerna na jednom místě ukazuje, kolik spotřebovávají vývojářské služby, na kterých běží moje projekty, kde mají limity a co stojí. Hlavně ale odpovídá na otázku: co brzy dojde a kdy? Metriky, které potřebují pozornost, jsou na obrazovce Overview hned nahoře, i s důvodem a datem resetu. U každého čísla je vidět, odkud je a jak je staré.
+
+Skutečná data sbírá od 4. listopadu 2026 a každé ráno se na ni dívám jako první. K 19. listopadu sledovala 36 metrik z osmi zdrojů (sedm poskytovatelů a moje Raspberry Pi), z toho 27 má limit. Zatím je soukromá. Měsíční předpovědi ukazuje jen jako předběžné, protože je zatím není s čím porovnat; to přinese až první měsíční reset 1. prosince. A spustit si ji zatím nemůže nikdo jiný než já.
+
+## Co jsem měl na starosti
+
+Všechno: otázku, pravidla pro produkt a data, design, kód i provoz. Začal jsem 29. října 2026 dokumentací. První kód přišel 2. listopadu, až když ověření proveditelnosti ukázalo, ze kterých poskytovatelů se dá vůbec něco vyčíst.
+
+Napsal jsem specifikaci, milníky s akceptačními kritérii a ke každému důležitému rozhodnutí záznam; do 17. listopadu jich bylo 37. Všechny testovací dotazy na poskytovatele jsem spouštěl sám, s tokeny, které agenti nikdy neviděli. Každý návrh obrazovky nejdřív schválím v mockupu a teprve pak se staví.
+
+## Problém a omezení
+
+Moje projekty běží na bezplatných tarifech: Neon a Vercel pro Kultomat, GitHub Actions, Cloudflare, Resend na e-maily, Netlify, Always Free stroje u Oracle a Google Cloudu a Raspberry Pi doma. Každá služba má jiné limity, jiný den resetu a vlastní dashboard. Některé při 100 % rovnou pozastaví celou službu. Že jsem na limitu, jsem se obvykle dozvěděl, až když jsem na něj narazil.
+
+Omezení, která rozhodla o všem:
+
+- **Žádný rozpočet.** I Systerna sama musí běžet zdarma a svoji spotřebu hlídá stejně jako všechno ostatní.
+- **Poskytovatelé se číst nenechají.** Řada bezplatných tarifů ukazuje kvóty jen v dashboardu. Vercel Hobby na ně nemá API vůbec, API Neonu pro spotřebu je jen v placeném tarifu. A klíč, který smí číst spotřebu, často smí i spoustu dalšího.
+- **Poctivost.** Neznámá hodnota nesmí vypadat jako nula, u staré hodnoty musí být vždycky datum a odhad poskytovatele se nesmí tvářit jako faktura.
+
+## Klíčová rozhodnutí
+
+<Decision
+  n={1}
+  name="Spotřeba se sbírá, nikdy se neopisuje"
+  chose="Všechna čísla o spotřebě sbírat automaticky, z API poskytovatele nebo skriptem, a ručně zadávat jen to, co se skoro nemění: limity, dny resetu a tarify"
+  insteadOf="Ruční zadávání jako záchrana: když API chybí, číslo z dashboardu opíšu"
+  because="Opisování čísel z dashboardů je přesně ta otrava, které se má Systerna zbavit, a zastaralé ručně zadané číslo vypadá jako skutečná data. Poskytovatel, kterého nejde číst automaticky, se prostě nezobrazuje."
+  checkedBy="Vercel je vedený jako blokovaný ze strany poskytovatele, i s doklady, místo aby se sledoval ručně. Pole pro ruční zadání spotřeby z aplikace zmizelo; ručně zadané limity mají zdroj a datum platnosti."
+/>
+
+<Decision
+  n={2}
+  name="Klíče zůstávají tam, kde jsou potřeba"
+  chose="Poskytovatele, jejichž klíč umí víc než jen číst, číst z mých vlastních zařízení: skripty na Raspberry Pi a malými Cloudflare Workers. Každý smí jen pevně daný seznam čtecích požadavků a Systerně posílá jen samotná čísla"
+  insteadOf="Mít všechny klíče poskytovatelů uložené v hostované aplikaci"
+  because="Někteří poskytovatelé klíč jen pro čtení nenabízejí, takže by uniklý klíč mohl posílat e-maily nebo měnit infrastrukturu. Klíč na zařízení se do databáze aplikace nikdy nedostane a aplikace má pro každý skript jen vlastní přístup, který jde kdykoli zrušit."
+  checkedBy="Každý skript má testy, které jakýkoli požadavek mimo seznam zastaví ještě před odesláním, a hlídají, aby se do Systerny ani do logu nedostal klíč, ID účtu nebo jméno. Když skript ztichne, Systerna ho ukáže jako neaktualizovaný a nechá jeho poslední čísla."
+/>
+
+<Decision
+  n={3}
+  name="Předběžné předpovědi, ale jasně označené"
+  chose="Předpověď, které chybí jen kalibrace nebo ověřený reset, ukázat jako předběžnou: s důvody, jen na dny, s nízkou jistotou, bez vlivu na pořadí rizik a bez upozornění"
+  insteadOf="Nezobrazovat žádnou předpověď, dokud v prosinci nebude první kalibrovaná"
+  because="Když byl výpočetní výkon jedné databáze na 88 % a do resetu zbývalo 13 dní, otázka „dojde to před resetem?“ si odpověď zasloužila. Tempo, jakým spotřeba zatím roste, je užitečné, i když metoda ještě není ověřená."
+  checkedBy="Upozornění při překročení prahu fungují i bez předpovědi. Každá předpověď se navíc potichu ukládá, takže první reset 1. prosince ukáže, jak moc se předběžné předpovědi trefily, dřív než některá smí měnit pořadí nebo posílat upozornění."
+/>
+
+## Jak to vzniklo
+
+Sběr dat běží podle vlastního plánu, nezávisle na hostingu. Aplikaci pravidelně budí Cloudflare Worker a cron na Vercelu. Aplikace sama pozná, co je u které metriky na řadě, zamkne si to, aby se dva běhy nepopraly, a když poskytovatel řekne „počkej“, počká. GitHub, Cloudflare a Neon čte přímo server. Oracle a Google Cloud čtou Cloudflare Workers; Resend, Netlify, stav samotného Pi a TryPost skripty na Pi.
+
+Každé měření se ukládá i se zdrojem, časem a kvalitou. Když sběr selže, zůstane poslední dobrá hodnota s informací, jak je stará. Pravidla pro to jsou v otestovaném doménovém kódu: neznámá hodnota není nikdy nula, stará data mají vždycky datum, nahlášené a odhadnuté částky se nikdy nesčítají. Metriky, u kterých poskytovatel nezaručuje přesnost pro fakturaci (třeba u Neonu), jsou na své stránce označené jako experimentální.
+
+Rozhraní je celé vlastní: Next.js, SCSS Modules a vlastní sada komponent postavená na tokenech ze schváleného designu, tmavé plochy a přihlašování přes passkey. Upozornění chodí do aplikace a e-mailem. Každý poskytovatel má svou barvu a ikonu, takže řádek poznáte dřív, než ho přečtete.
+
+<Figure
+  n={1}
+  src={overviewAttention}
+  alt="Obrazovka Overview v Systerně: pozornost potřebují 3 z 27 metrik s limitem. Výpočetní výkon Neonu pro Kultomat na 93,09 ze 100 CU-hodin, GitHub Actions na 10,49 z 12 USD a síťový přenos Neonu na 4,35 z 5 GB; všechny se blíží limitu a resetují se 1. prosince"
+  caption="Horní část obrazovky Overview 19. listopadu 2026: co potřebuje pozornost, proč a kdy se to resetuje."
+/>
+
+<Figure
+  n={2}
+  wide
+  src={overviewMetrics}
+  alt="Seznam všech metrik seřazený podle naléhavosti: nahoře tři metriky nad 75 %, pod nimi ty, které se právě čerpají, třeba blokové úložiště u Oracle na 50 %, paměť Raspberry Pi na 40 % a hodiny Oracle A1 na 40 %. U každé je pruh, datum resetu a období"
+  caption="Všechny metriky seřazené podle naléhavosti, s filtrem podle projektu a účtu, 19. listopadu 2026."
+/>
+
+Každá metrika má i vlastní stránku: kolik zbývá a kdy se resetuje, předpověď i s výpočtem, historie den po dni, odkud číslo je a jak je čerstvé, a upozornění, která ji hlídají.
+
+<Figure
+  n={3}
+  src={metricForecast}
+  alt="Předpověď na stránce metriky GitHub Actions compute: štítky Preliminary a low confidence, text „May run out between 23 Nov and 29 Nov“, nejpravděpodobněji 24. listopadu, tedy před resetem 1. prosince. Zbývá 1,51 z 12 USD; poslední dobou se čerpá 0,3 USD denně, a aby to vydrželo, smí to být nejvýš 0,1 USD denně. Jeden rámeček vysvětluje, že předběžná předpověď ukazuje jen dny, neposílá upozornění a nepočítá se do Needs attention; druhý ukazuje nízkou jistotu, 57 měření za 14,8 dne, ručně zadaný reset a metodu lineárního tempa"
+  caption="Předběžná předpověď na stránce metriky 19. listopadu 2026: odpověď, proč je zatím jen předběžná, a jak vznikla."
+/>
+
+## AI a spolupráce
+
+Pracoval jsem s AI agenty na programování. Specifikaci, milníky a záznamy rozhodnutí jsem psal do repozitáře a agenti podle nich stavěli, jeden pull request po druhém; do 19. listopadu 2026 jich bylo asi 290. Agenti připravili i průzkum proveditelnosti a audity (bezpečnost, architektura, správnost, výkon, testy a CI, kvalita webu). Ty jsem četl a rozhodoval podle nich.
+
+Klíč od žádného poskytovatele agenti nikdy neměli. Všechny testovací dotazy při ověřování proveditelnosti byly jen pro čtení a spouštěl jsem je sám. Agenti pracovali jen s datovanými výsledky, ze kterých jsem citlivé údaje odstranil.
+
+Systerna sama žádný AI model nevolá. Předpovědi jsou obyčejná aritmetika nad naměřenými hodnotami a u každé je vidět metoda, počet bodů a jistota.
+
+<AiAndMe
+  decided="Problém, pravidla pro poctivá data, které poskytovatele číst a jak, design a všechny kompromisy, sepsané ve specifikaci a záznamech rozhodnutí"
+  helped="S většinou kódu a testů, se skripty a Workers, s průzkumem proveditelnosti a audity, vždy podle těchto dokumentů"
+  reviewed="Každý pull request proti specifikaci: formátování, lint, typy, unit testy, integrační testy na skutečném Postgresu a testy v prohlížeči včetně přístupnosti; a čísla každého poskytovatele proti jeho vlastnímu dashboardu"
+/>
+
+## Výsledky a ověření
+
+<Outcomes>
+  <Outcome
+    metric="36 metrik"
+    source="Overview v Systerně 19. listopadu 2026: sedm poskytovatelů a Pi, 27 metrik s limitem"
+  >
+    Jedna obrazovka místo sedmi dashboardů, všechno načtené automaticky.
+  </Outcome>
+  <Outcome metric="93 %" source="Overview v Systerně 19. listopadu 2026">
+    Výpočetní výkon databáze Kultomatu jedenáct dní před resetem. První položka
+    v Needs attention; všiml jsem si toho v Systerně, ne v dashboardu Neonu.
+  </Outcome>
+  <Outcome>
+    Denně ji používám od začátku listopadu 2026, se skutečnými daty z
+    pravidelných běhů od 4. listopadu. Tři ze sedmi fází implementace jsou
+    uzavřené; většina zbytku čeká na moje vlastní kontroly a na reset 1.
+    prosince.
+  </Outcome>
+  {/* Skryté do prvního resetu (1. prosince 2026):
+  <Outcome metric="[Chyba předpovědi]" source="[Kalibrační záznam Systerny, období]">
+    [Jak moc se předběžné předpovědi trefily do skutečného konce měsíce]
+  </Outcome>
+  */}
+</Outcomes>
+
+## Co bych <Re>pře</Re>hodnotil
+
+Počítal jsem se čtyřmi integracemi a předpokládal, že většina poskytovatelů má API na čísla, která ukazuje v dashboardu. Vercel ho v bezplatném tarifu nemá vůbec a Neon jen v placeném. Příště bych si to ověřil dřív, než poskytovatele pro projekt vyberu, ne až potom. Překvapí mě totiž právě ten tarif, který hlídat nemůžu.
+
+Od začátku bych taky počítal s předpověďmi, které zatím nejde ověřit. Měsíční předpověď se dá zkontrolovat až po měsíci historie, a čekat celý měsíc na jakoukoli odpověď, když je kvóta na 88 %, mi nedávalo smysl. Předběžné, jasně označené předpovědi, které neposílají upozornění, měly být v plánu od první verze.
+
+Některé věci čekají záměrně. Web Push, tedy druhý kanál upozornění nezávislý na e-mailu, musí být hotový dřív, než se na Systernu začne spoléhat někdo další. Veřejná verze, ať už jako bezplatná služba, nebo jako balíček, který si kdokoli spustí na vlastním stroji, je zatím jen sepsaný směr, ne rozdělaná práce. Prvním krokem bude verze k provozu na vlastním serveru, až si předpovědi projdou skutečným resetem.
