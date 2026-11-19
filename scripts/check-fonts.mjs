@@ -1,6 +1,6 @@
 // Fails when a built page shows a character the site fonts were not built for.
 // Such a character would silently render in a fallback font. Run after
-// `pnpm build` (it is part of `pnpm verify`):
+// `pnpm build` (it is part of `pnpm verify` and CI job `check`):
 //
 //   pnpm check:fonts
 //

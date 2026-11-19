@@ -1,29 +1,6 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import About from '../../components/landing/About.astro'
-import Approach from '../../components/landing/Approach.astro'
-import Contact from '../../components/landing/Contact.astro'
-import Experience from '../../components/landing/Experience.astro'
-import Hero from '../../components/landing/Hero.astro'
-import Work from '../../components/landing/Work.astro'
-import PersonSchema from '../../components/landing/PersonSchema.astro'
-import { isLocale, t } from '../../i18n'
-
-const locale = isLocale(Astro.currentLocale) ? Astro.currentLocale : 'en'
-const copy = t(locale)
+import HomePage from '../../components/landing/HomePage.astro'
+import { localeOf } from '../../i18n'
 ---
 
-<BaseLayout
-  title={`${copy.site.name} · ${copy.site.role}`}
-  description={copy.site.description}
-  route="home"
-  bleed
->
-  <PersonSchema locale={locale} slot="head" />
-  <Hero locale={locale} />
-  <Work locale={locale} />
-  <Approach locale={locale} />
-  <Experience locale={locale} />
-  <About locale={locale} />
-  <Contact locale={locale} />
-</BaseLayout>
+<HomePage locale={localeOf(Astro.currentLocale)} />

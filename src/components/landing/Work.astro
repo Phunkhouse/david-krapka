@@ -19,7 +19,7 @@ const { featured, inProgress } = work
 const published = new Set((await getCaseStudies(locale)).map((s) => s.slug))
 // A case study without a card here would never be linked; a mistyped slug in
 // the dictionaries would leave its card plain. Fail the build instead.
-// Systerna keeps its in-progress card; it links once its case study is built.
+// Systerna keeps its in-progress card even though its case study is published.
 const cardSlugs = [
   featured.slug,
   ...work.projects.map((p) => p.slug),

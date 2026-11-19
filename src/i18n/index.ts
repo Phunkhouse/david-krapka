@@ -10,7 +10,12 @@ export function isLocale(value: string | undefined): value is Locale {
   return locales.includes(value as Locale)
 }
 
+/** The locale for a value such as `Astro.currentLocale`; English when unknown. */
+export function localeOf(value: string | undefined): Locale {
+  return isLocale(value) ? value : 'en'
+}
+
 /** Interface copy for a locale; falls back to English for unknown values. */
 export function t(locale: string | undefined): Dictionary {
-  return dictionaries[isLocale(locale) ? locale : 'en']
+  return dictionaries[localeOf(locale)]
 }
