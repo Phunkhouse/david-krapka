@@ -1,0 +1,159 @@
+---
+title: Systerna
+summary: 'One private dashboard for the limits and costs of my infrastructure, which tells me what will run out before it does. I own it from the first question to running it every day.'
+kind: long
+status: 'Private · in my daily use · a self-hostable release is planned after the first monthly reset'
+dates: 'Since October 2026'
+role: 'Owner: product, design, development and operations'
+collaborators: []
+ai: 'AI coding agents wrote most of the code from my specification and decision records · I reviewed every pull request against them, ran the provider probes myself and kept every key out of their reach'
+stack:
+  - Next.js
+  - TypeScript
+  - SCSS Modules
+  - Postgres on Neon
+  - Vercel
+  - Cloudflare Workers
+  - Raspberry Pi 5
+  - Resend
+order: 5
+draft: false
+---
+
+import overviewAttention from './overview-attention.jpg'
+import overviewMetrics from './overview-metrics.jpg'
+import metricForecast from './metric-forecast.jpg'
+
+## Summary
+
+Systerna is a dashboard for the usage, limits and costs of the developer services behind my projects. It answers one question first: what is about to run out, and when? The Overview puts the metrics that need attention on top, with their reason and their reset date, and every number says where it came from and how old it is.
+
+It has collected real data since 4 November 2026 and is the screen I check each morning. On 19 November it tracked 36 metrics from eight sources, seven providers and my Raspberry Pi, 27 of them against a limit. It is private for now: it shows monthly forecasts only as preliminary until the first monthly reset on 1 December gives them something to be checked against, and it is not yet packaged for anyone else to run.
+
+## What I owned
+
+All of it: the question, the product and data rules, the design, the code and running it. It started as documentation on 29 October 2026, and the first code followed on 2 November, after a feasibility milestone had shown which providers could be read at all.
+
+I wrote the specification, the milestones with their acceptance checks and a decision record for every significant choice, 37 by 17 November. I ran every probe against a provider myself, with tokens the coding agents never saw, and I approve each design in a canvas before it is built.
+
+## Problem and constraints
+
+My projects run on free tiers: Neon and Vercel for Kultomat, GitHub Actions, Cloudflare, Resend for email, Netlify, Oracle and Google Cloud's always-free machines and a Raspberry Pi at home. Each free tier has its own limits, its own reset day and its own dashboard. Some pause the whole service at 100 %. I found out about a limit when I hit it.
+
+The constraints shaped everything:
+
+- **No budget.** Systerna has to run on free tiers itself, and it watches its own usage like everything else.
+- **Providers do not want to be read.** Several free plans show their quotas only in a dashboard. Vercel Hobby has no API for them at all; Neon's consumption API needs a paid plan. A key that can read usage can often do much more.
+- **Honesty.** An unknown value must never look like a zero, an old value must always carry its date, and a provider's estimate must never be shown as its bill.
+
+## Key decisions
+
+<Decision
+  n={1}
+  name="Usage is collected, never typed"
+  chose="Collect every usage figure automatically, from a provider API or a collector, and allow manual input only for things that rarely change: limits, reset days and plans"
+  insteadOf="A manual fallback where I copy a number from a provider's dashboard when there is no API"
+  because="Copying numbers from dashboards is exactly the chore Systerna exists to remove, and a stale typed number looks like data. A provider with no automatic source is simply not shown."
+  checkedBy="Vercel is recorded as blocked by the provider, with its evidence, instead of tracked by hand. The manual usage field was removed from the app; manual limits keep their source and an expiry date."
+/>
+
+<Decision
+  n={2}
+  name="Keys stay where they are needed"
+  chose="Read providers with broad keys from my own devices: collectors on the Raspberry Pi and small Cloudflare Workers, each limited to a fixed list of read requests, sending Systerna only the figures"
+  insteadOf="Storing every provider key in the hosted app"
+  because="Some providers offer no read-only key, so a leaked key could send email or change infrastructure. Kept on a device, a key never reaches the app's database, and the app holds only a revocable ingest credential per collector."
+  checkedBy="Each collector has tests that refuse any request outside its list before the network and check that no key, account id or name reaches Systerna or its log. A collector that goes quiet shows as not updated, with its last figures kept."
+/>
+
+<Decision
+  n={3}
+  name="Preliminary forecasts, clearly labelled"
+  chose="Show a forecast held back only by missing calibration or an unverified reset as preliminary: labelled with its reasons, dates only and low confidence, without changing the risk order or sending an alert"
+  insteadOf="Showing no forecast until the first calibrated one in December"
+  because="With a database's compute at 88 % and 13 days to go, “will it run out before the reset?” deserved an answer. The pace so far is useful even before the method is proven."
+  checkedBy="Threshold alerts work without any forecast. Every forecast is also stored in shadow mode, so the first reset on 1 December can show how far off the preliminary ones were before any of them may rank or alert."
+/>
+
+## The build
+
+Collection runs on a schedule kept apart from the hosting. A Cloudflare Worker and Vercel's cron wake the app; the app decides what is due for each metric, takes a lease so two runs never collide, and backs off when a provider says to wait. GitHub, Cloudflare and Neon are read from the server. Oracle and Google Cloud are read by Cloudflare Workers, and Resend, Netlify, the Pi's own health and TryPost by collectors on the Pi.
+
+Every reading is stored with its source, time and quality. A failed collection keeps the last good value and says how old it is, and the rules for this live in tested domain code: unknown is never zero, stale data is always dated, reported and estimated money are never added together. Metrics whose provider reports them without promising billing accuracy, such as Neon's, are labelled experimental on their own page.
+
+The interface is custom: Next.js with SCSS Modules and my own component kit, drawn from tokens in the approved design, on dark surfaces, with passkey sign-in. Alerts go in-app and by email. Each provider has its own colour and mark, so a row is recognisable before it is read.
+
+<Figure
+  n={1}
+  src={overviewAttention}
+  alt="Systerna's Overview: 3 of 27 metrics with a limit need attention. Neon compute for Kultomat at 93.09 of 100 CU-hours, GitHub Actions compute at 10.49 of 12 USD and Neon network transfer at 4.35 of 5 GB, each near the limit and resetting on 1 December"
+  caption="The top of the Overview on 19 November 2026: what needs attention, why, and when it resets."
+/>
+
+<Figure
+  n={2}
+  wide
+  src={overviewMetrics}
+  alt="The All metrics list, sorted by attention: three metrics above 75 %, then metrics in use such as Oracle block storage at 50 %, Raspberry Pi memory at 40 % and Oracle A1 hours at 40 %, each with a bar, its reset date and its period"
+  caption="All metrics, sorted by attention, with filters by project and account, 19 November 2026."
+/>
+
+Each metric also has its own page: what is left and when it resets, the forecast with how it was worked out, the history day by day, where the number came from and how fresh it is, and the alerts that watch it.
+
+<Figure
+  n={3}
+  src={metricForecast}
+  alt="The forecast on the metric page for GitHub Actions compute: labelled Preliminary and low confidence, “May run out between 23 Nov and 29 Nov”, likely 24 November, before the reset on 1 December. 1.51 USD of 12 left, a recent pace of 0.3 USD a day against 0.1 USD a day to last. A box explains that a preliminary forecast shows dates only, sends no alert and is not counted in Needs attention; another shows low confidence, 57 readings over 14.8 days, a reset entered by me and the linear pace method"
+  caption="A preliminary forecast on a metric page, 19 November 2026: the answer, why it is only preliminary, and how it was worked out."
+/>
+
+## AI and collaboration
+
+I worked with AI coding agents. I wrote the specification, the milestones and the decision records in the repository, and agents implemented them one pull request at a time, about 290 by 19 November 2026. Agents also prepared the feasibility research and the audits (security, architecture, correctness, performance, tests and CI, web quality), which I read and decided on.
+
+The agents never held a provider key. Every probe in the feasibility milestone was a read-only request I ran myself, and the agents worked from the dated, redacted evidence I recorded.
+
+Systerna itself calls no AI model. Its forecasts are plain arithmetic on the readings, with the method, the number of points and the confidence shown beside each one.
+
+<AiAndMe
+  decided="The problem, the data honesty rules, which providers to read and how, the design and every trade-off, written down as a specification and decision records"
+  helped="Writing most of the code and tests, the collectors and Workers, the feasibility research and the audits, from those documents"
+  reviewed="Every pull request against the spec, with formatting, lint, types, unit tests, integration tests on real Postgres and browser tests with accessibility checks; each provider's figures against its own dashboard"
+/>
+
+## Outcomes and validation
+
+<Outcomes>
+  <Outcome
+    metric="36 metrics"
+    source="Systerna's Overview on 19 November 2026: seven providers and the Pi, 27 metrics with a limit"
+  >
+    One screen in place of seven provider dashboards, read automatically.
+  </Outcome>
+  <Outcome metric="93 %" source="Systerna's Overview on 19 November 2026">
+    Kultomat's database compute, eleven days before its reset: the first item
+    under Needs attention, found on the Overview rather than in Neon's
+    dashboard.
+  </Outcome>
+  <Outcome>
+    In daily use since early November 2026, on real data from scheduled runs
+    since 4 November. Three of seven implementation phases are signed off; most
+    of the rest waits on my own checks and the 1 December reset.
+  </Outcome>
+  {/* Hidden until the first reset (1 December 2026):
+  <Outcome
+    metric="[Forecast error]"
+    source="[Systerna's calibration record, the period]"
+  >
+    [How far the preliminary forecasts were from the real end of the month]
+  </Outcome>
+  */}
+</Outcomes>
+
+## What I would <Re>re</Re>think
+
+I planned four integrations and assumed most providers would have an API for the numbers their dashboards show. Vercel's free plan has none, and Neon's needs a paid plan. I would check that before choosing a provider for a project, not after: the free tier I cannot watch is the one that surprises me.
+
+I would also have planned for forecasts that cannot be proven yet. A monthly forecast needs a month of history before it can be checked, and waiting a month for any answer felt wrong when a quota was at 88 %. Preliminary forecasts, clearly labelled and kept out of the alerts, should have been in the plan from the start.
+
+Some things wait on purpose. Web Push, a second alert channel independent of email, is required before anyone else relies on Systerna. A public version, Systerna as a free service or as a package anyone can run on their own machine, is written down as a direction, not started: its first step is a self-hostable release once the forecasts have met a real reset.

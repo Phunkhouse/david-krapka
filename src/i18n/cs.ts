@@ -87,10 +87,11 @@ export const cs: Dictionary = {
         },
       ],
       inProgress: {
+        slug: 'systerna',
         name: 'Systerna',
-        label: 'Rozpracováno',
-        text: 'Právě vzniká. Případová studie přijde, až bude hotový.',
-        textShort: 'Právě vzniká. Studie přijde, až bude hotový.',
+        label: 'Vlastní produkt · Rozpracováno',
+        text: 'Soukromý dashboard, který mi řekne, co v infrastruktuře dojde, ještě než to dojde.',
+        textShort: 'Řekne mi, co dojde, ještě než to dojde.',
       },
     },
     approach: {

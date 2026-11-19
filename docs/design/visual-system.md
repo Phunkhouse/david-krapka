@@ -71,7 +71,7 @@ These are reusable utilities. All decorative glyphs are `aria-hidden="true"`.
 - **Halftone text.** Large letters filled with a dot screen: transparent text, `background-clip: text`, `radial-gradient(var(--ink) r, transparent r+0.3–0.8px)`. Three densities: large (6 px dots on an 18 px grid, hero drum and contact “?”), medium (3.4 px on 11 px, cards and the “+”), small (2.2 px on 8 px, approach columns).
 - **Misregistered copy.** A solid pink copy of the same glyph, offset by roughly 10–18 px right and down, at 45–55 % opacity with `multiply`.
 - **Yellow paper.** `--yellow` with a faint ink dot screen (2 px dots on a 12 px grid at 10 % ink).
-- **Pink dot screen.** 2.2 px pink dots on a 9 px grid, used behind the portrait and in the Systerna card.
+- **Pink dot screen.** 2.2 px pink dots on a 9 px grid, used behind the portrait; Systerna's project preview carries a larger version.
 - **Rollers.** Solid ink bars on the left and right edges of yellow panels: 36 px on desktop sections, 18 px on the approach grid, 22 px on mobile.
 - **Offset shadow.** Hard shadow with no blur: `6px 5px 0` pink at 55–60 % on section headings; `8–12px` pink or ink on cards.
 - **Highlight.** Yellow background behind a word fragment (“Re”think, “Serious”), with 6–8 px horizontal padding.

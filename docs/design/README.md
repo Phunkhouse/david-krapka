@@ -32,7 +32,7 @@ Snapshot taken on 4 November 2026 from canvas version `1793818431-5e1b` (landing
 | Hero | Print drum: a yellow drum turns T → M → R on a 9 s loop, with the headline cycling *Think. / Make. / Rethink.* | Landing page (desktop, mobile) |
 | Palette and type | Three inks (blue `#1B2F7A`, yellow `#FFE800`, pink `#FF48B0`) on paper `#FAFAF7`; Rubik Black, Sora, Space Mono | All boards |
 | Navigation | Desktop: Work · Approach · About · Contact. Mobile: round menu button | Landing page |
-| Selected work | Kultomat as a large feature card; Eucal, Vladan Vaněk, UpVideo as three cards; Systerna as a dashed “In progress” card | Landing page |
+| Selected work | Kultomat as a large feature card; Eucal, Vladan Vaněk, UpVideo as three cards; Systerna as a dashed “In progress” card with its preview (since 19 November 2026) | Landing page |
 | Approach | Three columns Think / Make / Rethink; **A5** motion: halftone develops on scroll, columns react on hover | Approach section · motion (A5 approved) |
 | AI disclosure | “AI + me” strip below the approach columns | Landing page |
 | Experience | **E3** “Big team. Small team.”: Emplifi card + Freelance card joined by a halftone plus sign | Experience section (E3 chosen) |

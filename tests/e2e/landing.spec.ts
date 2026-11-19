@@ -276,15 +276,15 @@ for (const {
       await expect(page.locator('#work')).toBeFocused()
     })
 
-    // The e2e build includes the draft case studies of Kultomat, Eucal,
-    // Vladan Vaněk and UpVideo, so their cards are the links; case-study.spec.ts covers the links themselves.
-    test('only published case studies are linked and Systerna says in progress', async ({
+    // Every card links to its case study, Systerna's still marked in
+    // progress; case-study.spec.ts covers the links themselves.
+    test('case studies built are linked and Systerna says in progress', async ({
       page,
     }) => {
       await page.goto(path)
       const work = page.locator('#work')
       const prefix = lang === 'en' ? '/work/' : '/cs/work/'
-      await expect(work.getByRole('link')).toHaveCount(4)
+      await expect(work.getByRole('link')).toHaveCount(5)
       await expect(work.getByRole('link').first()).toHaveAttribute(
         'href',
         `${prefix}kultomat/`,
@@ -301,20 +301,23 @@ for (const {
         'href',
         `${prefix}upvideo/`,
       )
+      await expect(work.getByRole('link').nth(4)).toHaveAttribute(
+        'href',
+        `${prefix}systerna/`,
+      )
       await expect(work.getByRole('listitem')).toHaveCount(4)
       await expect(
         work.getByRole('listitem').filter({ hasText: 'Systerna' }),
       ).toContainText(lang === 'en' ? 'In progress' : 'Rozpracováno')
     })
 
-    test('project cards show their preview image, Systerna keeps its dots', async ({
-      page,
-    }) => {
+    test('every project card shows its preview image', async ({ page }) => {
       await page.goto(path)
       const work = page.locator('#work')
-      // One image per project: the featured card and the three client cards.
+      // One image per project: the featured card, the three client cards and
+      // Systerna's in-progress card.
       const images = work.locator('picture img')
-      await expect(images).toHaveCount(4)
+      await expect(images).toHaveCount(5)
       for (const image of await images.all()) {
         // Decorative (the link's name is the project name), sized so nothing
         // shifts while it loads, and inside the hidden art box.
@@ -330,7 +333,7 @@ for (const {
           .getByRole('listitem')
           .filter({ hasText: 'Systerna' })
           .locator('img'),
-      ).toHaveCount(0)
+      ).toHaveCount(1)
       // The files really load (they are lazy, so scroll to them first).
       for (const image of await images.all()) {
         await image.scrollIntoViewIfNeeded()
