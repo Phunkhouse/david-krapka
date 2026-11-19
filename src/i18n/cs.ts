@@ -51,8 +51,6 @@ export const cs: Dictionary = {
     },
     work: {
       title: 'Vybraná práce',
-      intro:
-        'Jeden vlastní produkt od začátku do konce, několik projektů pro klienty a jeden, který ještě vzniká.',
       listLabel: 'Projekty',
       readMore: 'Přečíst případovou studii →',
       featured: {

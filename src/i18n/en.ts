@@ -52,8 +52,6 @@ export const en = {
     },
     work: {
       title: 'Selected work',
-      intro:
-        'One product I own end to end, a few client projects, and one that is still being built.',
       listLabel: 'Projects',
       readMore: 'Read the case study →',
       featured: {

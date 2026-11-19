@@ -56,10 +56,7 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
   tabindex="-1"
 >
   <div class="inner">
-    <div class="heading">
-      <SectionHeading id="work-title">{work.title}</SectionHeading>
-      <p class="intro">{work.intro}</p>
-    </div>
+    <SectionHeading id="work-title">{work.title}</SectionHeading>
 
     <article class:list={['featured', { 'is-link': featuredHref }]}>
       <div class="preview featured-art" aria-hidden="true">
@@ -160,20 +157,8 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
     padding: var(--pad-section) var(--pad-inline);
   }
 
-  .heading {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xs);
-  }
-
   .work :global(h2) {
     color: var(--yellow);
-  }
-
-  .intro {
-    max-width: 440px;
-    color: var(--ink-soft);
-    font-size: var(--text-body-lg);
   }
 
   /* Featured card */
@@ -396,13 +381,6 @@ const cardSizes = '(min-width: 1100px) 25vw, (min-width: 720px) 50vw, 100vw'
   @media (min-width: 720px) {
     .work {
       --shadow-heading: 6px 5px 0 var(--pink);
-    }
-
-    .heading {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: var(--gap-m);
     }
 
     .inner {
